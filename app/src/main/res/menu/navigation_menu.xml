@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/friends_list"
+            android:icon="@drawable/friends"
+            android:title="Friends List" />
+        <item
+            android:id="@+id/therapists"
+            android:icon="@drawable/therapists"
+            android:title="Therapists" />
+        <item
+            android:id="@+id/notification"
+            android:icon="@drawable/notification"
+            android:title="Notification" />
+        <item
+            android:id="@+id/appointments"
+            android:icon="@drawable/appointment"
+            android:title="Appointments" />
+        <item
+            android:id="@+id/cart"
+            android:icon="@drawable/cart"
+            android:title="Cart" />
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/home"
+            android:title="Log Out" />
+
+    </group>
+
+</menu>
