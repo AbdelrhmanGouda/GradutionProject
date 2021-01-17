@@ -4,4 +4,30 @@
     <string name="close">close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="names">
+        <item>ahemd</item>
+        <item>ali</item>
+        <item>hussin</item>
+        <item>zaki</item>
+        <item>hossam</item>
+        <item>ahemd</item>
+        <item>ahemd</item>
+
+    </string-array>
+
+
+    <string-array name="description">
+        <item>ahemd</item>
+        <item>ali</item>
+        <item>hussin</item>
+        <item>zaki</item>
+        <item>hossam</item>
+        <item>ahemd</item>
+        <item>ahemd</item>
+
+    </string-array>
+
+
 </resources>

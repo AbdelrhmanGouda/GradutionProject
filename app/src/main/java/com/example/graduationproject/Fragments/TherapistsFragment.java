@@ -1,66 +1,93 @@
 package com.example.graduationproject.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.example.graduationproject.Activities.MainActivity;
+import com.example.graduationproject.Adapter.PagerAdapter;
 import com.example.graduationproject.R;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TherapistsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TherapistsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    Toolbar toolbar;
+    EditText therapySearch;
+    TabLayout tabLayout;
+    TabItem therapyByName,therapyByLocation;
+    PagerAdapter pagerAdapter;
+    ViewPager viewPager;
+    ImageView backImage;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TherapistsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TherapistsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TherapistsFragment newInstance(String param1, String param2) {
-        TherapistsFragment fragment = new TherapistsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_therapists, container, false);
+        View v =  inflater.inflate(R.layout.fragment_therapists, container, false);
+
+        viewPager = v.findViewById(R.id.view_pager);
+        tabLayout = v.findViewById(R.id.therapists_tab_layout);
+        toolbar = v.findViewById(R.id.therapists_tool_bar);
+        therapySearch = v.findViewById(R.id.search_therapists);
+        therapyByName = v.findViewById(R.id.therapists_byName_tab_item);
+        therapyByLocation = v.findViewById(R.id.therapists_byLocation_tab_item);
+        backImage = v.findViewById(R.id.back);
+
+
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // move from fragment to activity 
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+
+        pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition()==0){
+                    pagerAdapter.notifyDataSetChanged();
+                }else if (tab.getPosition()==1){
+                    pagerAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+
+
+        return v;
     }
 }
