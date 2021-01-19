@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@color/colorAccent"
+    android:layout_height="200dp"
+    android:background="@color/color"
     android:orientation="horizontal"
     android:gravity="bottom"
     android:padding="20dp"
@@ -14,7 +14,7 @@
         android:id="@+id/header_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/doctor_icon"
         tools:ignore="MissingClass,MissingConstraints"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
@@ -23,5 +23,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp"
         android:text="Ahmed Ali"
+        android:textColor="@color/black"
         android:textSize="35dp" />
 </LinearLayout>

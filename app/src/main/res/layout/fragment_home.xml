@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeFragment"
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <androidx.cardview.widget.CardView
+       android:id="@+id/home_chat_boot_card"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:cardBackgroundColor="@color/color"
+       android:elevation="10dp"
+       android:layout_marginTop="90dp"
+       >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+         android:orientation="horizontal"
+          android:layout_margin="15dp">
+      <ImageView
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:background="@drawable/chat_bot"
+          android:layout_margin="10dp"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:textSize="20dp"
+          android:text="Start chat with a bot \n to check how are you \n doing."/>
+      </LinearLayout>
+   </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+   <androidx.cardview.widget.CardView
+       android:id="@+id/home_chat_person_card"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:cardBackgroundColor="@color/color"
+       android:elevation="10dp"
+       android:layout_marginTop="90dp"
+       >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="15dp">
+         <ImageView
+             android:layout_width="80dp"
+             android:layout_height="80dp"
+             android:background="@drawable/chat_icons"
+             android:layout_margin="10dp"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:textSize="20dp"
+             android:text="Start chat with a bot \n to check how are you \n doing."/>
+      </LinearLayout>
+   </androidx.cardview.widget.CardView>
+
+   <androidx.cardview.widget.CardView
+       android:id="@+id/home_therapist_card"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:cardBackgroundColor="@color/color"
+       android:elevation="10dp"
+       android:layout_marginTop="90dp"
+       >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_margin="15dp">
+         <ImageView
+             android:layout_width="80dp"
+             android:layout_height="80dp"
+             android:background="@drawable/doctor_icon"
+             android:layout_margin="10dp"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:textSize="20dp"
+             android:text="Start chat with a bot \n to check how are you \n doing."/>
+      </LinearLayout>
+   </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

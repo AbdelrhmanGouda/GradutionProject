@@ -18,7 +18,7 @@
             android:title="Friends List" />
         <item
             android:id="@+id/therapists"
-            android:icon="@drawable/therapists"
+            android:icon="@drawable/therapist"
             android:title="Therapists" />
         <item
             android:id="@+id/notification"
@@ -34,8 +34,9 @@
             android:title="Cart" />
         <item
             android:id="@+id/log_out"
-            android:icon="@drawable/home"
-            android:title="Log Out" />
+            android:icon="@drawable/logout"
+            android:title="Log Out"
+            />
 
     </group>
 
