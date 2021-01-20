@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/information"
+        android:title="Information"
+        android:icon="@drawable/user_profile"/>
+    <item
+        android:id="@+id/Check"
+        android:title="Check"
+        android:icon="@drawable/ic_baseline_check"/>
+    <item
+        android:id="@+id/request"
+        android:title="Request"
+        android:icon="@drawable/ic_baseline_message"/>
+    <item
+        android:id="@+id/updatebtn"
+        android:title="Update Info"
+        android:icon="@drawable/ic_baseline_edit_24"/>
+
+</menu>

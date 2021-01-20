@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,11 +21,14 @@ import com.example.graduationproject.Fragments.ProfileFragment;
 import com.example.graduationproject.Fragments.TherapistsFragment;
 import com.example.graduationproject.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    public FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         drawerLayout =findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        mAuth = FirebaseAuth.getInstance();
 
 
         navigationView=findViewById(R.id.navigation);
@@ -83,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.log_out:
                // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
+                //Toast.makeText(getActivity(),"Logged out!",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, com.example.graduationproject.Sign.MainActivity.class));
                 break;
 
         }
