@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView profileName,therapistNum,friendsNum,heartNum;
     private ImageView profilePic;
-    private FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingEditProfileBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,8 +28,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         friendsNum=view.findViewById(R.id.profile_friends_num);
         heartNum=view.findViewById(R.id.profile_heart_num);
         profilePic=view.findViewById(R.id.profile_image);
-        floatingActionButton=view.findViewById(R.id.floating_edit_profil);
-        floatingActionButton.setOnClickListener(this);
+        floatingEditProfileBtn =view.findViewById(R.id.floating_edit_profile_btn);
+        floatingEditProfileBtn.setOnClickListener(this);
 
         return view;
     }
