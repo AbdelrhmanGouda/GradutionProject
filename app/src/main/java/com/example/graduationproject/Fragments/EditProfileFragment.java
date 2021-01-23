@@ -13,17 +13,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.graduationproject.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EditProfileFragment extends Fragment {
     private ImageView editImage;
     private EditText editName, editEmail, editPassword, confirmPassword;
     private Button update;
+    private FloatingActionButton floatingEditImageBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         editImage =view.findViewById(R.id.edit_profile_image);
+        floatingEditImageBtn=view.findViewById(R.id.floating_edit_image_btn);
         editName =view.findViewById(R.id.edit_name);
         editEmail =view.findViewById(R.id.edit_email);
         editPassword =view.findViewById(R.id.edit_password);
