@@ -39,8 +39,14 @@ public class HomeFragment extends Fragment {
         cardViewFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FriendListFragment friend=new FriendListFragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container,new FriendListFragment()).addToBackStack("").commit();
+                Bundle bundle=new Bundle();
+                bundle.putString("find", "people");
+                friend.setArguments(bundle);
+
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,friend).addToBackStack("").commit();
+
 
             }
         });

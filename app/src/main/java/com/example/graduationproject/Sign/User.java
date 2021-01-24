@@ -3,7 +3,7 @@ package com.example.graduationproject.Sign;
 import android.net.Uri;
 
 public class User {
-    private String uid;
+    private String id;
     private String photo;
     private Uri uri;
     private String name;
@@ -15,8 +15,9 @@ public class User {
     public User() {
     }
 
-    public User(String uid, Uri uri, String name, String email, String phone, String location, String password) {
-        this.uid = uid;
+    public User(String id, String photo, Uri uri, String name, String email, String phone, String location, String password) {
+        this.id = id;
+        this.photo = photo;
         this.uri = uri;
         this.name = name;
         this.email = email;
@@ -25,12 +26,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUid() {
-        return uid;
+    public String getid() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public Uri getUri() {

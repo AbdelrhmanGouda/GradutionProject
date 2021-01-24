@@ -161,7 +161,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user.setPhone(phone);
         user.setPassword(password);
         user.setName(name);
-        user.setUid(uid);
+        user.setid(uid);
 
 
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -170,7 +170,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         myRef = database.getReference("Users").child(uid);
         databaseReference = myRef;
 
-        myRef.child("id").setValue(user.getUid());
+        myRef.child("id").setValue(user.getid());
         myRef.child("email").setValue(user.getEmail());
         //myRef.child("uri").setValue(user.getUri().toString());
         myRef.child("location").setValue(user.getLocation());

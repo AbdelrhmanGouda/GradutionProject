@@ -1,30 +1,41 @@
 package com.example.graduationproject.Data;
 
-import android.graphics.Bitmap;
-import android.media.Image;
-
 public class FriendListData {
-    private Bitmap friendListImage;
-    private String friendListName;
+    private String uri;
+    private String name;
+    private  String id;
 
-    public FriendListData( String friendListName) {
-    //    this.friendListImage = friendListImage;
-        this.friendListName = friendListName;
+
+    public FriendListData() {
     }
 
-    public Bitmap getFriendListImage() {
-        return friendListImage;
+    public FriendListData(String uri, String name, String id) {
+        this.uri = uri;
+        this.name = name;
+        this.id = id;
     }
 
-    public void setFriendListImage(Bitmap friendListImage) {
-        this.friendListImage = friendListImage;
+    public String getId() {
+        return id;
     }
 
-    public String getFriendListName() {
-        return friendListName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setFriendListName(String friendListName) {
-        this.friendListName = friendListName;
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
