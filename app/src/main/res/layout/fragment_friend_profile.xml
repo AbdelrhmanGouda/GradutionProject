@@ -132,7 +132,7 @@ android:orientation="vertical"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  0"
+                android:text="   0"
                 android:textSize="@dimen/_20ssp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_40sdp"
