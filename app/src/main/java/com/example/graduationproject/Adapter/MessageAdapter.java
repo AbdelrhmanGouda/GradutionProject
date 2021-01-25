@@ -41,6 +41,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.FriendLi
      }else {
          View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item_left  , parent, false);
          return new MessageAdapter.FriendListAdapterViewHolder(view);
+         
 
      }
     }

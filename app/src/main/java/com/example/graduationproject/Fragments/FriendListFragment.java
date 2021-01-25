@@ -3,6 +3,7 @@ package com.example.graduationproject.Fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,7 +41,9 @@ public class FriendListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+
         friendListRecyclerView =view.findViewById(R.id.friends_list_recycler_view);
         linearLayout=view.findViewById(R.id.location_linear);
         friendListRecyclerView.setLayoutManager( new LinearLayoutManager(getContext()));

@@ -51,6 +51,8 @@ public class ChatMessageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_message, container, false);
+     //   ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         textSend=view.findViewById(R.id.Edit_text_send);
         send=view.findViewById(R.id.btn_send);
 
@@ -70,14 +72,30 @@ public class ChatMessageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                getFragmentManager().popBackStack();
+
             }
         });
-        circleImageView=view.findViewById(R.id.profile_image);
-        userName=view.findViewById(R.id.username);
         if(getArguments()!=null){
             id=getArguments().getString("id");
-            Toast.makeText(getActivity(), id, Toast.LENGTH_SHORT).show();
+
         }
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FriendProfileFragment profileFragment=new FriendProfileFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("id", id);
+                //set Fragmentclass Arguments
+                profileFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,profileFragment).addToBackStack("").commit();
+
+            }
+        });
+
+        circleImageView=view.findViewById(R.id.profile_image);
+        userName=view.findViewById(R.id.username);
         getUser(id);
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -163,4 +181,11 @@ public class ChatMessageFragment extends Fragment {
     });
 
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
 }
