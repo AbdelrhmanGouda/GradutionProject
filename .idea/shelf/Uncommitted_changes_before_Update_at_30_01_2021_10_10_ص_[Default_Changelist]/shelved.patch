@@ -1,0 +1,416 @@
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"colorPrimary\">#1182BF</color>\r\n    <color name=\"colorPrimaryDark\">#1DA1E8</color>\r\n    <color name=\"colorAccent\">#03DAC5</color>\r\n    <color name=\"color\">#6ECDB2</color>\r\n\r\n\r\n    <color name=\"background_color\">#009688</color>\r\n    <color name=\"white\">#FFFFFF</color>\r\n    <color name=\"black\">#000000</color>\r\n    <color name=\"white_greyish\">#EEEEEE</color>\r\n    <color name=\"button_selectorcolor\">#9E9E9E</color>\r\n\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/res/values/colors.xml	(date 1611548093388)
+@@ -4,6 +4,7 @@
+     <color name="colorPrimaryDark">#1DA1E8</color>
+     <color name="colorAccent">#03DAC5</color>
+     <color name="color">#6ECDB2</color>
++    <color name="lightGray">#D5E6DFDF</color>
+ 
+ 
+     <color name="background_color">#009688</color>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05___Default_Changelist_1.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05___Default_Changelist_1.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05___Default_Changelist_1.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_20_01_2021_07_05_ص_[Default_Changelist]1" date="1611119145971" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05_ص_[Default_Changelist]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 20/01/2021 07:05 ص [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05_ص_[Default_Changelist]1/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05_ص_[Default_Changelist]1/shelved.patch	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05_ص_[Default_Changelist]1/shelved.patch	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
+@@ -1,17 +0,0 @@
+-Index: app/src/main/res/values/styles.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><resources>\r\n    <!-- Base application theme. -->\r\n    <style name=\"AppTheme\" parent=\"Theme.AppCompat.Light.NoActionBar\">\r\n        <!-- Customize your theme here. -->\r\n        <item name=\"colorPrimary\">@color/colorPrimary</item>\r\n        <item name=\"colorPrimaryDark\">@color/colorPrimaryDark</item>\r\n        <item name=\"colorAccent\">@color/colorAccent</item>\r\n    </style>\r\n    <style name=\"AppTheme.NoActionBar\">\r\n        <item name=\"windowActionBar\">false</item>\r\n        <item name=\"windowNoTitle\">true</item>\r\n    </style>\r\n\r\n</resources>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/values/styles.xml	(revision e555664861636931a826d7b05e2b460e115d4f71)
+-+++ app/src/main/res/values/styles.xml	(date 1611119082638)
+-@@ -1,6 +1,6 @@
+- <resources>
+-     <!-- Base application theme. -->
+--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+-+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+-         <!-- Customize your theme here. -->
+-         <item name="colorPrimary">@color/colorPrimary</item>
+-         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+Index: app/src/main/res/layout/fragment_appointments.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragments.AppointmentsFragment\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:text=\"@string/hello_blank_fragment\" />\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_appointments.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/res/layout/fragment_appointments.xml	(date 1611658720229)
+@@ -1,14 +1,35 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".Fragments.AppointmentsFragment">
+-
+-    <!-- TODO: Update blank fragment layout -->
+-    <TextView
++    tools:context=".Fragments.AppointmentsFragment"
++    android:orientation="vertical">
++    <com.google.android.material.tabs.TabLayout
++        android:id="@+id/appointments_tab_layout"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="#e6e6e6"
++        >
++
++        <com.google.android.material.tabs.TabItem
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="All"
++            android:id="@+id/all_tab_item" />
++
++        <com.google.android.material.tabs.TabItem
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text="Upcoming"
++            android:id="@+id/upcoming_tab_item"
++            />
++
++    </com.google.android.material.tabs.TabLayout>
++
++    <androidx.viewpager.widget.ViewPager
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+-        android:text="@string/hello_blank_fragment" />
+-
+-</FrameLayout>
+\ No newline at end of file
++        android:id="@+id/appointments_view_pager"
++        />
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/graduationproject/Fragments/NotificationFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.graduationproject.Fragments;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport com.example.graduationproject.R;\r\n\r\n/**\r\n * A simple {@link Fragment} subclass.\r\n * Use the {@link NotificationFragment#newInstance} factory method to\r\n * create an instance of this fragment.\r\n */\r\npublic class NotificationFragment extends Fragment {\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n\r\n    public NotificationFragment() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment NotificationFragment.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static NotificationFragment newInstance(String param1, String param2) {\r\n        NotificationFragment fragment = new NotificationFragment();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            mParam1 = getArguments().getString(ARG_PARAM1);\r\n            mParam2 = getArguments().getString(ARG_PARAM2);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        return inflater.inflate(R.layout.fragment_notification, container, false);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/graduationproject/Fragments/NotificationFragment.java	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/java/com/example/graduationproject/Fragments/NotificationFragment.java	(date 1611493054448)
+@@ -1,66 +1,62 @@
+ package com.example.graduationproject.Fragments;
+ 
++import android.app.Notification;
+ import android.os.Bundle;
+ 
+ import androidx.fragment.app.Fragment;
++import androidx.viewpager.widget.ViewPager;
+ 
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ 
++import com.example.graduationproject.Adapter.NotificationPagerAdapter;
++import com.example.graduationproject.Adapter.PagerAdapter;
+ import com.example.graduationproject.R;
++import com.google.android.material.tabs.TabItem;
++import com.google.android.material.tabs.TabLayout;
+ 
+-/**
+- * A simple {@link Fragment} subclass.
+- * Use the {@link NotificationFragment#newInstance} factory method to
+- * create an instance of this fragment.
+- */
+ public class NotificationFragment extends Fragment {
+-
+-    // TODO: Rename parameter arguments, choose names that match
+-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+-    private static final String ARG_PARAM1 = "param1";
+-    private static final String ARG_PARAM2 = "param2";
+-
+-    // TODO: Rename and change types of parameters
+-    private String mParam1;
+-    private String mParam2;
+-
+-    public NotificationFragment() {
+-        // Required empty public constructor
+-    }
+-
+-    /**
+-     * Use this factory method to create a new instance of
+-     * this fragment using the provided parameters.
+-     *
+-     * @param param1 Parameter 1.
+-     * @param param2 Parameter 2.
+-     * @return A new instance of fragment NotificationFragment.
+-     */
+-    // TODO: Rename and change types and number of parameters
+-    public static NotificationFragment newInstance(String param1, String param2) {
+-        NotificationFragment fragment = new NotificationFragment();
+-        Bundle args = new Bundle();
+-        args.putString(ARG_PARAM1, param1);
+-        args.putString(ARG_PARAM2, param2);
+-        fragment.setArguments(args);
+-        return fragment;
+-    }
+-
+-    @Override
+-    public void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        if (getArguments() != null) {
+-            mParam1 = getArguments().getString(ARG_PARAM1);
+-            mParam2 = getArguments().getString(ARG_PARAM2);
+-        }
+-    }
++    private TabLayout tabLayout;
++    private TabItem notificationTab,friendRequestTab;
++    private NotificationPagerAdapter notificationPagerAdapter;
++    private ViewPager viewPager;
+ 
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
+         // Inflate the layout for this fragment
+-        return inflater.inflate(R.layout.fragment_notification, container, false);
++        View view = inflater.inflate(R.layout.fragment_notification, container, false);
++        viewPager = view.findViewById(R.id.notification_view_pager);
++        tabLayout = view.findViewById(R.id.notification_tab_layout);
++        notificationTab = view.findViewById(R.id.notification_tab_item);
++        friendRequestTab = view.findViewById(R.id.friend_request_tab_item);
++
++        notificationPagerAdapter=new NotificationPagerAdapter(getFragmentManager(),tabLayout.getTabCount());
++        viewPager.setAdapter(notificationPagerAdapter);
++
++        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
++            @Override
++            public void onTabSelected(TabLayout.Tab tab) {
++                viewPager.setCurrentItem(tab.getPosition());
++                if (tab.getPosition()==0){
++                    notificationPagerAdapter.notifyDataSetChanged();
++                }else if (tab.getPosition()==1){
++                    notificationPagerAdapter.notifyDataSetChanged();
++                }
++            }
++
++            @Override
++            public void onTabUnselected(TabLayout.Tab tab) {
++
++            }
++
++            @Override
++            public void onTabReselected(TabLayout.Tab tab) {
++
++            }
++        });
++        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
++        return view;
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_notification.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragments.NotificationFragment\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:text=\"@string/hello_blank_fragment\" />\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_notification.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/res/layout/fragment_notification.xml	(date 1611548347060)
+@@ -1,14 +1,37 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".Fragments.NotificationFragment">
++    tools:context=".Fragments.NotificationFragment"
++    android:orientation="vertical">
+ 
+-    <!-- TODO: Update blank fragment layout -->
+-    <TextView
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:text="@string/hello_blank_fragment" />
+-
+-</FrameLayout>
+\ No newline at end of file
++        <com.google.android.material.tabs.TabLayout
++            android:id="@+id/notification_tab_layout"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="#e6e6e6"
++            >
++
++            <com.google.android.material.tabs.TabItem
++
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="Notifications"
++                android:id="@+id/notification_tab_item"/>
++
++            <com.google.android.material.tabs.TabItem
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="Friend Request"
++                android:id="@+id/friend_request_tab_item"
++                />
++
++        </com.google.android.material.tabs.TabLayout>
++
++        <androidx.viewpager.widget.ViewPager
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:id="@+id/notification_view_pager"
++            />
++    </LinearLayout>
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">GraduationProject</string>\r\n    <string name=\"open\">open</string>\r\n    <string name=\"close\">close</string>\r\n    <!-- TODO: Remove or change this placeholder text -->\r\n    <string name=\"hello_blank_fragment\">Hello blank fragment</string>\r\n    <string name=\"email\">Email</string>\r\n    <string name=\"passowrd\">Password</string>\r\n    <string name=\"login\">LOGIN</string>\r\n    <string name=\"show_pwd\">Show Password</string>\r\n    <string name=\"hide_pwd\">Hide Password</string>\r\n    <string name=\"forgot\">Update or Forgot password?</string>\r\n    <string name=\"closebutton\">Close Button for Activity</string>\r\n    <string name=\"newUser\">Not a Member yet? Sign Up here.</string>\r\n    <string name=\"fullName\">Full Name</string>\r\n    <string name=\"mobileNumber\">Mobile Number</string>\r\n    <string name=\"location\">Location</string>\r\n    <string name=\"confirmPassword\">Confirm Password</string>\r\n    <string name=\"signUp\">SIGN UP</string>\r\n    <string name=\"already_user\">Already have Account? Login here.</string>\r\n    <string name=\"registered_emailid\">Please enter your Registered Email Id below:</string>\r\n    <string name=\"submit\">SUBMIT</string>\r\n    <string name=\"back\">BACK</string>\r\n\r\n\r\n    <string-array name=\"names\">\r\n        <item>ahemd</item>\r\n        <item>ali</item>\r\n        <item>hussin</item>\r\n        <item>zaki</item>\r\n        <item>hossam</item>\r\n        <item>ahemd</item>\r\n        <item>ahemd</item>\r\n\r\n    </string-array>\r\n\r\n\r\n    <string-array name=\"description\">\r\n        <item>ahemd</item>\r\n        <item>ali</item>\r\n        <item>hussin</item>\r\n        <item>zaki</item>\r\n        <item>hossam</item>\r\n        <item>ahemd</item>\r\n        <item>ahemd</item>\r\n\r\n    </string-array>\r\n\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/res/values/strings.xml	(date 1611642475362)
+@@ -21,6 +21,8 @@
+     <string name="registered_emailid">Please enter your Registered Email Id below:</string>
+     <string name="submit">SUBMIT</string>
+     <string name="back">BACK</string>
++    <string name="confirm">Confirm</string>
++    <string name="delete">Delete</string>
+ 
+ 
+     <string-array name="names">
+Index: app/src/main/java/com/example/graduationproject/Fragments/AppointmentsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.graduationproject.Fragments;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport com.example.graduationproject.R;\r\n\r\n/**\r\n * A simple {@link Fragment} subclass.\r\n * Use the {@link AppointmentsFragment#newInstance} factory method to\r\n * create an instance of this fragment.\r\n */\r\npublic class AppointmentsFragment extends Fragment {\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n\r\n    public AppointmentsFragment() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment AppointmentsFragment.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static AppointmentsFragment newInstance(String param1, String param2) {\r\n        AppointmentsFragment fragment = new AppointmentsFragment();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            mParam1 = getArguments().getString(ARG_PARAM1);\r\n            mParam2 = getArguments().getString(ARG_PARAM2);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        return inflater.inflate(R.layout.fragment_appointments, container, false);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/graduationproject/Fragments/AppointmentsFragment.java	(revision b9c6dd8b82bf6ca37b38616d7f76a5d8f57233fe)
++++ app/src/main/java/com/example/graduationproject/Fragments/AppointmentsFragment.java	(date 1611662803780)
+@@ -3,64 +3,57 @@
+ import android.os.Bundle;
+ 
+ import androidx.fragment.app.Fragment;
++import androidx.viewpager.widget.ViewPager;
+ 
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ 
++import com.example.graduationproject.Adapter.AppointmentsPagerAdapter;
++import com.example.graduationproject.Adapter.NotificationPagerAdapter;
+ import com.example.graduationproject.R;
++import com.google.android.material.tabs.TabItem;
++import com.google.android.material.tabs.TabLayout;
+ 
+-/**
+- * A simple {@link Fragment} subclass.
+- * Use the {@link AppointmentsFragment#newInstance} factory method to
+- * create an instance of this fragment.
+- */
+ public class AppointmentsFragment extends Fragment {
+-
+-    // TODO: Rename parameter arguments, choose names that match
+-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+-    private static final String ARG_PARAM1 = "param1";
+-    private static final String ARG_PARAM2 = "param2";
+-
+-    // TODO: Rename and change types of parameters
+-    private String mParam1;
+-    private String mParam2;
+-
+-    public AppointmentsFragment() {
+-        // Required empty public constructor
+-    }
+-
+-    /**
+-     * Use this factory method to create a new instance of
+-     * this fragment using the provided parameters.
+-     *
+-     * @param param1 Parameter 1.
+-     * @param param2 Parameter 2.
+-     * @return A new instance of fragment AppointmentsFragment.
+-     */
+-    // TODO: Rename and change types and number of parameters
+-    public static AppointmentsFragment newInstance(String param1, String param2) {
+-        AppointmentsFragment fragment = new AppointmentsFragment();
+-        Bundle args = new Bundle();
+-        args.putString(ARG_PARAM1, param1);
+-        args.putString(ARG_PARAM2, param2);
+-        fragment.setArguments(args);
+-        return fragment;
+-    }
+-
+-    @Override
+-    public void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        if (getArguments() != null) {
+-            mParam1 = getArguments().getString(ARG_PARAM1);
+-            mParam2 = getArguments().getString(ARG_PARAM2);
+-        }
+-    }
+-
+-    @Override
++    private TabLayout appointmentsTabLayout;
++    private TabItem allTab, upcomingTab;
++    private AppointmentsPagerAdapter appointmentsPagerAdapter;
++    private ViewPager appointmentsViewPager;
++     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
+-        // Inflate the layout for this fragment
+-        return inflater.inflate(R.layout.fragment_appointments, container, false);
+-    }
++        final View view = inflater.inflate(R.layout.fragment_appointments, container, false);
++         appointmentsViewPager = view.findViewById(R.id.appointments_view_pager);
++         appointmentsTabLayout = view.findViewById(R.id.appointments_tab_layout);
++         allTab = view.findViewById(R.id.all_tab_item);
++         upcomingTab = view.findViewById(R.id.upcoming_tab_item);
++
++         appointmentsPagerAdapter=new AppointmentsPagerAdapter(getFragmentManager(),appointmentsTabLayout.getTabCount());
++         appointmentsViewPager.setAdapter(appointmentsPagerAdapter);
++
++         appointmentsTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
++             @Override
++             public void onTabSelected(TabLayout.Tab tab) {
++                 appointmentsViewPager.setCurrentItem(tab.getPosition());
++                 if (tab.getPosition()==0){
++                     appointmentsPagerAdapter.notifyDataSetChanged();
++                 }else if (tab.getPosition()==1){
++                     appointmentsPagerAdapter.notifyDataSetChanged();
++                 }
++             }
++
++             @Override
++             public void onTabUnselected(TabLayout.Tab tab) {
++
++             }
++
++             @Override
++             public void onTabReselected(TabLayout.Tab tab) {
++
++             }
++         });
++         appointmentsViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(appointmentsTabLayout));
++         return view;
++     }
+ }
+\ No newline at end of file
