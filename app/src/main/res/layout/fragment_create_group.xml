@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<EditText
+    android:layout_width="@dimen/_250sdp"
+    android:layout_height="wrap_content"
+    android:id="@+id/edit_group_name"
+    android:hint="Enter group name"
+    android:layout_marginTop="@dimen/_10sdp"
+    ></EditText>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_below="@id/edit_group_name"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:id="@+id/view"
+        android:background="@color/lightGray"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:text="Members"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_below="@id/view"
+        android:id="@+id/text_member"
+        ></TextView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_toRightOf="@id/edit_group_name"
+        android:src="@drawable/take_photo"
+        android:scaleType="centerCrop"
+        android:id="@+id/take_group_photo"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/background_round"
+        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="match_parent"
+        android:background="@color/lightGray"
+        android:layout_below="@id/text_member"
+        android:id="@+id/recycler_group_member"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

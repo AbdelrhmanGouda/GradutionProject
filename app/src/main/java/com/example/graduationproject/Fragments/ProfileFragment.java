@@ -22,6 +22,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
+        setHasOptionsMenu(false);
 
         profileName=view.findViewById(R.id.profile_name);
         therapistNum=view.findViewById(R.id.profile_therapist_num);
@@ -33,6 +34,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
+
 
     @Override
     public void onClick(View view) {
