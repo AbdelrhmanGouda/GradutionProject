@@ -65,6 +65,7 @@ public class ChooseGroupMember  extends Fragment {
                 createGroup.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,createGroup).addToBackStack("").commit();
+                FirebaseDatabase.getInstance().getReference().child("CreateGroup").child(firebaseUser.getUid()).removeValue();
 
             }
         });

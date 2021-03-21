@@ -20,7 +20,9 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.graduationproject.Adapter.FriendListAdapter;
+import com.example.graduationproject.Adapter.GroupChatAdapter;
 import com.example.graduationproject.Data.FriendListData;
+import com.example.graduationproject.Data.GroupChatList;
 import com.example.graduationproject.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,9 +38,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendListFragment extends Fragment {
-    private RecyclerView friendListRecyclerView;
+    private RecyclerView friendListRecyclerView,groupChatRecycler;
     private List<FriendListData> friendListDataList;
+    private List<GroupChatList> groupChatLists;
     private FriendListAdapter friendListAdapter;
+    private GroupChatAdapter groupChatAdapter;
     LinearLayout linearLayout;
     FloatingActionButton addGroup;
     FirebaseUser firebaseUser;
@@ -49,16 +53,21 @@ public class FriendListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
        // ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-
+        groupChatRecycler=view.findViewById(R.id.recycler_groupchat);
         friendListRecyclerView =view.findViewById(R.id.friends_list_recycler_view);
         linearLayout=view.findViewById(R.id.location_linear);
         friendListRecyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
         friendListRecyclerView.setHasFixedSize(true);
+        groupChatRecycler.setLayoutManager( new LinearLayoutManager(getContext()));
+        groupChatRecycler.setHasFixedSize(true);
+
         addGroup=view.findViewById(R.id.flating_group_chat);
         friendListDataList =new ArrayList<>();
+        groupChatLists=new ArrayList<>();
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
            // readData();
             FriendsList();
+            groupChatList();
 
         setHasOptionsMenu(true);
         if(getArguments()!=null){
@@ -84,6 +93,35 @@ public class FriendListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void groupChatList() {
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Groups");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                groupChatLists.clear();
+            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                if(dataSnapshot.child("Participants").child(firebaseUser.getUid()).exists()){
+                    GroupChatList groupChatList=dataSnapshot.getValue(GroupChatList.class);
+                    groupChatLists.add(groupChatList);
+                  //  Toast.makeText(getActivity(), "mwgod", Toast.LENGTH_SHORT).show();
+
+                }
+                }
+                groupChatAdapter=new GroupChatAdapter(groupChatLists,getActivity());
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), new LinearLayoutManager(getContext()).getOrientation());
+                groupChatRecycler.addItemDecoration(dividerItemDecoration);
+
+                groupChatRecycler.setAdapter(groupChatAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void FriendsList() {
