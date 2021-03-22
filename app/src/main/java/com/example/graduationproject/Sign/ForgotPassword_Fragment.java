@@ -79,7 +79,7 @@ public class ForgotPassword_Fragment extends Fragment implements
             case R.id.backToLoginBtn:
 
                 // Replace Login Fragment on Back Presses
-                new MainActivity().replaceLoginFragment();
+                new SignMainActivity().replaceLoginFragment();
                 break;
 
             case R.id.forgot_button:
@@ -136,7 +136,7 @@ public class ForgotPassword_Fragment extends Fragment implements
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "We have sent a reset password link to email: " + email, Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getActivity(),MainActivity.class));
+                                startActivity(new Intent(getActivity(), SignMainActivity.class));
                             } else {
                                 Toast.makeText(getActivity(), "Email not found in database!", Toast.LENGTH_LONG).show();
                             }

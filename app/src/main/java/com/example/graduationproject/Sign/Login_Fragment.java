@@ -242,7 +242,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 Toast.makeText(getActivity(), "Login Success." + name,
                         Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                startActivity(new Intent(getActivity(),MainActivity.class));
             } else {
                 Toast.makeText(getActivity(), "Your Email is not verified.",
                         Toast.LENGTH_SHORT).show();

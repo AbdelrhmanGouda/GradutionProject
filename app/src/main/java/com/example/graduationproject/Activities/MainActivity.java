@@ -20,6 +20,7 @@ import com.example.graduationproject.Fragments.NotificationFragment;
 import com.example.graduationproject.Fragments.ProfileFragment;
 import com.example.graduationproject.Fragments.TherapistsFragment;
 import com.example.graduationproject.R;
+import com.example.graduationproject.Sign.SignMainActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
                 mAuth.signOut();
                 //Toast.makeText(getActivity(),"Logged out!",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, com.example.graduationproject.Sign.MainActivity.class));
+                startActivity(new Intent(this, SignMainActivity.class));
                 break;
 
         }

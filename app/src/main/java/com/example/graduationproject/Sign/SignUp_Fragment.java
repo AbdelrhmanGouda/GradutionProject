@@ -97,7 +97,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        //new MainActivity().replaceLoginFragment();
+        //new SignMainActivity().replaceLoginFragment();
     }
 
 
@@ -216,7 +216,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             case R.id.already_user:
 
                 // Replace login fragment
-                new MainActivity().replaceLoginFragment();
+                new SignMainActivity().replaceLoginFragment();
                 break;
         }
 
@@ -290,7 +290,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
 			 */
             // Replace login fragment
-            //new MainActivity().replaceLoginFragment();
+            //new SignMainActivity().replaceLoginFragment();
         }
     }
 
@@ -464,7 +464,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                         if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "Email verification sent on\n" + emailId.getText().toString(), Toast.LENGTH_LONG).show();
                             //mAuth.signOut();
-                            //startActivity(new Intent(getActivity(),MainActivity.class));
+                            //startActivity(new Intent(getActivity(),SignMainActivity.class));
                         } else {
                             Toast.makeText(getActivity(), "Sign up Success But Failed to send verification email.", Toast.LENGTH_LONG).show();
                         }

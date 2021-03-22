@@ -3,6 +3,7 @@ package com.example.graduationproject.Sign;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.graduationproject.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SignMainActivity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
 
     @Override
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         else if (ForgotPassword_Fragment != null)
             replaceLoginFragment();
         else
-            super.onBackPressed();
+            Toast.makeText(this, "NO Back", Toast.LENGTH_SHORT).show();
+            //super.onBackPressed();
     }
 }

@@ -19,16 +19,21 @@
 
 
         <activity
-            android:name=".Sign.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+             />-
+
+        <activity
+            android:name=".Sign.SignMainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
