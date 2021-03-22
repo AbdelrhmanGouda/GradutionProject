@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Data.FriendListData;
 import com.example.graduationproject.Data.GroupChatList;
 import com.example.graduationproject.Fragments.ChatMessageFragment;
+import com.example.graduationproject.Fragments.GroupChatFragment;
 import com.example.graduationproject.R;
 import com.squareup.picasso.Picasso;
 
@@ -43,17 +44,15 @@ final GroupChatList user=friendListDataList.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
-       /* AppCompatActivity activity=(AppCompatActivity)v.getContext();
-        ChatMessageFragment messageFragment=new ChatMessageFragment();
+       AppCompatActivity activity=(AppCompatActivity)v.getContext();
+        GroupChatFragment groupChatFragment=new GroupChatFragment();
         Bundle bundle=new Bundle();
-        bundle.putString("id", user.getId());
+        bundle.putString("id",user.getGroupId() );
         //set Fragmentclass Arguments
-        messageFragment.setArguments(bundle);
+        groupChatFragment.setArguments(bundle);
         activity.getSupportFragmentManager().beginTransaction()
-        .replace(R.id.fragment_container,messageFragment).addToBackStack("").commit();
+        .replace(R.id.fragment_container,groupChatFragment).addToBackStack("").commit();
 
-
-        */
 
 
         }
@@ -74,6 +73,7 @@ public class GroupChatAdapterViewHolder extends RecyclerView.ViewHolder {
         friendListImage=itemView.findViewById(R.id.friends_list_image);
         friendListName=itemView.findViewById(R.id.friends_list_name);
         //  friendListId=itemView.findViewById(R.id.friends_list_name);
+
 
     }
 }

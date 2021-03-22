@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:background="#ABC"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout android:background="#ABC"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
     android:id="@+id/bar_layout"
@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler"
+        app:stackFromEnd="true"
         android:layout_below="@id/bar_layout"
         android:layout_above="@id/bottom">
 
@@ -54,14 +55,14 @@
         >
 
         <EditText
+            android:id="@+id/Edit_text_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Edit_text_send"
+            android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:hint="Type a message..."
-            ></EditText>
+            android:hint="Type a message..."></EditText>
+
         <ImageButton
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"

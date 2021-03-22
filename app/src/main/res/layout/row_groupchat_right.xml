@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_right"
+    android:layout_marginStart="@dimen/_100sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:padding="@dimen/_10sdp"
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="name"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/white"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_group_message"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="the message"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@id/name"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:textColor="@color/white"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:textColor="@color/white"
+        android:id="@+id/txt_group_time"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/txt_group_message"
+        android:textSize="@dimen/_12sdp"
+        ></TextView>
+
+</RelativeLayout>
