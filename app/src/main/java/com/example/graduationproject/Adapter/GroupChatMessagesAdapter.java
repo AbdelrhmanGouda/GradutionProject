@@ -24,10 +24,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMessagesAdapter.GroupChatMessagesAdapterViewHolder> {
     public static final int MSG_TYPE_LEFT=0;
@@ -68,11 +71,11 @@ public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMess
         holder.message.setText(user.getMessage());
         holder.time.setText(timeFormat);
         setUserName(user,holder);
-        //Picasso.get().load(user.ge()).into(holder.friendListImage);
+       // Picasso.get().load(user.ge()).into(holder.friendListImage);
 
     }
 
-    private void setUserName(GroupChat user, final GroupChatMessagesAdapterViewHolder holder) {
+    private void setUserName(final GroupChat user, final GroupChatMessagesAdapterViewHolder holder) {
 
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users");
         reference.orderByChild("id").equalTo(user.getSender()).addValueEventListener(new ValueEventListener() {
@@ -81,6 +84,17 @@ public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMess
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     String name=""+dataSnapshot.child("name").getValue();
                     holder.name.setText(name);
+                    String profImage=""+dataSnapshot.child("uri").getValue();
+
+                    //get user profile
+                    try {
+                        Picasso.get().load(profImage).into(holder.prof);
+
+                    }catch (Exception e){
+                     //   holder.prof.setImageResource(R.drawable.profile_image);
+
+                    }
+
                 }
             }
 
@@ -110,11 +124,13 @@ public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMess
 
     public class GroupChatMessagesAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView name,message,time;
+        CircleImageView prof;
         public GroupChatMessagesAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
             message=itemView.findViewById(R.id.txt_group_message);
             time=itemView.findViewById(R.id.txt_group_time);
+            prof=itemView.findViewById(R.id.prof);
             //  friendListId=itemView.findViewById(R.id.friends_list_name);
 
 

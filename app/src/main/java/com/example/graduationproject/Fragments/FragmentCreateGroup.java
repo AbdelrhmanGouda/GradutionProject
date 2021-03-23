@@ -104,8 +104,29 @@ public class FragmentCreateGroup  extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                dialog.dismiss();
-                                Toast.makeText(getActivity(), "Group Created ...", Toast.LENGTH_SHORT).show();
+                               for(FriendListData i :arraylist){
+                                   HashMap<String,String> hashMap2=new HashMap<>();
+
+                                   hashMap2.put("uId",i.getId());
+                                   hashMap2.put("role","creator");
+                                   hashMap2.put("timeStamp",time);
+                                   DatabaseReference reference2= FirebaseDatabase.getInstance().getReference("Groups");
+                                   reference2.child(time).child("Participants").child(i.getId()).setValue(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+
+                                       }
+                                   }).addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+
+                                       }
+                                   });
+                                   dialog.dismiss();
+                                   Toast.makeText(getActivity(), "Group Created ...", Toast.LENGTH_SHORT).show();
+
+                               }
+
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

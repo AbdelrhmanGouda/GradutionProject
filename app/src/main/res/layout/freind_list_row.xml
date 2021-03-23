@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,9 +16,53 @@
         android:id="@+id/friends_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:text="Ahmed Ali"
+        android:layout_toRightOf="@id/friends_list_image"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/friends_list_sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_below="@id/friends_list_name"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Ahmed Ali"
+        android:textStyle="bold"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/friends_list_image"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/friends_list_lastmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:maxLines="1"
+        android:lines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        android:layout_below="@id/friends_list_name"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:text="hello"
+        android:layout_toRightOf="@id/friends_list_sender"
+        android:layout_gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/friends_list_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:text="time"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_alignParentRight="true"
         android:layout_gravity="center_vertical"
         />
 
-</LinearLayout>
+
+
+</RelativeLayout>
