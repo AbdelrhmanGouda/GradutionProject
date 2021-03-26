@@ -88,11 +88,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
                 break;
             case R.id.log_out:
-               // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+
                 mAuth.signOut();
+
+                Intent intent = new Intent(getApplicationContext(), SignMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
                 //Toast.makeText(getActivity(),"Logged out!",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, SignMainActivity.class));
+
                 break;
 
         }

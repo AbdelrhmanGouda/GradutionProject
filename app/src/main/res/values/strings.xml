@@ -23,6 +23,7 @@
     <string name="back">BACK</string>
     <string name="confirm">Confirm</string>
     <string name="delete">Delete</string>
+    <string name="log_in_with">Log in With</string>
 
 
     <string-array name="names">

@@ -68,7 +68,7 @@ public class SignMainActivity extends AppCompatActivity {
         else if (ForgotPassword_Fragment != null)
             replaceLoginFragment();
         else
-            Toast.makeText(this, "NO Back", Toast.LENGTH_SHORT).show();
-            //super.onBackPressed();
+            //Toast.makeText(this, "NO Back", Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
     }
 }
