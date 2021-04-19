@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -42,13 +43,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
     private static View view;
-
     private static EditText emailid, password;
     private static Button loginButton , faceBookBtn , googleBtn;
     private static TextView forgotPassword, signUp;
@@ -56,8 +60,12 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    User userData = new User();
 
     private static final String TAG = "GoogleActivity";
+
 
 
 
@@ -310,7 +318,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
 
-
     // [START onactivityresult]
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -324,6 +331,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+                if (account != null) {
+                    String personName = account.getDisplayName() ;
+                    String personEmail = account.getEmail();
+                    String personId = account.getId();
+                    Uri personPhoto = account.getPhotoUrl();
+                    saveGoogleAuthToRealFirebase(personId,personName,personEmail,personPhoto);
+                }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -360,4 +375,32 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         startActivityForResult(signInIntent, 9001);
     }
     // [END signin]
+
+    public void saveGoogleAuthToRealFirebase(String uid, String name, String email,Uri uri) {
+
+        userData.setEmail(email);
+        userData.setUri(uri);
+        //userData.setLocation(location);
+        //userData.setPhone(phone);
+        ///userData.setPassword(password);
+        userData.setName(name);
+        userData.setid(uid);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users").child(uid);
+
+        myRef.child("id").setValue(userData.getid());
+        myRef.child("email").setValue(userData.getEmail());
+        myRef.child("uri").setValue(userData.getUri().toString());
+        //myRef.child("location").setValue(userData.getLocation());
+        //myRef.child("phone").setValue(userData.getPhone());
+        //myRef.child("pass").setValue(userData.getPassword());
+        myRef.child("name").setValue(userData.getName());
+
+
+    }
+
+
+
 }
