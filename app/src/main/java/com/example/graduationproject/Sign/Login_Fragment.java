@@ -37,6 +37,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.internal.ImageRequest;
 import com.facebook.login.LoginResult;
@@ -158,8 +159,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 R.anim.shake);
 
 
-
-
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
@@ -238,7 +237,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                 break;
             case R.id.google:
-
                 signIn();
 
                 break;
@@ -341,6 +339,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             String name = user.getDisplayName();
             Toast.makeText(getActivity(), "Google or Facebook Login Success." + name,
                     Toast.LENGTH_SHORT).show();
+           // Log.d("facebookdataggg", user.getPhotoUrl() + "");
 
             startActivity(new Intent(getActivity(),MainActivity.class));
 
@@ -444,9 +443,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         // [START initialize_fblogin]
         // Initialize Facebook Login button
 
-
-
-
         loginButtonF.setPermissions("email", "public_profile");
         loginButtonF.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -473,11 +469,15 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     String id = object.getString("id");
                                     //String gender = object.getString("gender");
                                     String profileURL = "";
-                                    //Log.v("facebookdata1", loginResult.getAccessToken().toString());
-                                    if (Profile.getCurrentProfile() != null) {                  //add this check because some people don't have profile picture
-                                        profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400).toString();
+
+                                    if (Profile.getCurrentProfile() != null) {
+
+                                        //add this check because some people don't have profile picture
+                                        profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId() , 400, 400)+ "&access_token=2615626898730021|JUNggramyAICJhX_cwcl0M4Vs48".toString();
                                         //after getting the profile url you can easily set this to image view using Glide or retrofit library . simple :)
+                                        Log.v("facebookdata1", profileURL);
                                     }
+
 
                                     Log.v("facebookdata2",obj);
                                     Log.v("facebookdata","id: "+id);
@@ -499,6 +499,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 parameters.putString("fields", "id,name,email,gender,birthday");                    //set these parameter
                 request.setParameters(parameters);
                 request.executeAsync();                                 //exuecute task in seprate thread
+
+
 
 
             }
