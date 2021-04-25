@@ -26,6 +26,7 @@
             android:layout_marginBottom="@dimen/_8sdp"
             android:textSize="@dimen/_18ssp"
             android:hint="  search doctors"
+            android:paddingLeft="@dimen/_15sdp"
             android:background="@drawable/custom_edit_text"
             android:drawableRight="@drawable/search"
             android:id="@+id/search_therapists"/>

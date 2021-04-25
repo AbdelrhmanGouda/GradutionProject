@@ -7,8 +7,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.graduationproject.Fragments.NotificationFriendRequestsTabFragment;
 import com.example.graduationproject.Fragments.NotificationNotificationsTabFragment;
-import com.example.graduationproject.Fragments.TherapistsByLocationFragment;
-import com.example.graduationproject.Fragments.TherapistsByNameFragment;
 
 public class NotificationPagerAdapter extends FragmentPagerAdapter  {
     private int numOfTabs;

@@ -20,6 +20,7 @@ public class PagerAdapter  extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        Fragment fragment = null;
         switch (position){
             case 0:
                 return new TherapistsByNameFragment();
