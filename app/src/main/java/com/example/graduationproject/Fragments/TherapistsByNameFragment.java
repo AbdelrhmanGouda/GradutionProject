@@ -1,8 +1,9 @@
 package com.example.graduationproject.Fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,10 +36,10 @@ public class TherapistsByNameFragment extends Fragment {
         n1 = getResources().getStringArray(R.array.names);
         l2 = getResources().getStringArray(R.array.description);
         list = new ArrayList<>();
-        adapter = new TherapistsByNameAdapter(getContext(),n1,l2);
+        adapter = new TherapistsByNameAdapter(getActivity(),n1,l2);
         therapists_byName_recyclerview = v.findViewById(R.id.therapists_byName_recyclerview);
         therapists_byName_recyclerview.setAdapter(adapter);
-        therapists_byName_recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        therapists_byName_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
         return v;
