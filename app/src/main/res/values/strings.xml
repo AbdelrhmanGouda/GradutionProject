@@ -24,6 +24,8 @@
     <string name="confirm">Confirm</string>
     <string name="delete">Delete</string>
     <string name="log_in_with">Log in With</string>
+    <string name="facebook_app_id">2615626898730021</string>
+    <string name="fb_login_protocol_scheme">fb2615626898730021</string>
 
 
     <string-array name="names">

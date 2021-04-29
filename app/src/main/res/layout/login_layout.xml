@@ -99,6 +99,7 @@
             android:textColor="#009688"
             android:textSize="17sp"
             android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,22 +120,36 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:id="@+id/google" />
-            <Button
+            <FrameLayout
+                android:layout_below="@+id/no_network_bar"
+                android:id="@+id/FrameLayout1"
                 android:layout_width="wrap_content"
-                android:text="@string/log_in_with"
-                android:layout_marginTop="@dimen/_8ssp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="@dimen/_5sdp"
-                android:textColor="#009688"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/loginbutton_selector"
-                android:drawableEnd="@drawable/ic_baseline_facebook_24"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:id="@+id/facebook"/>
+                android:layout_height="wrap_content">
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:text="@string/log_in_with"
+                    android:layout_marginTop="@dimen/_8ssp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:textColor="#009688"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/loginbutton_selector"
+                    android:drawableEnd="@drawable/ic_baseline_facebook_24"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:id="@+id/facebook"/>
+            </FrameLayout>
+
+
 
         </LinearLayout>
 

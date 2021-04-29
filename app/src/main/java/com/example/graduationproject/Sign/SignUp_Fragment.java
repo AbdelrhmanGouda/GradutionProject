@@ -393,8 +393,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                                                     + (int) progress + "%");
                                 }
                             });
-
-
         }
     }
 
@@ -473,7 +471,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     }
 
     /*-------- Below Code is for selecting image from galary or camera -----------*/
-
     private void SelectProfilePic() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

@@ -21,6 +21,7 @@ import com.example.graduationproject.Fragments.ProfileFragment;
 import com.example.graduationproject.Fragments.TherapistsFragment;
 import com.example.graduationproject.R;
 import com.example.graduationproject.Sign.SignMainActivity;
+import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
 
                 mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
 
                 Intent intent = new Intent(getApplicationContext(), SignMainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
