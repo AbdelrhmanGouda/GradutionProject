@@ -7,16 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.graduationproject.Fragments.CartFragment;
+import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Fragments.TherapyDataFragment;
 import com.example.graduationproject.R;
 
@@ -27,13 +23,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByNameAdapter.ViewHolder>{
 
     private Context mContext;
-    String name[],description[];
+    List<TherapistsByNameData> therapistsData;
 
 
-    public TherapistsByNameAdapter(Context mContext, String[] name, String[] description) {
+    public TherapistsByNameAdapter(Context mContext, List<TherapistsByNameData> getData) {
         this.mContext = mContext;
-        this.name = name;
-        this.description = description;
+        this.therapistsData = getData;
     }
 
     @NonNull
@@ -47,8 +42,11 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.therapyName.setText(name[position]);
-        holder.therapyDescription.setText(description[position]);
+        ViewHolder viewHolder = holder;
+        TherapistsByNameData model = therapistsData.get(position);
+        viewHolder.therapyName.setText(model.getName());
+        viewHolder.clinicLocation.setText(model.getLocation());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +63,13 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
 
 
+
     @Override
     public int getItemCount() {
-        return description.length;
+        return therapistsData.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView therapyPhoto;
         TextView therapyName,therapyDescription,sessionCost,clinicLocation;

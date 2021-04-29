@@ -2,43 +2,44 @@ package com.example.graduationproject.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.graduationproject.Adapter.TherapistsByNameAdapter;
+import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TherapistsByNameFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class TherapistsByNameFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
     public TherapistsByNameFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TherapistsByNameFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static TherapistsByNameFragment newInstance(String param1, String param2) {
         TherapistsByNameFragment fragment = new TherapistsByNameFragment();
         Bundle args = new Bundle();
@@ -57,10 +58,37 @@ public class TherapistsByNameFragment extends Fragment {
         }
     }
 
+    RecyclerView recyclerView;
+    List<TherapistsByNameData> therapistsDataList;
+    TherapistsByNameAdapter therapistsAdapter;
+    DatabaseReference therapistsRef;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_therapists_by_name, container, false);
+        View view= inflater.inflate(R.layout.fragment_therapists_by_name, container, false);
+
+        recyclerView = view.findViewById(R.id.therapists_by_name_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        therapistsDataList = new ArrayList<>();
+
+        therapistsRef = FirebaseDatabase.getInstance().getReference("Doctors");
+        therapistsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    TherapistsByNameData model = dataSnapshot.getValue(TherapistsByNameData.class);
+                    therapistsDataList.add(model);
+                }
+                therapistsAdapter = new TherapistsByNameAdapter(getContext(),therapistsDataList);
+                recyclerView.setAdapter(therapistsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return view;
     }
 }

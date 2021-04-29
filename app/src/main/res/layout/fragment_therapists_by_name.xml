@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.TherapistsByNameFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="therapist by name" />
-
+        android:id="@+id/therapists_by_name_recycler_view"/>
 </FrameLayout>
