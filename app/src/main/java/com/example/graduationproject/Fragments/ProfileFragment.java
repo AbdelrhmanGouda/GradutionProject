@@ -14,10 +14,15 @@ import android.widget.TextView;
 import com.example.graduationproject.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class
+
+
+
+ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView profileName,therapistNum,friendsNum,heartNum;
     private ImageView profilePic;
     private FloatingActionButton floatingEditProfileBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
