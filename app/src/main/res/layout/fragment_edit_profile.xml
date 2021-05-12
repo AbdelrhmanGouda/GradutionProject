@@ -10,7 +10,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="30dp">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/edit_profile_image"
         android:layout_width="180dp"
         android:layout_height="180dp"
@@ -48,27 +48,29 @@
         android:elevation="10dp"
         android:hint="E-mail"
         android:paddingLeft="30dp"
-        android:scrollbarSize="@dimen/_400sdp" />
+        android:scrollbarSize="@dimen/_400sdp"
+        android:inputType="textEmailAddress"/>
 
     <EditText
-        android:id="@+id/edit_password"
+        android:id="@+id/edit_location"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"
         android:elevation="10dp"
-        android:hint="Password"
+        android:hint="Location"
         android:paddingLeft="30dp" />
 
     <EditText
-        android:id="@+id/edit_confirm_password"
+        android:id="@+id/edit_phone"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"
         android:elevation="10dp"
-        android:hint="Confirm Password"
-        android:paddingLeft="30dp" />
+        android:hint="Phone"
+        android:paddingLeft="30dp"
+        android:inputType="phone"/>
 
     <Button
         android:id="@+id/edit_profile_update_btn"
