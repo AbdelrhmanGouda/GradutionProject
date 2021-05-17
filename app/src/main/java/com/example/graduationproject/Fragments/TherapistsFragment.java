@@ -23,15 +23,10 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class TherapistsFragment extends Fragment {
-
-    Toolbar toolbar;
-    EditText therapySearch;
     TabLayout tabLayout;
     TabItem therapyByName,therapyByLocation;
     PagerAdapter pagerAdapter;
     ViewPager viewPager;
-    ImageView backImage;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,23 +36,9 @@ public class TherapistsFragment extends Fragment {
 
         viewPager = v.findViewById(R.id.view_pager);
         tabLayout = v.findViewById(R.id.therapists_tab_layout);
-        toolbar = v.findViewById(R.id.therapists_tool_bar);
-        therapySearch = v.findViewById(R.id.search_therapists);
+
         therapyByName = v.findViewById(R.id.therapists_byName_tab_item);
         therapyByLocation = v.findViewById(R.id.therapists_byLocation_tab_item);
-        backImage = v.findViewById(R.id.back);
-
-
-        backImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // move from fragment to activity 
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
-            }
-        });
 
         pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);

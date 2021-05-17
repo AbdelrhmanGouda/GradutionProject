@@ -2,16 +2,16 @@ package com.example.graduationproject.Data;
 
 public class TherapistsByNameData {
 
-    String name,phone,image,location;
+    String name,phone, imageUrl,location;
 
 
     public TherapistsByNameData() {
     }
 
-    public TherapistsByNameData(String name, String phone, String image, String location) {
+    public TherapistsByNameData(String name, String phone, String imageUrl, String location) {
         this.name = name;
         this.phone = phone;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.location = location;
     }
 
@@ -32,12 +32,12 @@ public class TherapistsByNameData {
         this.phone = phone;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getLocation() {
