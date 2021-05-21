@@ -366,11 +366,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 firebaseAuthWithGoogle(account.getIdToken());
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
                 if (account != null) {
-                    String personName = account.getDisplayName() ;
+                    String personName = account.getDisplayName();
                     String personEmail = account.getEmail();
                     String personId = account.getId();
                     Uri personPhoto = account.getPhotoUrl();
-                    saveGoogleAndFacebookAuthToRealFirebase(personId,personName,personEmail,personPhoto);
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    final String gId = firebaseUser.getUid();
+                    Log.v("facebookdatauidg", ": " + gId);
+                    saveGoogleAndFacebookAuthToRealFirebase(personId, personName, personEmail, personPhoto);
                 }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -479,16 +482,24 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     }
 
 
-                                    Log.v("facebookdata2",obj);
-                                    Log.v("facebookdata","id: "+id);
-                                    Log.v("facebookdata","name: "+name);
-                                    Log.v("facebookdata","email: "+email);
-                                   // Log.v("facebookdata","birthday: "+birthday);
+                                    Log.v("facebookdata2", obj);
+                                    Log.v("facebookdata", "id: " + id);
+                                    Log.v("facebookdata", "name: " + name);
+                                    Log.v("facebookdata", "email: " + email);
+                                    // Log.v("facebookdata","birthday: "+birthday);
                                     //Log.v("facebookdata","gender: "+gender);
-                                    Log.v("facebookdata","profileURL: "+profileURL);
+                                    Log.v("facebookdata", "profileURL: " + profileURL);
                                     Uri uri = Uri.parse(profileURL);
-
-                                    saveGoogleAndFacebookAuthToRealFirebase(id,name,email,uri);
+                                    //FirebaseAuth m2Auth = FirebaseAuth.getInstance();
+                                    //FirebaseUser user = mAuth.getCurrentUser();
+                                    //String UID =user.getUid();
+                                   /*
+                                    FirebaseUser firebaseUser =mAuth.getCurrentUser();
+                                    String fId =firebaseUser.getUid();*/
+                                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                    final String fId = firebaseUser.getUid();
+                                    Log.v("facebookdatauid", ": " + fId);
+                                    saveGoogleAndFacebookAuthToRealFirebase("1111", name, email, uri);
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
