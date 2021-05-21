@@ -18,12 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.graduationproject.Data.FriendListData;
-import com.example.graduationproject.Notification.APIService;
+/*import com.example.graduationproject.Notification.APIService;
 import com.example.graduationproject.Notification.Client;
 import com.example.graduationproject.Notification.Data;
 import com.example.graduationproject.Notification.MyResponse;
 import com.example.graduationproject.Notification.NotificationSender;
-import com.example.graduationproject.Notification.Token;
+import com.example.graduationproject.Notification.Token;*/
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,12 +33,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
+/*
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+*/
 
 public class FriendProfileFragment extends Fragment {
     private static final String TAG ="gouda" ;
