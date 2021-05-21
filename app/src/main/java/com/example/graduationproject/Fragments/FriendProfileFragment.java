@@ -50,13 +50,12 @@ public class FriendProfileFragment extends Fragment {
     FirebaseUser firebaseUser;
     String  userName,userImage,myName,myImage;
     DatabaseReference profileRefrence;
-    public static final String SHARED="sharedPref";
-    public static final String STATE="love";
+
     Boolean loveState=true,addFriendState;
     int i=0,j=0,imageResourceId;
-    private APIService apiService;
+   /* private APIService apiService;
     String title ="Notification";
-    String message = "Love";
+    String message = "Love";*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class FriendProfileFragment extends Fragment {
         addLove=view.findViewById(R.id.profile_add_love);
         addFriend=view.findViewById(R.id.profile_add_friend);
         imageResourceId=R.drawable.whitelove;
-        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+       // apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
         profileRefrence =FirebaseDatabase.getInstance().getReference("Profiles");
 
         if(getArguments()!=null){
@@ -97,6 +96,7 @@ public class FriendProfileFragment extends Fragment {
                     addLove.setImageResource(R.drawable.bluelove);
                     setLoveImage();
                     makeLoves();
+/*
                     FirebaseDatabase.getInstance().getReference().child("Tokens").child(id).child("token")
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -111,6 +111,7 @@ public class FriendProfileFragment extends Fragment {
 
                                 }
                             });
+*/
 
                     flag=false;
                 }else {
@@ -143,17 +144,18 @@ public class FriendProfileFragment extends Fragment {
             }
         });
 
-        UpdateToken();
+        //UpdateToken();
         return view;
     }
 
-    private void UpdateToken() {
+  /*  private void UpdateToken() {
         FirebaseUser firebaseUser =FirebaseAuth.getInstance().getCurrentUser();
         String refreshToken= FirebaseInstanceId.getInstance().getToken();
         Token token =new Token(refreshToken);
         FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
-    }
+    }*/
 
+/*
     private void sendNotifications(String userToken, String title, String message) {
         Data data =new Data(title,message);
         NotificationSender notificationSender = new NotificationSender(data,userToken);
@@ -175,6 +177,7 @@ public class FriendProfileFragment extends Fragment {
             }
         });
     }
+*/
 
 
     private void getFriendData() {
