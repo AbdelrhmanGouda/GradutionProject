@@ -1,0 +1,280 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.graduationproject\">\r\n\r\n\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n\r\n\r\n        <activity\r\n            android:name=\".Activities.MainActivity\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\"\r\n             />\r\n\r\n        <activity\r\n            android:name=\".Sign.SignMainActivity\"\r\n            android:windowSoftInputMode=\"adjustPan\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\"\r\n            >\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data android:name=\"com.facebook.sdk.ApplicationId\"\r\n            android:value=\"@string/facebook_app_id\"/>\r\n\r\n        <activity android:name=\"com.facebook.FacebookActivity\"\r\n            android:configChanges=\r\n                \"keyboard|keyboardHidden|screenLayout|screenSize|orientation\"\r\n            android:label=\"@string/app_name\" />\r\n        <activity\r\n            android:name=\"com.facebook.CustomTabActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 93f85592a65f3ea10a8fd957389a91ed1f479b96)
++++ app/src/main/AndroidManifest.xml	(date 1621615650651)
+@@ -2,8 +2,6 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="com.example.graduationproject">
+ 
+-
+-
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.CAMERA" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+@@ -16,42 +14,41 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+-
+-
++        <activity android:name=".Activities.SendNotif"></activity>
+         <activity
+             android:name=".Activities.MainActivity"
+-            android:theme="@style/AppTheme.NoActionBar"
+-             />
+-
++            android:theme="@style/AppTheme.NoActionBar" />
+         <activity
+             android:name=".Sign.SignMainActivity"
+-            android:windowSoftInputMode="adjustPan"
+             android:theme="@style/AppTheme.NoActionBar"
+-            >
++            android:windowSoftInputMode="adjustPan">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
++
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+ 
+-        <meta-data android:name="com.facebook.sdk.ApplicationId"
+-            android:value="@string/facebook_app_id"/>
++        <meta-data
++            android:name="com.facebook.sdk.ApplicationId"
++            android:value="@string/facebook_app_id" />
+ 
+-        <activity android:name="com.facebook.FacebookActivity"
+-            android:configChanges=
+-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
++        <activity
++            android:name="com.facebook.FacebookActivity"
++            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+             android:label="@string/app_name" />
+         <activity
+             android:name="com.facebook.CustomTabActivity"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.VIEW" />
++
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <category android:name="android.intent.category.BROWSABLE" />
++
+                 <data android:scheme="@string/fb_login_protocol_scheme" />
+             </intent-filter>
+         </activity>
+-
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/example/graduationproject/Activities/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.graduationproject.Activities;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.ActionBarDrawerToggle;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.core.view.GravityCompat;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.graduationproject.Fragments.AppointmentsFragment;\r\nimport com.example.graduationproject.Fragments.CartFragment;\r\nimport com.example.graduationproject.Fragments.FriendListFragment;\r\nimport com.example.graduationproject.Fragments.HomeFragment;\r\nimport com.example.graduationproject.Fragments.NotificationFragment;\r\nimport com.example.graduationproject.Fragments.ProfileFragment;\r\nimport com.example.graduationproject.Fragments.TherapistsFragment;\r\nimport com.example.graduationproject.R;\r\nimport com.example.graduationproject.Sign.SignMainActivity;\r\nimport com.facebook.login.LoginManager;\r\nimport com.google.android.material.navigation.NavigationView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.Query;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport de.hdodenhof.circleimageview.CircleImageView;\r\n\r\npublic class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {\r\n    private Toolbar toolbar;\r\n    private DrawerLayout drawerLayout;\r\n    private NavigationView navigationView;\r\n    public FirebaseAuth mAuth;\r\n    String userName,userImage;\r\n    CircleImageView imgHead;\r\n    View view;\r\n    TextView textName;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        toolbar=findViewById(R.id.toolbar);\r\n        setSupportActionBar(toolbar);\r\n\r\n\r\n        drawerLayout =findViewById(R.id.drawer_layout);\r\n        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);\r\n        drawerLayout.addDrawerListener(toggle);\r\n        toggle.syncState();\r\n        mAuth = FirebaseAuth.getInstance();\r\n        getHeader();\r\n\r\n        navigationView=findViewById(R.id.navigation);\r\n        view =navigationView.getHeaderView(0);\r\n        imgHead=view.findViewById(R.id.header_image);\r\n        textName=view.findViewById(R.id.header_name);\r\n        navigationView.setNavigationItemSelectedListener(this);\r\n        if(savedInstanceState==null) {\r\n            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();\r\n            navigationView.setCheckedItem(R.id.home);\r\n        }\r\n\r\n    }\r\n    @Override\r\n    public void onBackPressed() {\r\n        if(drawerLayout.isDrawerOpen(GravityCompat.START)){\r\n            drawerLayout.closeDrawer(GravityCompat.START);\r\n        }else{\r\n            super.onBackPressed();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {\r\n        switch (menuItem.getItemId()){\r\n            case R.id.home:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();\r\n                break;\r\n            case R.id.profile:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();\r\n                break;\r\n            case R.id.friends_list:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new FriendListFragment()).commit();\r\n                break;\r\n            case R.id.therapists:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new TherapistsFragment()).commit();\r\n                break;\r\n            case R.id.notification:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new NotificationFragment()).commit();\r\n                break;\r\n            case R.id.appointments:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AppointmentsFragment()).commit();\r\n                break;\r\n            case R.id.cart:\r\n                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();\r\n                break;\r\n            case R.id.log_out:\r\n\r\n                Toast.makeText(this, \"Log Out\", Toast.LENGTH_SHORT).show();\r\n\r\n                mAuth.signOut();\r\n                FirebaseAuth.getInstance().signOut();\r\n                LoginManager.getInstance().logOut();\r\n\r\n                Intent intent = new Intent(getApplicationContext(), SignMainActivity.class);\r\n                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);\r\n                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);\r\n                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);\r\n                startActivity(intent);\r\n\r\n                //Toast.makeText(getActivity(),\"Logged out!\",Toast.LENGTH_LONG).show();\r\n\r\n                break;\r\n\r\n        }\r\n        drawerLayout.closeDrawer(GravityCompat.START);\r\n        return true;\r\n    }\r\n    private void getHeader() {\r\n        FirebaseUser firebaseUser=mAuth.getCurrentUser();\r\n        final String id=firebaseUser.getUid();\r\n\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Users\").child(id);\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n                            userName=dataSnapshot.child(\"name\").getValue(String.class);\r\n                            userImage=dataSnapshot.child(\"uri\").getValue(String.class);\r\n                            textName.setText(userName);\r\n                            Picasso.get().load(userImage).into(imgHead);\r\n\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/graduationproject/Activities/MainActivity.java	(revision 93f85592a65f3ea10a8fd957389a91ed1f479b96)
++++ app/src/main/java/com/example/graduationproject/Activities/MainActivity.java	(date 1621615650664)
+@@ -9,6 +9,7 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.TextView;
+@@ -105,7 +106,9 @@
+                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AppointmentsFragment()).commit();
+                 break;
+             case R.id.cart:
+-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
++                Intent i = new Intent(this,SendNotif.class);
++                startActivity(i);
++               // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
+                 break;
+             case R.id.log_out:
+ 
+@@ -142,6 +145,7 @@
+                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                             userName=dataSnapshot.child("name").getValue(String.class);
+                             userImage=dataSnapshot.child("uri").getValue(String.class);
++                            Log.i(userName.toString(), "onDataChange: ");
+                             textName.setText(userName);
+                             Picasso.get().load(userImage).into(imgHead);
+ 
+Index: app/src/main/java/com/example/graduationproject/Fragments/FriendProfileFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\npackage com.example.graduationproject.Fragments;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.example.graduationproject.Data.FriendListData;\r\nimport com.example.graduationproject.R;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.Query;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.squareup.picasso.Picasso;\r\n\r\npublic class FriendProfileFragment extends Fragment {\r\n    TextView name,loveNumbers,friendNumbers,location,bio;\r\n    ImageView profile,addLove,addFriend;\r\n    boolean flag=true,flag2=true;\r\n    LinearLayout linearLove,linearAdd;\r\n    String id,appreciateNumber,friendsNumber,uName,uri;\r\n    FirebaseUser firebaseUser;\r\n    String  userName,userImage,myName,myImage;\r\n    DatabaseReference profileRefrence;\r\n    public static final String SHARED=\"sharedPref\";\r\n    public static final String STATE=\"love\";\r\n    Boolean loveState=true,addFriendState;\r\n    int i=0,j=0,imageResourceId;\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n        View view = inflater.inflate(R.layout.fragment_friend_profile, container, false);\r\n     //   ((AppCompatActivity) getActivity()).getSupportActionBar().hide();\r\n        name=view.findViewById(R.id.profile_name);\r\n        loveNumbers=view.findViewById(R.id.profile_love_text);\r\n        friendNumbers=view.findViewById(R.id.profile_friend_text);\r\n        location=view.findViewById(R.id.profile_location);\r\n        bio=view.findViewById(R.id.profile_BIO);\r\n        linearAdd=view.findViewById(R.id.linear_add);\r\n        linearLove=view.findViewById(R.id.linear_love);\r\n        profile=view.findViewById(R.id.profile_image_details);\r\n        addLove=view.findViewById(R.id.profile_add_love);\r\n        addFriend=view.findViewById(R.id.profile_add_friend);\r\n        imageResourceId=R.drawable.whitelove;\r\n        profileRefrence =FirebaseDatabase.getInstance().getReference(\"Profiles\");\r\n\r\n        if(getArguments()!=null){\r\n            id=getArguments().getString(\"id\");\r\n            uName=getArguments().getString(\"name\");\r\n            uri=getArguments().getString(\"uri\");\r\n\r\n        }\r\n        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();\r\n        getFriendData();\r\n        setAddFriendImageState();\r\n        setLoveImage();\r\n        getApprciate();\r\n        getFriendsNumber();\r\n\r\n        linearLove.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if(flag==true){\r\n                    addLove.setImageResource(R.drawable.bluelove);\r\n                    setLoveImage();\r\n                    makeLoves();\r\n                    flag=false;\r\n                }else {\r\n                    addLove.setImageResource(R.drawable.whitelove);\r\n                    setLoveImage();\r\n                    deleteLove();\r\n                    flag=true;\r\n\r\n                }\r\n            }\r\n        });\r\n        linearAdd.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if(flag2==true){\r\n                    addFriend.setImageResource(R.drawable.blueadd);\r\n                  //  addFriends();\r\n                    sendFriendRequest();\r\n                    setAddFriendImageState();\r\n\r\n                    flag2=false;\r\n\r\n                }else {\r\n                    addFriend.setImageResource(R.drawable.whiteadd);\r\n                    //deleteFriends();\r\n                    setAddFriendImageState();\r\n                    flag2=true;\r\n\r\n                }\r\n            }\r\n        });\r\n\r\n\r\n        return view;\r\n    }\r\n\r\n\r\n\r\n    private void getFriendData() {\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Users\").child(id);\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                            // FriendListData user =snapshot.getValue(FriendListData.class);\r\n                              userName=dataSnapshot.child(\"name\").getValue(String.class);\r\n                              userImage=dataSnapshot.child(\"uri\").getValue(String.class);\r\n                            String  userLocation=dataSnapshot.child(\"location\").getValue(String.class);\r\n\r\n                            name.setText(userName);\r\n                            location.setText(userLocation);\r\n                            Picasso.get().load(userImage).into(profile);\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n        Query query7 = FirebaseDatabase.getInstance().getReference().child(\"Users\").child(firebaseUser.getUid());\r\n        query7.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                            // FriendListData user =snapshot.getValue(FriendListData.class);\r\n                            myName=dataSnapshot.child(\"name\").getValue(String.class);\r\n                            myImage=dataSnapshot.child(\"uri\").getValue(String.class);\r\n                            String  userLocation=dataSnapshot.child(\"location\").getValue(String.class);\r\n\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n    private void makeLoves() {\r\n        if(getApprciate()!=null){\r\n            i=Integer.valueOf(getApprciate());\r\n        }\r\n\r\n        i++;\r\n        loveNumbers.setText(String.valueOf(i));\r\n        profileRefrence.child(\"Appreciate\").child(\"Likes\").child(id).child(\"Appreciate\").setValue(String.valueOf(i));\r\n        profileRefrence.child(\"Appreciate\").child(\"AppreciateListNotification\").child(firebaseUser.getUid()).child(id).child(\"name\").setValue(myName);\r\n        profileRefrence.child(\"Appreciate\").child(\"AppreciateListNotification\").child(firebaseUser.getUid()).child(id).child(\"uri\").setValue(myImage);\r\n\r\n        profileRefrence.child(\"Appreciate\").child(\"FriendsStats\").child(firebaseUser.getUid()).child(id).child(\"State\").setValue(true);\r\n\r\n\r\n    }\r\n    private void deleteLove() {\r\n\r\n        if(getApprciate()!=null){\r\n            i=Integer.valueOf(getApprciate());\r\n        }\r\n        i--;\r\n        loveNumbers.setText(String.valueOf(i));\r\n\r\n        profileRefrence.child(\"Appreciate\").child(\"Likes\").child(id).child(\"Appreciate\").setValue(String.valueOf(i));\r\n        profileRefrence.child(\"Appreciate\").child(\"AppreciateListNotification\").child(firebaseUser.getUid()).child(id).child(\"name\").removeValue();\r\n\r\n        profileRefrence.child(\"Appreciate\").child(\"FriendsStats\").child(firebaseUser.getUid()).child(id).child(\"State\").removeValue();\r\n\r\n    }\r\n    private void setLoveImage(){\r\n\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Profiles\").child(\"Appreciate\").child(\"FriendsStats\").child(firebaseUser.getUid()).child(id);\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                            loveState =dataSnapshot.child(\"State\").getValue(Boolean.class);\r\n\r\n                 if(loveState){\r\n                       addLove.setImageResource(R.drawable.bluelove);\r\n\r\n                   }else {\r\n                       addLove.setImageResource(R.drawable.whitelove);\r\n                   }\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }else {\r\n                    Toast.makeText(getActivity(), \"no data\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n    private void sendFriendRequest() {\r\n\r\n    }\r\n\r\n   /* private void addFriends() {\r\n        if(getApprciate()!=null){\r\n            j=Integer.valueOf(getApprciate());\r\n        }\r\n\r\n        FriendListData data=new FriendListData(myImage,myName,firebaseUser.getUid(),true);\r\n        FriendListData data1=new FriendListData(userImage,userName,id,true);\r\n        j++;\r\n        profileRefrence.child(\"Friends\").child(\"FriendsNumber\").child(id).child(\"Friends\").setValue(String.valueOf(j));\r\n        profileRefrence.child(\"Friends\").child(\"FriendsNumber\").child(firebaseUser.getUid()).child(\"Friends\").setValue(String.valueOf(j));\r\n\r\n        profileRefrence.child(\"Friends\").child(\"FriendsList\").child(id).child(firebaseUser.getUid()).setValue(data);\r\n        profileRefrence.child(\"Friends\").child(\"FriendsList\").child(firebaseUser.getUid()).child(id).setValue(data1);\r\n\r\n    }\r\n    private void deleteFriends(){\r\n        if(getApprciate()!=null){\r\n            j=Integer.valueOf(getApprciate());\r\n        }\r\n\r\n        j--;\r\n        profileRefrence.child(\"Friends\").child(\"FriendsNumber\").child(id).child(\"Friends\").setValue(String.valueOf(j));\r\n        profileRefrence.child(\"Friends\").child(\"FriendsList\").child(id).child(firebaseUser.getUid()).removeValue() ;\r\n        profileRefrence.child(\"Friends\").child(\"FriendsList\").child(firebaseUser.getUid()).child(id).removeValue();\r\n\r\n\r\n    }\r\n\r\n    */\r\n\r\n\r\n    private void setAddFriendImageState(){\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Profiles\").child(\"Friends\").child(\"FriendsList\")\r\n                .child(firebaseUser.getUid());\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                                FriendListData data=snapshot.getValue(FriendListData.class);\r\n                                if(data.getId().equals(id)){\r\n                                    if(data.isState()){\r\n                                        addFriend.setImageResource(R.drawable.blueadd);\r\n\r\n                                    }else {\r\n                                        addFriend.setImageResource(R.drawable.whiteadd);\r\n                                    }\r\n                                }\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }else {\r\n                    Toast.makeText(getActivity(), \"no data\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n    private String getApprciate(){\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Profiles\").child(\"Friends\").child(\"FriendsNumber\")\r\n                .child(id);\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                            appreciateNumber=dataSnapshot.child(\"Friends\").getValue(String.class);\r\n                            friendNumbers.setText(appreciateNumber);\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }else {\r\n                    Toast.makeText(getActivity(), \"no data\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n        return appreciateNumber;\r\n\r\n    }\r\n    private String getFriendsNumber(){\r\n        Query query6 = FirebaseDatabase.getInstance().getReference().child(\"Profiles\").child(\"Appreciate\").child(\"Likes\")\r\n                .child(id);\r\n        query6.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n                if(dataSnapshot!=null){\r\n                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {\r\n                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\r\n\r\n                            friendsNumber=dataSnapshot.child(\"Appreciate\").getValue(String.class);\r\n                            loveNumbers.setText(friendsNumber);\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n\r\n                }else {\r\n                    Toast.makeText(getActivity(), \"no data\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError databaseError) {\r\n\r\n            }\r\n        });\r\n        return friendsNumber;\r\n\r\n    }\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setHasOptionsMenu(false);\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {\r\n        super.onCreateOptionsMenu(menu, inflater);\r\n        menu.clear();\r\n    }\r\n\r\n\r\n    /*private void makeLoves() {\r\n        //  databaseReference =FirebaseDatabase.getInstance().getReference(\"Profiles\");\r\n        i++;\r\n        //    databaseReference.child(id).child(\"Appreciate\").setValue(i);\r\n        SharedPreferences sharedPreferences=getActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE);\r\n        SharedPreferences.Editor editor=sharedPreferences.edit();\r\n        editor.putBoolean(STATE,true);\r\n        editor.apply();\r\n\r\n    }\r\n    private void deleteLove(){\r\n        SharedPreferences sharedPreferences=getActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE);\r\n        SharedPreferences.Editor editor=sharedPreferences.edit();\r\n        editor.putBoolean(STATE,false);\r\n        editor.apply();\r\n\r\n    }\r\n    private void stateLovePhoto(){\r\n        SharedPreferences sharedPreferences1=getActivity().getSharedPreferences(SHARED, Context.MODE_PRIVATE);\r\n\r\n        this.loveState=sharedPreferences1.getBoolean(STATE,false);\r\n        if(this.loveState){\r\n            addLove.setImageResource(R.drawable.bluelove);\r\n        }else {\r\n            addLove.setImageResource(R.drawable.whitelove);\r\n\r\n        }\r\n\r\n    }*/\r\n    \r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/graduationproject/Fragments/FriendProfileFragment.java	(revision 93f85592a65f3ea10a8fd957389a91ed1f479b96)
++++ app/src/main/java/com/example/graduationproject/Fragments/FriendProfileFragment.java	(date 1621615650775)
+@@ -2,6 +2,7 @@
+ package com.example.graduationproject.Fragments;
+ 
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.Menu;
+ import android.view.MenuInflater;
+@@ -14,10 +15,15 @@
+ 
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+-import androidx.appcompat.app.AppCompatActivity;
+ import androidx.fragment.app.Fragment;
+ 
+ import com.example.graduationproject.Data.FriendListData;
++import com.example.graduationproject.Notification.APIService;
++import com.example.graduationproject.Notification.Client;
++import com.example.graduationproject.Notification.Data;
++import com.example.graduationproject.Notification.MyResponse;
++import com.example.graduationproject.Notification.NotificationSender;
++import com.example.graduationproject.Notification.Token;
+ import com.example.graduationproject.R;
+ import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.auth.FirebaseUser;
+@@ -27,9 +33,15 @@
+ import com.google.firebase.database.FirebaseDatabase;
+ import com.google.firebase.database.Query;
+ import com.google.firebase.database.ValueEventListener;
++import com.google.firebase.iid.FirebaseInstanceId;
+ import com.squareup.picasso.Picasso;
+ 
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++
+ public class FriendProfileFragment extends Fragment {
++    private static final String TAG ="gouda" ;
+     TextView name,loveNumbers,friendNumbers,location,bio;
+     ImageView profile,addLove,addFriend;
+     boolean flag=true,flag2=true;
+@@ -42,6 +54,9 @@
+     public static final String STATE="love";
+     Boolean loveState=true,addFriendState;
+     int i=0,j=0,imageResourceId;
++    private APIService apiService;
++    String title ="Notification";
++    String message = "Love";
+     @Nullable
+     @Override
+     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+@@ -59,6 +74,7 @@
+         addLove=view.findViewById(R.id.profile_add_love);
+         addFriend=view.findViewById(R.id.profile_add_friend);
+         imageResourceId=R.drawable.whitelove;
++        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+         profileRefrence =FirebaseDatabase.getInstance().getReference("Profiles");
+ 
+         if(getArguments()!=null){
+@@ -81,6 +97,21 @@
+                     addLove.setImageResource(R.drawable.bluelove);
+                     setLoveImage();
+                     makeLoves();
++                    FirebaseDatabase.getInstance().getReference().child("Tokens").child(id).child("token")
++                            .addListenerForSingleValueEvent(new ValueEventListener() {
++                                @Override
++                                public void onDataChange(@NonNull DataSnapshot snapshot) {
++                                    String userToken=snapshot.getValue(String.class);
++                                    sendNotifications(userToken,title,message);
++                                    Log.i(TAG, "onDataChange: ");
++                                }
++
++                                @Override
++                                public void onCancelled(@NonNull DatabaseError error) {
++
++                                }
++                            });
++
+                     flag=false;
+                 }else {
+                     addLove.setImageResource(R.drawable.whitelove);
+@@ -112,10 +143,38 @@
+             }
+         });
+ 
+-
++        UpdateToken();
+         return view;
+     }
+ 
++    private void UpdateToken() {
++        FirebaseUser firebaseUser =FirebaseAuth.getInstance().getCurrentUser();
++        String refreshToken= FirebaseInstanceId.getInstance().getToken();
++        Token token =new Token(refreshToken);
++        FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
++    }
++
++    private void sendNotifications(String userToken, String title, String message) {
++        Data data =new Data(title,message);
++        NotificationSender notificationSender = new NotificationSender(data,userToken);
++        Log.i(TAG, "sendNotifications: ");
++        apiService.sendNotification(notificationSender).enqueue(new Callback<MyResponse>()
++       {
++            @Override
++            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
++                if (response.code()==200){
++                    if (response.body().success!=1){
++                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
++                    }
++                }
++            }
++
++            @Override
++            public void onFailure(Call<MyResponse> call, Throwable t) {
++
++            }
++        });
++    }
+ 
+ 
+     private void getFriendData() {
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.3\"\r\n\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.graduationproject\"\r\n        minSdkVersion 19\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.2'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n    implementation 'com.android.support:design:30.0.0'\r\n\r\n    implementation 'com.android.support:design:30.0.0'\r\n    implementation \"com.google.android.material:material:1.2.0\"\r\n    \r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n\r\n    implementation 'com.intuit.sdp:sdp-android:1.0.6'\r\n    implementation 'com.intuit.ssp:ssp-android:1.0.6'\r\n\r\n    /////////osama//////////\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:design:26.1.0'\r\n    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'\r\n\r\n    implementation 'com.intuit.sdp:sdp-android:1.0.6'\r\n    implementation 'com.intuit.ssp:ssp-android:1.0.6'\r\n\r\n    //glide\r\n    implementation 'com.github.bumptech.glide:glide:4.11.0'\r\n    implementation 'com.google.firebase:firebase-storage:19.2.1'\r\n    implementation 'com.google.firebase:firebase-functions:19.2.0'\r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'\r\n\r\n    //noinspection GradleCompatible\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:design:28.0.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.google.android.material:material:1.2.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:cardview-v7:28.0.0'\r\n    implementation 'androidx.cardview:cardview:1.0.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'androidx.legacy:legacy-support-v13:1.0.0'\r\n\r\n    // Import the BoM for the Firebase platform\r\n    implementation platform('com.google.firebase:firebase-bom:26.7.0')\r\n\r\n    // Declare the dependency for the Firebase Authentication library\r\n    // When using the BoM, you don't specify versions in Firebase library dependencies\r\n    implementation 'com.google.firebase:firebase-auth'\r\n\r\n    // Also declare the dependency for the Google Play services library and specify its version\r\n    implementation 'com.google.android.gms:play-services-auth:19.0.0'\r\n\r\n    // facebook sign in\r\n    implementation 'com.facebook.android:facebook-login:5.15.3'\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 93f85592a65f3ea10a8fd957389a91ed1f479b96)
++++ app/build.gradle	(date 1621615650786)
+@@ -39,7 +39,7 @@
+ 
+     implementation 'com.android.support:design:30.0.0'
+     implementation "com.google.android.material:material:1.2.0"
+-    
++
+     implementation 'de.hdodenhof:circleimageview:3.1.0'
+ 
+     implementation 'com.squareup.picasso:picasso:2.71828'
+@@ -90,5 +90,19 @@
+     // facebook sign in
+     implementation 'com.facebook.android:facebook-login:5.15.3'
+ 
++    //notification
++    implementation 'com.google.firebase:firebase-messaging:20.1.2'
++    //Retrofit2
++    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
++    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+ 
++
++    implementation 'com.android.support:multidex:1.0.3'
++    android {
++        defaultConfig {
++            minSdkVersion 21
++            targetSdkVersion 28
++            multiDexEnabled true
++        }
++    }
+ }
+\ No newline at end of file
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05___Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_20_01_2021_07_05___Default_Changelist_.xml

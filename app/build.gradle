@@ -39,7 +39,7 @@ dependencies {
 
     implementation 'com.android.support:design:30.0.0'
     implementation "com.google.android.material:material:1.2.0"
-    
+
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -90,5 +90,19 @@ dependencies {
     // facebook sign in
     implementation 'com.facebook.android:facebook-login:5.15.3'
 
+    //notification
+    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
+
+    implementation 'com.android.support:multidex:1.0.3'
+    android {
+        defaultConfig {
+            minSdkVersion 21
+            targetSdkVersion 28
+            multiDexEnabled true
+        }
+    }
 }
