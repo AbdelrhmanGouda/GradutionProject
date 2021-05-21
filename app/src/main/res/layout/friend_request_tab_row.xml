@@ -45,7 +45,7 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/friend_request_tab_confirm_btn"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/confirm"
             android:layout_marginLeft="70dp"
@@ -54,7 +54,7 @@
 
         <Button
             android:id="@+id/friend_request_tab_delete_btn"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/delete"
             android:layout_marginLeft="10dp"
