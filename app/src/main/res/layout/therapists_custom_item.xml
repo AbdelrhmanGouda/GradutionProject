@@ -1,69 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:background="@color/lightGray"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_margin="@dimen/_20sdp"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/therapy_photo"/>
-    
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:id="@+id/therapy_photo"
+        android:background="@drawable/doctor_icon"/>
+
     <TextView
+        android:id="@+id/therapy_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_110sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:textSize="@dimen/_25ssp"
-        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="DR.Ahmed Ali"
-        android:id="@+id/therapy_name"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_23ssp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_110sdp"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginLeft="@dimen/_80sdp"
+        android:layout_marginTop="@dimen/_45sdp"
         android:textSize="@dimen/_13ssp"
         android:text="Specialist in Addiction Treatment"
         android:id="@+id/therapy_description"/>
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_80sdp"
-        android:numStars="5"
-        android:id="@+id/therapy_rate_bar"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_130sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_70sdp"
         android:textSize="@dimen/_13ssp"
         android:text="Cost : 200 EGP"
-        android:id="@+id/therapy_session_cost"/>
+        android:id="@+id/therapy_session_cost"
+        android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_155sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_85sdp"
         android:textSize="@dimen/_13ssp"
         android:text="Location : El Bitash Street"
-        android:id="@+id/therapy_clinic_location"/>
+        android:id="@+id/therapy_clinic_location"
+        android:textColor="@color/black"/>
 
     <Button
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_25sdp"
-        android:background="@drawable/custom_button"
-        android:layout_marginTop="@dimen/_190sdp"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_120sdp"
         android:textSize="@dimen/_14ssp"
         android:text="Book"
+        android:backgroundTint="@color/color"
         android:id="@+id/therapy_book_button"/>
 
 

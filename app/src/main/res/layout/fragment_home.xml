@@ -11,8 +11,8 @@
 
    <androidx.cardview.widget.CardView
        android:id="@+id/home_chat_boot_card"
-       android:layout_width="350dp"
-       android:layout_height="130dp"
+       android:layout_width="330dp"
+       android:layout_height="120dp"
        app:cardBackgroundColor="@color/color"
        android:layout_marginTop="90dp"
        card_view:cardCornerRadius="25dp"
@@ -32,15 +32,15 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_margin="10dp"
-          android:textSize="20dp"
+          android:textSize="15dp"
           android:text="Start chat with a bot \n to check how are you \n doing."/>
       </LinearLayout>
    </androidx.cardview.widget.CardView>
 
    <androidx.cardview.widget.CardView
        android:id="@+id/home_chat_person_card"
-       android:layout_width="350dp"
-       android:layout_height="130dp"
+       android:layout_width="330dp"
+       android:layout_height="120dp"
        app:cardBackgroundColor="@color/color"
        android:layout_marginTop="80dp"
        card_view:cardCornerRadius="25dp"
@@ -61,15 +61,15 @@
              android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
              android:layout_margin="10dp"
-             android:textSize="20dp"
+             android:textSize="15dp"
              android:text="\Start chat with a  \n person to feel better ."/>
       </LinearLayout>
    </androidx.cardview.widget.CardView>
 
    <androidx.cardview.widget.CardView
        android:id="@+id/home_therapist_card"
-       android:layout_width="350dp"
-       android:layout_height="130dp"
+       android:layout_width="330dp"
+       android:layout_height="120dp"
        app:cardBackgroundColor="@color/color"
        android:layout_marginTop="80dp"
        android:layout_marginBottom="20dp"
@@ -92,7 +92,7 @@
              android:layout_height="wrap_content"
              android:layout_margin="10dp"
              android:text="Reserve a visit to a    \n therapist."
-             android:textSize="20dp" />
+             android:textSize="15dp" />
       </LinearLayout>
    </androidx.cardview.widget.CardView>
 

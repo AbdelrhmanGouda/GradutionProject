@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationproject.Fragments.AppointmentsFragment;
@@ -24,12 +26,26 @@ import com.example.graduationproject.Sign.SignMainActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     public FirebaseAuth mAuth;
+    String userName,userImage;
+    CircleImageView imgHead;
+    View view;
+    TextView textName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +61,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mAuth = FirebaseAuth.getInstance();
-
+        getHeader();
 
         navigationView=findViewById(R.id.navigation);
+        view =navigationView.getHeaderView(0);
+        imgHead=view.findViewById(R.id.header_image);
+        textName=view.findViewById(R.id.header_name);
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState==null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
@@ -109,6 +128,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void getHeader() {
+        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+        final String id=firebaseUser.getUid();
+
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            userName=dataSnapshot.child("name").getValue(String.class);
+                            userImage=dataSnapshot.child("uri").getValue(String.class);
+                            textName.setText(userName);
+                            Picasso.get().load(userImage).into(imgHead);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 }
