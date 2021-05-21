@@ -5,7 +5,7 @@
 <de.hdodenhof.circleimageview.CircleImageView
     android:layout_width="@dimen/_40sdp"
     android:layout_height="@dimen/_40sdp"
-    android:src="@mipmap/ic_launcher"
+    android:src="@drawable/chat_bot"
     android:layout_marginBottom="@dimen/_5sdp"
     android:id="@+id/chat_profile_image"
     ></de.hdodenhof.circleimageview.CircleImageView>

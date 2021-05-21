@@ -45,5 +45,6 @@ public class NotificationTabAdapter extends RecyclerView.Adapter<NotificationTab
             state=itemView.findViewById(R.id.notification_tab_state);
         }
     }
+
 }
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.graduationproject.Data.GroupChat;
 import com.example.graduationproject.Data.GroupChatList;
+import com.example.graduationproject.Fragments.FriendProfileFragment;
 import com.example.graduationproject.Fragments.GroupChatFragment;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,32 @@ public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMess
         holder.message.setText(user.getMessage());
         holder.time.setText(timeFormat);
         setUserName(user,holder);
-       // Picasso.get().load(user.ge()).into(holder.friendListImage);
+        try {
+            holder.prof.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    getprofile(user,v);
+                }
+            });
+
+        }catch (Exception e){
+
+        }
+
+    }
+
+    private void getprofile(GroupChat user, View v) {
+        AppCompatActivity activity=(AppCompatActivity)v.getContext();
+        FriendProfileFragment friendProfileFragment=new FriendProfileFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("id",user.getSender());
+        //set Fragmentclass Arguments
+        friendProfileFragment.setArguments(bundle);
+        activity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,friendProfileFragment).addToBackStack("").commit();
+        //set Fragmentclass Arguments
+
 
     }
 
@@ -130,7 +156,7 @@ public class GroupChatMessagesAdapter extends RecyclerView.Adapter<GroupChatMess
             name=itemView.findViewById(R.id.name);
             message=itemView.findViewById(R.id.txt_group_message);
             time=itemView.findViewById(R.id.txt_group_time);
-            prof=itemView.findViewById(R.id.prof);
+            prof=itemView.findViewById(R.id.prof1);
             //  friendListId=itemView.findViewById(R.id.friends_list_name);
 
 

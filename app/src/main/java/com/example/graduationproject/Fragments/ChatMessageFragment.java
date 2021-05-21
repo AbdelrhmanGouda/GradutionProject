@@ -1,5 +1,6 @@
 package com.example.graduationproject.Fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatMessageFragment extends Fragment {
-    String id;
+    String id,name,uri;
     RecyclerView recyclerView;
     ArrayList<Chat> chats;
     MessageAdapter messageAdapter;
@@ -53,16 +54,15 @@ public class ChatMessageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_message, container, false);
-      //  ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        setHasOptionsMenu(false);
+     // ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
 
         textSend=view.findViewById(R.id.Edit_text_send);
         send=view.findViewById(R.id.btn_send);
 
         recyclerView=view.findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
-        linearLayoutManager.setStackFromEnd(true);
       recyclerView.setLayoutManager(linearLayoutManager);
 
         Toolbar toolbar=view.findViewById(R.id.toolbar);
@@ -80,6 +80,8 @@ public class ChatMessageFragment extends Fragment {
         });
         if(getArguments()!=null){
             id=getArguments().getString("id");
+            name=getArguments().getString("name");
+            uri=getArguments().getString("uri");
 
         }
 
@@ -89,6 +91,9 @@ public class ChatMessageFragment extends Fragment {
                 FriendProfileFragment profileFragment=new FriendProfileFragment();
                 Bundle bundle=new Bundle();
                 bundle.putString("id", id);
+                bundle.putString("name", name);
+                bundle.putString("uri", uri);
+
                 //set Fragmentclass Arguments
                 profileFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
@@ -185,17 +190,6 @@ public class ChatMessageFragment extends Fragment {
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
-    }
 
 
 }

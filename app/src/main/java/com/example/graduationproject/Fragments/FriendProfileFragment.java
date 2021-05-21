@@ -2,6 +2,7 @@
 package com.example.graduationproject.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,7 +35,7 @@ public class FriendProfileFragment extends Fragment {
     ImageView profile,addLove,addFriend;
     boolean flag=true,flag2=true;
     LinearLayout linearLove,linearAdd;
-    String id,appreciateNumber,friendsNumber;
+    String id,appreciateNumber,friendsNumber,uName,uri;
     FirebaseUser firebaseUser;
     String  userName,userImage,myName,myImage;
     DatabaseReference profileRefrence;
@@ -63,6 +64,8 @@ public class FriendProfileFragment extends Fragment {
 
         if(getArguments()!=null){
             id=getArguments().getString("id");
+            uName=getArguments().getString("name");
+            uri=getArguments().getString("uri");
 
         }
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -94,14 +97,15 @@ public class FriendProfileFragment extends Fragment {
             public void onClick(View v) {
                 if(flag2==true){
                     addFriend.setImageResource(R.drawable.blueadd);
-                    addFriends();
+                   //addFriends();
+                    sendFriendRequest();
                     setAddFriendImageState();
-
                     flag2=false;
 
                 }else {
                     addFriend.setImageResource(R.drawable.whiteadd);
-                    deleteFriends();
+                   // deleteFriends();
+                    deleteFirendRequest();
                     setAddFriendImageState();
                     flag2=true;
 
@@ -112,6 +116,7 @@ public class FriendProfileFragment extends Fragment {
 
         return view;
     }
+
 
 
     private void getFriendData() {
@@ -156,6 +161,7 @@ public class FriendProfileFragment extends Fragment {
                             // FriendListData user =snapshot.getValue(FriendListData.class);
                             myName=dataSnapshot.child("name").getValue(String.class);
                             myImage=dataSnapshot.child("uri").getValue(String.class);
+                            Toast.makeText(getActivity(), myName+"   "+myImage, Toast.LENGTH_SHORT).show();
                             String  userLocation=dataSnapshot.child("location").getValue(String.class);
 
 
@@ -184,6 +190,9 @@ public class FriendProfileFragment extends Fragment {
         i++;
         loveNumbers.setText(String.valueOf(i));
         profileRefrence.child("Appreciate").child("Likes").child(id).child("Appreciate").setValue(String.valueOf(i));
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("name").setValue(myName);
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("uri").setValue(myImage);
+
         profileRefrence.child("Appreciate").child("FriendsStats").child(firebaseUser.getUid()).child(id).child("State").setValue(true);
 
 
@@ -197,6 +206,8 @@ public class FriendProfileFragment extends Fragment {
         loveNumbers.setText(String.valueOf(i));
 
         profileRefrence.child("Appreciate").child("Likes").child(id).child("Appreciate").setValue(String.valueOf(i));
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("name").removeValue();
+
         profileRefrence.child("Appreciate").child("FriendsStats").child(firebaseUser.getUid()).child(id).child("State").removeValue();
 
     }
@@ -238,6 +249,18 @@ public class FriendProfileFragment extends Fragment {
 
     }
 
+    private void sendFriendRequest() {
+        FriendListData data=new FriendListData(myImage,myName,firebaseUser.getUid(),true);
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("FriendsRequest").child(id).child(firebaseUser.getUid()).setValue(data);
+
+    }
+    private void deleteFirendRequest() {
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("FriendsRequest").child(id).child(firebaseUser.getUid()).removeValue();
+
+    }
+
 
     private void addFriends() {
         if(getApprciate()!=null){
@@ -266,6 +289,10 @@ public class FriendProfileFragment extends Fragment {
 
 
     }
+
+
+
+
     private void setAddFriendImageState(){
         Query query6 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsList")
                 .child(firebaseUser.getUid());
