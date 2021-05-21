@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationproject.Adapter.FriendListAdapter;
@@ -47,6 +48,7 @@ public class FriendListFragment extends Fragment {
     FloatingActionButton addGroup;
     FirebaseUser firebaseUser;
     String type;
+    TextView textViewGroup;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class FriendListFragment extends Fragment {
        // ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         groupChatRecycler=view.findViewById(R.id.recycler_groupchat);
         friendListRecyclerView =view.findViewById(R.id.friends_list_recycler_view);
+        textViewGroup=view.findViewById(R.id.text);
         linearLayout=view.findViewById(R.id.location_linear);
         friendListRecyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
         friendListRecyclerView.setHasFixedSize(true);
@@ -69,15 +72,17 @@ public class FriendListFragment extends Fragment {
             FriendsList();
             groupChatList();
 
-        setHasOptionsMenu(true);
         if(getArguments()!=null){
             type=getArguments().getString("find");
 
         }
         if(type!=null){
             if(type.equals("people")){
-
+                setHasOptionsMenu(true);
+                addGroup.setVisibility(View.VISIBLE);
                 linearLayout.setVisibility(View.VISIBLE);
+                groupChatRecycler.setVisibility(View.VISIBLE);
+                textViewGroup.setVisibility(View.VISIBLE);
             }
 
         }

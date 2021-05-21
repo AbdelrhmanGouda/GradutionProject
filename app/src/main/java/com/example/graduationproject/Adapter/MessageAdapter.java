@@ -51,7 +51,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.FriendLi
         Chat chat=chats.get(position);
         holder.showMessage.setText(chat.getMessage());
 
-        Picasso.get().load(imageUri).into(holder.friendListImage);
+        if(imageUri!=null){
+            Picasso.get().load(imageUri).into(holder.friendListImage);
+
+        }
 
     }
 

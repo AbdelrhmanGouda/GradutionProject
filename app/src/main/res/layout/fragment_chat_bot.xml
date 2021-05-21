@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout android:background="#ABC"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/bar_layout"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:id="@+id/toolbar"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:id="@+id/profile_image"
+                    android:src="@drawable/chat_bot"
+                    ></de.hdodenhof.circleimageview.CircleImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/username"
+                    android:textSize="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:text="name"
+                    ></TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler"
+            app:stackFromEnd="true"
+            android:layout_below="@id/bar_layout"
+            android:layout_above="@id/fram">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fram"
+            android:layout_alignParentBottom="true"
+            >
+            <RelativeLayout
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:background="#fff"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                >
+
+                <EditText
+                    android:id="@+id/Edit_text_send"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_toLeftOf="@id/btn_send"
+                    android:background="@android:color/transparent"
+                    android:hint="Type a message..."></EditText>
+
+                <ImageButton
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/btn_send"
+                    android:background="@drawable/send"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    ></ImageButton>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/linear_choose"
+                >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/linear_chose_12"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                >
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/_80sdp"
+                    android:text="one"
+                    android:id="@+id/choose_one"
+                    ></Button>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/_80sdp"
+                    android:text="two"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/choose_two"
+                    ></Button>
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_80sdp"
+                        android:text="three"
+                        android:layout_below="@id/choose_one"
+                        android:id="@+id/choose_three"
+                        ></Button>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_80sdp"
+                        android:text="four"
+                        android:id="@+id/choose_four"
+                        ></Button>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

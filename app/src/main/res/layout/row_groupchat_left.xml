@@ -10,7 +10,7 @@
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
         android:src="@drawable/profile_image"
-        android:id="@+id/prof"
+        android:id="@+id/prof1"
         ></de.hdodenhof.circleimageview.CircleImageView>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/backround_left"
 
-        android:layout_toRightOf="@id/prof"
+        android:layout_toRightOf="@id/prof1"
         >
         <TextView
             android:layout_width="wrap_content"

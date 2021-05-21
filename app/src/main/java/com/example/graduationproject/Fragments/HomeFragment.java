@@ -35,9 +35,10 @@ public class HomeFragment extends Fragment {
         cardViewBot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ChatBotFragment chatBotFragment=new ChatBotFragment();
                 Toast.makeText(getContext(), "Chat Bot", Toast.LENGTH_SHORT).show();
-              //  FragmentManager fragmentManager = getFragmentManager();
-              //  fragmentManager.beginTransaction().replace(R.id.fragment_container,).addToBackStack("").commit;
+               FragmentManager fragmentManager = getFragmentManager();
+               fragmentManager.beginTransaction().replace(R.id.fragment_container,chatBotFragment).addToBackStack("").commit();
             }
         });
 

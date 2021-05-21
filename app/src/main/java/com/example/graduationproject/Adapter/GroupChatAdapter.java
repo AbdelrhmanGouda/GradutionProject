@@ -29,6 +29,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.GroupChatAdapterViewHolder> {
         List<GroupChatList> friendListDataList;
         Context context;
@@ -124,7 +126,7 @@ public int getItemCount() {
         }
 
 public class GroupChatAdapterViewHolder extends RecyclerView.ViewHolder {
-    ImageView friendListImage;
+    CircleImageView friendListImage;
     TextView friendListName,time,message,sender;
     public GroupChatAdapterViewHolder(@NonNull View itemView) {
         super(itemView);

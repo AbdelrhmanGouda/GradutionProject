@@ -34,7 +34,7 @@ public class FriendProfileFragment extends Fragment {
     ImageView profile,addLove,addFriend;
     boolean flag=true,flag2=true;
     LinearLayout linearLove,linearAdd;
-    String id,appreciateNumber,friendsNumber;
+    String id,appreciateNumber,friendsNumber,uName,uri;
     FirebaseUser firebaseUser;
     String  userName,userImage,myName,myImage;
     DatabaseReference profileRefrence;
@@ -63,6 +63,8 @@ public class FriendProfileFragment extends Fragment {
 
         if(getArguments()!=null){
             id=getArguments().getString("id");
+            uName=getArguments().getString("name");
+            uri=getArguments().getString("uri");
 
         }
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -94,14 +96,15 @@ public class FriendProfileFragment extends Fragment {
             public void onClick(View v) {
                 if(flag2==true){
                     addFriend.setImageResource(R.drawable.blueadd);
-                    addFriends();
+                  //  addFriends();
+                    sendFriendRequest();
                     setAddFriendImageState();
 
                     flag2=false;
 
                 }else {
                     addFriend.setImageResource(R.drawable.whiteadd);
-                    deleteFriends();
+                    //deleteFriends();
                     setAddFriendImageState();
                     flag2=true;
 
@@ -112,6 +115,7 @@ public class FriendProfileFragment extends Fragment {
 
         return view;
     }
+
 
 
     private void getFriendData() {
@@ -184,6 +188,9 @@ public class FriendProfileFragment extends Fragment {
         i++;
         loveNumbers.setText(String.valueOf(i));
         profileRefrence.child("Appreciate").child("Likes").child(id).child("Appreciate").setValue(String.valueOf(i));
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("name").setValue(myName);
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("uri").setValue(myImage);
+
         profileRefrence.child("Appreciate").child("FriendsStats").child(firebaseUser.getUid()).child(id).child("State").setValue(true);
 
 
@@ -197,6 +204,8 @@ public class FriendProfileFragment extends Fragment {
         loveNumbers.setText(String.valueOf(i));
 
         profileRefrence.child("Appreciate").child("Likes").child(id).child("Appreciate").setValue(String.valueOf(i));
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("name").removeValue();
+
         profileRefrence.child("Appreciate").child("FriendsStats").child(firebaseUser.getUid()).child(id).child("State").removeValue();
 
     }
@@ -238,8 +247,11 @@ public class FriendProfileFragment extends Fragment {
 
     }
 
+    private void sendFriendRequest() {
 
-    private void addFriends() {
+    }
+
+   /* private void addFriends() {
         if(getApprciate()!=null){
             j=Integer.valueOf(getApprciate());
         }
@@ -266,6 +278,10 @@ public class FriendProfileFragment extends Fragment {
 
 
     }
+
+    */
+
+
     private void setAddFriendImageState(){
         Query query6 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsList")
                 .child(firebaseUser.getUid());
