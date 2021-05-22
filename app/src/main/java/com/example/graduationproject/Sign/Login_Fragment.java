@@ -55,6 +55,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -78,6 +79,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static LoginButton loginButtonF ;
     FirebaseStorage storage;
     StorageReference storageReference;
+    FirebaseAuth.AuthStateListener mAuthListener;
     User userData = new User();
 
     private static final String TAG = "GoogleActivity";
@@ -93,7 +95,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     public GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
     public FirebaseUser user;
-
+    public String nameReal,idReal,emailReal;
+    public Uri uriReal;
 
 
 
@@ -131,6 +134,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+      // String ll = user.getUid() + "$$";
+      //  Log.d("5555555",ll);
         // Check if user or account is signed in (non-null) and update UI accordingly.
         updateUI(user);
 
@@ -360,6 +365,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         if (requestCode == 9001) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
+
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
@@ -367,13 +373,38 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
                 if (account != null) {
                     String personName = account.getDisplayName();
+                    nameReal = personName;
                     String personEmail = account.getEmail();
+                    emailReal = personEmail;
                     String personId = account.getId();
                     Uri personPhoto = account.getPhotoUrl();
-                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                    final String gId = firebaseUser.getUid();
-                    Log.v("facebookdatauidg", ": " + gId);
-                    saveGoogleAndFacebookAuthToRealFirebase(personId, personName, personEmail, personPhoto);
+                    uriReal = personPhoto;
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
+                        Log.v("facebookdatauidg", ": " + personId);
+
+                    //final String gId = firebaseUser.getUid();//firebaseUser.getUid();
+
+                    mAuth=FirebaseAuth.getInstance();
+
+                    while (mAuth.getCurrentUser()==null){
+
+                        Log.v("555555", "id: " + "nulllllllll");
+
+                        if(mAuth.getCurrentUser()!=null)
+                        {
+                            //Your action here
+                            FirebaseUser firebaseUser =mAuth.getCurrentUser();
+                            String fId =firebaseUser.getUid();
+                            idReal = fId;
+                            Log.v("5555555", "id: " + idReal);
+                            saveGoogleAndFacebookAuthToRealFirebase(idReal, nameReal, emailReal, uriReal);
+                            Log.v("555555", ": " + fId);
+                            break;
+
+                        }
+                    }
                 }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -467,7 +498,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                 try {
                                     String obj = object.toString();                     //get complete JSON object refrence.
                                     String name = object.getString("name");                 //get particular JSON Object
+                                    nameReal = name;
                                     String email = object.getString("email");
+                                    emailReal = email;
                                     //String birthday = object.getString("birthday"); // 01/31/1980 format
                                     String id = object.getString("id");
                                     //String gender = object.getString("gender");
@@ -490,16 +523,44 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     //Log.v("facebookdata","gender: "+gender);
                                     Log.v("facebookdata", "profileURL: " + profileURL);
                                     Uri uri = Uri.parse(profileURL);
+                                    uriReal = uri;
                                     //FirebaseAuth m2Auth = FirebaseAuth.getInstance();
                                     //FirebaseUser user = mAuth.getCurrentUser();
                                     //String UID =user.getUid();
                                    /*
                                     FirebaseUser firebaseUser =mAuth.getCurrentUser();
                                     String fId =firebaseUser.getUid();*/
-                                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                    final String fId = firebaseUser.getUid();
-                                    Log.v("facebookdatauid", ": " + fId);
-                                    saveGoogleAndFacebookAuthToRealFirebase("1111", name, email, uri);
+
+
+
+                                    mAuth=FirebaseAuth.getInstance();
+
+                                    while (mAuth.getCurrentUser()==null){
+
+                                        Log.v("555555", "id: " + "nulllllllll");
+
+                                        if(mAuth.getCurrentUser()!=null)
+                                        {
+                                            //Your action here
+                                            FirebaseUser firebaseUser =mAuth.getCurrentUser();
+                                            String fId =firebaseUser.getUid();
+                                            idReal = fId;
+                                            Log.v("5555555", "id: " + idReal);
+                                            saveGoogleAndFacebookAuthToRealFirebase(idReal, nameReal, emailReal, uriReal);
+                                            Log.v("555555", ": " + fId);
+                                            break;
+
+                                        }
+                                    }
+
+
+                                    mAuthListener=new FirebaseAuth.AuthStateListener() {
+                                        @Override
+                                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                                        }
+                                    };
+
 
                                 } catch (Exception e) {
                                     e.printStackTrace();
