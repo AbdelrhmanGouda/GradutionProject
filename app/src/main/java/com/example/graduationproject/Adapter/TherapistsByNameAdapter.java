@@ -48,8 +48,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        doctorRef = FirebaseDatabase.getInstance().getReference("Doctors");
-        patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
+
         View view = LayoutInflater.from(mContext).inflate(R.layout.therapists_custom_item,parent,false);
         return new TherapistsByNameAdapter.ViewHolder(view);
     }
@@ -78,6 +77,8 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
             @Override
             public void onClick(View v) {
 
+                doctorRef = FirebaseDatabase.getInstance().getReference("Doctors");
+                patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
                 currentPatient = FirebaseAuth.getInstance().getCurrentUser();
                 patientId = currentPatient.getUid();
                 patientRefBook = FirebaseDatabase.getInstance().getReference();
