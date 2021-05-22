@@ -224,7 +224,9 @@ public class FriendProfileFragment extends Fragment {
                             // FriendListData user =snapshot.getValue(FriendListData.class);
                             myName=dataSnapshot.child("name").getValue(String.class);
                             myImage=dataSnapshot.child("uri").getValue(String.class);
-                            Toast.makeText(getActivity(), myName+"   "+myImage, Toast.LENGTH_SHORT).show();
+                          //
+                            //
+                            //Toast.makeText(getActivity(), myName+"   "+myImage, Toast.LENGTH_SHORT).show();
                             String  userLocation=dataSnapshot.child("location").getValue(String.class);
 
 
@@ -377,6 +379,7 @@ public class FriendProfileFragment extends Fragment {
                                 }
 
                         }
+
 
                     }
 
