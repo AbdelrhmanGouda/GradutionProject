@@ -2,17 +2,26 @@ package com.example.graduationproject.Data;
 
 public class TherapistsByNameData {
 
-    String name,phone, imageUrl,location;
+    String name,phone, imageUrl,location,id;
 
 
     public TherapistsByNameData() {
     }
 
-    public TherapistsByNameData(String name, String phone, String imageUrl, String location) {
+    public TherapistsByNameData(String name, String phone, String imageUrl, String location, String id) {
         this.name = name;
         this.phone = phone;
         this.imageUrl = imageUrl;
         this.location = location;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

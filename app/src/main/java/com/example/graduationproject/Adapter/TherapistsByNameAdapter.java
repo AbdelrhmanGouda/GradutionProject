@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Fragments.TherapyDataFragment;
 import com.example.graduationproject.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,6 +33,9 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
     private Context mContext;
     List<TherapistsByNameData> therapistsData;
+    FirebaseUser currentPatient;
+    DatabaseReference patientNameRef, patientRefBook,doctorRef;
+    String patientId,patientName;
 
 
     public TherapistsByNameAdapter(Context mContext, List<TherapistsByNameData> getData) {
@@ -31,10 +43,13 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
         this.therapistsData = getData;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        doctorRef = FirebaseDatabase.getInstance().getReference("Doctors");
+        patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
         View view = LayoutInflater.from(mContext).inflate(R.layout.therapists_custom_item,parent,false);
         return new TherapistsByNameAdapter.ViewHolder(view);
     }
@@ -43,19 +58,50 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         ViewHolder viewHolder = holder;
-        TherapistsByNameData model = therapistsData.get(position);
+        final TherapistsByNameData model = therapistsData.get(position);
         viewHolder.therapyName.setText(model.getName());
         viewHolder.clinicLocation.setText(model.getLocation());
+        Picasso.get().load(model.getImageUrl()).into(holder.therapyPhoto);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 TherapyDataFragment fragment = new TherapyDataFragment();
                 activity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
+            }
+        });
+
+        holder.book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+                patientId = currentPatient.getUid();
+                patientRefBook = FirebaseDatabase.getInstance().getReference();
+
+                patientRefBook.child("Doctors").child(model.getId()).child("patients")
+                        .child(patientId).child("id").setValue(patientId);
+
+                // book the patient with a doctor
+                patientNameRef.child(patientId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        patientName = snapshot.getValue(String.class);
+                        Toast.makeText(mContext, patientName, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                patientRefBook.child("Doctors").child(model.getId()).child("patients")
+                        .child(patientId).child("name").setValue(patientName);
+
+
             }
         });
 
