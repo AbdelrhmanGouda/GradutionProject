@@ -1,6 +1,7 @@
 package com.example.graduationproject.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,10 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Bundle bundle = new Bundle();
+                bundle.putString("id",model.getId());
                 TherapyDataFragment fragment = new TherapyDataFragment();
+                fragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
             }
@@ -120,7 +124,6 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
         CircleImageView therapyPhoto;
         TextView therapyName,therapyDescription,sessionCost,clinicLocation;
-        RatingBar therapyRate;
         Button book;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -130,7 +133,6 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
             therapyDescription = itemView.findViewById(R.id.therapy_description);
             sessionCost = itemView.findViewById(R.id.therapy_session_cost);
             clinicLocation = itemView.findViewById(R.id.therapy_clinic_location);
-            therapyRate = itemView.findViewById(R.id.therapy_rate_bar);
             book = itemView.findViewById(R.id.therapy_book_button);
 
 
