@@ -74,7 +74,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     FirebaseStorage storage;
     StorageReference storageReference;
     User user = new User();
-
+    //
 
     public SignUp_Fragment() {
 
