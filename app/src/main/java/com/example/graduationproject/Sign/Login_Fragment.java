@@ -6,6 +6,8 @@ import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -37,7 +39,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.internal.ImageRequest;
 import com.facebook.login.LoginResult;
@@ -55,7 +56,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -63,41 +63,34 @@ import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
 
-import java.net.URI;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
+    private static final String TAG = "GoogleActivity";
+    private static final String FTAG = "FacebookLogin";
+    private static final int RC_SIGN_IN = 12345;
     private static View view;
     private static EditText emailid, password;
-    private static Button loginButton , faceBookBtn , googleBtn;
+    private static Button loginButton, faceBookBtn, googleBtn;
     private static TextView forgotPassword, signUp;
     private static CheckBox show_hide_password;
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
-    private static LoginButton loginButtonF ;
+    private static LoginButton loginButtonF;
+    public GoogleSignInClient mGoogleSignInClient;
+    public FirebaseAuth mAuth;
+    public FirebaseUser user;
+    public String nameReal, idReal, emailReal;
+    public Uri uriReal;
     FirebaseStorage storage;
     StorageReference storageReference;
     FirebaseAuth.AuthStateListener mAuthListener;
     User userData = new User();
-
-    private static final String TAG = "GoogleActivity";
-
-
-
     private CallbackManager mCallbackManager;
-
-    private static final String FTAG = "FacebookLogin";
-    private static final int RC_SIGN_IN = 12345;
-
-
-    public GoogleSignInClient mGoogleSignInClient;
-    public FirebaseAuth mAuth;
-    public FirebaseUser user;
-    public String nameReal,idReal,emailReal;
-    public Uri uriReal;
-
 
 
     public Login_Fragment() {
@@ -134,8 +127,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-      // String ll = user.getUid() + "$$";
-      //  Log.d("5555555",ll);
+        // String ll = user.getUid() + "$$";
+        //  Log.d("5555555",ll);
         // Check if user or account is signed in (non-null) and update UI accordingly.
         updateUI(user);
 
@@ -147,18 +140,18 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private void initViews() {
         fragmentManager = getActivity().getSupportFragmentManager();
 
-        loginButtonF = (LoginButton) view.findViewById(R.id.login_button);
+        loginButtonF = view.findViewById(R.id.login_button);
         loginButtonF.setFragment(Login_Fragment.this);
-        emailid = (EditText) view.findViewById(R.id.login_emailid);
-        password = (EditText) view.findViewById(R.id.login_password);
-        loginButton = (Button) view.findViewById(R.id.loginBtn);
-        forgotPassword = (TextView) view.findViewById(R.id.forgot_password);
-        signUp = (TextView) view.findViewById(R.id.createAccount);
-        show_hide_password = (CheckBox) view
+        emailid = view.findViewById(R.id.login_emailid);
+        password = view.findViewById(R.id.login_password);
+        loginButton = view.findViewById(R.id.loginBtn);
+        forgotPassword = view.findViewById(R.id.forgot_password);
+        signUp = view.findViewById(R.id.createAccount);
+        show_hide_password = view
                 .findViewById(R.id.show_hide_password);
-        loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
-        googleBtn = (Button) view.findViewById(R.id.google) ;
-        faceBookBtn = (Button) view.findViewById(R.id.facebook) ;
+        loginLayout = view.findViewById(R.id.login_layout);
+        googleBtn = view.findViewById(R.id.google);
+        faceBookBtn = view.findViewById(R.id.facebook);
         // Load ShakeAnimation
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
@@ -185,7 +178,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         googleBtn.setOnClickListener(this);
         faceBookBtn.setOnClickListener(this);
         loginButtonF.setOnClickListener(this);
-
 
 
         // Set check listener over checkbox for showing and hiding password
@@ -300,13 +292,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             if (user != null) {
                                 // Name, email address, and profile photo Url
                                 String name = user.getDisplayName();
-                                if (name == null){
-                                    Log.d("urlllname","Welcome");
-                                    Toast.makeText(getActivity(), "Welcome++++" , Toast.LENGTH_SHORT)
+                                if (name == null) {
+                                    Log.d("urlllname", "Welcome");
+                                    Toast.makeText(getActivity(), "Welcome++++", Toast.LENGTH_SHORT)
                                             .show();
                                     updateUI(user);
-                                }else {
-                                    Log.d("urllName", name.toString());
+                                } else {
+                                    Log.d("urllName", name);
                                     Toast.makeText(getActivity(), "Welcome" + name, Toast.LENGTH_SHORT)
                                             .show();
                                     updateUI(user);
@@ -330,7 +322,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 Toast.makeText(getActivity(), "Login Success." + name,
                         Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getActivity(),MainActivity.class));
+                startActivity(new Intent(getActivity(), MainActivity.class));
             } else {
                 Toast.makeText(getActivity(), "Your Email is not verified.",
                         Toast.LENGTH_SHORT).show();
@@ -344,9 +336,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             String name = user.getDisplayName();
             Toast.makeText(getActivity(), "Google or Facebook Login Success." + name,
                     Toast.LENGTH_SHORT).show();
-           // Log.d("facebookdataggg", user.getPhotoUrl() + "");
+            // Log.d("facebookdataggg", user.getPhotoUrl() + "");
 
-            startActivity(new Intent(getActivity(),MainActivity.class));
+            startActivity(new Intent(getActivity(), MainActivity.class));
 
         } else {
             Toast.makeText(getActivity(), "Welcome , G , F none :)",
@@ -379,24 +371,21 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     String personId = account.getId();
                     Uri personPhoto = account.getPhotoUrl();
                     uriReal = personPhoto;
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-
-                        Log.v("facebookdatauidg", ": " + personId);
 
                     //final String gId = firebaseUser.getUid();//firebaseUser.getUid();
 
-                    mAuth=FirebaseAuth.getInstance();
 
-                    while (mAuth.getCurrentUser()==null){
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    while (mAuth.getCurrentUser() == null) {
+                        mAuth = FirebaseAuth.getInstance();
 
                         Log.v("555555", "id: " + "nulllllllll");
 
-                        if(mAuth.getCurrentUser()!=null)
-                        {
+                        if (mAuth.getCurrentUser() != null) {
                             //Your action here
-                            FirebaseUser firebaseUser =mAuth.getCurrentUser();
-                            String fId =firebaseUser.getUid();
+
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String fId = firebaseUser.getUid();
                             idReal = fId;
                             Log.v("5555555", "id: " + idReal);
                             saveGoogleAndFacebookAuthToRealFirebase(idReal, nameReal, emailReal, uriReal);
@@ -405,12 +394,14 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                         }
                     }
+
+
                 }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
             }
-        }else {
+        } else {
 
             // Pass the activity result back to the Facebook SDK
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
@@ -473,7 +464,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     }
 
-    private void signInFacebook(){
+    private void signInFacebook() {
         // [START initialize_fblogin]
         // Initialize Facebook Login button
 
@@ -509,7 +500,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     if (Profile.getCurrentProfile() != null) {
 
                                         //add this check because some people don't have profile picture
-                                        profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId() , 400, 400)+ "&access_token=2615626898730021|JUNggramyAICJhX_cwcl0M4Vs48".toString();
+                                        profileURL = ImageRequest.getProfilePictureUri(Profile.getCurrentProfile().getId(), 400, 400) + "&access_token=2615626898730021|JUNggramyAICJhX_cwcl0M4Vs48";
                                         //after getting the profile url you can easily set this to image view using Glide or retrofit library . simple :)
                                         Log.v("facebookdata1", profileURL);
                                     }
@@ -532,18 +523,16 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     String fId =firebaseUser.getUid();*/
 
 
+                                    mAuth = FirebaseAuth.getInstance();
 
-                                    mAuth=FirebaseAuth.getInstance();
-
-                                    while (mAuth.getCurrentUser()==null){
+                                    while (mAuth.getCurrentUser() == null) {
 
                                         Log.v("555555", "id: " + "nulllllllll");
 
-                                        if(mAuth.getCurrentUser()!=null)
-                                        {
+                                        if (mAuth.getCurrentUser() != null) {
                                             //Your action here
-                                            FirebaseUser firebaseUser =mAuth.getCurrentUser();
-                                            String fId =firebaseUser.getUid();
+                                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                            String fId = firebaseUser.getUid();
                                             idReal = fId;
                                             Log.v("5555555", "id: " + idReal);
                                             saveGoogleAndFacebookAuthToRealFirebase(idReal, nameReal, emailReal, uriReal);
@@ -553,8 +542,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                         }
                                     }
 
-
-                                    mAuthListener=new FirebaseAuth.AuthStateListener() {
+                                    mAuthListener = new FirebaseAuth.AuthStateListener() {
                                         @Override
                                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -573,8 +561,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 request.executeAsync();                                 //exuecute task in seprate thread
 
 
-
-
             }
 
             @Override
@@ -589,6 +575,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         });
         // [END initialize_fblogin]
     }
+
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(FTAG, "handleFacebookAccessToken:" + token);
@@ -612,7 +599,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     }
                 });
     }
-
 
 
 }
