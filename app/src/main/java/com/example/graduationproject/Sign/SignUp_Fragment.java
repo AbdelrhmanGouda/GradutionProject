@@ -20,10 +20,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,8 +59,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static final String TAG = SignUp_Fragment.class.getName();
     public static String uid;
     private static View view;
-    private static EditText fullName, emailId, mobileNumber, location,
+    private static EditText fullName, emailId, mobileNumber, //location,
             password, confirmPassword;
+    private static Spinner location;
+    private static Spinner dropdown;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
@@ -106,14 +110,21 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         fullName = (EditText) view.findViewById(R.id.fullName);
         emailId = (EditText) view.findViewById(R.id.userEmailId);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
-        location = (EditText) view.findViewById(R.id.location);
+        location = (Spinner) view.findViewById(R.id.spinner);
         password = (EditText) view.findViewById(R.id.password);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
 //		terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
         user_profile = (ImageView) view.findViewById(R.id.add_pic);
+        dropdown = view.findViewById(R.id.spinner);
 
+        //create a list of items for the spinner.
+        String[] items = new String[]{"Choose Your Location", "Alexandria", "Aswan", "Asyut", "Beheira", "Beni Suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Ismailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohag", "South Sinai", "Suez"};
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
@@ -229,7 +240,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getFullName = fullName.getText().toString();
         String getEmailId = emailId.getText().toString();
         String getMobileNumber = mobileNumber.getText().toString();
-        String getLocation = location.getText().toString();
+        String getLocation = location.getSelectedItem().toString();
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
 
@@ -242,7 +253,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         if (getFullName.equals("") || getFullName.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getMobileNumber.equals("") || getMobileNumber.length() == 0
-                || getLocation.equals("") || getLocation.length() == 0
+                || getLocation.equals("Choose Your Location") || location.getSelectedItemPosition() == 0
                 || getPassword.equals("") || getPassword.length() == 0
                 || getConfirmPassword.equals("")
                 || getConfirmPassword.length() == 0) {
@@ -302,7 +313,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             final ProgressDialog progressDialog
                     = new ProgressDialog(getActivity());
             progressDialog.setTitle("Uploading...");
+
             progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setCancelable(false);
 
             // Defining the child of storageReference
             storageReference = FirebaseStorage.getInstance().getReference();
