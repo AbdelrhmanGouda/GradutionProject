@@ -61,13 +61,22 @@
         android:id="@+id/therapy_mobile"/>
 
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="select the day "
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
+        android:layout_below="@+id/therapy_mobile"
+        android:id="@+id/select_the_day"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/therapy_mobile"
+        android:layout_below="@id/select_the_day"
         android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/cards_appointments"
         android:orientation="horizontal">

@@ -1,9 +1,13 @@
 package com.example.graduationproject.Fragments;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -13,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -33,12 +47,17 @@ public class TherapyDataFragment extends Fragment {
 
     CircleImageView therapyProfileImage;
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
-            therapyMobileNumberTextView, clinicLocationTextView;
-    String therapyId,dayName=null;;
+            therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
+    String therapyId,dayName;
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef, patientRefBook, therapyRef;
+    Button book;
 
-    AutoCompleteTextView autoCompleteTextView;
+    // Date picker dialog
+    DatePickerDialog.OnDateSetListener onDateSetListener;
+    Calendar c = Calendar.getInstance();
+
+     int year,month,day;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,15 +70,67 @@ public class TherapyDataFragment extends Fragment {
         therapySessionCostTextView = view.findViewById(R.id.therapy_session_cost);
         therapyMobileNumberTextView = view.findViewById(R.id.therapy_mobile);
         clinicLocationTextView = view.findViewById(R.id.therapy_clinic_location);
-
+        selectDayTextView = view.findViewById(R.id.select_the_day);
+        book = view.findViewById(R.id.therapy_book_button);
+        getTherapyData();
 
         // used for getting thee therapist data from the data base
 
-        getTherapyData();
+        selectDayTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              showDatePickerDialog();
+
+            }
+        });
+
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTime();
+            }
+        });
+
 
 
         return view;
     }
+
+    // show the date picker dialog to select the date of reservation
+    private void showDatePickerDialog(){
+        year= c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                SimpleDateFormat simpledateformat = new SimpleDateFormat("EE dd,MM,yy");
+                c.set(year, month, dayOfMonth);
+                String selectedDate = simpledateformat.format(c.getTime());
+                selectDayTextView.setText(selectedDate);
+                dayName = String.valueOf(selectedDate);
+                Toast.makeText(getActivity(),dayName, Toast.LENGTH_SHORT).show();
+            }
+        },year,month,day);
+        datePickerDialog.show();
+
+    }
+
+    private void getTime(){
+        if (dayName=="wed"){
+
+            patientRefBook = FirebaseDatabase.getInstance().getReference("Doctors")
+                    .child(therapyId).child("free time").child("firday");
+            patientRefBook.setValue("dghgh");
+        }else {
+            Toast.makeText(getActivity(), "non", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
 
     // used for getting thee therapist data from the data base
     public void getTherapyData(){
