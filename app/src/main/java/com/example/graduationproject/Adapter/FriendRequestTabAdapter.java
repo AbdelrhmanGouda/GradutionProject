@@ -57,7 +57,7 @@ public class FriendRequestTabAdapter extends RecyclerView.Adapter<FriendRequestT
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FriendRequestTabAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FriendRequestTabAdapterViewHolder holder, final int position) {
         id =friendListDataList.get(position).getId();
         friendName=friendListDataList.get(position).getName();
         friendImage=friendListDataList.get(position).getUri();
@@ -68,7 +68,10 @@ public class FriendRequestTabAdapter extends RecyclerView.Adapter<FriendRequestT
             public void onClick(View view) {
                 addFriends();
                 deleteFirendRequest();
-
+                friendListDataList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeRemoved(position, getItemCount());
+                Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
             }
         });
         holder.cancel.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +79,10 @@ public class FriendRequestTabAdapter extends RecyclerView.Adapter<FriendRequestT
             public void onClick(View view) {
                 deleteFriends();
                 deleteFirendRequest();
+                friendListDataList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeRemoved(position, getItemCount());
+                Toast.makeText(context, "delete", Toast.LENGTH_SHORT).show();
             }
         });
 

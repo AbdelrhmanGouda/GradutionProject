@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AppointmentsFragment()).commit();
                 break;
             case R.id.cart:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
+               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
                 break;
             case R.id.log_out:
 
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             userName=dataSnapshot.child("name").getValue(String.class);
                             userImage=dataSnapshot.child("uri").getValue(String.class);
+                            Log.i(userName.toString(), "onDataChange: ");
                             textName.setText(userName);
                             Picasso.get().load(userImage).into(imgHead);
 

@@ -255,8 +255,8 @@ public class FriendProfileFragment extends Fragment {
         i++;
         loveNumbers.setText(String.valueOf(i));
         profileRefrence.child("Appreciate").child("Likes").child(id).child("Appreciate").setValue(String.valueOf(i));
-        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("name").setValue(myName);
-        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(firebaseUser.getUid()).child(id).child("uri").setValue(myImage);
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(id).child(firebaseUser.getUid()).child("name").setValue(myName);
+        profileRefrence.child("Appreciate").child("AppreciateListNotification").child(id).child(firebaseUser.getUid()).child("uri").setValue(myImage);
 
         profileRefrence.child("Appreciate").child("FriendsStats").child(firebaseUser.getUid()).child(id).child("State").setValue(true);
 

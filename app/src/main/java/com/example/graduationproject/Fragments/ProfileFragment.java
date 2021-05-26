@@ -80,7 +80,7 @@ ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        Query query1 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsNumber").child(id);
+        Query query1 = FirebaseDatabase.getInstance().getReference().child("Friends").child("FriendsNumber").child(id);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

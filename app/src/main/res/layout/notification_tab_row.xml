@@ -40,7 +40,7 @@
             android:id="@+id/notification_tab_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Asked you for an appreciate"
+            android:text="Send you an appreciate"
             android:layout_marginTop="5dp"
             android:textSize="12dp"
             />
@@ -50,6 +50,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/heart_icon"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="40dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

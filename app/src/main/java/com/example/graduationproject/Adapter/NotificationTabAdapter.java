@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Data.NotificationTabData;
 import com.example.graduationproject.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class NotificationTabAdapter extends RecyclerView.Adapter<NotificationTab
     @Override
     public void onBindViewHolder(@NonNull NotificationTabAdapterViewHolder holder, int position) {
         holder.name.setText(notificationTabDataList.get(position).getName());
-        holder.state.setText(notificationTabDataList.get(position).getStateOfNotification());
+        String image=notificationTabDataList.get(position).getUri();
+        Picasso.get().load(image).into(holder.uri);
     }
 
     @Override
@@ -38,11 +41,12 @@ public class NotificationTabAdapter extends RecyclerView.Adapter<NotificationTab
     }
 
     public class NotificationTabAdapterViewHolder extends RecyclerView.ViewHolder{
-        TextView name,state;
+        TextView name;
+        ImageView uri;
         public NotificationTabAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.notification_tab_name);
-            state=itemView.findViewById(R.id.notification_tab_state);
+            uri=itemView.findViewById(R.id.notification_tab_image);
         }
     }
 

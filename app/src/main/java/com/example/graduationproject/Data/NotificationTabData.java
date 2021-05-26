@@ -1,12 +1,14 @@
 package com.example.graduationproject.Data;
 
 public class NotificationTabData {
-    private String name;
-    private String stateOfNotification;
+    private String name,uri;
 
-    public NotificationTabData(String name, String stateOfNotification) {
+    public NotificationTabData(String name, String uri) {
         this.name = name;
-        this.stateOfNotification = stateOfNotification;
+        this.uri = uri;
+    }
+
+    public NotificationTabData() {
     }
 
     public String getName() {
@@ -17,11 +19,11 @@ public class NotificationTabData {
         this.name = name;
     }
 
-    public String getStateOfNotification() {
-        return stateOfNotification;
+    public String getUri() {
+        return uri;
     }
 
-    public void setStateOfNotification(String stateOfNotification) {
-        this.stateOfNotification = stateOfNotification;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }
