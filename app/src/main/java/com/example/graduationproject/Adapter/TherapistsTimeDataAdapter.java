@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
 import com.example.graduationproject.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -21,6 +25,8 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
 
     private Context mContext;
     List<TherapistsReservationTimeData> therapistsReservationTimeDataListData;
+    DatabaseReference bookRef;
+    FirebaseUser currentPatient;
 
     public TherapistsTimeDataAdapter(Context mContext, List<TherapistsReservationTimeData> therapistsReservationTimeDataListData) {
         this.mContext = mContext;
@@ -36,7 +42,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       ViewHolder viewHolder = holder;
+       final ViewHolder viewHolder = holder;
         final TherapistsReservationTimeData model = therapistsReservationTimeDataListData.get(position);
         viewHolder.startTimeTextView.setText(model.getStartTime());
         viewHolder.endTimeTextView.setText(model.getEndTime());
@@ -44,6 +50,14 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+                bookRef = FirebaseDatabase.getInstance().getReference("Doctors")
+                        .child("appointment").child(currentPatient.getUid());
+
+                bookRef.child("startTime").setValue(model.getStartTime());
+                bookRef.child("endTime").setValue(model.getEndTime());
+                bookRef.child("id").setValue(currentPatient.getUid());
+
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();
             }
         });

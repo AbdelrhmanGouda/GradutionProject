@@ -22,6 +22,7 @@ import com.example.graduationproject.Adapter.TherapistsTimeDataAdapter;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
 import com.example.graduationproject.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +45,7 @@ public class TherapyDataFragment extends Fragment {
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
-    String therapyId,dayName;
+    String therapyId,patientId,dayName,patientName;
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef, patientBookRef, therapyRef;
     Button book;
@@ -97,6 +98,7 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getTime();
+               // bookAnAppointment();
             }
         });
 
@@ -208,6 +210,35 @@ public class TherapyDataFragment extends Fragment {
 
             }
         });
+
+    }
+
+
+    private void bookAnAppointment(){
+        currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+        patientId = currentPatient.getUid();
+        patientBookRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId);
+        patientBookRef.child("patients").child(patientId)
+                .child("id").setValue(patientId);
+
+
+        // book the patient with a doctor
+        patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
+        patientNameRef.child(patientId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                patientName = snapshot.getValue(String.class);
+                Toast.makeText(getActivity(), patientName, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        patientBookRef.child("patients")
+                .child(patientId).child("name").setValue(patientName);
 
     }
 
