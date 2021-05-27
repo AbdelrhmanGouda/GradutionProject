@@ -1,30 +1,24 @@
 package com.example.graduationproject.Fragments;
 
 import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationproject.Data.TherapistsByNameData;
+import com.example.graduationproject.Data.TherapistsReservationTimeData;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,13 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,9 +37,10 @@ public class TherapyDataFragment extends Fragment {
     CircleImageView therapyProfileImage;
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
+    TextView startTimeTextView1,endTimeTextView1;
     String therapyId,dayName;
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef, patientRefBook, therapyRef;
+    DatabaseReference patientNameRef, patientBookRef, therapyRef;
     Button book;
 
     // Date picker dialog
@@ -72,6 +62,8 @@ public class TherapyDataFragment extends Fragment {
         clinicLocationTextView = view.findViewById(R.id.therapy_clinic_location);
         selectDayTextView = view.findViewById(R.id.select_the_day);
         book = view.findViewById(R.id.therapy_book_button);
+        startTimeTextView1 = view.findViewById(R.id.start_time_text_view_card);
+        endTimeTextView1 = view.findViewById(R.id.end_time_text_view_card);
         getTherapyData();
 
         // used for getting thee therapist data from the data base
@@ -118,14 +110,48 @@ public class TherapyDataFragment extends Fragment {
     }
 
     private void getTime(){
-        if (dayName=="wed"){
+        patientBookRef = FirebaseDatabase.getInstance().getReference("Doctors")
+                    .child(therapyId).child("free time");
 
-            patientRefBook = FirebaseDatabase.getInstance().getReference("Doctors")
-                    .child(therapyId).child("free time").child("firday");
-            patientRefBook.setValue("dghgh");
-        }else {
-            Toast.makeText(getActivity(), "non", Toast.LENGTH_SHORT).show();
+        if (dayName!=null){
+            patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.hasChild(dayName)){
+                        patientBookRef.child(dayName).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    TherapistsReservationTimeData model =dataSnapshot.getValue(TherapistsReservationTimeData.class);
+                                    startTimeTextView1.setVisibility(View.VISIBLE);
+                                    startTimeTextView1.setText(model.getStartTime());
+                                    endTimeTextView1.setText(model.getEndTime());
+                                    Toast.makeText(getActivity(), model.getEndTime(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                    }else{
+                        Toast.makeText(getActivity(), "the date which you have selected is not saved ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }else{
+            Toast.makeText(getActivity(), "select the date first", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
