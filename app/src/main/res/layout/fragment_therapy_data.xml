@@ -73,178 +73,16 @@
         android:id="@+id/select_the_day"/>
 
 
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/select_the_day"
         android:layout_marginTop="@dimen/_15sdp"
-        android:id="@+id/cards_appointments"
+        android:id="@+id/appointments_recycler_view"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="170dp"
-            android:layout_margin="15dp"
-            app:cardCornerRadius="25dp"
-            android:id="@+id/free_time_1">
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/time_relative_layout"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/start_time_text_view_card"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="start time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-                <TextView
-                    android:layout_below="@+id/start_time_text_view_card"
-                    android:id="@+id/to_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="15dp"
-                    android:text="To"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/end_time_text_view_card"
-                    android:layout_below="@+id/to_text_view"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="end time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/free_time_2"
-            android:layout_width="100dp"
-            android:layout_height="170dp"
-            android:layout_margin="15dp"
-            app:cardCornerRadius="25dp">
-
-
-            <RelativeLayout
-                android:id="@+id/time_relative_layout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/start_time_text_view_card2"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="start time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/to_text_view2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/start_time_text_view_card2"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="15dp"
-                    android:text="To"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/end_time_text_view_card2"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/to_text_view2"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="end time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="170dp"
-            android:layout_margin="15dp"
-            app:cardCornerRadius="25dp"
-            android:id="@+id/free_time_3">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/time_relative_layout3"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/start_time_text_view_card3"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="start time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-                <TextView
-                    android:layout_below="@+id/start_time_text_view_card3"
-                    android:id="@+id/to_text_view3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="15dp"
-                    android:text="To"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/end_time_text_view_card3"
-                    android:layout_below="@+id/to_text_view3"
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/time_text_view_shape"
-                    android:gravity="center_horizontal"
-                    android:hint="end time"
-                    android:textAlignment="center"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:layout_width="@dimen/_80sdp"
@@ -257,7 +95,7 @@
         android:text="Book"
         android:backgroundTint="@color/color"
         android:id="@+id/therapy_book_button"
-        android:layout_below="@+id/cards_appointments"/>
+        android:layout_below="@+id/appointments_recycler_view"/>
 
 
 </RelativeLayout>

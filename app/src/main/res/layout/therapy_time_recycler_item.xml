@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="170dp"
+    android:layout_margin="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="25dp"
+    android:id="@+id/free_time_1">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/time_relative_layout">
+
+            <TextView
+                android:id="@+id/start_time_text_view"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/time_text_view_shape"
+                android:gravity="center_horizontal"
+                android:hint="start time"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_below="@+id/start_time_text_view"
+                android:id="@+id/to_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:text="To"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/end_time_text_view"
+                android:layout_below="@+id/to_text_view"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/time_text_view_shape"
+                android:gravity="center_horizontal"
+                android:hint="end time"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

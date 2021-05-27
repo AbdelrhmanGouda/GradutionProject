@@ -5,20 +5,24 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.graduationproject.Adapter.TherapistsByNameAdapter;
+import com.example.graduationproject.Adapter.TherapistsTimeDataAdapter;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,14 +43,21 @@ public class TherapyDataFragment extends Fragment {
     CircleImageView therapyProfileImage;
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
-    TextView startTimeTextView1,endTimeTextView1;
+
     String therapyId,dayName;
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef, patientBookRef, therapyRef;
     Button book;
 
+
+    RecyclerView recyclerView;
+    List<TherapistsReservationTimeData> therapistsTimeList;
+    LinearLayoutManager layoutManager;
+
+
+    TherapistsTimeDataAdapter therapistsTimeAdapter;
+
     // Date picker dialog
-    DatePickerDialog.OnDateSetListener onDateSetListener;
     Calendar c = Calendar.getInstance();
 
      int year,month,day;
@@ -62,8 +75,12 @@ public class TherapyDataFragment extends Fragment {
         clinicLocationTextView = view.findViewById(R.id.therapy_clinic_location);
         selectDayTextView = view.findViewById(R.id.select_the_day);
         book = view.findViewById(R.id.therapy_book_button);
-        startTimeTextView1 = view.findViewById(R.id.start_time_text_view_card);
-        endTimeTextView1 = view.findViewById(R.id.end_time_text_view_card);
+
+        layoutManager= new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView = view.findViewById(R.id.appointments_recycler_view);
+        recyclerView.setLayoutManager(layoutManager);
+        therapistsTimeList = new ArrayList<>();
+
         getTherapyData();
 
         // used for getting thee therapist data from the data base
@@ -82,8 +99,6 @@ public class TherapyDataFragment extends Fragment {
                 getTime();
             }
         });
-
-
 
         return view;
     }
@@ -109,6 +124,7 @@ public class TherapyDataFragment extends Fragment {
 
     }
 
+
     private void getTime(){
         patientBookRef = FirebaseDatabase.getInstance().getReference("Doctors")
                     .child(therapyId).child("free time");
@@ -121,21 +137,30 @@ public class TherapyDataFragment extends Fragment {
                         patientBookRef.child(dayName).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                    TherapistsReservationTimeData model =dataSnapshot.getValue(TherapistsReservationTimeData.class);
-                                    startTimeTextView1.setVisibility(View.VISIBLE);
-                                    startTimeTextView1.setText(model.getStartTime());
-                                    endTimeTextView1.setText(model.getEndTime());
-                                    Toast.makeText(getActivity(), model.getEndTime(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
 
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                        TherapistsReservationTimeData model =
+                                                dataSnapshot.getValue(TherapistsReservationTimeData.class);
+
+                                        therapistsTimeList.add(model);
+
+                                       /*
+                                        relativeLayout1.setVisibility(View.VISIBLE);
+                                        startTimeTextView1.setText(model.getStartTime());
+                                        endTimeTextView1.setText(model.getEndTime());
+                                        Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+
+                                        */
+                                    }
+                                therapistsTimeAdapter = new TherapistsTimeDataAdapter(getContext(),therapistsTimeList);
+                                recyclerView.setAdapter(therapistsTimeAdapter);
+
+                            }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
                         });
-
 
                     }else{
                         Toast.makeText(getActivity(), "the date which you have selected is not saved ", Toast.LENGTH_SHORT).show();
@@ -154,6 +179,8 @@ public class TherapyDataFragment extends Fragment {
 
 
     }
+
+
 
 
 
