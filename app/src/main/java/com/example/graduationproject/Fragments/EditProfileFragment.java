@@ -3,6 +3,7 @@ package com.example.graduationproject.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -13,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -23,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -58,10 +62,11 @@ import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment implements View.OnClickListener {
     private ImageView editImage;
     private EditText editName, editEmail, editLocation, editPhone;
     private Button updateBtn;
+    private TextView editPassword;
     private FloatingActionButton floatingEditImageBtn;
     public FirebaseAuth auth ;
     String userImage,userName,userEmail,userLocation,userPhone;
@@ -94,6 +99,8 @@ public class EditProfileFragment extends Fragment {
         editLocation =view.findViewById(R.id.edit_location);
         editPhone =view.findViewById(R.id.edit_phone);
         updateBtn =view.findViewById(R.id.edit_profile_update_btn);
+        editPassword=view.findViewById(R.id.edit_password_txt);
+        editPassword.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
         mAuth = auth;
 
@@ -461,6 +468,14 @@ public class EditProfileFragment extends Fragment {
             });
         }
     }
+
+    @Override
+    public void onClick(View view) {
+      AppCompatActivity activity =  (AppCompatActivity)view.getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ChangePasswordFragment()).commit();
+
+    }
+
 
     ///////////////////////////////////////////////////////////////////////
 
