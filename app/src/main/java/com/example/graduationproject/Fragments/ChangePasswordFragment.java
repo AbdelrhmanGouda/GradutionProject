@@ -76,11 +76,11 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         confirmPasswordTxt=confirmPassword.getText().toString();
         Log.i(currentPasswordTxt, "lllllllllllllllllllllllllll");
         Log.i(oldPassword, "hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-        if (currentPasswordTxt == oldPassword){
+        if (currentPasswordTxt.equals(oldPassword) ){
             Log.i(currentPasswordTxt, "kkkkkkkkkkkkkkkkk");
             Log.i(oldPassword, "ppppppppppppp");
 
-            if (newPasswordTxt==confirmPasswordTxt){
+            if (newPasswordTxt.equals(confirmPasswordTxt)){
                 Query query1 =FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 query1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
