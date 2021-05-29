@@ -45,9 +45,9 @@ public class TherapyDataFragment extends Fragment {
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
-    String therapyId,patientId,dayName,patientName;
+    String therapyId,therapyName,patientId,dayName,patientName;
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef, patientBookRef, therapyRef;
+    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy;
     Button book;
 
 
@@ -97,8 +97,7 @@ public class TherapyDataFragment extends Fragment {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getTime();
-               // bookAnAppointment();
+                bookAnAppointment();
             }
         });
 
@@ -120,14 +119,19 @@ public class TherapyDataFragment extends Fragment {
                 selectDayTextView.setText(selectedDate);
                 dayName = String.valueOf(selectedDate);
                 Toast.makeText(getActivity(),dayName, Toast.LENGTH_SHORT).show();
+                getTime();
+
             }
         },year,month,day);
         datePickerDialog.show();
 
+
+
     }
 
-
+// get the time which the doctor have saved in the database
     private void getTime(){
+
         patientBookRef = FirebaseDatabase.getInstance().getReference("Doctors")
                     .child(therapyId).child("free time");
 
@@ -146,13 +150,6 @@ public class TherapyDataFragment extends Fragment {
 
                                         therapistsTimeList.add(model);
 
-                                       /*
-                                        relativeLayout1.setVisibility(View.VISIBLE);
-                                        startTimeTextView1.setText(model.getStartTime());
-                                        endTimeTextView1.setText(model.getEndTime());
-                                        Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
-
-                                        */
                                     }
                                 therapistsTimeAdapter = new TherapistsTimeDataAdapter(getContext(),therapistsTimeList);
                                 recyclerView.setAdapter(therapistsTimeAdapter);
@@ -190,6 +187,7 @@ public class TherapyDataFragment extends Fragment {
     // used for getting thee therapist data from the data base
     public void getTherapyData(){
 
+        getPatientName();
         if (getArguments()!= null){
             therapyId = getArguments().getString("id");
         }
@@ -198,6 +196,7 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TherapistsByNameData model = snapshot.getValue(TherapistsByNameData.class);
+                therapyName = model.getName();
                 therapyNameTextView.setText("DR:"+model.getName());
                 clinicLocationTextView.setText("location:"+model.getLocation());
                 therapyMobileNumberTextView.setText("phone:"+model.getPhone());
@@ -215,14 +214,59 @@ public class TherapyDataFragment extends Fragment {
 
 
     private void bookAnAppointment(){
+
         currentPatient = FirebaseAuth.getInstance().getCurrentUser();
         patientId = currentPatient.getUid();
-        patientBookRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId);
-        patientBookRef.child("patients").child(patientId)
-                .child("id").setValue(patientId);
+        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+        patientBookRef.child("therapyId").setValue(therapyId);
+        patientBookRef.child("therapyName").setValue(therapyName);
+        patientBookRef.child("patientName").setValue(patientName);
 
 
-        // book the patient with a doctor
+        patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String starTime  = snapshot.getValue(String.class);
+                timeBookRefForTherapy.child(patientId).child("startTime").setValue(starTime);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String endTime  = snapshot.getValue(String.class);
+                timeBookRefForTherapy.child(patientId).child("endTime").setValue(endTime);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
+                .child("patients").child(dayName);
+        timeBookRefForTherapy.child(patientId)
+                .child("patientId").setValue(patientId);
+        timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
+
+
+
+
+
+
+
+    }
+
+    private void getPatientName(){
+        currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+        patientId = currentPatient.getUid();
+        // get the patient name from the database
         patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
         patientNameRef.child(patientId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -236,9 +280,6 @@ public class TherapyDataFragment extends Fragment {
 
             }
         });
-
-        patientBookRef.child("patients")
-                .child(patientId).child("name").setValue(patientName);
 
     }
 

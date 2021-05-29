@@ -51,12 +51,12 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
             @Override
             public void onClick(View v) {
                 currentPatient = FirebaseAuth.getInstance().getCurrentUser();
-                bookRef = FirebaseDatabase.getInstance().getReference("Doctors")
-                        .child("appointment").child(currentPatient.getUid());
+                bookRef = FirebaseDatabase.getInstance().getReference()
+                        .child("request appointment").child(currentPatient.getUid());
 
                 bookRef.child("startTime").setValue(model.getStartTime());
                 bookRef.child("endTime").setValue(model.getEndTime());
-                bookRef.child("id").setValue(currentPatient.getUid());
+                bookRef.child("patientId").setValue(currentPatient.getUid());
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();
             }
