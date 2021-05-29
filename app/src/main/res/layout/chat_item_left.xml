@@ -15,6 +15,8 @@
         android:background="@drawable/backround_left"
         android:layout_toRightOf="@id/chat_profile_image"
         android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+
         android:text="name"
         android:textColor="@color/black"
         android:id="@+id/show_message"

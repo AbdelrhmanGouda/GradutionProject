@@ -3,9 +3,12 @@ package com.example.graduationproject.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,7 +35,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -46,8 +48,9 @@ public class ChatBotFragment extends Fragment {
     MessageAdapter messageAdapter;
     CircleImageView circleImageView;
     TextView userName;
+    Button chooseOne,chooseTwo,chooseThree,chooseFour;
     FirebaseUser firebaseUser;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseAllReference,databaseReference;
     EditText textSend;
     ImageButton send;
     RelativeLayout relativeLayout;
@@ -64,10 +67,18 @@ public class ChatBotFragment extends Fragment {
         relativeLayout=view.findViewById(R.id.bottom);
         linearLayout=view.findViewById(R.id.linear_choose);
         recyclerView=view.findViewById(R.id.recycler);
-        //recyclerView.setHasFixedSize(true);
+        chooseOne=view.findViewById(R.id.choose_one);
+        chooseTwo=view.findViewById(R.id.choose_two);
+        chooseThree=view.findViewById(R.id.choose_three);
+        chooseFour=view.findViewById(R.id.choose_four);
+        circleImageView=view.findViewById(R.id.profile_image);
+        userName=view.findViewById(R.id.username);
+        Toolbar toolbar=view.findViewById(R.id.toolbar);
+       databaseAllReference= FirebaseDatabase.getInstance().getReference();
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        Toolbar toolbar=view.findViewById(R.id.toolbar);
+        linearLayoutManager.setStackFromEnd(true);
         final AppCompatActivity activity=(AppCompatActivity)view.getContext();
         activity.setSupportActionBar(toolbar);
         // ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -85,8 +96,6 @@ public class ChatBotFragment extends Fragment {
 
         }
 
-        circleImageView=view.findViewById(R.id.profile_image);
-        userName=view.findViewById(R.id.username);
         userName.setText("Bot");
         readMessages(firebaseUser.getUid(), "Bot");
 
@@ -95,27 +104,152 @@ public class ChatBotFragment extends Fragment {
             public void onClick(View v) {
                 String msg= textSend.getText().toString();
                 if(!msg.equals("")){
-                    sendMessage(firebaseUser.getUid(),msg);
+                    if(textSend.getInputType()==InputType.TYPE_CLASS_NUMBER){
+                        if(Integer.parseInt(msg)>=12
+                                &&Integer.parseInt(msg)<100){
+                            sendUserMessage(msg);
+                            sendBotMessage("Are you single?");
+
+                        }else {
+                            Toast.makeText(getActivity(), "Age must from 12 to 100 ", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                    }else {
+                        sendUserMessage(msg);
+                        sendBotMessage("i see");
+                        sendBotMessage("Have you ever been in therapy before?");
+
+                    }
+                    textSend.setText("");
+
                 }else {
                     Toast.makeText(getActivity(), "Cant send empty message!", Toast.LENGTH_SHORT).show();
                 }
-                textSend.setText("");
 
             }
         });
-        relativeLayout.setVisibility(View.VISIBLE);
-        linearLayout.setVisibility(View.GONE);
+        chooseOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chooseOne.getText().toString().equals("Ok")){
+                    sendBotMessage("How old are you?");
+                    setRelativeVisable();
+                }
+                else if(chooseOne.getText().toString().equals("Yeah!")) {
+                    sendUserMessage("Yeah!");
+                    sendBotMessage("Are you still studying or working?");
 
+                }
+                else if(chooseOne.getText().toString().equals("Working")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    sendBotMessage("Wow good , what's your job?");
+                }else if(chooseOne.getText().toString().equals("Yes")){
+                    sendUserMessage(chooseOne.getText().toString());
+                   sendBotMessage("Lets start our sesion");
+                    sendBotMessage("How do you feel right now ?");
+                }else if(chooseOne.getText().toString().equals("Sad")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    sendBotMessage("Tell me about your problem");
+                    sendBotMessage("I'm listening");
+
+                }
+            }
+        });
+        chooseTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chooseTwo.getText().toString().equals("Nope!")){
+                    sendUserMessage("Nope!");
+                    sendBotMessage("Are you still studying or working?");
+
+                }else if (chooseTwo.getText().toString().equals("Studying")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    sendBotMessage("Amazing , what do you study?");
+
+                }else if(chooseTwo.getText().toString().equals("Nope")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    sendBotMessage("Lets start our sesion");
+                    sendBotMessage("How do you feel right now ?");
+
+
+                }else if(chooseTwo.getText().toString().equals("Depressed")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    sendBotMessage("Tell me about your problem");
+                    sendBotMessage("I'm listening");
+
+                }
+            }
+        });
+        chooseThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chooseThree.getText().toString().equals("It just complecated!")){
+                    sendUserMessage("It just complecated!");
+                    sendBotMessage("Are you still studying or working?");
+
+                }else if(chooseThree.getText().toString().equals("Doing both")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    sendBotMessage("Tell me more about that ?");
+
+                }else if(chooseThree.getText().toString().equals("Happy")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    sendBotMessage("Tell me about your problem");
+                    sendBotMessage("I'm listening");
+
+                }
+
+            }
+        });
+        chooseFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chooseFour.getText().toString().equals("Neither both")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    sendBotMessage("ok , i see");
+
+                }else if(chooseFour.getText().toString().equals("Angry")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    sendBotMessage("Tell me about your problem");
+                    sendBotMessage("I'm listening");
+
+                }
+            }
+        });
         getPrefrance();
+
         return view;
     }
 
-    private void sendMessage(String uid, String msg) {
+    private void setChooseVisable() {
+        relativeLayout.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private void setRelativeVisable() {
+        relativeLayout.setVisibility(View.VISIBLE);
+        linearLayout.setVisibility(View.GONE);
+
+    }
+
+
+    private void sendBotMessage(String msg) {
+        Chat chat3=new Chat("Bot",firebaseUser.getUid(),msg);
+        databaseAllReference.child("ChatBot").child(firebaseUser.getUid()).push().setValue(chat3);
+
+    }
+    private void sendUserMessage(String msg) {
+        Chat chat3=new Chat(firebaseUser.getUid(),"Bot",msg);
+        databaseAllReference.child("ChatBot").child(firebaseUser.getUid()).push().setValue(chat3);
+
     }
 
     private void getPrefrance() {
         final SharedPreferences preferences=getActivity().getSharedPreferences("Prefrence", Context.MODE_PRIVATE);
         String botFirstTime=preferences.getString("first","n");
+        final String botSecondTimeMessage=preferences.getString("second","n");
+        final String botThirdTimeMessage=preferences.getString("third","n");
 
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         //  databaseReference= FirebaseDatabase.getInstance().getReference("Users").child(id);
@@ -132,6 +266,11 @@ public class ChatBotFragment extends Fragment {
                             String  image=dataSnapshot.child("uri").getValue(String.class);
                             SharedPreferences.Editor editor=preferences.edit();
                             editor.putString("first","Hello "+name);
+                            editor.putString("second","I am a myndiabot! and i will help you checking if you have such a mental illness or not,\n" +
+                                    "specify it, recommend doctors for you and more");
+                            editor.putString("third","But first i need to know more about you");
+
+
                             editor.apply();
 
 
@@ -151,17 +290,13 @@ public class ChatBotFragment extends Fragment {
         });
 
 
-        sendFirstBotMessage(firebaseUser.getUid(),botFirstTime);
-
-
-
-
+        sendFirstBotMessage(firebaseUser.getUid(),botFirstTime,botSecondTimeMessage,botThirdTimeMessage);
     }
 
     private void readMessages(final String myId, final String botId) {
 
         chats=new ArrayList<>();
-        databaseReference=FirebaseDatabase.getInstance().getReference("ChatBot");
+        databaseReference=FirebaseDatabase.getInstance().getReference("ChatBot").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -171,8 +306,75 @@ public class ChatBotFragment extends Fragment {
                     if(chat.getSender().equals(myId)&&chat.getReciever().equals(botId)||
                             chat.getReciever().equals(myId)&&chat.getSender().equals(botId)){
                         chats.add(chat);
+
+                        try {
+                            if(chat.getMessage().equals("How old are you?")){
+                                setRelativeVisable();
+                                textSend.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            }
+                            else if (chat.getMessage().equals("Are you single?")){
+                                setChooseVisable();
+
+                                chooseTwo.setVisibility(View.VISIBLE);
+                                chooseThree.setVisibility(View.VISIBLE);
+                                chooseOne.setText("Yeah!");
+                                chooseTwo.setText("Nope!");
+                                chooseThree.setText("It just complecated!");
+                                chooseFour.setVisibility(View.GONE);
+
+                            }else if(chat.getMessage().equals("Yeah!")||chat.getMessage().equals("Nope!")||
+                                    chat.getMessage().equals("It just complecated!")){
+                                chooseOne.setText("Working");
+                                chooseTwo.setText("Studying");
+                                chooseThree.setText("Doing both");
+                                chooseFour.setText("Neither both");
+                                chooseFour.setVisibility(View.VISIBLE);
+                            }else if(chat.getMessage().equals("Wow good , what's your job?")||
+                                    chat.getMessage().equals("Amazing , what do you study?")||
+                                    chat.getMessage().equals("Tell me more about that ?"))
+                            {
+                                    setRelativeVisable();
+                                    textSend.setInputType(InputType.TYPE_CLASS_TEXT);
+
+                            }else if(chat.getMessage().equals("ok , i see")||
+                                    chat.getMessage().equals("i see")){
+                                setChooseVisable();
+                                chooseOne.setText("Yes");
+                                chooseTwo.setText("Nope");
+                                chooseThree.setVisibility(View.GONE);
+                                chooseFour.setVisibility(View.GONE);
+                            }else if(chat.getMessage().equals("How do you feel right now ?")){
+                               chooseOne.setText("Sad");
+                                chooseTwo.setText("Depressed");
+                                chooseThree.setText("Happy");
+                                chooseFour.setText("Angry");
+                                chooseThree.setVisibility(View.VISIBLE);
+                                chooseFour.setVisibility(View.VISIBLE);
+
+                            }else if(chat.getMessage().equals("I'm listening")){
+                                setRelativeVisable();
+                            }
+
+
+                        }catch (Exception e){
+
+                        }
+
                     //    Toast.makeText(getActivity(), chat.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                       new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView.smoothScrollToPosition(chats.size());
+
+
+                            }
+                        });
+
+
+
+
+
                     messageAdapter=new MessageAdapter(chats,getActivity(),"uri");
                     recyclerView.setAdapter(messageAdapter);
 
@@ -188,13 +390,24 @@ public class ChatBotFragment extends Fragment {
 
     }
 
-    private void sendFirstBotMessage(String sender, String message) {
+    private void sendFirstBotMessage(String sender, String message1,String message2,String message3) {
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
-        Chat chat=new Chat("Bot",sender,message);
-        reference.child("ChatBot").child(firebaseUser.getUid()).setValue(chat);
+        Chat chat1=new Chat("Bot",sender,message1);
+        Chat chat2=new Chat("Bot",sender,message2);
+        Chat chat3=new Chat("Bot",sender,message3);
+
+        reference.child("ChatBot").child(firebaseUser.getUid()).child("1").setValue(chat1);
+        reference.child("ChatBot").child(firebaseUser.getUid()).child("2").setValue(chat2);
+        reference.child("ChatBot").child(firebaseUser.getUid()).child("3").setValue(chat3);
+
         messageAdapter=new MessageAdapter(chats,getActivity(),"uri");
         recyclerView.setAdapter(messageAdapter);
+        setChooseVisable();
+        chooseOne.setText("Ok");
+        chooseTwo.setVisibility(View.GONE);
+        chooseThree.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
 
 
     }
