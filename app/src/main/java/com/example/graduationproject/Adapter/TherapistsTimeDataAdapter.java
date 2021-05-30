@@ -56,6 +56,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
 
                 bookRef.child("startTime").setValue(model.getStartTime());
                 bookRef.child("endTime").setValue(model.getEndTime());
+                bookRef.child("timeName").setValue(model.getTimeName());
                 bookRef.child("patientId").setValue(currentPatient.getUid());
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();

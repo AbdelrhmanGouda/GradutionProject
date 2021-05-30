@@ -45,9 +45,9 @@ public class TherapyDataFragment extends Fragment {
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
-    String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime;
+    String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName;
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy;
+    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy,deleteSelectedTime;
     Button book;
 
 
@@ -198,7 +198,6 @@ public class TherapyDataFragment extends Fragment {
                 Picasso.get().load(model.getImageUrl()).into(therapyProfileImage);
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -244,11 +243,29 @@ public class TherapyDataFragment extends Fragment {
                 }
             });
 
+            // get the time name
+            patientBookRef.child("timeName").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    timeName = snapshot.getValue(String.class);
+                    Toast.makeText(getActivity(), timeName, Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
             timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
                     .child("patients").child(dayName);
             timeBookRefForTherapy.child(patientId)
                     .child("patientId").setValue(patientId);
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
+
+            deleteSelectedTime = FirebaseDatabase.getInstance().getReference("Doctors").child("free time").child(dayName);
+            if (timeName!=null) {
+                deleteSelectedTime.child(timeName).removeValue();
+            }
 
         }else {
             Toast.makeText(getActivity(), "select the date first", Toast.LENGTH_SHORT).show();
@@ -276,9 +293,5 @@ public class TherapyDataFragment extends Fragment {
         });
 
     }
-
-
-
-
 
 }
