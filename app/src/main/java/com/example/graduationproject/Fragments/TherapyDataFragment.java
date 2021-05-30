@@ -45,7 +45,7 @@ public class TherapyDataFragment extends Fragment {
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
-    String therapyId,therapyName,patientId,dayName,patientName;
+    String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime;
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy;
     Button book;
@@ -222,8 +222,8 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String starTime  = snapshot.getValue(String.class);
-                    timeBookRefForTherapy.child(patientId).child("startTime").setValue(starTime);
+                     startTime  = snapshot.getValue(String.class);
+                    timeBookRefForTherapy.child(patientId).child("startTime").setValue(startTime);
                 }
 
                 @Override
@@ -234,7 +234,7 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String endTime  = snapshot.getValue(String.class);
+                     endTime  = snapshot.getValue(String.class);
                     timeBookRefForTherapy.child(patientId).child("endTime").setValue(endTime);
                 }
 
@@ -276,5 +276,9 @@ public class TherapyDataFragment extends Fragment {
         });
 
     }
+
+
+
+
 
 }
