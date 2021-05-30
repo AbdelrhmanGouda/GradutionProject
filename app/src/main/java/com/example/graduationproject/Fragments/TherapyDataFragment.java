@@ -123,6 +123,7 @@ public class TherapyDataFragment extends Fragment {
 
             }
         },year,month,day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
 
 
@@ -178,12 +179,6 @@ public class TherapyDataFragment extends Fragment {
 
 
     }
-
-
-
-
-
-
     // used for getting thee therapist data from the data base
     public void getTherapyData(){
 
@@ -215,51 +210,50 @@ public class TherapyDataFragment extends Fragment {
 
     private void bookAnAppointment(){
 
-        currentPatient = FirebaseAuth.getInstance().getCurrentUser();
-        patientId = currentPatient.getUid();
-        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
-        patientBookRef.child("therapyId").setValue(therapyId);
-        patientBookRef.child("therapyName").setValue(therapyName);
-        patientBookRef.child("patientName").setValue(patientName);
+        if (dayName!=null){
+            currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+            patientId = currentPatient.getUid();
+            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+            patientBookRef.child("therapyId").setValue(therapyId);
+            patientBookRef.child("therapyName").setValue(therapyName);
+            patientBookRef.child("patientName").setValue(patientName);
+            patientBookRef.child("dayDate").setValue(dayName);
 
+            patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String starTime  = snapshot.getValue(String.class);
+                    timeBookRefForTherapy.child(patientId).child("startTime").setValue(starTime);
+                }
 
-        patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String starTime  = snapshot.getValue(String.class);
-                timeBookRefForTherapy.child(patientId).child("startTime").setValue(starTime);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+            patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String endTime  = snapshot.getValue(String.class);
+                    timeBookRefForTherapy.child(patientId).child("endTime").setValue(endTime);
+                }
 
-            }
-        });
-        patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String endTime  = snapshot.getValue(String.class);
-                timeBookRefForTherapy.child(patientId).child("endTime").setValue(endTime);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
-            }
-        });
+            timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
+                    .child("patients").child(dayName);
+            timeBookRefForTherapy.child(patientId)
+                    .child("patientId").setValue(patientId);
+            timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
 
+        }else {
+            Toast.makeText(getActivity(), "select the date first", Toast.LENGTH_SHORT).show();
 
-        timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
-                .child("patients").child(dayName);
-        timeBookRefForTherapy.child(patientId)
-                .child("patientId").setValue(patientId);
-        timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
-
-
-
-
-
-
+        }
 
     }
 
