@@ -1,16 +1,25 @@
 package com.example.graduationproject.Data;
 
 public class TherapistsReservationTimeData {
-    private String startTime,endTime,timeName;
+    private String startTime,endTime,timeName,dayName;
 
 
     public TherapistsReservationTimeData() {
     }
 
-    public TherapistsReservationTimeData(String startTime, String endTime, String timeName) {
+    public TherapistsReservationTimeData(String startTime, String endTime, String timeName, String dayName) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.timeName = timeName;
+        this.dayName = dayName;
+    }
+
+    public String getDayName() {
+        return dayName;
+    }
+
+    public void setDayName(String dayName) {
+        this.dayName = dayName;
     }
 
     public String getTimeName() {

@@ -71,6 +71,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
                 bookRef.child("timeName").setValue(model.getTimeName());
                 bookRef.child("patientId").setValue(currentPatient.getUid());
                 bookRef.child("requestStatus").setValue("not confirmed");
+                bookRef.child("dayName").setValue(model.getDayName());
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();
 
