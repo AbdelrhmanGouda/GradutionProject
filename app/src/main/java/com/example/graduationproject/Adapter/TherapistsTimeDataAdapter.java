@@ -1,6 +1,8 @@
 package com.example.graduationproject.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
+import com.example.graduationproject.Fragments.TherapyDataFragment;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTimeDataAdapter.ViewHolder> {
 
@@ -27,6 +35,8 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
     List<TherapistsReservationTimeData> therapistsReservationTimeDataListData;
     DatabaseReference bookRef;
     FirebaseUser currentPatient;
+
+
 
     public TherapistsTimeDataAdapter(Context mContext, List<TherapistsReservationTimeData> therapistsReservationTimeDataListData) {
         this.mContext = mContext;
@@ -37,6 +47,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.therapy_time_recycler_item,parent,false);
+
         return new ViewHolder(view);
     }
 
@@ -46,6 +57,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
         final TherapistsReservationTimeData model = therapistsReservationTimeDataListData.get(position);
         viewHolder.startTimeTextView.setText(model.getStartTime());
         viewHolder.endTimeTextView.setText(model.getEndTime());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +70,10 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
                 bookRef.child("endTime").setValue(model.getEndTime());
                 bookRef.child("timeName").setValue(model.getTimeName());
                 bookRef.child("patientId").setValue(currentPatient.getUid());
+                bookRef.child("requestStatus").setValue("not confirmed");
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -73,8 +87,12 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView startTimeTextView,endTimeTextView,toTextView;
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
 
             startTimeTextView = itemView.findViewById(R.id.start_time_text_view);
             toTextView = itemView.findViewById(R.id.to_text_view);

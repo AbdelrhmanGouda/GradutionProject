@@ -1,6 +1,7 @@
 package com.example.graduationproject.Fragments;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -77,6 +78,7 @@ public class TherapyDataFragment extends Fragment {
         selectDayTextView = view.findViewById(R.id.select_the_day);
         book = view.findViewById(R.id.therapy_book_button);
 
+
         layoutManager= new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView = view.findViewById(R.id.appointments_recycler_view);
         recyclerView.setLayoutManager(layoutManager);
@@ -97,7 +99,9 @@ public class TherapyDataFragment extends Fragment {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 bookAnAppointment();
+
             }
         });
 
@@ -185,6 +189,7 @@ public class TherapyDataFragment extends Fragment {
         getPatientName();
         if (getArguments()!= null){
             therapyId = getArguments().getString("id");
+            timeName = getArguments().getString("timeName");
         }
         therapyRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId);
         therapyRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -209,6 +214,7 @@ public class TherapyDataFragment extends Fragment {
 
     private void bookAnAppointment(){
 
+
         if (dayName!=null){
             currentPatient = FirebaseAuth.getInstance().getCurrentUser();
             patientId = currentPatient.getUid();
@@ -217,6 +223,8 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
             patientBookRef.child("dayDate").setValue(dayName);
+
+
 
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -244,11 +252,12 @@ public class TherapyDataFragment extends Fragment {
             });
 
             // get the time name
+            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(currentPatient.getUid());
             patientBookRef.child("timeName").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     timeName = snapshot.getValue(String.class);
-                    Toast.makeText(getActivity(), timeName, Toast.LENGTH_SHORT).show();
+
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -256,16 +265,22 @@ public class TherapyDataFragment extends Fragment {
                 }
             });
 
+
             timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
                     .child("patients").child(dayName);
             timeBookRefForTherapy.child(patientId)
                     .child("patientId").setValue(patientId);
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
 
-            deleteSelectedTime = FirebaseDatabase.getInstance().getReference("Doctors").child("free time").child(dayName);
+
             if (timeName!=null) {
-                deleteSelectedTime.child(timeName).removeValue();
+                deleteSelectedTime = FirebaseDatabase.getInstance().getReference("Doctors");
+                deleteSelectedTime.child(therapyId).child("free time").child(dayName).child(timeName).removeValue();
+
+            }else {
+                Toast.makeText(getActivity(), "time name null ", Toast.LENGTH_SHORT).show();
             }
+
 
         }else {
             Toast.makeText(getActivity(), "select the date first", Toast.LENGTH_SHORT).show();
