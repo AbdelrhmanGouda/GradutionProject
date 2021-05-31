@@ -59,17 +59,7 @@
         android:id="@+id/therapy_clinic_location"
         android:textColor="@color/black"/>
 
-    <Button
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:background="@drawable/rounded_corner"
-        android:layout_marginTop="@dimen/_110sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_120sdp"
-        android:textSize="@dimen/_14ssp"
-        android:text="Book"
-        android:backgroundTint="@color/color"
-        android:id="@+id/therapy_book_button"/>
+
 
 
 </androidx.cardview.widget.CardView>

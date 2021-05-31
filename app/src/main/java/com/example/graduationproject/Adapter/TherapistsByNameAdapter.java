@@ -77,38 +77,6 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
             }
         });
 
-        holder.book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                doctorRef = FirebaseDatabase.getInstance().getReference("Doctors");
-                patientNameRef = FirebaseDatabase.getInstance().getReference("Users");
-                currentPatient = FirebaseAuth.getInstance().getCurrentUser();
-                patientId = currentPatient.getUid();
-                patientRefBook = FirebaseDatabase.getInstance().getReference();
-
-                patientRefBook.child("Doctors").child(model.getId()).child("patients")
-                        .child(patientId).child("id").setValue(patientId);
-
-                // book the patient with a doctor
-                patientNameRef.child(patientId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        patientName = snapshot.getValue(String.class);
-                        Toast.makeText(mContext, patientName, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-                patientRefBook.child("Doctors").child(model.getId()).child("patients")
-                        .child(patientId).child("name").setValue(patientName);
-
-
-            }
-        });
 
     }
 
@@ -124,7 +92,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
         CircleImageView therapyPhoto;
         TextView therapyName,therapyDescription,sessionCost,clinicLocation;
-        Button book;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -133,7 +101,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
             therapyDescription = itemView.findViewById(R.id.therapy_description);
             sessionCost = itemView.findViewById(R.id.therapy_session_cost);
             clinicLocation = itemView.findViewById(R.id.therapy_clinic_location);
-            book = itemView.findViewById(R.id.therapy_book_button);
+
 
 
         }

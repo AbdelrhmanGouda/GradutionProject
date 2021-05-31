@@ -1,10 +1,11 @@
 package com.example.graduationproject.Fragments;
 
 import android.app.DatePickerDialog;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.graduationproject.Adapter.TherapistsByNameAdapter;
 import com.example.graduationproject.Adapter.TherapistsTimeDataAdapter;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
@@ -52,6 +51,7 @@ public class TherapyDataFragment extends Fragment {
     Button book;
 
 
+    AlertDialog.Builder builder;
     RecyclerView recyclerView;
     List<TherapistsReservationTimeData> therapistsTimeList;
     LinearLayoutManager layoutManager;
@@ -70,6 +70,9 @@ public class TherapyDataFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_therapy_data, container, false);
 
+        currentPatient = FirebaseAuth.getInstance().getCurrentUser();
+        patientId = currentPatient.getUid();
+
         therapyProfileImage = view.findViewById(R.id.therapy_photo);
         therapyNameTextView = view.findViewById(R.id.therapy_name);
         therapySessionCostTextView = view.findViewById(R.id.therapy_session_cost);
@@ -77,6 +80,7 @@ public class TherapyDataFragment extends Fragment {
         clinicLocationTextView = view.findViewById(R.id.therapy_clinic_location);
         selectDayTextView = view.findViewById(R.id.select_the_day);
         book = view.findViewById(R.id.therapy_book_button);
+        builder = new AlertDialog.Builder(getActivity());
 
 
         layoutManager= new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -100,10 +104,32 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                bookAnAppointment();
+                getTimeName();
+                builder.setTitle("Alert")
+                        .setMessage("Are you sure for booking this time?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                confirmBooking();
+                                Toast.makeText(getActivity(), "appointment is booked", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getActivity(), "you have not book any appointment ", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+
 
             }
         });
+
+
+
+
 
         return view;
     }
@@ -212,24 +238,40 @@ public class TherapyDataFragment extends Fragment {
     }
 
 
-    private void bookAnAppointment(){
+    private void getTimeName(){
 
+        // get the time name
+
+        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+        patientBookRef.child("timeName").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                timeName = snapshot.getValue(String.class);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    private void confirmBooking(){
 
         if (dayName!=null){
-            currentPatient = FirebaseAuth.getInstance().getCurrentUser();
-            patientId = currentPatient.getUid();
+
             patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
             patientBookRef.child("dayDate").setValue(dayName);
 
-
-
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                     startTime  = snapshot.getValue(String.class);
+                    startTime  = snapshot.getValue(String.class);
                     timeBookRefForTherapy.child(patientId).child("startTime").setValue(startTime);
                 }
 
@@ -241,7 +283,7 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                     endTime  = snapshot.getValue(String.class);
+                    endTime  = snapshot.getValue(String.class);
                     timeBookRefForTherapy.child(patientId).child("endTime").setValue(endTime);
                 }
 
@@ -250,21 +292,6 @@ public class TherapyDataFragment extends Fragment {
 
                 }
             });
-
-            // get the time name
-            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(currentPatient.getUid());
-            patientBookRef.child("timeName").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    timeName = snapshot.getValue(String.class);
-
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
 
             timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
                     .child("patients").child(dayName);
