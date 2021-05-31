@@ -267,6 +267,7 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
             patientBookRef.child("dayDate").setValue(dayName);
+            patientBookRef.child("requestStatus").setValue("confirmed");
 
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
