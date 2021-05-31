@@ -1,6 +1,7 @@
 package com.example.graduationproject.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTimeDataAdapter.ViewHolder> {
 
 
@@ -26,8 +29,6 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
     List<TherapistsReservationTimeData> therapistsReservationTimeDataListData;
     DatabaseReference bookRef;
     FirebaseUser currentPatient;
-
-
 
     public TherapistsTimeDataAdapter(Context mContext, List<TherapistsReservationTimeData> therapistsReservationTimeDataListData) {
         this.mContext = mContext;
@@ -63,6 +64,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
                 bookRef.child("patientId").setValue(currentPatient.getUid());
                 bookRef.child("requestStatus").setValue("not confirmed");
                 bookRef.child("dayDate").setValue(model.getDayDate());
+
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();
 

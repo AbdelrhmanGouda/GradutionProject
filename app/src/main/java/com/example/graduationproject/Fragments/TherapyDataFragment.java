@@ -47,7 +47,7 @@ public class TherapyDataFragment extends Fragment {
 
     String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName;
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy,deleteSelectedTime;
+    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime;
     Button book;
 
 
@@ -299,11 +299,19 @@ public class TherapyDataFragment extends Fragment {
                 }
             });
 
+            // save the appointments to get them back
             timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
-                    .child("patients").child(dayName);
+                    .child("appointments").child(dayName);
             timeBookRefForTherapy.child(patientId)
                     .child("patientId").setValue(patientId);
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
+
+            // save the patients to get them back for the doctor
+            savePatientRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
+                    .child("patients");
+            savePatientRef.child(patientId).child("patientId").setValue(patientId);
+            savePatientRef.child(patientId).child("patientName").setValue(patientName);
+
 
 
             if (timeName!=null) {
@@ -364,6 +372,7 @@ public class TherapyDataFragment extends Fragment {
 
             }
         });
+
     }
 
 }
