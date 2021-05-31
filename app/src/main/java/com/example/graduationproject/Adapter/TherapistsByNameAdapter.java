@@ -80,9 +80,6 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
     }
 
-
-
-
     @Override
     public int getItemCount() {
         return therapistsData.size();
