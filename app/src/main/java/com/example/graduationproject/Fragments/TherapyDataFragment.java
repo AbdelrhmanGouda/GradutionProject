@@ -114,8 +114,27 @@ public class TherapyDataFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                confirmBooking();
-                                Toast.makeText(getActivity(), "appointment is booked", Toast.LENGTH_SHORT).show();
+
+                                patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+                                patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String startTime = snapshot.getValue(String.class);
+                                        if (startTime!=null){
+                                            confirmBooking();
+                                            Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            Toast.makeText(getActivity(), "you must choose a time ", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -352,26 +371,8 @@ public class TherapyDataFragment extends Fragment {
 
     private void enableBooking(){
 
-        book.setEnabled(false);
-        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
-        patientBookRef.child("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = snapshot.getValue(String.class);
-                if (id==patientId){
-                    book.setEnabled(true);
-                    Toast.makeText(getActivity(), "id is correct", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getActivity(), "cannot book without choosing the time", Toast.LENGTH_SHORT).show();
-                }
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 
