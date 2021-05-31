@@ -61,7 +61,7 @@ public class ChatBotFragment extends Fragment {
     TextView userName;
     Button chooseOne,chooseTwo,chooseThree,chooseFour;
     FirebaseUser firebaseUser;
-    DatabaseReference databaseAllReference,databaseReference;
+    DatabaseReference databaseAllReference,databaseReference,reportRefrence;
     EditText textSend;
     ImageButton send;
     RelativeLayout relativeLayout;
@@ -86,7 +86,8 @@ public class ChatBotFragment extends Fragment {
         userName=view.findViewById(R.id.username);
         Toolbar toolbar=view.findViewById(R.id.toolbar);
        databaseAllReference= FirebaseDatabase.getInstance().getReference();
-
+        reportRefrence=FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot")
+                .child(firebaseUser.getUid());
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setStackFromEnd(true);
@@ -119,6 +120,8 @@ public class ChatBotFragment extends Fragment {
                         if(Integer.parseInt(msg)>=12
                                 &&Integer.parseInt(msg)<100){
                             sendUserMessage(msg);
+                            reportRefrence.child("age").setValue(msg);
+                            reportRefrence.child("id").setValue(firebaseUser.getUid());
                             sendBotMessage("Are you single?");
 
                         }else {
@@ -128,6 +131,7 @@ public class ChatBotFragment extends Fragment {
 
                     }else if(textSend.getInputType()== InputType.TYPE_CLASS_TEXT) {
                         sendUserMessage(msg);
+                        reportRefrence.child("currentState").setValue(msg);
                         sendBotMessage("i see");
                         sendBotMessage("Have you ever been in therapy before?");
 
@@ -153,11 +157,13 @@ public class ChatBotFragment extends Fragment {
                 }
                 else if(chooseOne.getText().toString().equals("Yeah!")) {
                     sendUserMessage("Yeah!");
+                    reportRefrence.child("relationship").setValue("single");
                     sendBotMessage("Are you still studying or working?");
 
                 }
                 else if(chooseOne.getText().toString().equals("Working")){
                     sendUserMessage(chooseOne.getText().toString());
+                    reportRefrence.child("workOrStudy").setValue(chooseOne.getText().toString());
                     sendBotMessage("Wow good , what's your job?");
                 }else if(chooseOne.getText().toString().equals("Yes")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -168,6 +174,25 @@ public class ChatBotFragment extends Fragment {
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
 
+                }else if(chooseOne.getText().toString().equals("Ok let's do Depression test")){
+                    sendUserMessage("Depression test");
+                    sendBotMessage("Starting Depression test ....!");
+                    sendBotMessage("How often have you been bothered by feeling down," +
+                            " depressed, irritable, or hopeless over the last two weeks?");
+
+                }else if(chooseOne.getText().toString().equals("Not at all")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    depressionTestQuestionsCounter(0);
+                    getDepressionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("Not at all.")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    depressionTestQuestionsCounter(0);
+                //    readDepressionDegree();
+
+
+
+
                 }
             }
         });
@@ -176,10 +201,12 @@ public class ChatBotFragment extends Fragment {
             public void onClick(View v) {
                 if(chooseTwo.getText().toString().equals("Nope!")){
                     sendUserMessage("Nope!");
+                    reportRefrence.child("relationship").setValue("in relationship");
                     sendBotMessage("Are you still studying or working?");
 
                 }else if (chooseTwo.getText().toString().equals("Studying")){
                     sendUserMessage(chooseTwo.getText().toString());
+                    reportRefrence.child("workOrStudy").setValue(chooseTwo.getText().toString());
                     sendBotMessage("Amazing , what do you study?");
 
                 }else if(chooseTwo.getText().toString().equals("Nope")){
@@ -193,6 +220,20 @@ public class ChatBotFragment extends Fragment {
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
 
+                }else if(chooseTwo.getText().toString().equals("I'd prefere to begain with another one")){
+
+                }else if(chooseTwo.getText().toString().equals("Several days")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    depressionTestQuestionsCounter(1);
+                    getDepressionQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("Several days.")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    depressionTestQuestionsCounter(1);
+                //    readDepressionDegree();
+
+
+
                 }
             }
         });
@@ -201,16 +242,29 @@ public class ChatBotFragment extends Fragment {
             public void onClick(View v) {
                 if(chooseThree.getText().toString().equals("It just complecated!")){
                     sendUserMessage("It just complecated!");
+                    reportRefrence.child("relationship").setValue("complecated");
                     sendBotMessage("Are you still studying or working?");
 
                 }else if(chooseThree.getText().toString().equals("Doing both")){
                     sendUserMessage(chooseThree.getText().toString());
+                    reportRefrence.child("workOrStudy").setValue(chooseThree.getText().toString());
                     sendBotMessage("Tell me more about that ?");
 
                 }else if(chooseThree.getText().toString().equals("Happy")){
                     sendUserMessage(chooseThree.getText().toString());
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
+
+                }else if (chooseThree.getText().toString().equals("More than half of the days")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    depressionTestQuestionsCounter(2);
+                    getDepressionQuestions();
+
+                }else if (chooseThree.getText().toString().equals("More than half of the days.")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    depressionTestQuestionsCounter(2);
+                   // readDepressionDegree();
+
 
                 }
 
@@ -221,12 +275,24 @@ public class ChatBotFragment extends Fragment {
             public void onClick(View v) {
                 if(chooseFour.getText().toString().equals("Neither both")){
                     sendUserMessage(chooseFour.getText().toString());
+                    reportRefrence.child("workOrStudy").setValue(chooseFour.getText().toString());
                     sendBotMessage("ok , i see");
 
                 }else if(chooseFour.getText().toString().equals("Angry")){
                     sendUserMessage(chooseFour.getText().toString());
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
+
+                }else if(chooseFour.getText().toString().equals("Nearly everyday")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    depressionTestQuestionsCounter(3);
+                    getDepressionQuestions();
+                }else if(chooseFour.getText().toString().equals("Nearly everyday.")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    depressionTestQuestionsCounter(3);
+                 //   readDepressionDegree();
+
+
 
                 }
             }
@@ -235,6 +301,49 @@ public class ChatBotFragment extends Fragment {
 
         return view;
     }
+
+    private void readDepressionDegree() {
+
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Depression");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            String  degree=dataSnapshot.child("totalDegree").getValue(String.class);
+                            sendBotMessage("Your total degree from Depression test is \n"+degree+"%");
+                            if(Double.parseDouble(degree)<(double) 40){
+                                sendBotMessage("Your degree is lower than 40% ,\n" +
+                                        " I think you're a normal person");
+
+                            }else {
+                                sendBotMessage("Your degree is more than 40% ,\n" +
+                                        " I think you should visit a doctor");
+
+
+                            }
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
     private void setChooseVisable() {
         relativeLayout.setVisibility(View.GONE);
@@ -245,6 +354,56 @@ public class ChatBotFragment extends Fragment {
     private void setRelativeVisable() {
         relativeLayout.setVisibility(View.VISIBLE);
         linearLayout.setVisibility(View.GONE);
+
+    }
+    private void depressionTestQuestionsCounter(int count){
+
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter11", Context.MODE_PRIVATE);
+        int depressionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            depressionCounterDegree++;
+        }else if(count==2){
+            depressionCounterDegree+=2;
+        }else if(count==3){
+            depressionCounterDegree+=3;
+        }
+        editor.putInt("counter",depressionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)depressionCounterDegree/27)*100);
+                reportRefrence.child("Depression").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+depressionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+    private void getDepressionQuestions() {
+
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber19", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"How often have you been bothered that you have little interest or pleasure in doing things over the last two weeks?"
+                ,"How often have you been bothered by trouble falling asleep, staying asleep, or sleeping too much over the last two weeks?"
+                ,"How often have you been bothered that you have poor appetite, weight loss, or overeating over the last two weeks?"
+                ," How often have you been bothered by feeling tired, or having little energy over the last two weeks?"
+                ," How often have you been bothered by feeling bad about yourself – or feeling that you are a failure, or that you have let yourself or your family down over the last two weeks?"
+                ,"How often have you been bothered that you have trouble concentrating on things like school work, reading, or watching TV over the last two weeks?"
+                ,"How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite – being so fidgety or restless that you were moving around a lot more than usual over the last two weeks?"
+                ,"How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite – being so fidgety or restless that you were moving around a lot more than usual over the last two weeks?."
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=8) {
+            if (numberOfQuestion <= 7) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+
+            break;
+        }
+
 
     }
 
@@ -285,7 +444,7 @@ public class ChatBotFragment extends Fragment {
                                     "specify it, recommend doctors for you and more");
                             editor.putString("third","But first i need to know more about you");
 
-
+                            reportRefrence.child("name").setValue(name);
                             editor.apply();
 
 
@@ -369,9 +528,32 @@ public class ChatBotFragment extends Fragment {
                             }else if(chat.getMessage().equals("I'm listening")){
                                 textSend.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                                 setRelativeVisable();
+                            }else if(chat.getMessage().equals("I recommend for us to begin with Depression test ,what do you see?")){
+                                chooseOne.setText("Ok let's do Depression test");
+                                chooseTwo.setText("I'd prefere to begain with another one");
+                                chooseThree.setVisibility(View.GONE);
+                                chooseFour.setVisibility(View.GONE);
+                                setChooseVisable();
+                            }else if(chat.getMessage().equals("Starting Depression test ....!")){
+                                chooseFour.setVisibility(View.VISIBLE);
+                                chooseThree.setVisibility(View.VISIBLE);
+                                depressionTest();
+                            }else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
+                                    " – being so fidgety or restless that you were moving around a lot more than usual over the last two weeks?.")){
+                                chooseOne.setText("Not at all.");
+                                chooseTwo.setText("Several days.");
+                                chooseThree.setText("More than half of the days.");
+                                chooseFour.setText("Nearly everyday.");
                             }
+                            else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
+                            chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
+                                chooseOne.setVisibility(View.GONE);
+                                chooseTwo.setVisibility(View.GONE);
+                                chooseThree.setVisibility(View.GONE);
+                                chooseFour.setVisibility(View.GONE);
 
+                            }
                         }catch (Exception e){
 
                         }
@@ -405,6 +587,7 @@ public class ChatBotFragment extends Fragment {
 
 
     }
+
 
     private void sendFirstBotMessage(String sender, String message1,String message2,String message3) {
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -443,6 +626,9 @@ public class ChatBotFragment extends Fragment {
                          chats.add(response.body());
                      Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                      sendBotMessage("After analysis we see that you have "+response.body().getMessage());
+                     sendBotMessage("I recommend for us to begin with "+response.body().getMessage()+
+                             " test ,what do you see?");
+                     reportRefrence.child(response.body().getMessage()).child("illness").setValue(response.body().getMessage());
                      }else {
                      Toast.makeText(getActivity(), "Something was wrong", Toast.LENGTH_SHORT).show();
                  }
@@ -457,4 +643,13 @@ public class ChatBotFragment extends Fragment {
              }
          });
     }
+    private void depressionTest() {
+        setChooseVisable();
+        chooseOne.setText("Not at all");
+        chooseTwo.setText("Several days");
+        chooseThree.setText("More than half of the days");
+        chooseFour.setText("Nearly everyday");
+    }
+
+
 }
