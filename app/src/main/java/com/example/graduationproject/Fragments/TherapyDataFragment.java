@@ -81,7 +81,7 @@ public class TherapyDataFragment extends Fragment {
         selectDayTextView = view.findViewById(R.id.select_the_day);
         book = view.findViewById(R.id.therapy_book_button);
         builder = new AlertDialog.Builder(getActivity());
-
+        book.setEnabled(true);
 
         layoutManager= new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView = view.findViewById(R.id.appointments_recycler_view);
@@ -90,21 +90,24 @@ public class TherapyDataFragment extends Fragment {
 
         getTherapyData();
 
+
         // used for getting thee therapist data from the data base
 
         selectDayTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               showDatePickerDialog();
-
             }
         });
+
+
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 getTimeName();
+
                 builder.setTitle("Alert")
                         .setMessage("Are you sure for booking this time?")
                         .setCancelable(true)
@@ -122,6 +125,7 @@ public class TherapyDataFragment extends Fragment {
                             }
                         })
                         .show();
+
 
 
             }
@@ -155,6 +159,7 @@ public class TherapyDataFragment extends Fragment {
         },year,month,day);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
+
 
 
 
@@ -335,6 +340,30 @@ public class TherapyDataFragment extends Fragment {
             }
         });
 
+    }
+
+    private void enableBooking(){
+
+        book.setEnabled(false);
+        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+        patientBookRef.child("patientId").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String id = snapshot.getValue(String.class);
+                if (id==patientId){
+                    book.setEnabled(true);
+                    Toast.makeText(getActivity(), "id is correct", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "cannot book without choosing the time", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
