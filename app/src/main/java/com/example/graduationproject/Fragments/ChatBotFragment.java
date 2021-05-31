@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.ScriptGroup;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -125,11 +126,14 @@ public class ChatBotFragment extends Fragment {
                             return;
                         }
 
+                    }else if(textSend.getInputType()== InputType.TYPE_CLASS_TEXT) {
+                        sendUserMessage(msg);
+                        sendBotMessage("i see");
+                        sendBotMessage("Have you ever been in therapy before?");
+
                     }else {
                         sendUserMessage(msg);
                         fetchChatBotReply(textSend.getText().toString());
-                    //    sendBotMessage("i see");
-                      //  sendBotMessage("Have you ever been in therapy before?");
 
                     }
                     textSend.setText("");
@@ -363,6 +367,7 @@ public class ChatBotFragment extends Fragment {
                                 chooseFour.setVisibility(View.VISIBLE);
 
                             }else if(chat.getMessage().equals("I'm listening")){
+                                textSend.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                                 setRelativeVisable();
                             }
 
@@ -437,6 +442,7 @@ public class ChatBotFragment extends Fragment {
 
                          chats.add(response.body());
                      Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                     sendBotMessage("After analysis we see that you have "+response.body().getMessage());
                      }else {
                      Toast.makeText(getActivity(), "Something was wrong", Toast.LENGTH_SHORT).show();
                  }
