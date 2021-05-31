@@ -24,7 +24,7 @@ public class CustomToast {
                 (ViewGroup) view.findViewById(R.id.toast_root));
 
         // Get TextView id and set error
-        TextView text = (TextView) layout.findViewById(R.id.toast_error);
+        TextView text = layout.findViewById(R.id.toast_error);
         text.setText(error);
 
         Toast toast = new Toast(context);// Get Toast Context

@@ -49,9 +49,9 @@ public class ForgotPassword_Fragment extends Fragment implements
 
     // Initialize the views
     private void initViews() {
-        emailId = (EditText) view.findViewById(R.id.registered_emailid);
-        submit = (TextView) view.findViewById(R.id.forgot_button);
-        back = (TextView) view.findViewById(R.id.backToLoginBtn);
+        emailId = view.findViewById(R.id.registered_emailid);
+        submit = view.findViewById(R.id.forgot_button);
+        back = view.findViewById(R.id.backToLoginBtn);
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
@@ -113,8 +113,7 @@ public class ForgotPassword_Fragment extends Fragment implements
                     "Your Email Id is Invalid.");
 
             // Else submit email id and fetch passwod or do your stuff
-        else
-        {
+        else {
             PasswordResetEmail(getEmailId);
             Toast.makeText(getActivity(), "Check your e-mailbox.",
                     Toast.LENGTH_SHORT).show();
@@ -126,10 +125,9 @@ public class ForgotPassword_Fragment extends Fragment implements
     /*------------ Below Code is for reset password process user will get email on registered email-----------*/
 
     private void PasswordResetEmail(final String email) {
-        if(email.equals("")){
+        if (email.equals("")) {
             Toast.makeText(getActivity(), "Enter Email!! ", Toast.LENGTH_LONG).show();
-        }
-        else {
+        } else {
             mAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
                         @Override

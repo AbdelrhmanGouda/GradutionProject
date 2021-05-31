@@ -6,8 +6,6 @@ import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -63,8 +61,6 @@ import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -107,16 +107,16 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
     // Initialize all views
     private void initViews() {
-        fullName = (EditText) view.findViewById(R.id.fullName);
-        emailId = (EditText) view.findViewById(R.id.userEmailId);
-        mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
-        location = (Spinner) view.findViewById(R.id.spinner);
-        password = (EditText) view.findViewById(R.id.password);
-        confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
-        signUpButton = (Button) view.findViewById(R.id.signUpBtn);
-        login = (TextView) view.findViewById(R.id.already_user);
+        fullName = view.findViewById(R.id.fullName);
+        emailId = view.findViewById(R.id.userEmailId);
+        mobileNumber = view.findViewById(R.id.mobileNumber);
+        location = view.findViewById(R.id.spinner);
+        password = view.findViewById(R.id.password);
+        confirmPassword = view.findViewById(R.id.confirmPassword);
+        signUpButton = view.findViewById(R.id.signUpBtn);
+        login = view.findViewById(R.id.already_user);
 //		terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
-        user_profile = (ImageView) view.findViewById(R.id.add_pic);
+        user_profile = view.findViewById(R.id.add_pic);
         dropdown = view.findViewById(R.id.spinner);
 
         //create a list of items for the spinner.
@@ -189,7 +189,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         myRef.child("pass").setValue(user.getPassword());
         myRef.child("name").setValue(user.getName());
 
-        }
+    }
 
 
     // Set Listeners
