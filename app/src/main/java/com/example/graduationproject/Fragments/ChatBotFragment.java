@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Adapter.MessageAdapter;
 import com.example.graduationproject.Data.Chat;
 import com.example.graduationproject.R;
+import com.example.graduationproject.Remote.IChatBotApi;
+import com.example.graduationproject.Remote.RetrofitBot;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,9 +39,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatBotFragment extends Fragment {
 
@@ -117,8 +127,9 @@ public class ChatBotFragment extends Fragment {
 
                     }else {
                         sendUserMessage(msg);
-                        sendBotMessage("i see");
-                        sendBotMessage("Have you ever been in therapy before?");
+                        fetchChatBotReply(textSend.getText().toString());
+                    //    sendBotMessage("i see");
+                      //  sendBotMessage("Have you ever been in therapy before?");
 
                     }
                     textSend.setText("");
@@ -410,5 +421,34 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setVisibility(View.GONE);
 
 
+    }
+    public void fetchChatBotReply(String illness){
+        IChatBotApi iChatBotApi= RetrofitBot.cteareAPI();
+        Log.d("TAGDATA", "onResponse: no ");
+
+        Call<Chat> chatCall = iChatBotApi.fetchIlnessName(illness);
+        Log.d("TAGDATA", "onResponse: no1 ");
+
+        chatCall.enqueue(new Callback<Chat>() {
+             @Override
+             public void onResponse(Call<Chat> call, Response<Chat> response) {
+                 Log.d("TAGDATA", "onResponse: " + response.message() + " " + response.code());
+                 if(response.isSuccessful()&&response.body()!=null) {
+
+                         chats.add(response.body());
+                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                     }else {
+                     Toast.makeText(getActivity(), "Something was wrong", Toast.LENGTH_SHORT).show();
+                 }
+
+             }
+
+             @Override
+             public void onFailure(Call<Chat> call, Throwable t) {
+                 Log.e("TAG", "onFailure: "+t.getMessage() );
+                    //getLocalIpAddress();
+
+             }
+         });
     }
 }
