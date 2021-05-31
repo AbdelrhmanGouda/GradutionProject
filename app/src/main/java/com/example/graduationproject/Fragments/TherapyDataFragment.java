@@ -324,6 +324,7 @@ public class TherapyDataFragment extends Fragment {
             timeBookRefForTherapy.child(patientId)
                     .child("patientId").setValue(patientId);
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
+            timeBookRefForTherapy.child(patientId).child("dayName").setValue(dayName);
 
             // save the patients to get them back for the doctor
             savePatientRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
