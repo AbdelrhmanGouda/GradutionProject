@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,11 +117,14 @@ public class TherapyDataFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
-                                patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment")
+                                        .child(patientId).child("startTime");
+
+                                patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String startTime = snapshot.getValue(String.class);
+                                        Log.i(startTime, "aaaaaaaaaaa ");
                                         if (startTime!=null){
                                             confirmBooking();
                                             Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
@@ -135,6 +139,7 @@ public class TherapyDataFragment extends Fragment {
 
                                     }
                                 });
+
 
                             }
                         })
@@ -288,7 +293,7 @@ public class TherapyDataFragment extends Fragment {
 
         if (dayName!=null){
 
-            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId).push();
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
