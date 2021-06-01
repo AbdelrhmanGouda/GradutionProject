@@ -56,7 +56,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
             public void onClick(View v) {
                 currentPatient = FirebaseAuth.getInstance().getCurrentUser();
                 bookRef = FirebaseDatabase.getInstance().getReference()
-                        .child("request appointment").child(currentPatient.getUid()).push();
+                        .child("request appointment").child(currentPatient.getUid());
 
                 bookRef.child("startTime").setValue(model.getStartTime());
                 bookRef.child("endTime").setValue(model.getEndTime());
@@ -64,6 +64,7 @@ public class TherapistsTimeDataAdapter extends RecyclerView.Adapter<TherapistsTi
                 bookRef.child("patientId").setValue(currentPatient.getUid());
                 bookRef.child("requestStatus").setValue("not confirmed");
                 bookRef.child("dayDate").setValue(model.getDayDate());
+
 
 
                 Toast.makeText(mContext, "item is clicked", Toast.LENGTH_SHORT).show();

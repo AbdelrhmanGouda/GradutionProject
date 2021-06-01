@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationproject.Adapter.TherapistsTimeDataAdapter;
+import com.example.graduationproject.Data.AllAppointmentData;
 import com.example.graduationproject.Data.TherapistsByNameData;
 import com.example.graduationproject.Data.TherapistsReservationTimeData;
 import com.example.graduationproject.R;
@@ -47,8 +47,11 @@ public class TherapyDataFragment extends Fragment {
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
     String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName,uri;
+    String startTimeFinal,endTimeFinal;
+
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef,patientImageRef,patientBookRef, therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime;
+    DatabaseReference patientNameRef,patientImageRef,patientBookRef,
+            therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime,allAppointmentDataRef;
     Button book;
 
 
@@ -119,15 +122,15 @@ public class TherapyDataFragment extends Fragment {
 
                                 patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment")
                                         .child(patientId).child("startTime");
-
                                 patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String startTime = snapshot.getValue(String.class);
-                                        Log.i(startTime, "aaaaaaaaaaa ");
                                         if (startTime!=null){
                                             confirmBooking();
+
                                             Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
+
                                         }else {
                                             Toast.makeText(getActivity(), "you must choose a time ", Toast.LENGTH_SHORT).show();
                                         }
@@ -286,6 +289,31 @@ public class TherapyDataFragment extends Fragment {
             }
         });
 
+        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+        patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                startTimeFinal = snapshot.getValue(String.class);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
+        patientBookRef.child("endTime").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                endTimeFinal = snapshot.getValue(String.class);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -293,12 +321,24 @@ public class TherapyDataFragment extends Fragment {
 
         if (dayName!=null){
 
-            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId).push();
+            patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
             patientBookRef.child("dayDate").setValue(dayName);
             patientBookRef.child("requestStatus").setValue("confirmed");
+            patientBookRef.child("state").setValue("upcoming");
+
+            patientBookRef = FirebaseDatabase.getInstance().getReference("appointment").child(patientId).push();
+            patientBookRef.child("therapyId").setValue(therapyId);
+            patientBookRef.child("therapyName").setValue(therapyName);
+            patientBookRef.child("patientName").setValue(patientName);
+            patientBookRef.child("dayDate").setValue(dayName);
+            patientBookRef.child("startTime").setValue(startTimeFinal);
+            patientBookRef.child("endTime").setValue(endTimeFinal);
+            patientBookRef.child("timeName").setValue(timeName);
+            patientBookRef.child("patientId").setValue(patientId);
+            patientBookRef.child("state").setValue("Upcoming");
 
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -336,6 +376,7 @@ public class TherapyDataFragment extends Fragment {
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
             timeBookRefForTherapy.child(patientId).child("dayName").setValue(dayName);
             timeBookRefForTherapy.child(patientId).child("uri").setValue(uri);
+
 
             // save the patients to get them back for the doctor
             savePatientRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
@@ -384,7 +425,6 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 uri = snapshot.getValue(String.class);
-                Toast.makeText(getActivity(), uri, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -394,5 +434,7 @@ public class TherapyDataFragment extends Fragment {
         });
 
     }
+
+
 
 }
