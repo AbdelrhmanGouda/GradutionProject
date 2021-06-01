@@ -45,9 +45,9 @@ public class TherapyDataFragment extends Fragment {
     TextView therapyNameTextView,therapyDescription, therapySessionCostTextView,
             therapyMobileNumberTextView, clinicLocationTextView,selectDayTextView;
 
-    String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName;
+    String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName,uri;
     FirebaseUser currentPatient;
-    DatabaseReference patientNameRef, patientBookRef, therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime;
+    DatabaseReference patientNameRef,patientImageRef,patientBookRef, therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime;
     Button book;
 
 
@@ -237,7 +237,8 @@ public class TherapyDataFragment extends Fragment {
     // used for getting thee therapist data from the data base
     public void getTherapyData(){
 
-        getPatientName();
+        getPatientdata();
+
         if (getArguments()!= null){
             therapyId = getArguments().getString("id");
             timeName = getArguments().getString("timeName");
@@ -319,6 +320,9 @@ public class TherapyDataFragment extends Fragment {
                 }
             });
 
+
+
+
             // save the appointments to get them back
             timeBookRefForTherapy = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
                     .child("appointments").child(dayName);
@@ -326,13 +330,14 @@ public class TherapyDataFragment extends Fragment {
                     .child("patientId").setValue(patientId);
             timeBookRefForTherapy.child(patientId).child("patientName").setValue(patientName);
             timeBookRefForTherapy.child(patientId).child("dayName").setValue(dayName);
+            timeBookRefForTherapy.child(patientId).child("uri").setValue(uri);
 
             // save the patients to get them back for the doctor
             savePatientRef = FirebaseDatabase.getInstance().getReference("Doctors").child(therapyId)
                     .child("patients");
             savePatientRef.child(patientId).child("patientId").setValue(patientId);
             savePatientRef.child(patientId).child("patientName").setValue(patientName);
-
+            savePatientRef.child(patientId).child("uri").setValue(uri);
 
 
             if (timeName!=null) {
@@ -351,7 +356,7 @@ public class TherapyDataFragment extends Fragment {
 
     }
 
-    private void getPatientName(){
+    private void getPatientdata(){
         currentPatient = FirebaseAuth.getInstance().getCurrentUser();
         patientId = currentPatient.getUid();
         // get the patient name from the database
@@ -361,6 +366,20 @@ public class TherapyDataFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 patientName = snapshot.getValue(String.class);
                 Toast.makeText(getActivity(), patientName, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        patientImageRef = FirebaseDatabase.getInstance().getReference("Users").child(patientId).child("uri");
+        patientImageRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                uri = snapshot.getValue(String.class);
+                Toast.makeText(getActivity(), uri, Toast.LENGTH_SHORT).show();
             }
 
             @Override

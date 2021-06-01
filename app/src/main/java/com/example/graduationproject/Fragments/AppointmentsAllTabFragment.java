@@ -19,7 +19,7 @@ import com.example.graduationproject.Adapter.AllTabAdapter;
 import com.example.graduationproject.Adapter.NotificationTabAdapter;
 import com.example.graduationproject.Data.AllTabData;
 import com.example.graduationproject.Data.NotificationTabData;
-import com.example.graduationproject.Notification.Data;
+//import com.example.graduationproject.Notification.Data;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
