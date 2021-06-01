@@ -1,9 +1,11 @@
 package com.example.graduationproject.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,6 +77,13 @@ public class AppointmentsAllTabFragment extends Fragment {
 
             }
         });
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft.setReorderingAllowed(false);
+        }
+        ft.detach(this).attach(this).commit();
+
         return view;
     }
 
@@ -96,7 +105,9 @@ public class AppointmentsAllTabFragment extends Fragment {
                         allTabAdapter = new AllTabAdapter(allTabDataList, getContext());
                         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), new LinearLayoutManager(getContext()).getOrientation());
                         allTabRecyclerView.addItemDecoration(dividerItemDecoration);
+                        allTabAdapter.notifyDataSetChanged();
                         allTabRecyclerView.setAdapter(allTabAdapter);
+
 
                     }
                 }
@@ -114,7 +125,7 @@ public class AppointmentsAllTabFragment extends Fragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentDate = new SimpleDateFormat("EEE dd,MM,yy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
         if (!state.equals("Canceled")){
             if (currentDate.compareTo(oldDate) < 0){
                 databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
@@ -122,8 +133,10 @@ public class AppointmentsAllTabFragment extends Fragment {
             else if (currentDate.compareTo(oldDate) == 0) {
                     if (currentTime.compareTo(oldTime) < 0) {
                         databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
+                        Log.i(currentTime, "gggggggggggggggggggggggg");
                     } else {
                         databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
+                        Log.i(currentTime, "hhhhhhhhhhhhhhh");
                     }
                 }
            else  {

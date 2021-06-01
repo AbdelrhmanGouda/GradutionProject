@@ -38,6 +38,7 @@ public class AppointmentsUpcomingTabFragment extends Fragment {
         upcomingTabRecyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
         upcomingTabRecyclerView.setHasFixedSize(true);
         upcomingTabDataList =new ArrayList<>();
+
         Query query = FirebaseDatabase.getInstance().getReference("request appointment").orderByChild("state").equalTo("Upcoming");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

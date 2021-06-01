@@ -52,7 +52,6 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
                     if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                              currentState=snapshot.child("state").getValue(String.class);
-
                         }
                         if (currentState.equals("Upcoming")){
                             holder.cancel.setVisibility(View.VISIBLE);
@@ -68,10 +67,9 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
                                                 if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
                                                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                                         snapshot.getRef().child("state").setValue("Canceled");
-
                                                     }
-
                                                 }
+
 
                                             }
 
@@ -85,7 +83,7 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
                                     view.setVisibility(View.INVISIBLE);
                                 }
                             });
-
+                            notifyDataSetChanged();
                         }else {
                             holder.cancel.setVisibility(View.INVISIBLE);
                         }
@@ -101,7 +99,6 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
 
             }
         });
-
     }
 
     @Override
