@@ -199,7 +199,7 @@ public class TherapyDataFragment extends Fragment {
                         patientBookRef.child(dayName).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                                    therapistsTimeList.clear();
                                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                         TherapistsReservationTimeData model =
                                                 dataSnapshot.getValue(TherapistsReservationTimeData.class);
@@ -368,13 +368,6 @@ public class TherapyDataFragment extends Fragment {
 
             }
         });
-
-    }
-
-    private void enableBooking(){
-
-
-
 
     }
 
