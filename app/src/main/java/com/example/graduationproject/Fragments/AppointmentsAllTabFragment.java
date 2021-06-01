@@ -116,13 +116,16 @@ public class AppointmentsAllTabFragment extends Fragment {
         String currentDate = new SimpleDateFormat("EEE dd,MM,yy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("HH:mm a", Locale.getDefault()).format(new Date());
         if (!state.equals("Canceled")){
-            if (currentDate.compareTo(oldDate) <= 0) {
-                if (currentTime.compareTo(oldTime) < 0) {
-                    databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
-                } else {
-                    databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
-                }
+            if (currentDate.compareTo(oldDate) < 0){
+                databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
             }
+            else if (currentDate.compareTo(oldDate) == 0) {
+                    if (currentTime.compareTo(oldTime) < 0) {
+                        databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
+                    } else {
+                        databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
+                    }
+                }
            else  {
                 databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
             }

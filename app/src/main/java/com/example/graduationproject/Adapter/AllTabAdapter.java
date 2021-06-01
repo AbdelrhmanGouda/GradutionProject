@@ -24,6 +24,7 @@ import java.util.List;
 public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdapterViewHolder> {
     List<AllTabData> allTabDataList;
     Context context;
+    String currentState;
     public AllTabAdapter (List<AllTabData> allTabDataList ,Context context){
         this.allTabDataList=allTabDataList;
         this.context=context;
@@ -36,45 +37,77 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllTabAdapterViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final AllTabAdapterViewHolder holder, final int position) {
         holder.date.setText(allTabDataList.get(position).getDayDate());
         holder.startTime.setText(allTabDataList.get(position).getStartTime());
         holder.docName.setText(allTabDataList.get(position).getTherapyName());
         holder.endTime.setText(allTabDataList.get(position).getEndTime());
         holder.state.setText(allTabDataList.get(position).getState());
-        holder.cancel.setOnClickListener(new View.OnClickListener() {
+        Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot != null) {
-                            if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
-                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                                    snapshot.getRef().child("state").setValue("Canceled");
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot != null) {
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                             currentState=snapshot.child("state").getValue(String.class);
+
+                        }
+                        if (currentState.equals("Upcoming")){
+                            holder.cancel.setVisibility(View.VISIBLE);
+                            holder.cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot != null) {
+                                                if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
+                                                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                                        snapshot.getRef().child("state").setValue("Canceled");
+
+                                                    }
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    view.setVisibility(View.INVISIBLE);
                                 }
+                            });
 
-                            }
-
+                        }else {
+                            holder.cancel.setVisibility(View.INVISIBLE);
                         }
 
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-                    }
-                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
         return allTabDataList.size();
+
     }
 
     public class AllTabAdapterViewHolder extends RecyclerView.ViewHolder {
@@ -88,6 +121,9 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
             state=itemView.findViewById(R.id.all_tab_state);
             docName=itemView.findViewById(R.id.all_tab_doctor_name);
             cancel=itemView.findViewById(R.id.appointment_cancel_btn);
+            cancel.setVisibility(View.INVISIBLE);
+
+            
         }
     }
 }
