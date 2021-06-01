@@ -1,29 +1,49 @@
 package com.example.graduationproject.Data;
 
 public class AllTabData {
-    private String date,time,state,docName;
+    private String dayDate, startTime, endTime, therapyName, state;
 
-    public AllTabData(String date, String time, String state, String docName) {
-        this.date = date;
-        this.time = time;
+    public AllTabData() {
+    }
+
+    public AllTabData(String dayDate, String startTime, String endTime, String therapyName, String state) {
+        this.dayDate = dayDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.therapyName = therapyName;
         this.state = state;
-        this.docName = docName;
     }
 
-    public String getDate() {
-        return date;
+    public String getDayDate() {
+        return dayDate;
     }
 
-    public void setData(String date) {
-        this.date = date;
+    public void setDayDate(String dayDate) {
+        this.dayDate = dayDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getTherapyName() {
+        return therapyName;
+    }
+
+    public void setTherapyName(String therapyName) {
+        this.therapyName = therapyName;
     }
 
     public String getState() {
@@ -32,13 +52,5 @@ public class AllTabData {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
     }
 }

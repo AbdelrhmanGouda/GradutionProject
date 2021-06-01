@@ -83,6 +83,7 @@ public class TherapyDataFragment extends Fragment {
         builder = new AlertDialog.Builder(getActivity());
         book.setEnabled(true);
 
+
         layoutManager= new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView = view.findViewById(R.id.appointments_recycler_view);
         recyclerView.setLayoutManager(layoutManager);
