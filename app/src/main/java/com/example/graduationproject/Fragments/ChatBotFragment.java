@@ -182,6 +182,12 @@ public class ChatBotFragment extends Fragment {
                             " muscle tension, nausea, or changes in sex drive?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Alcohol Addiction test")){
                     startTestWithFirstQuestion("Alcohol Addiction","Do you lose time from work or school due to drinking?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Drug Addiction test")){
+                    startTestWithFirstQuestion("Drug Addiction","Do you feel like you need to use the drug regularly?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Psychosexual Dysfunction test")){
+                    startTestWithFirstQuestion("Psychosexual Dysfunction","Over the past month, how many days have you experienced a sexual impulse?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Attention-Deficit Hyperactivity Disorder (ADHD) test")){
+                    startTestWithFirstQuestion("Attention-Deficit Hyperactivity Disorder (ADHD)","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -225,6 +231,85 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     lcoholAddictionTestQuestionsCounter(1);
                     readAlcoholAddictionDegree();
+
+                }else if(chooseOne.getText().toString().equals("YES.")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    drugAddictionTestQuestionsCounter(1);
+                    getDrugAddictionQuestions();
+
+
+                }else if(chooseOne.getText().toString().equals("YES. ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    drugAddictionTestQuestionsCounter(1);
+                    readDrugAddictionDegree();
+                }else if(chooseOne.getText().toString().equals("NEVER")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(0);
+                    getPsychosexualDysfunctionQuestions();
+
+
+                }else if(chooseOne.getText().toString().equals("NEVER.")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(0);
+                    getPsychosexualDysfunctionDegree();
+
+                }else if(chooseOne.getText().toString().equals("VERY LITTLE")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("HE PREFER CIRCLE TIME")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    chooseOne.setText("HE CAN");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("HE CAN")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    chooseOne.setText("YES, HE DOES");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("YES, HE DOES")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("YES, I DO");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("YES, I DO")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals(" YES ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("NO, HE DOESN'T UNDERSTAND ME")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals("YES, HE COULD")) {
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+                }else if(chooseOne.getText().toString().equals("YES, BUT MORE THAN 6 MONTHS AGO")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals(" YES. ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
 
                 }
 
@@ -292,6 +377,65 @@ public class ChatBotFragment extends Fragment {
                     lcoholAddictionTestQuestionsCounter(0);
                     readAlcoholAddictionDegree();
 
+                }else if(chooseTwo.getText().toString().equals("NO.")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    drugAddictionTestQuestionsCounter(0);
+                    getDrugAddictionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NO. ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    drugAddictionTestQuestionsCounter(0);
+                    readDrugAddictionDegree();
+                }else if(chooseTwo.getText().toString().equals("RARELY")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(1);
+                    getPsychosexualDysfunctionQuestions();
+
+
+                }else if(chooseTwo.getText().toString().equals("RARELY.")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(1);
+                    getPsychosexualDysfunctionDegree();
+
+                }else if(chooseTwo.getText().toString().equals("TOO MUCH CALLS")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("HE DOESN'T PREFER CIRCLE TIME")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("HE GETS DISTRACTED")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NO, HE DOESN'T")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NO, I DON'T")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals(" NO ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NO, HE DOESN'T UNDERSTAND ME")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NO, HE COULDN'T")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals("NOT AT ALL")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals(" NO. ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    adhdTestQuestionsCounter(0);
+                    adhdfunctionQuestions();
                 }
 
 
@@ -345,6 +489,17 @@ public class ChatBotFragment extends Fragment {
                     stressTestQuestionsCounter(2);
                     readStressDegree();
 
+                }else if(chooseThree.getText().toString().equals("SOMETIMES")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(2);
+                    getPsychosexualDysfunctionQuestions();
+
+
+                }else if(chooseThree.getText().toString().equals("SOMETIMES.")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(2);
+                    getPsychosexualDysfunctionDegree();
+
                 }
 
             }
@@ -388,6 +543,16 @@ public class ChatBotFragment extends Fragment {
                     stressTestQuestionsCounter(3);
                     readStressDegree();
 
+                }else if(chooseFour.getText().toString().equals("OFTEN")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(3);
+                    getPsychosexualDysfunctionQuestions();
+
+                }else if(chooseFour.getText().toString().equals("OFTEN.")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(3);
+                    getPsychosexualDysfunctionDegree();
+
                 }
             }
 
@@ -405,12 +570,261 @@ public class ChatBotFragment extends Fragment {
                     stressTestQuestionsCounter(4);
                     readStressDegree();
 
+                }else if(chooseFive.getText().toString().equals("VERY OFTEN")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(4);
+                    getPsychosexualDysfunctionQuestions();
+
+
+                }else if(chooseFive.getText().toString().equals("VERY OFTEN.")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    psychosexualDysfunctionTestQuestionsCounter(4);
+                    getPsychosexualDysfunctionDegree();
                 }
             }
         });
         getPrefrance();
 
         return view;
+    }
+
+    private void adhdfunctionQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber132", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"HOW IS YOUR CHILD DOING WITH CIRCLE TIME?"
+                ,"CAN YOUR CHILD FOLLOW ONE- OR TWO-STEP DIRECTIONS WITHOUT GETTING DISTRACTED?"
+                ,"DOES YOUR CHILD “DART” AT THE STORE OR AT PRESCHOOL?"
+                ,"DO YOU AVOID TAKING YOUR CHILD OUT IN PUBLIC, EVEN TO CASUAL, FAMILY-FRIENDLY PLACES?"
+                ,"HAS YOUR CHILD HAD HER HEARING CHECKED?"
+                ,"DO YOU THINK YOUR CHILD UNDERSTANDS YOUR WORDS WHEN YOU SPEAK TO HIM?"
+                ,"COULD YOUR CHILD HAVE ANOTHER HEALTH CONDITION, LIKE SLEEP APNEA?"
+                ,"HAS YOUR CHILD UNDERGONE AN ACUTE STRESSOR?"
+                ,"DOES YOUR CHILD’S BEHAVIOUR DIFFER IN THE PRESENCE OF AUTHORITY (TEACHER , TRAINER)?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=9) {
+            if (numberOfAdhdQuestion <= 8) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+
+
+    }
+
+    private void adhdTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter132", Context.MODE_PRIVATE);
+        int adhdCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            adhdCounterDegree++;
+        }
+        editor.putInt("counter",adhdCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)adhdCounterDegree));
+        reportRefrence.child("Attention-Deficit Hyperactivity Disorder (ADHD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+adhdCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+
+
+    }
+
+    private void getPsychosexualDysfunctionDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Psychosexual Dysfunction");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Psychosexual Dysfunction test is \n"+degree+"");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
+    private void getPsychosexualDysfunctionQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber120", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={" How concerned have you been about your sexual performance?"
+                ,"How much pain did you experience after or during sex?"
+                ,"How happy have you felt with the emotional intimacy you experienced with your sexual companion?"
+                ,"How often did you enjoy sex?"
+                ,"While you were having sex, how would you describe the intensity of your sexual arousal?"
+                ,"Over the past month, how would you rate the strength of your sexual impulses?"
+                ,"Are you feeling depressed or stressed?"
+                ,"Have you ever faced a childhood abuse or sexual trauma?"
+                ,"Are you feeling low self-esteem, or losing interest in sex?"
+                ,"Are you not satisfying your partner?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=10) {
+            if (numberOfQuestion <= 9) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void psychosexualDysfunctionTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter120", Context.MODE_PRIVATE);
+        int psychosexualDysfunctionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            psychosexualDysfunctionCounterDegree++;
+        }else if(count==2){
+            psychosexualDysfunctionCounterDegree+=2;
+        }else if(count==3){
+            psychosexualDysfunctionCounterDegree+=3;
+        }else if(count==4){
+            psychosexualDysfunctionCounterDegree+=4;
+        }
+        editor.putInt("counter",psychosexualDysfunctionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)psychosexualDysfunctionCounterDegree/44)*100);
+        reportRefrence.child("Psychosexual Dysfunction").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+psychosexualDysfunctionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void readDrugAddictionDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("drugAddiction");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Drug Addiction test is \n"+degree+"");
+                        if(Double.parseDouble(degree)>(double) 3){
+                            sendBotMessage("Your degree is more than 3 ,\n" +
+                                    " I think you should visit a doctor");
+
+                        }else if(Double.parseDouble(degree)==(double) 3){
+
+                            sendBotMessage("Your degree is 3  ,\n" +
+                                    " I think you're a normal person");
+
+
+                        }else {
+                            sendBotMessage("Your degree is less than 3  ,\n" +
+                                    " I think you're a normal person");
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getDrugAddictionQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber113", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you make sure you have a steady supply of your drug of choice on hand?"
+                ,"Do you want to stop, but can’t?"
+                ,"If you feel you can’t stop using, do you do things you normally would not do to get drugs?"
+                ,"Do you feel you need drugs to function normally?"
+                ,"Are you willing to do something dangerous while taking drugs, like operating a " +
+                "motor vehicle, or some kind of equipment that could cause bodily harm?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=5) {
+            if (numberOfQuestion <= 4) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+
+    }
+
+    private void drugAddictionTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter113", Context.MODE_PRIVATE);
+        int drugAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            drugAddictionCounterDegree++;
+        }
+        editor.putInt("counter",drugAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)drugAddictionCounterDegree));
+        reportRefrence.child("drugAddiction").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+drugAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+
     }
 
     private void readAlcoholAddictionDegree() {
@@ -430,19 +844,19 @@ public class ChatBotFragment extends Fragment {
 
 
                         } sendBotMessage("Your total degree from Alcohol Addiction test is \n"+degree+"");
-                        if(Double.parseDouble(degree)<(double) 5){
+                        if(Double.parseDouble(degree)>(double) 5){
                             sendBotMessage("Your degree is more than 5 ,\n" +
-                                    " I think you're a normal person");
+                                    " I think you should visit a doctor");
 
                         }else if(Double.parseDouble(degree)==(double) 5){
 
                             sendBotMessage("Your degree is 5  ,\n" +
-                                    " I think you should visit a doctor");
+                                    " I think you're a normal person");
 
 
                         }else {
-                            sendBotMessage("Your degree is more than 5  ,\n" +
-                                    " I think you should visit a doctor");
+                            sendBotMessage("Your degree is less than 5  ,\n" +
+                                    " I think you're a normal person");
                         }
 
                     }
@@ -937,6 +1351,12 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Stress");
                             }else if(chat.getMessage().equals(recommendedTest("Alcohol Addiction"))){
                                 chooseForStartTest("Alcohol Addiction");
+                            }else if(chat.getMessage().equals(recommendedTest("Drug Addiction"))){
+                                chooseForStartTest("Drug Addiction");
+                            }else if(chat.getMessage().equals(recommendedTest("Psychosexual Dysfunction"))){
+                                chooseForStartTest("Psychosexual Dysfunction");
+                            }else if(chat.getMessage().equals(recommendedTest("Attention-Deficit Hyperactivity Disorder (ADHD)"))){
+                                chooseForStartTest("Attention-Deficit Hyperactivity Disorder (ADHD)");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -952,6 +1372,13 @@ public class ChatBotFragment extends Fragment {
                                 stressTest();
                             }else if(chat.getMessage().equals("Starting Alcohol Addiction test ....!")){
                                 alcoholAddictiontest();
+                            }else if(chat.getMessage().equals("Starting Drug Addiction test ....!")){
+                                drugAddictiontest();
+
+                            }else if(chat.getMessage().equals("Starting Psychosexual Dysfunction test ....!")){
+                                psychosexualDysfunctionTest();
+                            }else if(chat.getMessage().equals("Starting Attention-Deficit Hyperactivity Disorder (ADHD) test ....!")){
+                                AdhdTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -977,8 +1404,57 @@ public class ChatBotFragment extends Fragment {
                                     "a crowd that drinks more than your old friends?")){
                                 chooseOne.setText("YES ");
                                 chooseTwo.setText("NO ");
+                            }else if(chat.getMessage().equals("Are you willing to do something dangerous while taking drugs," +
+                                    " like operating a motor vehicle, or some kind of equipment that could cause bodily harm?")){
+                                chooseOne.setText("YES. ");
+                                chooseTwo.setText("NO. ");
                             }
+                            else if(chat.getMessage().equals("Are you not satisfying your partner?")){
+                                chooseOne.setText("NEVER.");
+                                chooseTwo.setText("RARELY.");
+                                chooseThree.setText("SOMETIMES.");
+                                chooseFour.setText("OFTEN.");
+                                chooseFive.setText("VERY OFTEN.");
 
+                            }else if(chat.getMessage().equals("HOW IS YOUR CHILD DOING WITH CIRCLE TIME?")){
+                                chooseOne.setText("HE PREFER CIRCLE TIME");
+                                chooseTwo.setText("HE DOESN'T PREFER CIRCLE TIME");
+
+                            }else if(chat.getMessage().equals("CAN YOUR CHILD FOLLOW ONE- OR TWO-STEP DIRECTIONS WITHOUT GETTING DISTRACTED?")){
+                                chooseOne.setText("HE CAN");
+                                chooseTwo.setText("HE GETS DISTRACTED");
+
+                            }else if(chat.getMessage().equals("DOES YOUR CHILD “DART” AT THE STORE OR AT PRESCHOOL?")){
+                                chooseOne.setText("YES, HE DOES");
+                                chooseTwo.setText("NO, HE DOESN'T");
+
+                            }else if(chat.getMessage().equals("DO YOU AVOID TAKING YOUR CHILD OUT IN PUBLIC, EVEN TO CASUAL, FAMILY-FRIENDLY PLACES?")){
+                                chooseOne.setText("YES, I DO");
+                                chooseTwo.setText("NO, I DON'T");
+
+                            }else if(chat.getMessage().equals("HAS YOUR CHILD HAD HER HEARING CHECKED?")){
+
+                                chooseOne.setText(" YES ");
+                                chooseTwo.setText(" NO ");
+
+                            }else if(chat.getMessage().equals("DO YOU THINK YOUR CHILD UNDERSTANDS YOUR WORDS WHEN YOU SPEAK TO HIM?")){
+                                chooseOne.setText("YES HE OBEYES ME");
+                                chooseTwo.setText("NO, HE DOESN'T UNDERSTAND ME");
+
+                            }else if(chat.getMessage().equals("COULD YOUR CHILD HAVE ANOTHER HEALTH CONDITION, LIKE SLEEP APNEA?")){
+                                chooseOne.setText("YES, HE COULD");
+                                chooseTwo.setText("NO, HE COULDN'T");
+                            }else if(chat.getMessage().equals("HAS YOUR CHILD UNDERGONE AN ACUTE STRESSOR?")){
+                                chooseOne.setText("YES, BUT MORE THAN 6 MONTHS AGO");
+                                chooseTwo.setText("NOT AT ALL");
+
+
+                            }else if(chat.getMessage().equals("DOES YOUR CHILD’S BEHAVIOUR DIFFER IN THE PRESENCE OF AUTHORITY (TEACHER , TRAINER)?")){
+                                chooseOne.setText(" YES. ");
+                                chooseTwo.setText(" NO. ");
+
+
+                            }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
@@ -1021,6 +1497,35 @@ public class ChatBotFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void AdhdTest() {
+        chooseThree.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseOne.setText("VERY LITTLE");
+        chooseTwo.setText("TOO MUCH CALLS");
+    }
+
+    private void psychosexualDysfunctionTest() {
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        setChooseVisable();
+        chooseOne.setText("NEVER");
+        chooseTwo.setText("RARELY");
+        chooseThree.setText("SOMETIMES");
+        chooseFour.setText("OFTEN");
+        chooseFive.setText("VERY OFTEN");
+    }
+
+    private void drugAddictiontest() {
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        setChooseVisable();
+        chooseOne.setText("YES.");
+        chooseTwo.setText("NO.");
 
     }
 
