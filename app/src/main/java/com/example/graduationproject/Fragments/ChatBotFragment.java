@@ -320,7 +320,7 @@ public class ChatBotFragment extends Fragment {
                     getBorderlinePersonalityDisorderQuestions();
                     chooseOne.setText("");
 
-                }else if(chooseOne.getText().toString().equals(" YES  .")){
+                }else if(chooseOne.getText().toString().equals(" YES   . ")){
                     sendUserMessage(chooseOne.getText().toString());
                     BorderlinePersonalityDisorderTestQuestionsCounter(1);
                     readBorderlinePersonalityDisorderDegree();
@@ -397,7 +397,7 @@ public class ChatBotFragment extends Fragment {
                     BorderlinePersonalityDisorderTestQuestionsCounter(0);
                     getBorderlinePersonalityDisorderQuestions();
 
-                }else if(chooseTwo.getText().toString().equals(" NO . ")){
+                }else if(chooseTwo.getText().toString().equals(" NO   . ")){
                     sendUserMessage(chooseTwo.getText().toString());
                     BorderlinePersonalityDisorderTestQuestionsCounter(0);
                     readBorderlinePersonalityDisorderDegree();
