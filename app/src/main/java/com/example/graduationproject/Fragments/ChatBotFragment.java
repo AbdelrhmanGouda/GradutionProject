@@ -909,6 +909,7 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/14)*100);
+        //
         reportRefrence.child("Borderline personality disorder (BPD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
