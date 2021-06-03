@@ -53,6 +53,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
         final TherapistsByNameData model = therapistsData.get(position);
         viewHolder.therapyName.setText(model.getName());
         viewHolder.clinicLocation.setText(model.getLocation());
+        viewHolder.sessionCost.setText("cost: "+model.getCost());
         Picasso.get().load(model.getImageUrl()).into(holder.therapyPhoto);
 
 
