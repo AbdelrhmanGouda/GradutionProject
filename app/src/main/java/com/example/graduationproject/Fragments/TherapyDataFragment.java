@@ -114,23 +114,7 @@ public class TherapyDataFragment extends Fragment {
 
 
                 getTimeName();
-                appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
-                        .child("appoints number").child(patientId).child("appointments");
-                appointmentsNumberRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        num = snapshot.getValue(String.class);
-                        if (num==null){
-                            appointmentsNumberRef.setValue("0");
-                            value=0;
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
                 builder.setTitle("Alert")
                         .setMessage("Are you sure for booking this time?")
                         .setCancelable(true)
@@ -147,8 +131,6 @@ public class TherapyDataFragment extends Fragment {
                                         String startTime = snapshot.child("startTime").getValue(String.class);
                                         if (startTime!=null){
                                             confirmBooking();
-                                            value = Integer.parseInt(num)+1;
-                                            appointmentsNumberRef.setValue(String.valueOf(value));
                                             Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
 
                                         }else {
@@ -342,6 +324,24 @@ public class TherapyDataFragment extends Fragment {
 
         if (dayName!=null){
 
+            appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
+                    .child("appoints number").child(patientId).child("appointments");
+
+            appointmentsNumberRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    num = snapshot.getValue(String.class);
+                    value = Integer.parseInt(num)+1;
+                    appointmentsNumberRef.setValue( String.valueOf(value));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
             patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
@@ -350,6 +350,8 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("requestStatus").setValue("confirmed");
             patientBookRef.child("state").setValue("upcoming");
 
+            patientBookRef = FirebaseDatabase.getInstance().getReference("appointment").child(patientId).push();
+            String id = patientBookRef.getKey();
             patientBookRef = FirebaseDatabase.getInstance().getReference("appointment").child(patientId).push();
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
@@ -360,6 +362,7 @@ public class TherapyDataFragment extends Fragment {
             patientBookRef.child("timeName").setValue(timeName);
             patientBookRef.child("patientId").setValue(patientId);
             patientBookRef.child("state").setValue("Upcoming");
+            patientBookRef.child("id").setValue(id);
 
             patientBookRef.child("startTime").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
