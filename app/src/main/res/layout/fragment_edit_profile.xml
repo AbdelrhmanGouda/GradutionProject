@@ -49,18 +49,18 @@
         android:hint="E-mail"
         android:paddingLeft="30dp"
         android:scrollbarSize="@dimen/_400sdp"
-
         android:inputType="textEmailAddress"/>
 
-    <EditText
-        android:id="@+id/edit_location"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"
         android:elevation="10dp"
-        android:hint="Location"
-        android:paddingLeft="30dp" />
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="20dp"
+        android:spinnerMode="dialog"
+        />
 
     <EditText
         android:id="@+id/edit_phone"

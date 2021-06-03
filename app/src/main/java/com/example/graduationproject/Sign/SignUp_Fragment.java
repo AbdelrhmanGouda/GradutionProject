@@ -62,7 +62,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static EditText fullName, emailId, mobileNumber, //location,
             password, confirmPassword;
     private static Spinner location;
-    private static Spinner dropdown;
+    //  private static Spinner dropdown;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
@@ -117,14 +117,14 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         login = view.findViewById(R.id.already_user);
 //		terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
         user_profile = view.findViewById(R.id.add_pic);
-        dropdown = view.findViewById(R.id.spinner);
+        //   dropdown = view.findViewById(R.id.spinner);
 
         //create a list of items for the spinner.
         String[] items = new String[]{"Choose Your Location", "Alexandria", "Aswan", "Asyut", "Beheira", "Beni Suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Ismailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohag", "South Sinai", "Suez"};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+        location.setAdapter(adapter);
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);

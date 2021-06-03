@@ -1,10 +1,7 @@
 package com.example.graduationproject.Fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.graduationproject.Adapter.MessageAdapter;
 import com.example.graduationproject.Data.Chat;
-import com.example.graduationproject.Data.FriendListData;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.graduationproject.Adapter.FriendListAdapter;
 import com.example.graduationproject.Adapter.FriendsMakegroupChossenAdapter;
 import com.example.graduationproject.Adapter.ShowAllFriendsMakeGroupAdapter;
 import com.example.graduationproject.Data.FriendListData;

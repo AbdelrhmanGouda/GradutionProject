@@ -1,6 +1,5 @@
 package com.example.graduationproject.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.graduationproject.Data.FriendListData;
-import com.example.graduationproject.Data.FriendRequestTabData;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

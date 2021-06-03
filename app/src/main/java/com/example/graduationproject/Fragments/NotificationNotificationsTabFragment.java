@@ -1,7 +1,10 @@
 package com.example.graduationproject.Fragments;
 
-import android.app.Notification;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,14 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.graduationproject.Adapter.FriendListAdapter;
 import com.example.graduationproject.Adapter.NotificationTabAdapter;
-import com.example.graduationproject.Data.FriendListData;
 import com.example.graduationproject.Data.NotificationTabData;
 import com.example.graduationproject.R;
 import com.google.firebase.auth.FirebaseAuth;

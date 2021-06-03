@@ -3,7 +3,6 @@ package com.example.graduationproject.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -12,27 +11,26 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.graduationproject.R;
-import com.example.graduationproject.Sign.CustomToast;
 import com.example.graduationproject.Sign.User;
 import com.example.graduationproject.Sign.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -56,15 +54,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static android.app.Activity.RESULT_OK;
-
 public class EditProfileFragment extends Fragment implements View.OnClickListener {
     private ImageView editImage;
-    private EditText editName, editEmail, editLocation, editPhone;
+    private EditText editName, editEmail, editPhone;
     private Button updateBtn;
     private TextView editPassword;
     private FloatingActionButton floatingEditImageBtn;
@@ -84,6 +79,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     StorageReference storageReference;
     User user = new User();
     String uid;
+    private static Spinner editLocation;
     /////////////////////////////////////
 
     @Override
@@ -96,13 +92,20 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         floatingEditImageBtn=view.findViewById(R.id.floating_edit_image_btn);
         editName =view.findViewById(R.id.edit_name);
         editEmail =view.findViewById(R.id.edit_email);
-        editLocation =view.findViewById(R.id.edit_location);
+        editLocation =view.findViewById(R.id.spinner);
         editPhone =view.findViewById(R.id.edit_phone);
         updateBtn =view.findViewById(R.id.edit_profile_update_btn);
         editPassword=view.findViewById(R.id.edit_password_txt);
         editPassword.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
         mAuth = auth;
+
+        //create a list of items for the spinner.
+        String[] items = new String[]{"Choose Your Location", "Alexandria", "Aswan", "Asyut", "Beheira", "Beni Suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Ismailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohag", "South Sinai", "Suez"};
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
+        editLocation.setAdapter(adapter);
 
 
         dataBase();
@@ -135,7 +138,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                             userPhone=snapshot.child("phone").getValue(String.class);
                             editName.setText(userName);
                             editEmail.setText(userEmail);
-                            editLocation.setText(userLocation);
+                            editLocation.setSelection(((ArrayAdapter<String>)editLocation.getAdapter()).getPosition(userLocation));
                             editPhone.setText(userPhone);
                             Picasso.get().load(userImage).into(editImage);
                         }
@@ -157,7 +160,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         final String id = firebaseUser.getUid();
         final String name = editName.getText().toString();
         final String email = editEmail.getText().toString();
-        final String location = editLocation.getText().toString();
+        final String location = editLocation.getSelectedItem().toString();
         final String phone = editPhone.getText().toString();
         Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         uploadImage();
@@ -192,7 +195,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         String getFullName = editName.getText().toString();
         String getEmailId = editEmail.getText().toString();
         String getMobileNumber = editPhone.getText().toString();
-        String getLocation = editLocation.getText().toString();
+        String getLocation = editLocation.getSelectedItem().toString();
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(getEmailId);
@@ -201,7 +204,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         if (getFullName.equals("") || getFullName.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getMobileNumber.equals("") || getMobileNumber.length() == 0
-                || getLocation.equals("") || getLocation.length() == 0
+                || getLocation.equals("Choose Your Location") || editLocation.getSelectedItemPosition() == 0
            ) {
             Toast.makeText(getContext(), "All fields are required.", Toast.LENGTH_SHORT).show();
         }
