@@ -48,6 +48,7 @@ public class TherapyDataFragment extends Fragment {
 
     String therapyId,therapyName,patientId,dayName,patientName,startTime,endTime,timeName,uri;
     String startTimeFinal,endTimeFinal;
+    String num ;
 
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef,patientImageRef,patientBookRef,
@@ -67,7 +68,7 @@ public class TherapyDataFragment extends Fragment {
     Calendar c = Calendar.getInstance();
 
      int year,month,day;
-
+    int value;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,8 +112,25 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                getTimeName();
 
+                getTimeName();
+                appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
+                        .child("appoints number").child(patientId).child("appointments");
+                appointmentsNumberRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        num = snapshot.getValue(String.class);
+                        if (num==null){
+                            appointmentsNumberRef.setValue("0");
+                            value=0;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 builder.setTitle("Alert")
                         .setMessage("Are you sure for booking this time?")
                         .setCancelable(true)
@@ -122,16 +140,15 @@ public class TherapyDataFragment extends Fragment {
 
                                 patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment")
                                         .child(patientId).child("startTime");
-                                appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
-                                       .child("appoints number").child(patientId);
+
                                 patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String startTime = snapshot.getValue(String.class);
                                         if (startTime!=null){
                                             confirmBooking();
-
-
+                                            value = Integer.parseInt(num)+1;
+                                            appointmentsNumberRef.setValue(String.valueOf(value));
                                             Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
 
                                         }else {
