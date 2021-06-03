@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.TherapyDataFragment"
-    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+    android:orientation="vertical"
+    android:gravity="center">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:src="@mipmap/ic_launcher"
-        android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:layout_centerHorizontal="true"
         android:id="@+id/therapy_photo"/>
 
     <TextView
@@ -22,10 +22,10 @@
         android:layout_below="@id/therapy_photo"
         android:textSize="@dimen/_18ssp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
         android:textStyle="bold"
-        android:text="DR.Ahmed Ali"
-        android:id="@+id/therapy_name"/>
+        android:text="Dr.Ahmed Ali"
+        android:id="@+id/therapy_name"
+        android:textColor="@color/black"/>
 
 
     <TextView
@@ -33,9 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/therapy_photo"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_170sdp"
+        android:textColor="@color/black"
         android:textSize="@dimen/_15ssp"
-        android:textStyle="bold"
         android:text="Cost : 200 EGP"
         android:id="@+id/therapy_session_cost"/>
 
@@ -43,32 +42,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_below="@id/therapy_session_cost"
-        android:textStyle="bold"
         android:textSize="@dimen/_15ssp"
         android:text="Location : El Bitash Street"
+        android:textColor="@color/black"
         android:id="@+id/therapy_clinic_location"/>
+
     <TextView
+        android:id="@+id/therapy_mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/therapy_session_cost"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_170sdp"
-        android:textStyle="bold"
-        android:textSize="@dimen/_15ssp"
-        android:id="@+id/therapy_mobile"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp" />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
         android:hint="select the day "
-        android:textSize="@dimen/_20ssp"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/_15sdp"
         android:textStyle="bold"
-        android:layout_below="@+id/therapy_mobile"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/blue"
         android:id="@+id/select_the_day"/>
 
 
@@ -76,7 +75,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/select_the_day"
         android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/appointments_recycler_view"
         android:orientation="horizontal">
@@ -85,17 +83,17 @@
 
 
     <Button
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
         android:background="@drawable/rounded_corner"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_15sdp"
-        android:layout_marginLeft="@dimen/_120sdp"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="20dp"
         android:text="Book"
-        android:backgroundTint="@color/color"
+        android:backgroundTint="@color/blue"
         android:id="@+id/therapy_book_button"
-        android:layout_below="@+id/appointments_recycler_view"/>
+        android:textColor="@color/white"
+        />
 
 
-</RelativeLayout>
+</LinearLayout>

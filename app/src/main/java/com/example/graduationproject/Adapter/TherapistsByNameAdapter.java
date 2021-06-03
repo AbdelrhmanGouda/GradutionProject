@@ -24,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByNameAdapter.ViewHolder>{
 
-    private Context mContext;
+    private final Context mContext;
     List<TherapistsByNameData> therapistsData;
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef, patientRefBook,doctorRef;
@@ -53,7 +53,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
         final TherapistsByNameData model = therapistsData.get(position);
         viewHolder.therapyName.setText(model.getName());
         viewHolder.clinicLocation.setText(model.getLocation());
-        viewHolder.sessionCost.setText("cost: "+model.getCost());
+        viewHolder.sessionCost.setText(model.getCost()+" EGP");
         Picasso.get().load(model.getImageUrl()).into(holder.therapyPhoto);
 
 
@@ -88,7 +88,7 @@ public class TherapistsByNameAdapter extends RecyclerView.Adapter <TherapistsByN
 
             therapyPhoto = itemView.findViewById(R.id.therapy_photo);
             therapyName = itemView.findViewById(R.id.therapy_name);
-            therapyDescription = itemView.findViewById(R.id.therapy_description);
+         // therapyDescription = itemView.findViewById(R.id.therapy_description);
             sessionCost = itemView.findViewById(R.id.therapy_session_cost);
             clinicLocation = itemView.findViewById(R.id.therapy_clinic_location);
 

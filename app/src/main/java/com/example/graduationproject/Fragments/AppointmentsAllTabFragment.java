@@ -35,7 +35,7 @@ public class AppointmentsAllTabFragment extends Fragment {
     private RecyclerView allTabRecyclerView;
     private List<AllTabData> allTabDataList;
     private AllTabAdapter allTabAdapter;
-    String conf, dayDate, time,state;
+    String  dayDate, time,state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +45,7 @@ public class AppointmentsAllTabFragment extends Fragment {
         allTabRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allTabRecyclerView.setHasFixedSize(true);
         allTabDataList = new ArrayList<>();
-        Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
+        Query query = FirebaseDatabase.getInstance().getReference().child("appointment")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -53,13 +53,12 @@ public class AppointmentsAllTabFragment extends Fragment {
                 if (snapshot != null) {
                     if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            conf = snapshot.child("requestStatus").getValue(String.class);
                             dayDate = snapshot.child("dayDate").getValue(String.class);
                             time = snapshot.child("endTime").getValue(String.class);
                             state=snapshot.child("state").getValue(String.class);
                         }
                         isConfirmed(dayDate, time,state);
-                        getData(conf);
+                        getData();
 
                     }
 
@@ -82,9 +81,8 @@ public class AppointmentsAllTabFragment extends Fragment {
         return view;
     }
 
-    private void getData(String confirm) {
-        if (confirm.equals("confirmed")) {
-            Query query1 = FirebaseDatabase.getInstance().getReference().child("request appointment")
+    private void getData() {
+            Query query1 = FirebaseDatabase.getInstance().getReference().child("appointment")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
             query1.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -114,23 +112,21 @@ public class AppointmentsAllTabFragment extends Fragment {
             });
         }
 
-    }
-
     private void isConfirmed(String oldDate, String oldTime ,String oldState) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String currentDate = new SimpleDateFormat("EEE dd,MM,yy", Locale.getDefault()).format(new Date());
         String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
-        if (!state.equals("Canceled")){
+        if (!oldState.equals("Canceled")){
             if (currentDate.compareTo(oldDate) < 0){
-                databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
+                databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
             }
             else if (currentDate.compareTo(oldDate) == 0) {
                     if (currentTime.compareTo(oldTime) < 0) {
-                        databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
+                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
                         Log.i(currentTime, "gggggggggggggggggggggggg");
                     } else {
-                        databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
+                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
                         Log.i(currentTime, "hhhhhhhhhhhhhhh");
                     }
                 }

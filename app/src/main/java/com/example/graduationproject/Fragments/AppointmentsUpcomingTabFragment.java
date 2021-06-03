@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduationproject.Adapter.AllTabAdapter;
 import com.example.graduationproject.Data.AllTabData;
 import com.example.graduationproject.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,7 +38,8 @@ public class AppointmentsUpcomingTabFragment extends Fragment {
         upcomingTabRecyclerView.setHasFixedSize(true);
         upcomingTabDataList =new ArrayList<>();
 
-        Query query = FirebaseDatabase.getInstance().getReference("request appointment").orderByChild("state").equalTo("Upcoming");
+        Query query = FirebaseDatabase.getInstance().getReference("appointment")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).orderByChild("state").equalTo("Upcoming");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

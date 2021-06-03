@@ -139,12 +139,12 @@ public class TherapyDataFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment")
-                                        .child(patientId).child("startTime");
+                                        .child(patientId);
 
                                 patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        String startTime = snapshot.getValue(String.class);
+                                        String startTime = snapshot.child("startTime").getValue(String.class);
                                         if (startTime!=null){
                                             confirmBooking();
                                             value = Integer.parseInt(num)+1;
@@ -199,7 +199,7 @@ public class TherapyDataFragment extends Fragment {
                 c.set(year, month, dayOfMonth);
                 String selectedDate = simpledateformat.format(c.getTime());
                 selectDayTextView.setText(selectedDate);
-                dayName = String.valueOf(selectedDate);
+                dayName = selectedDate;
                 Toast.makeText(getActivity(),dayName, Toast.LENGTH_SHORT).show();
                 getTime();
 
@@ -277,10 +277,10 @@ public class TherapyDataFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TherapistsByNameData model = snapshot.getValue(TherapistsByNameData.class);
                 therapyName = model.getName();
-                therapyNameTextView.setText("DR:"+model.getName());
-                clinicLocationTextView.setText("location:"+model.getLocation());
-                therapyMobileNumberTextView.setText("phone:"+model.getPhone());
-                therapySessionCostTextView.setText("cost:"+model.getCost());
+                therapyNameTextView.setText("Dr."+model.getName());
+                clinicLocationTextView.setText("Location : "+model.getLocation());
+                therapyMobileNumberTextView.setText("Phone : "+model.getPhone());
+                therapySessionCostTextView.setText("Cost : "+model.getCost() +" EGP");
                 Picasso.get().load(model.getImageUrl()).into(therapyProfileImage);
 
             }

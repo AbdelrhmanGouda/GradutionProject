@@ -43,7 +43,7 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
         holder.docName.setText(allTabDataList.get(position).getTherapyName());
         holder.endTime.setText(allTabDataList.get(position).getEndTime());
         holder.state.setText(allTabDataList.get(position).getState());
-        Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
+        Query query = FirebaseDatabase.getInstance().getReference().child("appointment")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -58,7 +58,7 @@ public class AllTabAdapter extends RecyclerView.Adapter<AllTabAdapter.AllTabAdap
                             holder.cancel.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Query query = FirebaseDatabase.getInstance().getReference().child("request appointment")
+                                    Query query = FirebaseDatabase.getInstance().getReference().child("appointment")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override

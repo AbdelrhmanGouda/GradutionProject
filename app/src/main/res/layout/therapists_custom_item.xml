@@ -1,65 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="15dp"
-    android:background="@color/lightGray"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:layout_marginTop="3dp"
+    android:layout_marginRight="10dp"
     android:layout_marginBottom="3dp"
-    >
+    android:background="@color/white"
+    app:cardCornerRadius="15dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:id="@+id/therapy_photo"
-        android:background="@drawable/doctor_icon"/>
+        android:layout_marginBottom="@dimen/_10sdp">
 
-    <TextView
-        android:id="@+id/therapy_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:text="DR.Ahmed Ali"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_23ssp"
-        android:textStyle="bold" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/therapy_photo"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:background="@drawable/doctor_icon" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_45sdp"
-        android:textSize="@dimen/_13ssp"
-        android:text="Specialist in Addiction Treatment"
-        android:id="@+id/therapy_description"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_70sdp"
-        android:textSize="@dimen/_13ssp"
-        android:text="Cost : 200 EGP"
-        android:id="@+id/therapy_session_cost"
-        android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_85sdp"
-        android:textSize="@dimen/_13ssp"
-        android:text="Location : El Bitash Street"
-        android:id="@+id/therapy_clinic_location"
-        android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/therapy_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ahmed Ali"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cost : "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:id="@+id/therapy_session_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200 EGP"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location : "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:id="@+id/therapy_clinic_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="El Bitash Street"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

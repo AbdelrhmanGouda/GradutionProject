@@ -26,11 +26,11 @@ public class
 
 
 ProfileFragment extends Fragment implements View.OnClickListener {
-    private TextView profileName,therapistNum,friendsNum,heartNum;
+    private TextView profileName,appointmentsNum,friendsNum,heartNum;
     private ImageView profilePic;
     private FloatingActionButton floatingEditProfileBtn;
     public FirebaseAuth auth ;
-    String userName,userImage,friendsNumber,heartNumber;
+    String userName,userImage,friendsNumber,heartNumber,appointmentsNumber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +38,7 @@ ProfileFragment extends Fragment implements View.OnClickListener {
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
         setHasOptionsMenu(false);
         profileName=view.findViewById(R.id.profile_name);
-        therapistNum=view.findViewById(R.id.profile_therapist_num);
+        appointmentsNum=view.findViewById(R.id.profile_therapist_num);
         friendsNum=view.findViewById(R.id.profile_friends_num);
         heartNum=view.findViewById(R.id.profile_heart_num);
         profilePic=view.findViewById(R.id.profile_image);
@@ -106,6 +106,27 @@ ProfileFragment extends Fragment implements View.OnClickListener {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()){
                             heartNumber=snapshot.child("Appreciate").getValue(String.class);
                             heartNum.setText(heartNumber);
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Query query3 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("appoints number").child(id);
+        query3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot!= null){
+                    if (snapshot.exists()&& snapshot.getChildrenCount()>0&&snapshot.getValue().toString().length()>0){
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                            appointmentsNumber=snapshot.child("appointments").getValue(String.class);
+                            appointmentsNum.setText(appointmentsNumber);
                         }
                     }
 

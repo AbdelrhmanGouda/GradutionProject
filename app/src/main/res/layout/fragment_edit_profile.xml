@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".Fragments.EditProfileFragment">
@@ -27,7 +28,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="0dp"
             android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"/>
+            android:layout_marginRight="0dp"
+            android:backgroundTint="@color/blue"
+            app:borderWidth="0dp"/>
     </RelativeLayout>
     <EditText
         android:id="@+id/edit_name"
@@ -78,7 +81,7 @@
         android:layout_height="wrap_content"
         android:text="Change Password"
         android:textSize="@dimen/_13sdp"
-        android:textColor="@color/color"
+        android:textColor="@color/blue"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_55sdp"/>
 
@@ -89,7 +92,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="200dp"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="@color/color"
+        android:backgroundTint="@color/blue"
         android:text="Update"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textColor="@color/white"/>
 </LinearLayout>

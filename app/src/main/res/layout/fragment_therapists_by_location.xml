@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.TherapistsByLocationFragment">
+    tools:context=".Fragments.TherapistsByLocationFragment"
+    android:background="@color/light_Gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

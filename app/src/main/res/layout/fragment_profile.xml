@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".Fragments.ProfileFragment">
@@ -46,9 +47,9 @@
 
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/doctor_icon"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/appointment"
                 android:layout_marginTop="@dimen/_10sdp"/>
         </LinearLayout>
 
@@ -69,7 +70,7 @@
                 android:textColor="@color/black"/>
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
+                android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/friends"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -92,7 +93,7 @@
                 android:textColor="@color/black"/>
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
+                android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/heart_icon"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -104,11 +105,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_edit_profile_btn"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_baseline_edit_24" />
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:backgroundTint="@color/blue"
+        app:borderWidth="0dp"
+        />
 
 </LinearLayout>
