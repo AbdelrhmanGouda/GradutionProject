@@ -80,7 +80,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     User user = new User();
     String uid;
     private static Spinner editLocation;
-    /////////////////////////////////////
+    //////////////////////////////////
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -232,14 +232,6 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         floatingEditImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePicture, 0);//zero can be replaced with any action code (called requestCode)
-
-                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
-                */
                 SelectProfilePic();
             }
         });

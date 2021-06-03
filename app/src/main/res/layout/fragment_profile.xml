@@ -104,12 +104,11 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_edit_profile_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_edit_24"
+        android:layout_height="50dp"
         android:layout_gravity="end|bottom"
+        android:layout_marginTop="@dimen/_50sdp"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_110sdp"
         android:layout_marginBottom="20dp"
-        />
+        android:src="@drawable/ic_baseline_edit_24" />
 
 </LinearLayout>

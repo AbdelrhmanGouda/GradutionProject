@@ -25,7 +25,6 @@ import com.squareup.picasso.Picasso;
 public class
 
 
-
 ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView profileName,therapistNum,friendsNum,heartNum;
     private ImageView profilePic;
