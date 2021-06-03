@@ -174,6 +174,9 @@ public class ChatBotFragment extends Fragment {
 
                     startTestWithFirstQuestion("Depression","How often have you been bothered by feeling down," +
                             "depressed, irritable, or hopeless over the last two weeks?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Borderline Personality Disorder test")){
+
+                    startTestWithFirstQuestion("Borderline Personality Disorder","Is the social and emotional relationship unstable ?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Anixiety test")){
                         startTestWithFirstQuestion("Anixiety","How often have you been bothered by feeling nervous," +
                                 " anxious or on edge over the last two weeks?");
@@ -311,6 +314,18 @@ public class ChatBotFragment extends Fragment {
                     chooseOne.setText("");
                     adhdfunctionQuestions();
 
+                }else if(chooseOne.getText().toString().equals("  .YES  ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
+                }else if(chooseOne.getText().toString().equals(" YES  . ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    adhdTestQuestionsCounter(1);
+                    chooseOne.setText("");
+                    adhdfunctionQuestions();
+
                 }
 
             }
@@ -376,6 +391,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     lcoholAddictionTestQuestionsCounter(0);
                     readAlcoholAddictionDegree();
+
+                }else if(chooseTwo.getText().toString().equals(" NO .")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    BorderlinePersonalityDisorderTestQuestionsCounter(0);
+                    getBorderlinePersonalityDisorderQuestions();
+
+                }else if(chooseTwo.getText().toString().equals(" . NO ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    BorderlinePersonalityDisorderTestQuestionsCounter(0);
+                    readBorderlinePersonalityDisorderDegree();
 
                 }else if(chooseTwo.getText().toString().equals("NO.")){
                     sendUserMessage(chooseTwo.getText().toString());
@@ -873,6 +898,100 @@ public class ChatBotFragment extends Fragment {
 
     }
 
+    private void BorderlinePersonalityDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter140", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree));
+        reportRefrence.child("Borderline Personality Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getBorderlinePersonalityDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber140", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Have you had a sense of overwhelming emptiness or feeling \"hollow\"?"
+                ,"Have you intentionally harmed or hurt yourself (for example, cutting yourself) or attempted suicide?"
+                ,"Have you been angry or irritable much of the time, or responded angrily to those close to you?"
+                ,"Have you often felt detached from reality, like things are imaginary?"
+                ,"Have you found that you mistrust those around you?"
+                ,"Have you suffered from extreme mood swings?"
+                ,"Have you engaged in two or more impulsive behaviors such as sudden emotional outbursts, compulsive eating, gambling more than you can afford, or bingeing alcohol?"
+                ,"Have you often felt that you lack a clear identity or you just aren't sure who you are inside?"
+                ,"Have you made frantic attempts to avoid feelings of abandonment (for example, repeated calls to a friend or partner to gain reassurance that they still care)?"
+                ,"Have your relationships with those nearest to you been damaged by quarrels or frequent breakups?"
+                ,"Is your level of anger often inappropriate, intense, and difficult to control?"
+                ,"Do you work hard to prevent those close to me from abandoning me, whether that feeling is real or illusory ?"
+                ,"Do your feelings and mood fluctuate quickly ?"
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=13) {
+            if (numberOfQuestion <= 12) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readBorderlinePersonalityDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Stress");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Stress test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 60% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 60% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
 
 
     private void lcoholAddictionTestQuestionsCounter(int count) {
@@ -1343,6 +1462,8 @@ public class ChatBotFragment extends Fragment {
                             }else if(chat.getMessage().equals("I'm listening")){
                                 textSend.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                                 setRelativeVisable();
+                            }else if(chat.getMessage().equals(recommendedTest("Borderline Personality Disorder"))){
+                                chooseForStartTest("Borderline Personality Disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Depression"))){
                                 chooseForStartTest("Depression");
                             }else if(chat.getMessage().equals(recommendedTest("Anixiety"))){
@@ -1362,6 +1483,10 @@ public class ChatBotFragment extends Fragment {
                                 chooseFour.setVisibility(View.VISIBLE);
                                 chooseThree.setVisibility(View.VISIBLE);
                                 depressionTest();
+                            } else if(chat.getMessage().equals("Starting Borderline Personality Disorder test ....!")){
+                                chooseFour.setVisibility(View.VISIBLE);
+                                chooseThree.setVisibility(View.VISIBLE);
+                                BorderlinePersonalityDisordertest();
                             }else if(chat.getMessage().equals("Starting Anixiety test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
                                 chooseThree.setVisibility(View.VISIBLE);
@@ -1455,6 +1580,12 @@ public class ChatBotFragment extends Fragment {
 
 
                             }
+                            else if(chat.getMessage().equals("Do your feelings and mood fluctuate quickly ?")){
+                                chooseOne.setText(" YES   . ");
+                                chooseTwo.setText(" NO   . ");
+
+
+                            }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
@@ -1506,6 +1637,13 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setVisibility(View.GONE);
         chooseOne.setText("VERY LITTLE");
         chooseTwo.setText("TOO MUCH CALLS");
+    }
+    private void BorderlinePersonalityDisordertest() {
+        chooseThree.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseOne.setText("YES . ");
+        chooseTwo.setText("NO . ");
     }
 
     private void psychosexualDysfunctionTest() {

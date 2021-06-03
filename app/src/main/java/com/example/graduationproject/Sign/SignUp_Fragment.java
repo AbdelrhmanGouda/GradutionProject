@@ -424,7 +424,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                             // Toast.makeText(getActivity(), "3 ", Toast.LENGTH_SHORT).show();
                             uploadImage();
 
-//hhj                            //Toast.makeText(getActivity(), generatedFilePathURI.toString() , Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), generatedFilePathURI.toString() , Toast.LENGTH_SHORT).show();
                             // Toast.makeText(getActivity(), "2 ", Toast.LENGTH_SHORT).show();
                             Log.d("urlll2", generatedFilePathURI.toString());
                             saveToRealFirebase(uid, name, email, phone, location, password);
