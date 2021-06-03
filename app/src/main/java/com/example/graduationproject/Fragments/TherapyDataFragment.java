@@ -51,7 +51,7 @@ public class TherapyDataFragment extends Fragment {
 
     FirebaseUser currentPatient;
     DatabaseReference patientNameRef,patientImageRef,patientBookRef,
-            therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime,allAppointmentDataRef;
+            therapyRef,timeBookRefForTherapy,savePatientRef,deleteSelectedTime,appointmentsNumberRef;
     Button book;
 
 
@@ -122,12 +122,15 @@ public class TherapyDataFragment extends Fragment {
 
                                 patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment")
                                         .child(patientId).child("startTime");
+                                appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
+                                       .child("appoints number").child(patientId);
                                 patientBookRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String startTime = snapshot.getValue(String.class);
                                         if (startTime!=null){
                                             confirmBooking();
+
 
                                             Toast.makeText(getActivity(), "book confirmed", Toast.LENGTH_SHORT).show();
 
@@ -260,6 +263,7 @@ public class TherapyDataFragment extends Fragment {
                 therapyNameTextView.setText("DR:"+model.getName());
                 clinicLocationTextView.setText("location:"+model.getLocation());
                 therapyMobileNumberTextView.setText("phone:"+model.getPhone());
+                therapySessionCostTextView.setText("cost:"+model.getCost());
                 Picasso.get().load(model.getImageUrl()).into(therapyProfileImage);
 
             }
