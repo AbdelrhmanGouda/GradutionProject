@@ -174,9 +174,9 @@ public class ChatBotFragment extends Fragment {
 
                     startTestWithFirstQuestion("Depression","How often have you been bothered by feeling down," +
                             "depressed, irritable, or hopeless over the last two weeks?");
-                }else if(chooseOne.getText().toString().equals("Ok let's do Borderline Personality Disorder test")){
+                }else if(chooseOne.getText().toString().equals("Ok let's do Borderline personality disorder (BPD) test")){
 
-                    startTestWithFirstQuestion("Borderline Personality Disorder","Is the social and emotional relationship unstable ?");
+                    startTestWithFirstQuestion("Borderline personality disorder (BPD)","Is the social and emotional relationship unstable ?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Anixiety test")){
                         startTestWithFirstQuestion("Anixiety","How often have you been bothered by feeling nervous," +
                                 " anxious or on edge over the last two weeks?");
@@ -614,7 +614,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdfunctionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber132", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber133", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"HOW IS YOUR CHILD DOING WITH CIRCLE TIME?"
@@ -646,7 +646,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter132", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter133", Context.MODE_PRIVATE);
         int adhdCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -908,8 +908,8 @@ public class ChatBotFragment extends Fragment {
         }
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
-        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree));
-        reportRefrence.child("Borderline Personality Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/14)*100);
+        reportRefrence.child("Borderline personality disorder (BPD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -950,7 +950,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readBorderlinePersonalityDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Stress");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Borderline personality disorder (BPD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -965,8 +965,8 @@ public class ChatBotFragment extends Fragment {
 
 
 
-                        } sendBotMessage("Your total degree from Stress test is \n"+degree+"%");
-                        if(Double.parseDouble(degree)<(double) 40){
+                        } sendBotMessage("Your total degree from Borderline personality disorder (BPD) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 60){
                             sendBotMessage("Your degree is lower than 60% ,\n" +
                                     " I think you're a normal person");
 
@@ -1462,8 +1462,8 @@ public class ChatBotFragment extends Fragment {
                             }else if(chat.getMessage().equals("I'm listening")){
                                 textSend.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
                                 setRelativeVisable();
-                            }else if(chat.getMessage().equals(recommendedTest("Borderline Personality Disorder"))){
-                                chooseForStartTest("Borderline Personality Disorder");
+                            }else if(chat.getMessage().equals(recommendedTest("Borderline personality disorder (BPD)"))){
+                                chooseForStartTest("Borderline personality disorder (BPD)");
                             }else if(chat.getMessage().equals(recommendedTest("Depression"))){
                                 chooseForStartTest("Depression");
                             }else if(chat.getMessage().equals(recommendedTest("Anixiety"))){
@@ -1483,7 +1483,7 @@ public class ChatBotFragment extends Fragment {
                                 chooseFour.setVisibility(View.VISIBLE);
                                 chooseThree.setVisibility(View.VISIBLE);
                                 depressionTest();
-                            } else if(chat.getMessage().equals("Starting Borderline Personality Disorder test ....!")){
+                            } else if(chat.getMessage().equals("Starting Borderline personality disorder (BPD) test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
                                 chooseThree.setVisibility(View.VISIBLE);
                                 BorderlinePersonalityDisordertest();
