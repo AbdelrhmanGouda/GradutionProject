@@ -664,13 +664,13 @@ public class ChatBotFragment extends Fragment {
                     readSocialAnxietyDisorderDegree();
                 }else if(chooseTwo.getText().toString().equals("\n Rarely \n")){
                     sendUserMessage(chooseTwo.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(1);
                     getEmpathyDeficitDisorderQuestions();
 
 
                 }else if(chooseTwo.getText().toString().equals("\n Rarely.\n")) {
                     sendUserMessage(chooseTwo.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(1);
                     readEmpathyDeficitDisorderDegree();
 
                 }
@@ -792,13 +792,13 @@ public class ChatBotFragment extends Fragment {
 
                 }else if(chooseThree.getText().toString().equals("\n Sometimes \n")){
                     sendUserMessage(chooseThree.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(2);
                     getEmpathyDeficitDisorderQuestions();
 
 
                 }else if(chooseThree.getText().toString().equals("\n Sometimes.\n")) {
                     sendUserMessage(chooseThree.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(2);
                     readEmpathyDeficitDisorderDegree();
 
                 }
@@ -899,13 +899,13 @@ public class ChatBotFragment extends Fragment {
 
                 }else if(chooseFour.getText().toString().equals("\n Often \n")){
                     sendUserMessage(chooseFour.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(3);
                     getEmpathyDeficitDisorderQuestions();
 
 
                 }else if(chooseFour.getText().toString().equals("\n Often.\n")) {
                     sendUserMessage(chooseFour.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(3);
                     readEmpathyDeficitDisorderDegree();
 
                 }
@@ -967,24 +967,24 @@ public class ChatBotFragment extends Fragment {
 
                 }
                 else if(chooseFive.getText().toString().equals("\nVery Often\n")){
-                    sendUserMessage(chooseFour.getText().toString());
+                    sendUserMessage(chooseFive.getText().toString());
                     socialAnxietyDisorderTestQuestionsCounter(4);
                     getSocialAnxietyDisorderQuestions();
 
                 }else if(chooseFive.getText().toString().equals("\nVery Often.\n")){
-                    sendUserMessage(chooseFour.getText().toString());
+                    sendUserMessage(chooseFive.getText().toString());
                     socialAnxietyDisorderTestQuestionsCounter(4);
                     readSocialAnxietyDisorderDegree();
 
                 }else if(chooseFive.getText().toString().equals("\n Very often \n")){
                     sendUserMessage(chooseFive.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(4);
                     getEmpathyDeficitDisorderQuestions();
 
 
                 }else if(chooseFive.getText().toString().equals("\n Very often.\n")) {
                     sendUserMessage(chooseFive.getText().toString());
-                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    empathyDeficitDisorderTestQuestionsCounter(4);
                     readEmpathyDeficitDisorderDegree();
 
                 }
