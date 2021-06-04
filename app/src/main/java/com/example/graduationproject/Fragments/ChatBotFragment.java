@@ -207,6 +207,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Autism","is old-fashioned or precocious?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Pseudobulbar Affect (PBA) test")){
                     startTestWithFirstQuestion("Pseudobulbar Affect (PBA)","There are times when I feel fine one minute, and then I’ll become tearful the next over something small or for no reason at all");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Social Anxiety Disorder test")){
+                    startTestWithFirstQuestion("Social Anxiety Disorder","Do you feel anxious or panicky before social situations?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -373,13 +375,25 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     psychosisTestQuestionsCounter(1);
                     getPsychosisQuestions();
-                    chooseOne.setText("");
+
 
                 }else if(chooseOne.getText().toString().equals(" Agree")){
                     sendUserMessage(chooseOne.getText().toString());
                     psychosisTestQuestionsCounter(1);
                     readPsychosisDegree();
-                    chooseOne.setText("");
+
+
+                }else if(chooseOne.getText().toString().equals("\nNever\n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(0);
+                    getSocialAnxietyDisorderQuestions();
+
+
+                }else if(chooseOne.getText().toString().equals("\nNever.\n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(0);
+                    readSocialAnxietyDisorderDegree();
+
 
                 }else if(chooseOne.getText().toString().equals("\n No \n")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -625,6 +639,18 @@ public class ChatBotFragment extends Fragment {
                     readNarcissisticPersonalityDisorderDegree();
 
                 }
+                else if(chooseTwo.getText().toString().equals("\nRarely\n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(1);
+                    getSocialAnxietyDisorderQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("\nRarely.\n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(1);
+                    readSocialAnxietyDisorderDegree();
+
+
+                }
 
 
             }
@@ -729,6 +755,19 @@ public class ChatBotFragment extends Fragment {
                     readNarcissisticPersonalityDisorderDegree();
 
                 }
+                else if(chooseThree.getText().toString().equals("\nSometimes\n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(2);
+                    getSocialAnxietyDisorderQuestions();
+
+
+                }else if(chooseThree.getText().toString().equals("\nSometimes.\n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(2);
+                    readSocialAnxietyDisorderDegree();
+
+
+                }
 
             }
         });
@@ -812,6 +851,19 @@ public class ChatBotFragment extends Fragment {
                     readNarcissisticPersonalityDisorderDegree();
 
                 }
+                else if(chooseFour.getText().toString().equals("\nOften\n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(3);
+                    getSocialAnxietyDisorderQuestions();
+
+
+                }else if(chooseFour.getText().toString().equals("\nOften.\n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(3);
+                    readSocialAnxietyDisorderDegree();
+
+
+                }
             }
 
         });
@@ -867,6 +919,17 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     NarcissisticPersonalityDisorderTestQuestionsCounter(4);
                     readNarcissisticPersonalityDisorderDegree();
+
+                }
+                else if(chooseFive.getText().toString().equals("\nVery Often\n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(4);
+                    getSocialAnxietyDisorderQuestions();
+
+                }else if(chooseFive.getText().toString().equals("\nVery Often.\n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    socialAnxietyDisorderTestQuestionsCounter(4);
+                    readSocialAnxietyDisorderDegree();
 
                 }
             }
@@ -2209,6 +2272,104 @@ public class ChatBotFragment extends Fragment {
         });
 
     }
+
+    private void socialAnxietyDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter210", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }else if(count==2){
+            alcoholAddictionCounterDegree+=2;
+        }else if (count==3){
+            alcoholAddictionCounterDegree+=3;
+        }else if (count==4){
+            alcoholAddictionCounterDegree+=4;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
+        reportRefrence.child("Social Anxiety Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getSocialAnxietyDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber210", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you fear that you will be negatively evaluated by others when in social situations?"
+                ,"Do you avoid social situations because of fear or anxiety?"
+                ,"Do you avoid situations, or feel uncomfortable, where you do not know people well?"
+                ,"Do you panic when you have to do something in front of others, whether speaking up in a meeting or presenting to a group?"
+                ,"Is it hard to imagine that others are judging you as anxious, weak, crazy, stupid, boring, intimidating, dirty, or unlikeable when you are in a group setting?"
+                ,"When in social situations, do you worry that people will notice you are experiencing anxiety symptoms such as blushing, trembling, sweating, stumbling over your words, or staring?"
+                ,"Are you extremely conscious of your actions when in social settings because you fear they might offend someone or you could be rejected?"
+                ,"Do you experience significant worrying about being in certain social situations which is out of proportion to the threat posed by the social situation?"
+                ,"Are your work life, home life, social life, and/or relationships affected by your anxiety?"
+
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 9) {
+            if (numberOfQuestion <= 8) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readSocialAnxietyDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Social Anxiety Disorder");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Social Anxiety Disorder test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -2417,8 +2578,11 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Attention-Deficit Hyperactivity Disorder (ADHD)");
                             }else if(chat.getMessage().equals(recommendedTest("Bipolar Disorder"))){
                                 chooseForStartTest("Bipolar Disorder");
+                                ////////farid
                             }else if(chat.getMessage().equals(recommendedTest("Psychosis"))){
                                 chooseForStartTest("Psychosis");
+                            }else if(chat.getMessage().equals(recommendedTest("Social Anxiety Disorder"))){
+                                chooseForStartTest("Social Anxiety Disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Autism"))){
                                 chooseForStartTest("Autism");
                             }else if(chat.getMessage().equals(recommendedTest("Pseudobulbar Affect (PBA)"))){
@@ -2458,6 +2622,7 @@ public class ChatBotFragment extends Fragment {
                             }
                             else if(chat.getMessage().equals("Starting Psychosis test ....!")){
                                 psychosisTest();
+
                             }else if(chat.getMessage().equals("Starting Autism test ....!")){
                                 autismTest();
                             }else if(chat.getMessage().equals("Starting Pseudobulbar Affect (PBA) test ....!")){
@@ -2466,6 +2631,9 @@ public class ChatBotFragment extends Fragment {
                                 ManiaTest();
                             }else if(chat.getMessage().equals("Starting Narcissistic Personality Disorder test ....!")){
                                 NarcissisticPersonalityDisorderTest();
+                            }
+                            else if(chat.getMessage().equals("Starting Social Anxiety Disorder test ....!")){
+                                socialAnxietyDisorderTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -2580,6 +2748,13 @@ public class ChatBotFragment extends Fragment {
                                 chooseThree.setText(" .Sometimes");
                                 chooseFour.setText(" .Often");
                                 chooseFive.setText(" .Very Often");
+
+                            }else if(chat.getMessage().equals("Are your work life, home life, social life, and/or relationships affected by your anxiety?")){
+                                chooseOne.setText("\nNever.\n");
+                                chooseTwo.setText("\nRarely.\n");
+                                chooseThree.setText("\nSometimes.\n");
+                                chooseFour.setText("\nOften.\n");
+                                chooseFive.setText("\nVery Often.\n");
 
                             }
                             else if(chat.getMessage().equals("How likely are you to assume that others are jealous of your talents and success?")){
@@ -2764,6 +2939,15 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
+    }
+///// farid
+    private void socialAnxietyDisorderTest(){
+        setChooseVisable();
+        chooseOne.setText("\nNever\n");
+        chooseTwo.setText("\nRarely \n");
+        chooseThree.setText("\nSometimes\n");
+        chooseFour.setText("\nOften\n");
+        chooseFive.setText("\nVery often\n");
     }
 
     private String recommendedTest(String illness) {
