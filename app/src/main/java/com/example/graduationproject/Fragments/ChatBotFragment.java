@@ -194,7 +194,7 @@ public class ChatBotFragment extends Fragment {
                 }else if(chooseOne.getText().toString().equals("Ok let's do low self esteem test")){
                     startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Bipolar Disorder test")){
-                    startTestWithFirstQuestion("Bipolar Disorder","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
+                    startTestWithFirstQuestion("Bipolar Disorder","You experienced feelings of anguish or desperation:");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -1154,7 +1154,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void BipolarDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter160", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter162", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -1172,11 +1172,10 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getBipolarDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber160", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber162", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
-        String [] depressionTest={"You experienced feelings of anguish or desperation:"
-                ,"You were much more socially active than normal, and at all hours:"
+        String [] depressionTest={"You were much more socially active than normal, and at all hours:"
                 ,"Your behavior was unsafe or risky in a way that wasn't normal for you:"
                 ,"You felt exhausted or unusually fatigued:"
                 ,"You got angry and you were aggressive or violent towards others:"
@@ -1865,7 +1864,10 @@ public class ChatBotFragment extends Fragment {
                                 AdhdTest();
                             }else if(chat.getMessage().equals("Starting low self esteem test ....!")){
                                 lowselfesteemTest();
-                            }else if(chat.getMessage().equals("Starting Psychosis test ....!")){
+                            }else if(chat.getMessage().equals("Starting Bipolar Disorder test ....!")){
+                                BipolarDisorderTest();
+                            }
+                            else if(chat.getMessage().equals("Starting Psychosis test ....!")){
                                 psychosisTest();
                         }
 
