@@ -22,7 +22,7 @@
             android:padding="@dimen/_8sdp"
             android:textColor="#fff"
             android:id="@+id/show_message"
-            android:textSize="@dimen/_18sdp"
+            android:textSize="@dimen/_15sdp"
             android:background="@drawable/background_right"
             ></TextView>
 
