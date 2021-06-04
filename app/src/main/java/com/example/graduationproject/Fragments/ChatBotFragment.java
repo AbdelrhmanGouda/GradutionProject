@@ -195,6 +195,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Bipolar Disorder test")){
                     startTestWithFirstQuestion("Bipolar Disorder","You experienced feelings of anguish or desperation:");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Mania test")){
+                    startTestWithFirstQuestion("Mania","Do you ever experience a persistent elevated or irritable mood for more than a week?");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -397,6 +399,16 @@ public class ChatBotFragment extends Fragment {
                     pbaTestQuestionsCounter(1);
                     readPBADegree();
 
+                }else if(chooseOne.getText().toString().equals(". Never")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    ManiaTestQuestionsCounter(0);
+                    getManiaQuestions();
+
+                }else if(chooseOne.getText().toString().equals(" .Never")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    ManiaTestQuestionsCounter(0);
+                    readManiaDegree();
+
                 }
 
 
@@ -580,6 +592,16 @@ public class ChatBotFragment extends Fragment {
                     pbaTestQuestionsCounter(2);
                     readPBADegree();
 
+                }else if(chooseTwo.getText().toString().equals(". Rarely")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    ManiaTestQuestionsCounter(1);
+                    getManiaQuestions();
+
+                }else if(chooseTwo.getText().toString().equals(" .Rarely")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    ManiaTestQuestionsCounter(1);
+                    readManiaDegree();
+
                 }
 
 
@@ -664,6 +686,16 @@ public class ChatBotFragment extends Fragment {
                     pbaTestQuestionsCounter(3);
                     readPBADegree();
 
+                }else if(chooseThree.getText().toString().equals(". Sometimes")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    ManiaTestQuestionsCounter(2);
+                    getManiaQuestions();
+
+                }else if(chooseThree.getText().toString().equals(" .Sometimes")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    ManiaTestQuestionsCounter(2);
+                    readManiaDegree();
+
                 }
 
             }
@@ -727,6 +759,16 @@ public class ChatBotFragment extends Fragment {
                     pbaTestQuestionsCounter(4);
                     readPBADegree();
 
+                }else if(chooseFour.getText().toString().equals(". Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    ManiaTestQuestionsCounter(3);
+                    getManiaQuestions();
+
+                }else if(chooseFour.getText().toString().equals(" .Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    ManiaTestQuestionsCounter(3);
+                    readManiaDegree();
+
                 }
             }
 
@@ -763,6 +805,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     pbaTestQuestionsCounter(5);
                     readPBADegree();
+
+                }else if(chooseFour.getText().toString().equals(". Very Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    ManiaTestQuestionsCounter(4);
+                    getManiaQuestions();
+
+                }else if(chooseFour.getText().toString().equals(" .Very Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    ManiaTestQuestionsCounter(4);
+                    readManiaDegree();
 
                 }
             }
@@ -864,6 +916,102 @@ public class ChatBotFragment extends Fragment {
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
     }
+
+
+
+    private void readManiaDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Mania");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Mania test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getManiaQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber170", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you ever experience persistently increased goal-directed activity for more than a week?"
+                ,"Do you ever experience inflated self-esteem or grandiose thoughts about yourself?"
+                ,"Do you ever feel little need for sleep, feeling rested after only a few hours?"
+                ,"Do you ever find yourself more talkative than usual?"
+                ,"Do you experience racing thoughts or a flight of ideas?"
+                ," Do you notice (or others comment) that you are easily distracted?"
+                ,"Do you engage excessively in risky behaviors, sexually or financially?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=7) {
+            if (numberOfAdhdQuestion <= 6) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void ManiaTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter170", Context.MODE_PRIVATE);
+        int pbaCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){}
+        else if(count==1){
+            pbaCounterDegree++;
+        }else if(count==2){
+            pbaCounterDegree+=2;
+        }else if(count==3){
+            pbaCounterDegree+=3;
+        }else if(count==4){
+            pbaCounterDegree+=4;
+        }
+        editor.putInt("counter",pbaCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/24)*100);
+        reportRefrence.child("Mania").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+    }
+
 
     private void readAutismDegree() {
         Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Autism");
@@ -2127,6 +2275,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Autism");
                             }else if(chat.getMessage().equals(recommendedTest("Pseudobulbar Affect (PBA)"))){
                                 chooseForStartTest("Pseudobulbar Affect (PBA)");
+                            }else if(chat.getMessage().equals(recommendedTest("Mania"))){
+                                chooseForStartTest("Mania");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -2164,6 +2314,8 @@ public class ChatBotFragment extends Fragment {
                                 autismTest();
                             }else if(chat.getMessage().equals("Starting Pseudobulbar Affect (PBA) test ....!")){
                                 pbaTest();
+                            }else if(chat.getMessage().equals("Starting Mania test ....!")){
+                                ManiaTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -2272,6 +2424,13 @@ public class ChatBotFragment extends Fragment {
                                 chooseFour.setText("Applies frequently.");
                                 chooseFive.setText("Applies most of the time.");
 
+                            }else if(chat.getMessage().equals("Do you engage excessively in risky behaviors, sexually or financially?")){
+                                chooseOne.setText(" .Never");
+                                chooseTwo.setText(" .Rarely");
+                                chooseThree.setText(" .Sometimes");
+                                chooseFour.setText(" .Often");
+                                chooseFive.setText(" .Very Often");
+
                             }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
@@ -2348,6 +2507,13 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setVisibility(View.GONE);
         chooseOne.setText("VERY LITTLE");
         chooseTwo.setText("TOO MUCH CALLS");
+    }
+    private void ManiaTest() {
+        chooseThree.setText(". Very Often");
+        chooseFive.setText(". Often");
+        chooseFour.setText(". Sometimes");
+        chooseOne.setText(". Never");
+        chooseTwo.setText(". Rarely");
     }
     private void  lowselfesteemTest() {
         chooseThree.setVisibility(View.GONE);
@@ -2511,8 +2677,7 @@ public class ChatBotFragment extends Fragment {
     }
 //Abdo Gouda
     //sasasasa
-//kkkkkkkkkk
-//    kkkkkkkk
+//jjjjjjjjjj
     //jskdj
     //21212
 }
