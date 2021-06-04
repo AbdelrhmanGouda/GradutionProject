@@ -1,6 +1,7 @@
 package com.example.graduationproject.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,6 +137,10 @@ public class ChatMessageFragment extends Fragment {
                             Picasso.get().load(image).into(circleImageView);
 
                             readMessages(firebaseUser.getUid(), id,image);
+                            Log.i(firebaseUser.getUid(), "aaaaaaaaaaaaaaaaa");
+                            Log.i(id, "aaaaaaaaaaaaaaaaa");
+                            Log.i(image, "aaaaaaaaaaaaaaaaa");
+
 
                         }
 
