@@ -982,7 +982,7 @@ public class ChatBotFragment extends Fragment {
                     getEmpathyDeficitDisorderQuestions();
 
 
-                }else if(chooseFive.getText().toString().equals("\n Very often.\n")) {
+                }else if(chooseFive.getText().toString().equals("\n Very Often.\n")) {
                     sendUserMessage(chooseFive.getText().toString());
                     empathyDeficitDisorderTestQuestionsCounter(4);
                     readEmpathyDeficitDisorderDegree();
@@ -2427,7 +2427,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void empathyDeficitDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter220", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter221", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2451,7 +2451,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getEmpathyDeficitDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber220", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber221", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"I attempt to change the topic of conversation when a family member or friend wants to talk about what’s troubling them?"
