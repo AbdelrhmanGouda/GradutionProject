@@ -2505,11 +2505,12 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setText("Nearly everyday");
     }
     private void ayhaga(){
-
+        Toast.makeText(getActivity(), "hahha", Toast.LENGTH_SHORT).show();
     }
 //Abdo Gouda
     //sasasasa
 //kkkkkkkkkk
 //    kkkkkkkk
     //jskdj
+    //21212
 }
