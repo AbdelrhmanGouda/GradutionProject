@@ -360,6 +360,21 @@ public class ChatBotFragment extends Fragment {
                     chooseOne.setText("");
 
                 }
+                ////// farid
+                else if(chooseOne.getText().toString().equals("Agree")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    psychosisTestQuestionsCounter(1);
+                    getPsychosisQuestions();
+                    chooseOne.setText("");
+
+                }else if(chooseOne.getText().toString().equals(" Agree")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    psychosisTestQuestionsCounter(1);
+                    readPsychosisDegree();
+                    chooseOne.setText("");
+
+                }
+
 
             }
         });
@@ -511,6 +526,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     BipolarDisorderTestQuestionsCounter(0);
                     readBipolarDisorderDegree();
+                }
+                ///////farid
+                else if(chooseTwo.getText().toString().equals("Disagree")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    psychosisTestQuestionsCounter(0);
+                    getPsychosisQuestions();
+                }else if(chooseTwo.getText().toString().equals(" Disagree")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    psychosisTestQuestionsCounter(0);
+                    readPsychosisDegree();
                 }
 
 
@@ -1512,6 +1537,99 @@ public class ChatBotFragment extends Fragment {
 
 
     }
+
+    // farid////////////////////////////////
+    private void psychosisTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter200", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/17)*100);
+        reportRefrence.child("Psychosis").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getPsychosisQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber200", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"I sometimes feel that someone or something else controls my thoughts"
+                ,"I frequently feel like other people are plotting against me"
+                ,"I feel that my body is different or behaves in a different way to how it used to"
+                ,"I have lost interest in things I used to like"
+                ,"I have seen someone's face change in front of me, or my own face has changed in the mirror"
+                ,"Meeting new people makes me very nervous or stressed"
+                ,"I am not always sure if something has actually happened, or whether I imagined it"
+                ,"I sometimes spot hidden messages in adverts on television, in shop displays, or in how things are arranged"
+                ,"I get the feeling that I have lived through the present situation before, like things are repeating"
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 9) {
+            if (numberOfQuestion <= 8) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readPsychosisDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Psychosis");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Psychosis test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 60% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 60% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+///////////////////////////////////////////////////////////////////////////
+
+
 
 
     private void setChooseVisable() {
