@@ -45,8 +45,9 @@ public class AppointmentsUpcomingTabFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot != null) {
                     if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
+                        upcomingTabDataList.clear();
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                         upcomingTabDataList.clear();
+
                             AllTabData allTabData = snapshot1.getValue(AllTabData.class);
                             upcomingTabDataList.add(allTabData);
                         }

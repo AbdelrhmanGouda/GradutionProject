@@ -129,7 +129,7 @@ public class FriendListFragment extends Fragment {
 
     private void FriendsList() {
 
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsList")
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("Friends").child("FriendsList")
                 .child(firebaseUser.getUid());
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

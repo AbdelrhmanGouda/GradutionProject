@@ -42,12 +42,17 @@
                     android:text="8:00 AM"
                     android:textColor="@color/black"
                     android:textSize="18dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  To  "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"/>
 
                 <TextView
                     android:id="@+id/all_tab_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
                     android:text="9:00 AM"
                     android:textColor="@color/black"
                     android:textSize="18dp" />
@@ -88,8 +93,9 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:background="@drawable/rounded_corner"
-            android:backgroundTint="@color/color"
+            android:backgroundTint="@color/blue"
             android:text="Cancel"
+            android:textColor="@color/white"
             android:textSize="15dp" />
     </LinearLayout>
 

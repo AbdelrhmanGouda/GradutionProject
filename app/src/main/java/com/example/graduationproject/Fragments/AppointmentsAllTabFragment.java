@@ -2,6 +2,7 @@ package com.example.graduationproject.Fragments;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,17 +26,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Calendar;
 
 public class AppointmentsAllTabFragment extends Fragment {
     private RecyclerView allTabRecyclerView;
     private List<AllTabData> allTabDataList;
     private AllTabAdapter allTabAdapter;
-    String  dayDate, time,state;
+    String  dayDate, time,state,id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +49,8 @@ public class AppointmentsAllTabFragment extends Fragment {
         allTabRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allTabRecyclerView.setHasFixedSize(true);
         allTabDataList = new ArrayList<>();
-        Query query = FirebaseDatabase.getInstance().getReference().child("appointment")
+
+       Query query = FirebaseDatabase.getInstance().getReference().child("appointment")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -53,11 +58,12 @@ public class AppointmentsAllTabFragment extends Fragment {
                 if (snapshot != null) {
                     if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0) {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            dayDate = snapshot.child("dayDate").getValue(String.class);
-                            time = snapshot.child("endTime").getValue(String.class);
-                            state=snapshot.child("state").getValue(String.class);
+                            dayDate = snapshot1.child("dayDate").getValue(String.class);
+                            time = snapshot1.child("endTime").getValue(String.class);
+                            state=snapshot1.child("state").getValue(String.class);
+                            id=snapshot1.child("id").getValue(String.class);
                         }
-                        isConfirmed(dayDate, time,state);
+                     isConfirmed(dayDate, time,state,id);
                         getData();
 
                     }
@@ -71,13 +77,6 @@ public class AppointmentsAllTabFragment extends Fragment {
 
             }
         });
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        if (Build.VERSION.SDK_INT >= 26) {
-            ft.setReorderingAllowed(false);
-        }
-        ft.detach(this).attach(this).commit();
-
         return view;
     }
 
@@ -87,13 +86,12 @@ public class AppointmentsAllTabFragment extends Fragment {
             query1.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()) {
+                    allTabDataList.clear();
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0 && snapshot.getValue().toString().length() > 0){
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            allTabDataList.clear();
-                            AllTabData allTabData = snapshot.getValue(AllTabData.class);
-                            allTabDataList.add(allTabData);
 
+                            AllTabData allTabData = snapshot1.getValue(AllTabData.class);
+                            allTabDataList.add(allTabData);
                         }
                         allTabAdapter = new AllTabAdapter(allTabDataList, getContext());
                         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), new LinearLayoutManager(getContext()).getOrientation());
@@ -112,27 +110,30 @@ public class AppointmentsAllTabFragment extends Fragment {
             });
         }
 
-    private void isConfirmed(String oldDate, String oldTime ,String oldState) {
 
+    private void isConfirmed(String oldDate, String oldTime ,String oldState,String id) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        String currentDate = new SimpleDateFormat("EEE dd,MM,yy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+        Time dtNow = new Time();
+        dtNow.setToNow();
+        int hours = dtNow.hour;
+        String currentTime = dtNow.format("%H:%M");
+      String currentDate = dtNow.format("%d,%m,%y");
         if (!oldState.equals("Canceled")){
-            if (currentDate.compareTo(oldDate) < 0){
-                databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
+            if (currentDate.compareTo(oldDate.substring(4)) < 0){
+                databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id).child("state").setValue("Upcoming");
             }
-            else if (currentDate.compareTo(oldDate) == 0) {
+            else if (currentDate.compareTo(oldDate.substring(4)) == 0) {
                     if (currentTime.compareTo(oldTime) < 0) {
-                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Upcoming");
-                        Log.i(currentTime, "gggggggggggggggggggggggg");
+                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id).child("state").setValue("Upcoming");
                     } else {
-                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
-                        Log.i(currentTime, "hhhhhhhhhhhhhhh");
+                        databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id).child("state").setValue("Over");
                     }
                 }
            else  {
-                databaseReference.child("request appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("state").setValue("Over");
-            }
+
+                databaseReference.child("appointment").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id).child("state").setValue("Over");
+
+           }
         }
     }
 }
