@@ -192,9 +192,9 @@ public class ChatBotFragment extends Fragment {
                 }else if(chooseOne.getText().toString().equals("Ok let's do Attention-Deficit Hyperactivity Disorder (ADHD) test")){
                     startTestWithFirstQuestion("Attention-Deficit Hyperactivity Disorder (ADHD)","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do low self esteem test")){
-                    startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
+                    startTestWithFirstQuestion("low self esteem","Do you feel blame yourself for the simplest things?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Bipolar Disorder test")){
-                    startTestWithFirstQuestion("Bipolar Disorder","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
+                    startTestWithFirstQuestion("Bipolar Disorder","You experienced feelings of anguish or desperation");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -1051,7 +1051,7 @@ public class ChatBotFragment extends Fragment {
         }
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
-        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/7)*100);
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/8)*100);
         reportRefrence.child("low self esteem").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
@@ -1063,7 +1063,8 @@ public class ChatBotFragment extends Fragment {
         final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber150", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
-        String [] depressionTest={"Do you feel hate about your outward appearance?"
+        String [] depressionTest={"Do you suffer from the problem of obsession with perfection?"
+                ,"Do you feel hate about your outward appearance?"
                 ,"Do you feel that yourself is worthless?"
                 ,"Do you not accept criticism from others?"
                 ,"Do you always feel fear and anxiety?"
@@ -1074,8 +1075,8 @@ public class ChatBotFragment extends Fragment {
 
         };
         Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
-        while (numberOfQuestion<=6) {
-            if (numberOfQuestion <= 5) {
+        while (numberOfQuestion<=7) {
+            if (numberOfQuestion <= 6) {
                 sendBotMessage(depressionTest[numberOfQuestion]);
                 numberOfQuestion++;
                 editor.putInt("number", numberOfQuestion);
@@ -1150,8 +1151,7 @@ public class ChatBotFragment extends Fragment {
         final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber160", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
-        String [] depressionTest={"You experienced feelings of anguish or desperation:"
-                ,"You were much more socially active than normal, and at all hours:"
+        String [] depressionTest={"You were much more socially active than normal, and at all hours:"
                 ,"Your behavior was unsafe or risky in a way that wasn't normal for you:"
                 ,"You felt exhausted or unusually fatigued:"
                 ,"You got angry and you were aggressive or violent towards others:"
@@ -1747,6 +1747,8 @@ public class ChatBotFragment extends Fragment {
                                 AdhdTest();
                             }else if(chat.getMessage().equals("Starting low self esteem test ....!")){
                                 lowselfesteemTest();
+                            }else if(chat.getMessage().equals("Starting Bipolar Disorder test ....!")){
+                                BipolarDisorderTest();
                             }else if(chat.getMessage().equals("Starting Psychosis test ....!")){
                                 psychosisTest();
                         }
@@ -1847,6 +1849,7 @@ public class ChatBotFragment extends Fragment {
                                 chooseOne.setText(" Agree");
                                 chooseTwo.setText(" Disagree");
                             }
+
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
