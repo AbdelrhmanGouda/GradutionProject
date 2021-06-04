@@ -754,13 +754,13 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     psychosexualDysfunctionTestQuestionsCounter(4);
                     getPsychosexualDysfunctionDegree();
-                }else if(chooseFour.getText().toString().equals("Applies most of the time")){
-                    sendUserMessage(chooseFour.getText().toString());
+                }else if(chooseFive.getText().toString().equals("Applies most of the time")){
+                    sendUserMessage(chooseFive.getText().toString());
                     pbaTestQuestionsCounter(5);
                     getPBAQuestions();
 
-                }else if(chooseFour.getText().toString().equals("Applies most of the time.")){
-                    sendUserMessage(chooseFour.getText().toString());
+                }else if(chooseFive.getText().toString().equals("Applies most of the time.")){
+                    sendUserMessage(chooseFive.getText().toString());
                     pbaTestQuestionsCounter(5);
                     readPBADegree();
 
@@ -815,7 +815,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPBAQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber312", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber314", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Others have told me that I seem to become amused very easily or that I seem to become amused about things that really aren’t funny"
@@ -823,7 +823,7 @@ public class ChatBotFragment extends Fragment {
                 ,"I find that even when I try to control my laughter, I am often unable to do so"
                 ,"There are times when I won’t be thinking of anything happy or funny at all, but will suddenly be overcome by funny or happy thoughts"
                 ,"I find that even when I try to control my crying, I am often unable to do so."
-                ," I find that I am easily overcome by laughter."
+                ,"I find that I am easily overcome by laughter."
 
         };
         Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
@@ -842,7 +842,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void pbaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter312", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter314", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==1){
@@ -2265,7 +2265,7 @@ public class ChatBotFragment extends Fragment {
                                 chooseOne.setText("\n No. \n");
                                 chooseTwo.setText("\n Somewhat. \n");
                                 chooseThree.setText("\n Yes. \n");
-                            }else if(chat.getMessage().equals("I find that I am easily overcome by laughter")){
+                            }else if(chat.getMessage().equals("I find that I am easily overcome by laughter.")){
                                 chooseOne.setText("Applies never.");
                                 chooseTwo.setText("Applies rarely.");
                                 chooseThree.setText("Applies occasionally.");
