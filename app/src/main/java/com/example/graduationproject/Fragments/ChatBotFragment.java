@@ -861,7 +861,7 @@ public class ChatBotFragment extends Fragment {
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/35)*100);
         reportRefrence.child("Pseudobulbar Affect (PBA)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
-        Toast.makeText(getActivity(), " dep "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
     }
 
