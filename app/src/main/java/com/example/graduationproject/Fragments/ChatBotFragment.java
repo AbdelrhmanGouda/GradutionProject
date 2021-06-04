@@ -2504,6 +2504,9 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText("More than half of the days");
         chooseFour.setText("Nearly everyday");
     }
+    private void ayhaga(){
+
+    }
 //Abdo Gouda
 
 }
