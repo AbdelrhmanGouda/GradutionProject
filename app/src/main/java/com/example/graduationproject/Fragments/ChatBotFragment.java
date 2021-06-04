@@ -209,6 +209,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Pseudobulbar Affect (PBA)","There are times when I feel fine one minute, and then I’ll become tearful the next over something small or for no reason at all");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Social Anxiety Disorder test")){
                     startTestWithFirstQuestion("Social Anxiety Disorder","Do you feel anxious or panicky before social situations?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Empathy Deficit Disorder test")){
+                    startTestWithFirstQuestion("Empathy Deficit Disorder","I find it hard to feel sympathetic for someone who is experiencing unkind or unfair behavior");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -394,6 +396,16 @@ public class ChatBotFragment extends Fragment {
                     socialAnxietyDisorderTestQuestionsCounter(0);
                     readSocialAnxietyDisorderDegree();
 
+                }else if(chooseOne.getText().toString().equals("\n Never \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
+
+
+                }else if(chooseOne.getText().toString().equals("\n Never.\n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
 
                 }else if(chooseOne.getText().toString().equals("\n No \n")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -648,12 +660,21 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     socialAnxietyDisorderTestQuestionsCounter(1);
                     readSocialAnxietyDisorderDegree();
+                }else if(chooseTwo.getText().toString().equals("\n Never \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
 
+
+                }else if(chooseTwo.getText().toString().equals("\n Never.\n")) {
+                    sendUserMessage(chooseTwo.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
 
                 }
 
 
-            }
+                }
         });
         chooseThree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -767,9 +788,20 @@ public class ChatBotFragment extends Fragment {
                     readSocialAnxietyDisorderDegree();
 
 
+                }else if(chooseThree.getText().toString().equals("\n Never \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
+
+
+                }else if(chooseThree.getText().toString().equals("\n Never.\n")) {
+                    sendUserMessage(chooseThree.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
+
                 }
 
-            }
+                }
         });
         chooseFour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -863,8 +895,19 @@ public class ChatBotFragment extends Fragment {
                     readSocialAnxietyDisorderDegree();
 
 
+                }else if(chooseFour.getText().toString().equals("\n Never \n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
+
+
+                }else if(chooseFour.getText().toString().equals("\n Never.\n")) {
+                    sendUserMessage(chooseFour.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
+
                 }
-            }
+                }
 
         });
         chooseFive.setOnClickListener(new View.OnClickListener() {
@@ -931,8 +974,19 @@ public class ChatBotFragment extends Fragment {
                     socialAnxietyDisorderTestQuestionsCounter(4);
                     readSocialAnxietyDisorderDegree();
 
+                }else if(chooseFive.getText().toString().equals("\n Never \n")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
+
+
+                }else if(chooseFive.getText().toString().equals("\n Never.\n")) {
+                    sendUserMessage(chooseFive.getText().toString());
+                    empathyDeficitDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
+
                 }
-            }
+                }
         });
         getPrefrance();
 
@@ -2370,6 +2424,104 @@ public class ChatBotFragment extends Fragment {
     }
 
 
+    private void empathyDeficitDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter220", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }else if(count==2){
+            alcoholAddictionCounterDegree+=2;
+        }else if (count==3){
+            alcoholAddictionCounterDegree+=3;
+        }else if (count==4){
+            alcoholAddictionCounterDegree+=4;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
+        reportRefrence.child("Empathy Deficit Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getEmpathyDeficitDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber220", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"I attempt to change the topic of conversation when a family member or friend wants to talk about what’s troubling them?"
+                ,"Other people’s emotional states and moods aren't that important to me"
+                ,"When someone is ill because of their own unhealthy behaviors, I am not sorry for them"
+                ,"I get annoyed when someone I'm around gets tearful"
+                ,"I don’t get it if another person is unhappy even if they have told me so"
+                ,"When bad things to happen to other people, it doesn’t bother me very much"
+                ,"I don’t feel compassionate and sympathetic towards people who aren’t as lucky as I am"
+                ,"Cheering other people up doesn’t change my feeling"
+                ,"I don’t sympathize with people who are being exploited"
+
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 9) {
+            if (numberOfQuestion <= 8) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readEmpathyDeficitDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Empathy Deficit Disorder");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Empathy Deficit Disorder test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -2589,6 +2741,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Pseudobulbar Affect (PBA)");
                             }else if(chat.getMessage().equals(recommendedTest("Mania"))){
                                 chooseForStartTest("Mania");
+                            }else if(chat.getMessage().equals(recommendedTest("Empathy Deficit Disorder"))){
+                                chooseForStartTest("Empathy Deficit Disorder");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -2755,6 +2909,14 @@ public class ChatBotFragment extends Fragment {
                                 chooseThree.setText("\nSometimes.\n");
                                 chooseFour.setText("\nOften.\n");
                                 chooseFive.setText("\nVery Often.\n");
+
+                            }
+                            else if(chat.getMessage().equals("I don’t sympathize with people who are being exploited")){
+                                chooseOne.setText("\n Never.\n");
+                                chooseTwo.setText("\n Rarely.\n");
+                                chooseThree.setText("\n Sometimes.\n");
+                                chooseFour.setText("\n Often.\n");
+                                chooseFive.setText("\n Very Often.\n");
 
                             }
                             else if(chat.getMessage().equals("How likely are you to assume that others are jealous of your talents and success?")){
@@ -2947,10 +3109,22 @@ public class ChatBotFragment extends Fragment {
         chooseFive.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("\nNever\n");
-        chooseTwo.setText("\nRarely \n");
+        chooseTwo.setText("\nRarely\n");
         chooseThree.setText("\nSometimes\n");
         chooseFour.setText("\nOften\n");
         chooseFive.setText("\nVery often\n");
+    }
+
+    private void empathyDeficitDisorderTest(){
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        setChooseVisable();
+        chooseOne.setText("\n Never \n");
+        chooseTwo.setText("\n Rarely \n");
+        chooseThree.setText("\n Sometimes \n");
+        chooseFour.setText("\n Often \n");
+        chooseFive.setText("\n Very often \n");
     }
 
     private String recommendedTest(String illness) {
