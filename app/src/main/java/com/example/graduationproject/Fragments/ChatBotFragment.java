@@ -199,6 +199,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Mania","Do you ever experience a persistent elevated or irritable mood for more than a week?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Narcissistic Personality Disorder test")){
                     startTestWithFirstQuestion("Narcissistic Personality Disorder","Do you experience an exaggerated sense of self-importance?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Empathy Deficit Disorder test")){
+                    startTestWithFirstQuestion("Empathy Deficit Disorder","I find it hard to feel sympathetic for someone who is experiencing unkind or unfair behavior");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -209,8 +211,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Pseudobulbar Affect (PBA)","There are times when I feel fine one minute, and then I’ll become tearful the next over something small or for no reason at all");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Social Anxiety Disorder test")){
                     startTestWithFirstQuestion("Social Anxiety Disorder","Do you feel anxious or panicky before social situations?");
-                }else if(chooseOne.getText().toString().equals("Ok let's do Empathy Deficit Disorder test")){
-                    startTestWithFirstQuestion("Empathy Deficit Disorder","I find it hard to feel sympathetic for someone who is experiencing unkind or unfair behavior");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Bullying test")){
+                    startTestWithFirstQuestion("Bullying","Do others make hurtful comments about you?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -2788,6 +2790,8 @@ public class ChatBotFragment extends Fragment {
                             }
                             else if(chat.getMessage().equals("Starting Social Anxiety Disorder test ....!")){
                                 socialAnxietyDisorderTest();
+                            }else if(chat.getMessage().equals("Starting Empathy Deficit Disorder test ....!")){
+                                empathyDeficitDisorderTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
