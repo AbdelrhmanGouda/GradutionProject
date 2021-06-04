@@ -197,6 +197,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Bipolar Disorder","You experienced feelings of anguish or desperation:");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Mania test")){
                     startTestWithFirstQuestion("Mania","Do you ever experience a persistent elevated or irritable mood for more than a week?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Narcissistic Personality Disorder test")){
+                    startTestWithFirstQuestion("Narcissistic Personality Disorder","Do you experience an exaggerated sense of self-importance?");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -409,6 +411,16 @@ public class ChatBotFragment extends Fragment {
                     ManiaTestQuestionsCounter(0);
                     readManiaDegree();
 
+                }else if(chooseOne.getText().toString().equals(".  Never")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(0);
+                    getNarcissisticPersonalityDisorderQuestions();
+
+                }else if(chooseOne.getText().toString().equals("  .Never")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(0);
+                    readNarcissisticPersonalityDisorderDegree();
+
                 }
 
 
@@ -602,6 +614,16 @@ public class ChatBotFragment extends Fragment {
                     ManiaTestQuestionsCounter(1);
                     readManiaDegree();
 
+                }else if(chooseTwo.getText().toString().equals(".  Rarely")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(1);
+                    getNarcissisticPersonalityDisorderQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("  .Rarely")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(1);
+                    readNarcissisticPersonalityDisorderDegree();
+
                 }
 
 
@@ -696,6 +718,16 @@ public class ChatBotFragment extends Fragment {
                     ManiaTestQuestionsCounter(2);
                     readManiaDegree();
 
+                }else if(chooseThree.getText().toString().equals(".  Sometimes")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(2);
+                    getNarcissisticPersonalityDisorderQuestions();
+
+                }else if(chooseThree.getText().toString().equals("  .Sometimes")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(2);
+                    readNarcissisticPersonalityDisorderDegree();
+
                 }
 
             }
@@ -769,6 +801,16 @@ public class ChatBotFragment extends Fragment {
                     ManiaTestQuestionsCounter(3);
                     readManiaDegree();
 
+                }else if(chooseFour.getText().toString().equals(".  Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(3);
+                    getNarcissisticPersonalityDisorderQuestions();
+
+                }else if(chooseFour.getText().toString().equals("  .Often")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(3);
+                    readNarcissisticPersonalityDisorderDegree();
+
                 }
             }
 
@@ -815,6 +857,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     ManiaTestQuestionsCounter(4);
                     readManiaDegree();
+
+                }else if(chooseFive.getText().toString().equals(".  Very Often")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(4);
+                    getNarcissisticPersonalityDisorderQuestions();
+
+                }else if(chooseFive.getText().toString().equals("  .Very Often")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    NarcissisticPersonalityDisorderTestQuestionsCounter(4);
+                    readNarcissisticPersonalityDisorderDegree();
 
                 }
             }
@@ -1007,6 +1059,102 @@ public class ChatBotFragment extends Fragment {
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/32)*100);
         reportRefrence.child("Mania").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+    private void readNarcissisticPersonalityDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Narcissistic Personality Disorder");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Narcissistic Personality Disorder test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getNarcissisticPersonalityDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber180", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you expect to be seen as superior to other people?"
+                ,"Do you ever exaggerate your talents or accomplishments?"
+                ,"Do you require constant admiration from others?"
+                ,"Do you engage in fantasies about being successful, powerful, or beautiful?"
+                ,"Do you struggle to recognize the emotions and needs of other people?"
+                ,"Do others perceive you as arrogant or haughty?"
+                ,"How likely are you to experience heightened jealousy about the success or accomplishments of others?"
+                ,"How likely are you to insist on having the best of everything (office, car, home, etc.)?"
+                ,"How likely are you to assume that others are jealous of your talents and success?"
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=9) {
+            if (numberOfAdhdQuestion <= 8) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void NarcissisticPersonalityDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter180", Context.MODE_PRIVATE);
+        int pbaCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){}
+        else if(count==1){
+            pbaCounterDegree++;
+        }else if(count==2){
+            pbaCounterDegree+=2;
+        }else if(count==3){
+            pbaCounterDegree+=3;
+        }else if(count==4){
+            pbaCounterDegree+=4;
+        }
+        editor.putInt("counter",pbaCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/40)*100);
+        reportRefrence.child("Narcissistic Personality Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2316,6 +2464,8 @@ public class ChatBotFragment extends Fragment {
                                 pbaTest();
                             }else if(chat.getMessage().equals("Starting Mania test ....!")){
                                 ManiaTest();
+                            }else if(chat.getMessage().equals("Starting Narcissistic Personality Disorder test ....!")){
+                                NarcissisticPersonalityDisorderTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -2432,6 +2582,14 @@ public class ChatBotFragment extends Fragment {
                                 chooseFive.setText(" .Very Often");
 
                             }
+                            else if(chat.getMessage().equals("How likely are you to assume that others are jealous of your talents and success?")){
+                                chooseOne.setText("  .Never");
+                                chooseTwo.setText("  .Rarely");
+                                chooseThree.setText("  .Sometimes");
+                                chooseFour.setText("  .Often");
+                                chooseFive.setText("  .Very Often");
+
+                            }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
@@ -2517,6 +2675,16 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText(". Sometimes");
         chooseOne.setText(". Never");
         chooseTwo.setText(". Rarely");
+    }
+    private void NarcissisticPersonalityDisorderTest() {
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setText(".  Very Often");
+        chooseFour.setText(".  Often");
+        chooseThree.setText(".  Sometimes");
+        chooseOne.setText(".  Never");
+        chooseTwo.setText(".  Rarely");
     }
     private void  lowselfesteemTest() {
         chooseThree.setVisibility(View.GONE);
