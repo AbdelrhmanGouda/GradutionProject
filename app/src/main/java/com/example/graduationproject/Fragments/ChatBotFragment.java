@@ -191,6 +191,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Psychosexual Dysfunction","Over the past month, how many days have you experienced a sexual impulse?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Attention-Deficit Hyperactivity Disorder (ADHD) test")){
                     startTestWithFirstQuestion("Attention-Deficit Hyperactivity Disorder (ADHD)","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do low self esteem test")){
+                    startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -324,6 +326,18 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     BorderlinePersonalityDisorderTestQuestionsCounter(1);
                     readBorderlinePersonalityDisorderDegree();
+                    chooseOne.setText("");
+
+                }else if(chooseOne.getText().toString().equals(" Yes  ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    lowselfesteemTestQuestionsCounter(1);
+                    getlowselfesteemQuestions();
+                    chooseOne.setText("");
+
+                }else if(chooseOne.getText().toString().equals(". Yes ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    lowselfesteemTestQuestionsCounter(1);
+                    readlowselfesteemDegree();
                     chooseOne.setText("");
 
                 }
@@ -461,6 +475,14 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     adhdTestQuestionsCounter(0);
                     adhdfunctionQuestions();
+                }else if(chooseTwo.getText().toString().equals(" NO  ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    lowselfesteemTestQuestionsCounter(0);
+                    getlowselfesteemQuestions();
+                }else if(chooseTwo.getText().toString().equals(". NO ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    lowselfesteemTestQuestionsCounter(0);
+                    readlowselfesteemDegree();
                 }
 
 
@@ -909,7 +931,6 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/14)*100);
-        //
         reportRefrence.child("Borderline personality disorder (BPD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
@@ -951,6 +972,93 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readBorderlinePersonalityDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Borderline personality disorder (BPD)");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Borderline personality disorder (BPD) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 60){
+                            sendBotMessage("Your degree is lower than 60% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 60% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void lowselfesteemTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter150", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/7)*100);
+        reportRefrence.child("low self esteem").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getlowselfesteemQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber150", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you feel hate about your outward appearance?"
+                ,"Do you feel that yourself is worthless?"
+                ,"Do you not accept criticism from others?"
+                ,"Do you always feel fear and anxiety?"
+                ,"Do you always feel quick rage?"
+                ,"Do you always seek to please others?"
+
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=6) {
+            if (numberOfQuestion <= 5) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readlowselfesteemDegree() {
         Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Borderline personality disorder (BPD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
@@ -1477,6 +1585,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Drug Addiction");
                             }else if(chat.getMessage().equals(recommendedTest("Psychosexual Dysfunction"))){
                                 chooseForStartTest("Psychosexual Dysfunction");
+                            }else if(chat.getMessage().equals(recommendedTest("low self esteem"))){
+                                chooseForStartTest("low self esteem");
                             }else if(chat.getMessage().equals(recommendedTest("Attention-Deficit Hyperactivity Disorder (ADHD)"))){
                                 chooseForStartTest("Attention-Deficit Hyperactivity Disorder (ADHD)");
                             }
@@ -1505,6 +1615,8 @@ public class ChatBotFragment extends Fragment {
                                 psychosexualDysfunctionTest();
                             }else if(chat.getMessage().equals("Starting Attention-Deficit Hyperactivity Disorder (ADHD) test ....!")){
                                 AdhdTest();
+                            }else if(chat.getMessage().equals("Starting low self esteem test ....!")){
+                                lowselfesteemTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -1587,6 +1699,12 @@ public class ChatBotFragment extends Fragment {
 
 
                             }
+                            else if(chat.getMessage().equals("Do you always seek to please others?")){
+                                chooseOne.setText(". Yes ");
+                                chooseTwo.setText(". No ");
+
+
+                            }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
@@ -1638,6 +1756,13 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setVisibility(View.GONE);
         chooseOne.setText("VERY LITTLE");
         chooseTwo.setText("TOO MUCH CALLS");
+    }
+    private void  lowselfesteemTest() {
+        chooseThree.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseOne.setText(" Yes  ");
+        chooseTwo.setText(" NO  ");
     }
     private void BorderlinePersonalityDisordertest() {
         chooseThree.setVisibility(View.GONE);
