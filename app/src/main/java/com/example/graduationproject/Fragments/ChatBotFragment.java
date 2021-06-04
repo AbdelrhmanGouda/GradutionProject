@@ -201,6 +201,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Psychosis","I sometimes see things that others tell me they cannot see");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Autism test")){
                     startTestWithFirstQuestion("Autism","is old-fashioned or precocious?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Pseudobulbar Affect (PBA) test")){
+                    startTestWithFirstQuestion("Pseudobulbar Affect (PBA)","There are times when I feel fine one minute, and then I’ll become tearful the next over something small or for no reason at all");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -385,6 +387,16 @@ public class ChatBotFragment extends Fragment {
                     autismTestQuestionsCounter(0);
                     readAutismDegree();
 
+                }else if(chooseOne.getText().toString().equals("Applies never")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    pbaTestQuestionsCounter(1);
+                    getPBAQuestions();
+
+                }else if(chooseOne.getText().toString().equals("Applies never.")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    pbaTestQuestionsCounter(1);
+                    readPBADegree();
+
                 }
 
 
@@ -558,6 +570,16 @@ public class ChatBotFragment extends Fragment {
                     autismTestQuestionsCounter(1);
                     readAutismDegree();
 
+                }else if(chooseTwo.getText().toString().equals("Applies rarely")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    pbaTestQuestionsCounter(2);
+                    getPBAQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("Applies rarely.")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    pbaTestQuestionsCounter(2);
+                    readPBADegree();
+
                 }
 
 
@@ -632,6 +654,16 @@ public class ChatBotFragment extends Fragment {
                     autismTestQuestionsCounter(2);
                     readAutismDegree();
 
+                }else if(chooseThree.getText().toString().equals("Applies occasionally")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    pbaTestQuestionsCounter(3);
+                    getPBAQuestions();
+
+                }else if(chooseThree.getText().toString().equals("Applies occasionally.")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    pbaTestQuestionsCounter(3);
+                    readPBADegree();
+
                 }
 
             }
@@ -685,6 +717,16 @@ public class ChatBotFragment extends Fragment {
                     psychosexualDysfunctionTestQuestionsCounter(3);
                     getPsychosexualDysfunctionDegree();
 
+                }else if(chooseFour.getText().toString().equals("Applies frequently")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    pbaTestQuestionsCounter(4);
+                    getPBAQuestions();
+
+                }else if(chooseFour.getText().toString().equals("Applies frequently.")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    pbaTestQuestionsCounter(4);
+                    readPBADegree();
+
                 }
             }
 
@@ -712,12 +754,115 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     psychosexualDysfunctionTestQuestionsCounter(4);
                     getPsychosexualDysfunctionDegree();
+                }else if(chooseFour.getText().toString().equals("Applies most of the time")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    pbaTestQuestionsCounter(5);
+                    getPBAQuestions();
+
+                }else if(chooseFour.getText().toString().equals("Applies most of the time.")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    pbaTestQuestionsCounter(5);
+                    readPBADegree();
+
                 }
             }
         });
         getPrefrance();
 
         return view;
+    }
+
+    private void readPBADegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Pseudobulbar Affect (PBA)");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Pseudobulbar Affect (PBA) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 13){
+                            sendBotMessage("Your degree is lower than 13% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 13% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getPBAQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber310", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Others have told me that I seem to become amused very easily or that I seem to become amused about things that really aren’t funny"
+                ,"I find myself crying very easily"
+                ,"I find that even when I try to control my laughter, I am often unable to do so"
+                ,"There are times when I won’t be thinking of anything happy or funny at all, but will suddenly be overcome by funny or happy thoughts"
+                ,"I find that even when I try to control my crying, I am often unable to do so."
+                ," I find that I am easily overcome by laughter."
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=6) {
+            if (numberOfAdhdQuestion <= 5) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void pbaTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter310", Context.MODE_PRIVATE);
+        int pbaCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==1){
+            pbaCounterDegree++;
+        }else if(count==2){
+            pbaCounterDegree+=2;
+        }else if(count==3){
+            pbaCounterDegree+=3;
+        }else if(count==4){
+            pbaCounterDegree+=4;
+        }else if(count==5){
+            pbaCounterDegree+=5;
+        }
+        editor.putInt("counter",pbaCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/35)*100);
+        reportRefrence.child("Pseudobulbar Affect (PBA)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
     }
 
     private void readAutismDegree() {
@@ -1980,6 +2125,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Psychosis");
                             }else if(chat.getMessage().equals(recommendedTest("Autism"))){
                                 chooseForStartTest("Autism");
+                            }else if(chat.getMessage().equals(recommendedTest("Pseudobulbar Affect (PBA)"))){
+                                chooseForStartTest("Pseudobulbar Affect (PBA)");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -2015,6 +2162,8 @@ public class ChatBotFragment extends Fragment {
                                 psychosisTest();
                             }else if(chat.getMessage().equals("Starting Autism test ....!")){
                                 autismTest();
+                            }else if(chat.getMessage().equals("Starting Pseudobulbar Affect (PBA) test ....!")){
+                                pbaTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -2116,6 +2265,13 @@ public class ChatBotFragment extends Fragment {
                                 chooseOne.setText("\n No. \n");
                                 chooseTwo.setText("\n Somewhat. \n");
                                 chooseThree.setText("\n Yes. \n");
+                            }else if(chat.getMessage().equals("I find that I am easily overcome by laughter")){
+                                chooseOne.setText("Applies never.");
+                                chooseTwo.setText("Applies rarely.");
+                                chooseThree.setText("Applies occasionally.");
+                                chooseFour.setText("Applies frequently.");
+                                chooseFive.setText("Applies most of the time.");
+
                             }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
@@ -2158,6 +2314,19 @@ public class ChatBotFragment extends Fragment {
 
             }
         });
+
+
+    }
+
+    private void pbaTest() {
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseOne.setText("Applies never");
+        chooseTwo.setText("Applies rarely");
+        chooseThree.setText("Applies occasionally");
+        chooseFour.setText("Applies frequently");
+        chooseFive.setText("Applies most of the time");
 
 
     }
