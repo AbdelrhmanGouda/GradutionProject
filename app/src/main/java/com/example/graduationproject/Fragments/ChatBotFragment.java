@@ -194,6 +194,10 @@ public class ChatBotFragment extends Fragment {
                 }else if(chooseOne.getText().toString().equals("Ok let's do low self esteem test")){
                     startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }
+                // farid
+                else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
+                    startTestWithFirstQuestion("Psychosis","I sometimes see things that others tell me they cannot see");
+                }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
                     depressionTestQuestionsCounter(0);
@@ -1589,6 +1593,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("low self esteem");
                             }else if(chat.getMessage().equals(recommendedTest("Attention-Deficit Hyperactivity Disorder (ADHD)"))){
                                 chooseForStartTest("Attention-Deficit Hyperactivity Disorder (ADHD)");
+                            }else if(chat.getMessage().equals(recommendedTest("Psychosis"))){
+                                chooseForStartTest("Psychosis");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -1617,7 +1623,9 @@ public class ChatBotFragment extends Fragment {
                                 AdhdTest();
                             }else if(chat.getMessage().equals("Starting low self esteem test ....!")){
                                 lowselfesteemTest();
-                            }
+                            }else if(chat.getMessage().equals("Starting Psychosis test ....!")){
+                                psychosisTest();
+                        }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
                                     " – being so fidgety or restless that you were moving around a lot more than usual over the last two weeks?.")){
@@ -1704,6 +1712,10 @@ public class ChatBotFragment extends Fragment {
                                 chooseTwo.setText(". No ");
 
 
+                            }
+                            else if(chat.getMessage().equals("I get the feeling that I have lived through the present situation before, like things are repeating")){
+                                chooseOne.setText(" Agree");
+                                chooseTwo.setText(" Disagree");
                             }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
@@ -1819,6 +1831,15 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText("More  than half of the days ");
         chooseFour.setText("Nearly  everyday ");
 
+    }
+
+    private void psychosisTest(){
+        setChooseVisable();
+        chooseOne.setText("Agree");
+        chooseTwo.setText("Disagree");
+        chooseThree.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
     }
 
     private String recommendedTest(String illness) {

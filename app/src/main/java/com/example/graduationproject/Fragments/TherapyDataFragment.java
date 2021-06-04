@@ -68,7 +68,7 @@ public class TherapyDataFragment extends Fragment {
     Calendar c = Calendar.getInstance();
 
      int year,month,day;
-    int value;
+    int value=0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,6 +112,11 @@ public class TherapyDataFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
+                        .child("appoints number").child(patientId).child("appointments");
+
+                value=value+1;
+                appointmentsNumberRef.setValue( String.valueOf(value));
 
                 getTimeName();
 
@@ -136,15 +141,12 @@ public class TherapyDataFragment extends Fragment {
                                         }else {
                                             Toast.makeText(getActivity(), "you must choose a time ", Toast.LENGTH_SHORT).show();
                                         }
-
                                     }
-
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
 
                                     }
                                 });
-
 
                             }
                         })
@@ -156,9 +158,11 @@ public class TherapyDataFragment extends Fragment {
                         })
                         .show();
 
-
-
             }
+
+
+
+
         });
 
 
@@ -324,22 +328,7 @@ public class TherapyDataFragment extends Fragment {
 
         if (dayName!=null){
 
-            appointmentsNumberRef = FirebaseDatabase.getInstance().getReference("Profiles")
-                    .child("appoints number").child(patientId).child("appointments");
 
-            appointmentsNumberRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    num = snapshot.getValue(String.class);
-                    value = Integer.parseInt(num)+1;
-                    appointmentsNumberRef.setValue( String.valueOf(value));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
 
 
             patientBookRef = FirebaseDatabase.getInstance().getReference("request appointment").child(patientId);
