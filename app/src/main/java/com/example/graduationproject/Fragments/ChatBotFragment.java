@@ -199,6 +199,8 @@ public class ChatBotFragment extends Fragment {
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
                     startTestWithFirstQuestion("Psychosis","I sometimes see things that others tell me they cannot see");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Autism test")){
+                    startTestWithFirstQuestion("Autism","is old-fashioned or precocious?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -373,6 +375,16 @@ public class ChatBotFragment extends Fragment {
                     readPsychosisDegree();
                     chooseOne.setText("");
 
+                }else if(chooseOne.getText().toString().equals("\n No \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    autismTestQuestionsCounter(0);
+                    getAutismQuestions();
+
+                }else if(chooseOne.getText().toString().equals("\n No. \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    autismTestQuestionsCounter(0);
+                    readAutismDegree();
+
                 }
 
 
@@ -536,6 +548,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     psychosisTestQuestionsCounter(0);
                     readPsychosisDegree();
+                }else if(chooseTwo.getText().toString().equals("\n Somewhat \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    autismTestQuestionsCounter(1);
+                    getAutismQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("\n Somewhat. \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    autismTestQuestionsCounter(1);
+                    readAutismDegree();
+
                 }
 
 
@@ -599,6 +621,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseThree.getText().toString());
                     psychosexualDysfunctionTestQuestionsCounter(2);
                     getPsychosexualDysfunctionDegree();
+
+                }else if(chooseThree.getText().toString().equals("\n Yes \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    autismTestQuestionsCounter(2);
+                    getAutismQuestions();
+
+                }else if(chooseThree.getText().toString().equals("\n Yes. \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    autismTestQuestionsCounter(2);
+                    readAutismDegree();
 
                 }
 
@@ -686,6 +718,116 @@ public class ChatBotFragment extends Fragment {
         getPrefrance();
 
         return view;
+    }
+
+    private void readAutismDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Autism");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Autism test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<=(double) 28.7){
+                            sendBotMessage("Your degree is lower than 28.7% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 28.7% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
+    private void getAutismQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber303", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={" is regarded as an \"eccentric professor\" by the other children?"
+                ,"lives somewhat in a world of his/her own with restricted idiosyncratic intellectual interests?"
+                ,"accumulates facts on certain subjects (good rote memory) but does not really understand the meaning?"
+                ,"has a literal understanding of ambiguous and metaphorical language?"
+                ,"has a deviant style of communication with a formal, fussy, old-fashioned or \"robot like\" language?"
+                ,"invents idiosyncratic words and expressions?"
+                ," has a different voice or speech?"
+                ,"expresses sounds involuntarily; clears throat, grunts, smacks, cries or screams?"
+                ,"is surprisingly good at some things and surprisingly poor at others?"
+                ,"uses language freely but fails to make adjustment to fit social contexts or the needs of different listeners?"
+                ,"lacks empathy?"
+                ,"makes naive and embarrassing remarks?"
+                ,"has a deviant style of gaze?"
+                ,"wishes to be sociable but fails to make relationships with peers?"
+                ,"can be with other children but only on his/her terms?"
+                ,"lacks best friend?"
+                ,"lacks common sense?"
+                ,"is poor at games: no idea of cooperating in a team, scores \"own goals?"
+                ,"has clumsy, ill coordinated, ungainly, awkward movements or gestures?"
+                ,"has involuntary face or body movements?"
+                ,"has difficulties in completing simple daily activities because of compulsory repetition of certain actions or thoughts?"
+                ,"has special routines: insists on no change?"
+                ,"shows idiosyncratic attachment to objects?"
+                ,"is bullied by other children?"
+                ,"has markedly unusual facial expression?"
+                ,"has markedly unusual posture?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=26) {
+            if (numberOfAdhdQuestion <= 25) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+
+    }
+
+    private void autismTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter303", Context.MODE_PRIVATE);
+        int autismCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            autismCounterDegree++;
+        }else if(count==2){
+            autismCounterDegree+=2;
+        }
+        editor.putInt("counter",autismCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)autismCounterDegree/54)*100);
+        reportRefrence.child("Autism").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+autismCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
     }
 
     private void adhdfunctionQuestions() {
@@ -1836,6 +1978,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Bipolar Disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Psychosis"))){
                                 chooseForStartTest("Psychosis");
+                            }else if(chat.getMessage().equals(recommendedTest("Autism"))){
+                                chooseForStartTest("Autism");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -1869,7 +2013,9 @@ public class ChatBotFragment extends Fragment {
                             }
                             else if(chat.getMessage().equals("Starting Psychosis test ....!")){
                                 psychosisTest();
-                        }
+                            }else if(chat.getMessage().equals("Starting Autism test ....!")){
+                                autismTest();
+                            }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
                                     " – being so fidgety or restless that you were moving around a lot more than usual over the last two weeks?.")){
@@ -1966,6 +2112,10 @@ public class ChatBotFragment extends Fragment {
                             else if(chat.getMessage().equals("I get the feeling that I have lived through the present situation before, like things are repeating")){
                                 chooseOne.setText(" Agree");
                                 chooseTwo.setText(" Disagree");
+                            }else if(chat.getMessage().equals("has markedly unusual posture?")){
+                                chooseOne.setText("\n No. \n");
+                                chooseTwo.setText("\n Somewhat. \n");
+                                chooseThree.setText("\n Yes. \n");
                             }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
@@ -2010,6 +2160,17 @@ public class ChatBotFragment extends Fragment {
         });
 
 
+    }
+
+    private void autismTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseOne.setText("\n No \n");
+        chooseTwo.setText("\n Somewhat \n");
+        chooseThree.setText("\n Yes \n");
     }
 
     private void AdhdTest() {
