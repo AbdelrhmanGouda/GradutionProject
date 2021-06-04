@@ -2499,10 +2499,12 @@ public class ChatBotFragment extends Fragment {
     }
     private void depressionTest() {
         setChooseVisable();
+        chooseFive.setVisibility(View.GONE);
         chooseOne.setText("Not at all");
         chooseTwo.setText("Several days");
         chooseThree.setText("More than half of the days");
         chooseFour.setText("Nearly everyday");
+        chooseFive.setText("hahaha");
     }
     private void ayhaga(){
         Toast.makeText(getActivity(), "hahha", Toast.LENGTH_SHORT).show();
