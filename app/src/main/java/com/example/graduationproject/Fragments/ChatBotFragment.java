@@ -771,7 +771,7 @@ public class ChatBotFragment extends Fragment {
 
         return view;
     }
-
+//hahaa
     private void readPBADegree() {
         Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Pseudobulbar Affect (PBA)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
