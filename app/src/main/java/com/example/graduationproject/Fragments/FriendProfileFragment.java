@@ -60,7 +60,7 @@ public class FriendProfileFragment extends Fragment {
         loveNumbers=view.findViewById(R.id.profile_love_text);
         friendNumbers=view.findViewById(R.id.profile_friend_text);
         location=view.findViewById(R.id.profile_location);
-        bio=view.findViewById(R.id.profile_BIO);
+    //    bio=view.findViewById(R.id.profile_BIO);
         linearAdd=view.findViewById(R.id.linear_add);
         linearLove=view.findViewById(R.id.linear_love);
         profile=view.findViewById(R.id.profile_image_details);
@@ -87,7 +87,7 @@ public class FriendProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(flag==true){
-                    addLove.setImageResource(R.drawable.bluelove);
+                    addLove.setImageResource(R.drawable.heart_icon);
                     setLoveImage();
                     makeLoves();
 /*
@@ -109,7 +109,7 @@ public class FriendProfileFragment extends Fragment {
 
                     flag=false;
                 }else {
-                    addLove.setImageResource(R.drawable.whitelove);
+                    addLove.setImageResource(R.drawable.add_appreciate);
                     setLoveImage();
                     deleteLove();
                     flag=true;
@@ -121,14 +121,14 @@ public class FriendProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(flag2==true){
-                    addFriend.setImageResource(R.drawable.blueadd);
+                    addFriend.setImageResource(R.drawable.friends);
                    //addFriends();
                     sendFriendRequest();
                     setAddFriendImageState();
                     flag2=false;
 
                 }else {
-                    addFriend.setImageResource(R.drawable.whiteadd);
+                    addFriend.setImageResource(R.drawable.add_friends);
                    // deleteFriends();
                     deleteFirendRequest();
                     setAddFriendImageState();
@@ -390,7 +390,7 @@ public class FriendProfileFragment extends Fragment {
 
     }
     private String getApprciate(){
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsNumber")
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("Friends").child("FriendsNumber")
                 .child(id);
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

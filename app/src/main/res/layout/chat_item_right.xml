@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="name"
             android:layout_alignParentEnd="true"
-            android:padding="@dimen/_8sdp"
+            android:padding="@dimen/_6sdp"
             android:textColor="#fff"
             android:id="@+id/show_message"
             android:textSize="@dimen/_15sdp"
