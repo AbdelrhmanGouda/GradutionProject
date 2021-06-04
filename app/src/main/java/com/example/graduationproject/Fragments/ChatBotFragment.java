@@ -806,13 +806,13 @@ public class ChatBotFragment extends Fragment {
                     pbaTestQuestionsCounter(5);
                     readPBADegree();
 
-                }else if(chooseFour.getText().toString().equals(". Very Often")){
-                    sendUserMessage(chooseFour.getText().toString());
+                }else if(chooseFive.getText().toString().equals(". Very Often")){
+                    sendUserMessage(chooseFive.getText().toString());
                     ManiaTestQuestionsCounter(4);
                     getManiaQuestions();
 
-                }else if(chooseFour.getText().toString().equals(" .Very Often")){
-                    sendUserMessage(chooseFour.getText().toString());
+                }else if(chooseFive.getText().toString().equals(" .Very Often")){
+                    sendUserMessage(chooseFive.getText().toString());
                     ManiaTestQuestionsCounter(4);
                     readManiaDegree();
 
@@ -962,7 +962,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getManiaQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber170", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber172", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you ever experience persistently increased goal-directed activity for more than a week?"
@@ -990,7 +990,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void ManiaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter170", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter172", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){}
@@ -1005,7 +1005,7 @@ public class ChatBotFragment extends Fragment {
         }
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
-        double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/24)*100);
+        double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/32)*100);
         reportRefrence.child("Mania").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
@@ -2509,9 +2509,12 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText("TOO MUCH CALLS");
     }
     private void ManiaTest() {
-        chooseThree.setText(". Very Often");
-        chooseFive.setText(". Often");
-        chooseFour.setText(". Sometimes");
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setText(". Very Often");
+        chooseFour.setText(". Often");
+        chooseThree.setText(". Sometimes");
         chooseOne.setText(". Never");
         chooseTwo.setText(". Rarely");
     }
