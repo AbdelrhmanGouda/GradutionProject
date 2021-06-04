@@ -2942,6 +2942,9 @@ public class ChatBotFragment extends Fragment {
     }
 ///// farid
     private void socialAnxietyDisorderTest(){
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("\nNever\n");
         chooseTwo.setText("\nRarely \n");
