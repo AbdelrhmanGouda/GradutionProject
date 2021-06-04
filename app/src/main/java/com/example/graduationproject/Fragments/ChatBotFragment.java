@@ -815,7 +815,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPBAQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber310", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber312", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Others have told me that I seem to become amused very easily or that I seem to become amused about things that really aren’t funny"
@@ -842,7 +842,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void pbaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter310", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter312", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==1){
@@ -2511,4 +2511,5 @@ public class ChatBotFragment extends Fragment {
     //sasasasa
 //kkkkkkkkkk
 //    kkkkkkkk
+    //jskdj
 }
