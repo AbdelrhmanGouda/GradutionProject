@@ -1549,7 +1549,7 @@ public class ChatBotFragment extends Fragment {
         }
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
-        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/17)*100);
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/10)*100);
         reportRefrence.child("Psychosis").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
