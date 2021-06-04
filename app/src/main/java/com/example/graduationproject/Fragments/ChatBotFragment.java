@@ -193,6 +193,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Attention-Deficit Hyperactivity Disorder (ADHD)","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do low self esteem test")){
                     startTestWithFirstQuestion("low self esteem","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Bipolar Disorder test")){
+                    startTestWithFirstQuestion("Bipolar Disorder","HOW OFTEN ARE YOU GETTING CALLS FROM PRESCHOOL?");
                 }
                 // farid
                 else if(chooseOne.getText().toString().equals("Ok let's do Psychosis test")){
@@ -345,6 +347,19 @@ public class ChatBotFragment extends Fragment {
                     chooseOne.setText("");
 
                 }
+                else if(chooseOne.getText().toString().equals(" Yes  .")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    BipolarDisorderTestQuestionsCounter(1);
+                    getBipolarDisorderQuestions();
+                    chooseOne.setText("");
+
+                }else if(chooseOne.getText().toString().equals(" . Yes ")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    BipolarDisorderTestQuestionsCounter(1);
+                    readBipolarDisorderDegree();
+                    chooseOne.setText("");
+
+                }
 
             }
         });
@@ -487,6 +502,15 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     lowselfesteemTestQuestionsCounter(0);
                     readlowselfesteemDegree();
+                }
+                else if(chooseTwo.getText().toString().equals(" NO  .")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    BipolarDisorderTestQuestionsCounter(0);
+                    getBipolarDisorderQuestions();
+                }else if(chooseTwo.getText().toString().equals(" . No ")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    BipolarDisorderTestQuestionsCounter(0);
+                    readBipolarDisorderDegree();
                 }
 
 
@@ -1063,7 +1087,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readlowselfesteemDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Borderline personality disorder (BPD)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("low self esteem");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1078,7 +1102,105 @@ public class ChatBotFragment extends Fragment {
 
 
 
-                        } sendBotMessage("Your total degree from Borderline personality disorder (BPD) test is \n"+degree+"%");
+                        } sendBotMessage("Your total degree low self esteem test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 60){
+                            sendBotMessage("Your degree is lower than 60% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 60% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void BipolarDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter160", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/17)*100);
+        reportRefrence.child("Bipolar Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getBipolarDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber160", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"You experienced feelings of anguish or desperation:"
+                ,"You were much more socially active than normal, and at all hours:"
+                ,"Your behavior was unsafe or risky in a way that wasn't normal for you:"
+                ,"You felt exhausted or unusually fatigued:"
+                ,"You got angry and you were aggressive or violent towards others:"
+                ,"You talked a lot more or a lot faster than normal:"
+                ,"You took risks with your finances which caused problems for yourself or others:"
+                ,"Nothing could make you happy or joyful:"
+                ,"Your sex drive was much higher than normal:"
+                ,"You felt slower than normal, in your body or your mind, for a noticeable period of time:"
+                ,"You were a lot more confident or self-assured than normal:"
+                ,"You didn’t sleep very much and felt like you didn’t really need to:"
+                ,"You felt inadequate or to blame for things:"
+                ,"You were much more lively and energetic than normal:"
+                ,"You became absent-minded and had difficulty focusing on tasks:"
+                ,"You were much more productive than normal:"
+                ,"You became so excitable or agitated that others around you were surprised by your behavior, or your behavior caused problems for you:"
+
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<=16) {
+            if (numberOfQuestion <= 15) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readBipolarDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Bipolar Disorder");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Bipolar Disorder test is \n"+degree+"%");
                         if(Double.parseDouble(degree)<(double) 60){
                             sendBotMessage("Your degree is lower than 60% ,\n" +
                                     " I think you're a normal person");
@@ -1593,6 +1715,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("low self esteem");
                             }else if(chat.getMessage().equals(recommendedTest("Attention-Deficit Hyperactivity Disorder (ADHD)"))){
                                 chooseForStartTest("Attention-Deficit Hyperactivity Disorder (ADHD)");
+                            }else if(chat.getMessage().equals(recommendedTest("Bipolar Disorder"))){
+                                chooseForStartTest("Bipolar Disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Psychosis"))){
                                 chooseForStartTest("Psychosis");
                             }
@@ -1713,6 +1837,12 @@ public class ChatBotFragment extends Fragment {
 
 
                             }
+                            else if(chat.getMessage().equals("You became so excitable or agitated that others around you were surprised by your behavior, or your behavior caused problems for you:")){
+                                chooseOne.setText(" . Yes ");
+                                chooseTwo.setText(" . No ");
+
+
+                            }
                             else if(chat.getMessage().equals("I get the feeling that I have lived through the present situation before, like things are repeating")){
                                 chooseOne.setText(" Agree");
                                 chooseTwo.setText(" Disagree");
@@ -1775,6 +1905,13 @@ public class ChatBotFragment extends Fragment {
         chooseFour.setVisibility(View.GONE);
         chooseOne.setText(" Yes  ");
         chooseTwo.setText(" NO  ");
+    }
+    private void  BipolarDisorderTest() {
+        chooseThree.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseOne.setText(" Yes  .");
+        chooseTwo.setText(" NO  .");
     }
     private void BorderlinePersonalityDisordertest() {
         chooseThree.setVisibility(View.GONE);
