@@ -221,6 +221,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Imposter syndrome","I think my success was just a coincidence.");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Schizophrenia test")){
                     startTestWithFirstQuestion("Schizophrenia","Do you hear or see any things other people cannot see?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Obsessive-Compulsive Disorder (OCD) test")){
+                    startTestWithFirstQuestion("Obsessive-Compulsive Disorder (OCD)","1-Do you ever experience repetitive thoughts that cause you anxiety?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -509,6 +511,19 @@ public class ChatBotFragment extends Fragment {
                     readBullyingDegree();
                     trythis();
 
+                }else if(chooseOne.getText().toString().equals("\n  Never \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(0);
+                    getObsessiveCompulsiveDisorderQuestions();
+
+
+
+                }else if(chooseOne.getText().toString().equals("\n  Never.\n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(0);
+                    readObsessiveCompulsiveDisordeDegree();
+
+
                 }
 ///s7
 
@@ -783,6 +798,16 @@ public class ChatBotFragment extends Fragment {
                     bullyingTestQuestionsCounter(1);
                     readBullyingDegree();
 
+                }else if(chooseTwo.getText().toString().equals("\n  Rarely \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(1);
+                    getObsessiveCompulsiveDisorderQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("\n  Rarely.\n")) {
+                    sendUserMessage(chooseTwo.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(1);
+                    readObsessiveCompulsiveDisordeDegree();
+
                 }
 
 
@@ -942,6 +967,16 @@ public class ChatBotFragment extends Fragment {
                     bullyingTestQuestionsCounter(2);
                     readBullyingDegree();
 
+                }else if(chooseThree.getText().toString().equals("\n Sometimes \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(2);
+                    getObsessiveCompulsiveDisorderQuestions();
+
+
+                }else if(chooseThree.getText().toString().equals("\n Sometimes.\n")) {
+                    sendUserMessage(chooseThree.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(2);
+                    readObsessiveCompulsiveDisordeDegree();
                 }
                 }
         });
@@ -1078,6 +1113,16 @@ public class ChatBotFragment extends Fragment {
                     bullyingTestQuestionsCounter(3);
                     readBullyingDegree();
 
+                }else if(chooseFour.getText().toString().equals("\n  Often \n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(3);
+                    getObsessiveCompulsiveDisorderQuestions();
+
+                }else if(chooseFour.getText().toString().equals("\n  Often.\n")) {
+                    sendUserMessage(chooseFour.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(3);
+                    readObsessiveCompulsiveDisordeDegree();
+
                 }
                 }
 
@@ -1187,7 +1232,18 @@ public class ChatBotFragment extends Fragment {
                     bullyingTestQuestionsCounter(4);
                     readBullyingDegree();
 
-                }
+                }else if(chooseFive.getText().toString().equals("\n  Very often \n")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(4);
+                    getObsessiveCompulsiveDisorderQuestions();
+
+
+
+                }else if(chooseFive.getText().toString().equals("\n  Very often.\n")) {
+                    sendUserMessage(chooseFive.getText().toString());
+                    obsessiveCompulsiveDisorderTestQuestionsCounter(4);
+                    readObsessiveCompulsiveDisordeDegree();
+                  }
                 }
         });
         getPrefrance();
@@ -3200,6 +3256,102 @@ public class ChatBotFragment extends Fragment {
 
 
 
+    private void obsessiveCompulsiveDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter241", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }else if(count==2){
+            alcoholAddictionCounterDegree+=2;
+        }else if (count==3){
+            alcoholAddictionCounterDegree+=3;
+        }else if (count==4){
+            alcoholAddictionCounterDegree+=4;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
+        reportRefrence.child("Obsessive-Compulsive Disorder (OCD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+    private void getObsessiveCompulsiveDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber241", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"2-Do you ever fear germs or engage in excessive cleaning?"
+                ,"3-Do you experience the need to constantly check on something or arrange things?"
+                ,"4-Do you experience intrusive thoughts that are aggressive or about taboo topics?"
+                ,"5-Do you struggle to control obsessive thoughts or compulsive behaviors?"
+                ,"6-Do you engage in rituals that provide temporary relief to your anxiety, such as counting, checking, or cleaning?"
+                ,"7-Do you spend at least one hour a day thinking obsessive thoughts or performing these ritual behaviors?"
+                ,"8-Are work life, home life, or relationships affected by your obsessive thinking or ritual behaviors?"
+                ,"9-to what extent did these thoughts make you feel distressed or upset"
+                ,"10-how anxious would you have been if you had been prevented acting out the compulsive behaviors"
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 9) {
+            if (numberOfQuestion <= 8) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readObsessiveCompulsiveDisordeDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Obsessive-Compulsive Disorder (OCD)");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Obsessive-Compulsive Disorder (OCD) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -3431,6 +3583,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Illness anxiety disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Bullying"))){
                                 chooseForStartTest("Bullying");
+                            }else if(chat.getMessage().equals(recommendedTest("Obsessive-Compulsive Disorder (OCD)"))){
+                                chooseForStartTest("Obsessive-Compulsive Disorder (OCD)");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -3488,6 +3642,8 @@ public class ChatBotFragment extends Fragment {
                                 IllnessanxietydisorderTest();
                             }else if(chat.getMessage().equals("Starting Bullying test ....!")){
                                 bullyingTest();
+                            }else if(chat.getMessage().equals("Starting Obsessive-Compulsive Disorder (OCD) test ....!")){
+                                obsessiveCompulsiveDisorderTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -3658,6 +3814,12 @@ public class ChatBotFragment extends Fragment {
 
 
 
+                            }else if(chat.getMessage().equals("10-how anxious would you have been if you had been prevented acting out the compulsive behaviors")){
+                                chooseOne.setText("\n  Never. \n");
+                                chooseTwo.setText("\n  Rarely. \n");
+                                chooseThree.setText("\n  Sometimes. \n");
+                                chooseFour.setText("\n  Often. \n");
+                                chooseFive.setText("\n  Very often. \n");
                             }
 
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
@@ -3908,6 +4070,18 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText("\nSometimes \n");
         chooseFour.setText("\nOften \n");
         chooseFive.setText("\nVery often \n");
+    }
+
+    private void obsessiveCompulsiveDisorderTest(){
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        setChooseVisable();
+        chooseOne.setText("\n  Never \n");
+        chooseTwo.setText("\n  Rarely \n");
+        chooseThree.setText("\n  Sometimes \n");
+        chooseFour.setText("\n  Often \n");
+        chooseFive.setText("\n  Very often \n");
     }
 
     private String recommendedTest(String illness) {
