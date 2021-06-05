@@ -630,7 +630,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                 if ("primary".equalsIgnoreCase(type)) {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-                
+
             }
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
