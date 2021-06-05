@@ -498,7 +498,7 @@ public class ChatBotFragment extends Fragment {
                     readDissociativeIdentityDisorderDegree();
 
                 }
-
+///s7
 
             }
         });
