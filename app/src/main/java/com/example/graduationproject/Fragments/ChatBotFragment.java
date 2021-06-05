@@ -215,6 +215,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Bullying","Do others make hurtful comments about you?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Imposter syndrome test")){
                     startTestWithFirstQuestion("Imposter syndrome","I think my success was just a coincidence.");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Schizophrenia test")){
+                    startTestWithFirstQuestion("Schizophrenia","Do you hear or see any things other people cannot see?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -457,9 +459,19 @@ public class ChatBotFragment extends Fragment {
                     getimposterSyndromerQuestions();
 
                 }else if(chooseOne.getText().toString().equals("\nNever. \n")){
+                        sendUserMessage(chooseOne.getText().toString());
+                        imposterSyndromeTestQuestionsCounter(0);
+                        readImposterSyndromeDegree();
+
+                    }else if(chooseOne.getText().toString().equals("  \n yes  \n")){
                     sendUserMessage(chooseOne.getText().toString());
-                    imposterSyndromeTestQuestionsCounter(0);
-                    readImposterSyndromeDegree();
+                    schizophreniaTestQuestionsCounter(1);
+                    getSchizophreniaQuestions();
+
+                }else if(chooseOne.getText().toString().equals("  \n yes.  \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    schizophreniaTestQuestionsCounter(1);
+                    readSchizophreniaDegree();
 
                 }
 
@@ -695,10 +707,21 @@ public class ChatBotFragment extends Fragment {
                     imposterSyndromeTestQuestionsCounter(1);
                     readImposterSyndromeDegree();
 
+                }else if(chooseTwo.getText().toString().equals("  \n no  \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    schizophreniaTestQuestionsCounter(0);
+                    getSchizophreniaQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("  \n no.  \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    schizophreniaTestQuestionsCounter(0);
+                    readSchizophreniaDegree();
+
                 }
 
 
-                }
+
+            }
         });
         chooseThree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1029,12 +1052,12 @@ public class ChatBotFragment extends Fragment {
                     empathyDeficitDisorderTestQuestionsCounter(4);
                     readEmpathyDeficitDisorderDegree();
 
-                }else if(chooseFive.getText().toString().equals("\nVery Often \n")){
+                }else if(chooseFive.getText().toString().equals("\nVery often \n")){
                     sendUserMessage(chooseFive.getText().toString());
                     imposterSyndromeTestQuestionsCounter(4);
                     getimposterSyndromerQuestions();
 
-                }else if(chooseFive.getText().toString().equals("\nVery Often. \n")){
+                }else if(chooseFive.getText().toString().equals("\nVery often. \n")){
                     sendUserMessage(chooseFive.getText().toString());
                     imposterSyndromeTestQuestionsCounter(4);
                     readImposterSyndromeDegree();
@@ -1046,7 +1069,99 @@ public class ChatBotFragment extends Fragment {
 
         return view;
     }
-//hahaa
+
+    private void readSchizophreniaDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Schizophrenia");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Schizophrenia test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getSchizophreniaQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber331", Context.MODE_PRIVATE);
+        int numberOfAdhdQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you find it difficult to think regularly?"
+                ,"Do some people comment on their inability to understand what you are saying?"
+                ,"Do you feel that you have little in common with family and friends?"
+                ,"Do you sometimes feel that someone is watching you?"
+                ,"Do other people have a hard time guessing your emotions from your facial expressions?"
+                ,"Do you feel that you have capabilities that others cannot understand or appreciate?"
+                ,"Are you struggling to trust that what you are thinking is real?"
+                ,"Do you feel that others are taking advantage of your thoughts or emotions?"
+                ,"Are you struggling to keep up with everyday tasks like showering, changing clothes, paying bills, cleaning, cooking, etc.?"
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfAdhdQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfAdhdQuestion<=9) {
+            if (numberOfAdhdQuestion <= 8) {
+
+
+                sendBotMessage(depressionTest[numberOfAdhdQuestion]);
+                numberOfAdhdQuestion++;
+                editor.putInt("number", numberOfAdhdQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void schizophreniaTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter331", Context.MODE_PRIVATE);
+        int schizophreniaCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+            
+        }else if(count==1){
+            schizophreniaCounterDegree++;
+        }
+        editor.putInt("counter",schizophreniaCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)schizophreniaCounterDegree/10)*100);
+        reportRefrence.child("Schizophrenia").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep  "+schizophreniaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    //hahaa
     private void readPBADegree() {
         Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Pseudobulbar Affect (PBA)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -2897,6 +3012,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Empathy Deficit Disorder");
                             }else if(chat.getMessage().equals(recommendedTest("Imposter syndrome"))){
                                 chooseForStartTest("Imposter syndrome");
+                            }else if(chat.getMessage().equals(recommendedTest("Schizophrenia"))){
+                                chooseForStartTest("Schizophrenia");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -2944,8 +3061,10 @@ public class ChatBotFragment extends Fragment {
                                 socialAnxietyDisorderTest();
                             }else if(chat.getMessage().equals("Starting Empathy Deficit Disorder test ....!")){
                                 empathyDeficitDisorderTest();
-                            }else if(chat.getMessage().equals("Starting Empathy Imposter syndrome test ....!")){
+                            }else if(chat.getMessage().equals("Starting Imposter syndrome test ....!")){
                                 imposterSyndromeTest();
+                            }else if(chat.getMessage().equals("Starting Schizophrenia test ....!")){
+                                schizophreniaTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -3089,8 +3208,14 @@ public class ChatBotFragment extends Fragment {
                                 chooseTwo.setText("\nRarely. \n");
                                 chooseThree.setText("\nSometimes. \n");
                                 chooseFour.setText("\nOften. \n");
-                                chooseFive.setText("\nVery Often. \n");
+                                chooseFive.setText("\nVery often. \n");
+                            }else if(chat.getMessage().equals("Are you struggling to keep up with everyday tasks like showering, changing clothes, paying bills, cleaning, cooking, etc.?")){
+                                chooseOne.setText("  \n yes.  \n");
+                                chooseTwo.setText("  \n no.  \n");
+
+
                             }
+
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
 
@@ -3133,6 +3258,15 @@ public class ChatBotFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void schizophreniaTest() {
+        chooseThree.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
+        chooseFour.setVisibility(View.GONE);
+        chooseOne.setText("  \n yes  \n");
+        chooseTwo.setText("  \n no  \n");
 
     }
 
