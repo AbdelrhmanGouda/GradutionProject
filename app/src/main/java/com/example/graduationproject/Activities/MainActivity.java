@@ -19,7 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.graduationproject.Fragments.AppointmentsFragment;
-import com.example.graduationproject.Fragments.CartFragment;
+import com.example.graduationproject.Fragments.TestFragment;
 import com.example.graduationproject.Fragments.FriendListFragment;
 import com.example.graduationproject.Fragments.HomeFragment;
 import com.example.graduationproject.Fragments.NotificationFragment;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AppointmentsFragment()).commit();
                 break;
             case R.id.cart:
-               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new CartFragment()).commit();
+               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new TestFragment()).commit();
                 break;
             case R.id.log_out:
 
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             userName=dataSnapshot.child("name").getValue(String.class);
                             userImage=dataSnapshot.child("uri").getValue(String.class);
-                            Log.i(userName.toString(), "onDataChange: ");
+                            Log.i(userName, "onDataChange: ");
                             textName.setText(userName);
                             Picasso.get().load(userImage).centerCrop().fit().into(imgHead);
 
