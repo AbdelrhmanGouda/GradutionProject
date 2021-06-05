@@ -509,7 +509,7 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     bullyingTestQuestionsCounter(0);
                     readBullyingDegree();
-                    trythis();
+
 
                 }else if(chooseOne.getText().toString().equals("\n  Never \n")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -1239,7 +1239,7 @@ public class ChatBotFragment extends Fragment {
 
 
 
-                }else if(chooseFive.getText().toString().equals("\n  Very often.\n")) {
+                }else if(chooseFive.getText().toString().equals("\n  Very often. \n")) {
                     sendUserMessage(chooseFive.getText().toString());
                     obsessiveCompulsiveDisorderTestQuestionsCounter(4);
                     readObsessiveCompulsiveDisordeDegree();
@@ -1251,9 +1251,7 @@ public class ChatBotFragment extends Fragment {
         return view;
     }
 
-    private void trythis() {
-        Toast.makeText(getActivity(), "hhhh", Toast.LENGTH_SHORT).show();
-    }
+
 
     private void readBullyingDegree() {
         Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Bullying");
@@ -3257,7 +3255,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void obsessiveCompulsiveDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter241", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter242", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3280,7 +3278,7 @@ public class ChatBotFragment extends Fragment {
 
     }
     private void getObsessiveCompulsiveDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber241", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber242", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"2-Do you ever fear germs or engage in excessive cleaning?"
