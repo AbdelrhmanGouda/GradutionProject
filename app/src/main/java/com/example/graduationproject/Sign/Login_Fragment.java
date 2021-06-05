@@ -1,7 +1,9 @@
 package com.example.graduationproject.Sign;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
@@ -87,7 +89,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     FirebaseAuth.AuthStateListener mAuthListener;
     User userData = new User();
     private CallbackManager mCallbackManager;
-    public boolean IdToken ;
+    public boolean IdTokenFlag;
+    public String IdToken,UserType;
+    public SharedPreferences pref;
+    public SharedPreferences.Editor editor;
 
 
     public Login_Fragment() {
@@ -113,6 +118,18 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+
+
+        pref = getActivity().getSharedPreferences("Token",0);
+        editor = pref.edit();
+
+        IdToken = pref.getString("IdToken", "");
+        Log.d("IdTokenCreate",IdToken);
+        UserType = pref.getString("UserType", "");
+        Log.d("IdTokenUserTypeCreate",UserType);
+        IdTokenFlag = pref.getBoolean("IdTokenFlag",false);
+        Log.d("IdTokenFlagCreate",String.valueOf(IdTokenFlag));
+
         initViews();
         setListeners();
         return view;
@@ -128,6 +145,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         //  Log.d("5555555",ll);
         // Check if user or account is signed in (non-null) and update UI accordingly.
         updateUI(user);
+
+
 
 
     }
@@ -298,6 +317,22 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     Log.d("urllName", name);
                                     Toast.makeText(getActivity(), "Welcome" + name, Toast.LENGTH_SHORT)
                                             .show();
+
+                                    IdToken="";
+                                    IdTokenFlag = false;
+                                    editor.putString("IdToken", IdToken);
+                                    editor.putString("UserType","N");
+                                    editor.putBoolean("IdTokenFlag",IdTokenFlag);
+                                    editor.apply();
+
+                                    IdToken = pref.getString("IdToken", "");
+                                    Log.d("IdTokenNorm",IdToken);
+
+                                    UserType = pref.getString("UserType", "");
+                                    Log.d("IdTokenUserTypeNorm",UserType);
+
+                                    IdTokenFlag = pref.getBoolean("IdTokenFlag",false);
+                                    Log.d("IdTokenFlagNorm",String.valueOf(IdTokenFlag));
                                     updateUI(user);
                                 }
                             }
@@ -311,13 +346,22 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     }
 
     private void updateUI(FirebaseUser user) {
-        /*-------- Check if user is already logged in or not--------*/
-        if (user != null) {
+
+        /*-------- Check if G user is already logged in or not--------*/
+        if (user != null && IdTokenFlag && UserType.equals("G")) {
+            String name = user.getDisplayName();
+            Toast.makeText(getActivity(), "Google Login Success." + name, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }else if (user != null && IdTokenFlag && UserType.equals("F")){
+            String name = user.getDisplayName();
+            Toast.makeText(getActivity(), "Facebook Login Success " + name, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
+        else if (user != null) {
             /*------------ If user's email is verified then access login -----------*/
             if (user.isEmailVerified()) {
                 String name = user.getDisplayName();
-
-                Log.d("555555","Login Success." +"/" + user.isEmailVerified() +"/" +name);
+                Log.d("555555","Login Success " +"/" + user.isEmailVerified() +"/" +name);
 
                 startActivity(new Intent(getActivity(), MainActivity.class));
                 //Toast.makeText(getActivity(), "Login Success."  +name, Toast.LENGTH_SHORT).show();
@@ -330,19 +374,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             }
         } else {
             Toast.makeText(getActivity(), "Welcome , none :)",
-                    Toast.LENGTH_SHORT).show();
-        }
-        /*-------- Check if G user is already logged in or not--------*/
-        if (user != null && IdToken) {
-            String name = user.getDisplayName();
-            Toast.makeText(getActivity(), "Google or Facebook Login Success." + name,
-                    Toast.LENGTH_SHORT).show();
-            // Log.d("facebookdataggg", user.getPhotoUrl() + "");
-
-            startActivity(new Intent(getActivity(), MainActivity.class));
-
-        } else {
-            Toast.makeText(getActivity(), "Welcome , G , F none :)",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -423,7 +454,23 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            IdToken =true;
+                            IdTokenFlag =true;
+
+
+                            editor.putString("IdToken", idToken);
+                            editor.putString("UserType","G");
+                            editor.putBoolean("IdTokenFlag",IdTokenFlag);
+                            editor.apply();
+
+                            IdToken = pref.getString("IdToken", "");
+                            Log.d("IdTokenGoogle",IdToken);
+
+                            UserType = pref.getString("UserType", "");
+                            Log.d("IdTokenUserTypeGoogle",UserType);
+
+                            IdTokenFlag = pref.getBoolean("IdTokenFlag",false);
+                            Log.d("IdTokenFlagGoogle",String.valueOf(IdTokenFlag));
+
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -591,7 +638,23 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(FTAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            IdToken = true;
+                            IdTokenFlag = true;
+                            IdToken = token.getToken();
+
+                            editor.putString("IdToken", IdToken);
+                            editor.putString("UserType","F");
+                            editor.putBoolean("IdTokenFlag",IdTokenFlag);
+                            editor.apply();
+
+                            IdToken = pref.getString("IdToken", "");
+                            Log.d("IdTokenFace",IdToken);
+
+                            UserType = pref.getString("UserType", "");
+                            Log.d("IdTokenUserTypeFace",UserType);
+
+                            IdTokenFlag = pref.getBoolean("IdTokenFlag",false);
+                            Log.d("IdTokenFlagFace",String.valueOf(IdTokenFlag));
+
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

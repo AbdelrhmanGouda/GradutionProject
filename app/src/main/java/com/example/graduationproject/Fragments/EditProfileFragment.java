@@ -279,7 +279,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                 Bitmap bmp = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), image_uri);
                 bmp = modifyOrientation(bmp,getPath(getContext(),image_uri));
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos);
                 data = baos.toByteArray();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -289,8 +289,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             UploadTask uploadTask = ref.putBytes(data);//ref.putFile(image_uri);
             ref.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(
-                        UploadTask.TaskSnapshot taskSnapshot) {
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Image uploaded successfully
                     // Dismiss dialog
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -300,38 +299,22 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                             //Store data into Firebase Realtime Database
                             generatedFilePathURI = uri;
                             Log.d("urlll", generatedFilePathURI + "");
-                            imageToRealFirebase(generatedFilePathURI);
 
+                            // imageToRealFirebase(generatedFilePathURI);
+                            user.setUri(uri);
+
+                            database = FirebaseDatabase.getInstance();
+                            myRef = database.getReference("Users").child(uid);
+                            myRef.child("uri").setValue(user.getUri().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getActivity(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
                         }
                     });
-                                   /* uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                                        @Override
-                                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                            if (!task.isSuccessful()) {
-                                                throw task.getException();
-
-                                            }
-                                            // Continue with the task to get the download URL
-                                            return ref.getDownloadUrl();
-                                        }
-                                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Uri> task) {
-                                            if (task.isSuccessful()) {
-
-                                                generatedFilePathURI = task.getResult();
-                                                Log.d("urlll",generatedFilePathURI + "");
-
-
-                                            }
-                                        }
-                                    });
-
-                                    */
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
-
 
                 }
             })
@@ -356,13 +339,8 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
                                 @Override
                                 public void onProgress(
                                         UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
+                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
                                 }
                             });
         }

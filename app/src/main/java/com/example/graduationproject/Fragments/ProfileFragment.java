@@ -1,5 +1,7 @@
 package com.example.graduationproject.Fragments;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.graduationproject.R;
+import com.example.graduationproject.Sign.SignMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,8 +23,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +46,11 @@ ProfileFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton floatingEditProfileBtn ,delete;
     public FirebaseAuth auth ;
     String userName,userImage,friendsNumber,heartNumber,appointmentsNumber, password;
+    public boolean IdTokenFlag;
+    public String IdToken , UserType;
+    public SharedPreferences pref;
+    public SharedPreferences.Editor editor;
+    public AuthCredential credential;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +69,16 @@ ProfileFragment extends Fragment implements View.OnClickListener {
         dataBase();
 
 
+        pref = getActivity().getSharedPreferences("Token",0);
+        editor = pref.edit();
+
+        IdToken = pref.getString("IdToken", "");
+        Log.d("IdTokenProfile",IdToken);
+        UserType = pref.getString("UserType", "");
+        Log.d("IdTokenUserTypeProfile",UserType);
+        IdTokenFlag = pref.getBoolean("IdTokenFlag",false);
+        Log.d("IdTokenFlagProfile",String.valueOf(IdTokenFlag));
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,9 +92,16 @@ ProfileFragment extends Fragment implements View.OnClickListener {
                 // Get auth credentials from the user for re-authentication. The example below shows
                 // email and password credentials but there are multiple possible providers,
                 // such as GoogleAuthProvider or FacebookAuthProvider.
-                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), password);
-                //GoogleAuthProvider.getCredential(,null);
-               // FacebookAuthProvider.getCredential();
+
+
+                if (user != null && IdTokenFlag) {
+                   // credential = GoogleAuthProvider.getCredential(IdToken,null);
+                    credential = FacebookAuthProvider.getCredential(IdToken);
+                }else {
+                    credential = EmailAuthProvider.getCredential(user.getEmail(), password);
+                }
+
+
 
                 // Prompt the user to re-provide their sign-in credentials
                 user.reauthenticate(credential)
@@ -120,7 +147,7 @@ ProfileFragment extends Fragment implements View.OnClickListener {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Log.d("123auth", "User account deleted.");
-                                            // startActivity(new Intent(getActivity(), SignMainActivity.class));
+                                             startActivity(new Intent(getActivity(), SignMainActivity.class));
                                         } else {
                                             Log.w("123auth","Something is wrong!");
                                         }
@@ -172,7 +199,6 @@ ProfileFragment extends Fragment implements View.OnClickListener {
                             profileName.setText(userName);
                             Picasso.get().load(userImage).into(profilePic);
                             password =snapshot.child("pass").getValue(String.class);
-                            Log.i(password, "old password: ");
                         }
                     }
 
