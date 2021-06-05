@@ -49,6 +49,7 @@ import retrofit2.Response;
 public class ChatBotFragment extends Fragment {
 
     String id;
+    String illness1;
     RecyclerView recyclerView;
     ArrayList<Chat> chats;
     MessageAdapter messageAdapter;
@@ -346,7 +347,8 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     adhdTestQuestionsCounter(1);
                     chooseOne.setText("");
-                    adhdfunctionQuestions();
+                    getadhdDegree();
+
 
                 }else if(chooseOne.getText().toString().equals("YES . ")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -533,7 +535,17 @@ public class ChatBotFragment extends Fragment {
                     posttraumaticStressDisorderTestQuestionsCounter(0);
                     readPosttraumaticStressDisorderDegree();
 
+                }else if(chooseOne.getText().toString().equals("Show "+illness1+" discreption")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    //budle to test fragment
+                    sendBotMessage("feel free to snooze me any time :)");
+                }else if(chooseOne.getText().toString().equals("Start Session Again")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    sendBotMessage("Tell me about your problem");
+                    sendBotMessage("I'm listening");
+
                 }
+
 ///s7
 
             }
@@ -827,6 +839,9 @@ public class ChatBotFragment extends Fragment {
                     posttraumaticStressDisorderTestQuestionsCounter(1);
                     readPosttraumaticStressDisorderDegree();
 
+                }else if(chooseTwo.getText().toString().equals("No, Thanks")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    sendBotMessage("feel free to snooze me any time :)");
                 }
 
 
@@ -1303,6 +1318,48 @@ public class ChatBotFragment extends Fragment {
         return view;
     }
 
+    private void getadhdDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Attention-Deficit Hyperactivity Disorder (ADHD)");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Attention-Deficit Hyperactivity Disorder (ADHD) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 4){
+                            sendBotMessage("Your degree is lower than 4 ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 4 ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 
     private void readBullyingDegree() {
@@ -1332,6 +1389,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1429,6 +1488,9 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
+
                     }
 
 
@@ -1521,6 +1583,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1616,6 +1680,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1711,6 +1777,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1809,6 +1877,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1906,6 +1976,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -1991,6 +2063,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -2075,7 +2149,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdfunctionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber133", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber135", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"HOW IS YOUR CHILD DOING WITH CIRCLE TIME?"
@@ -2107,7 +2181,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter133", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter135", Context.MODE_PRIVATE);
         int adhdCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2153,6 +2227,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
                     }
 
 
@@ -2252,6 +2328,8 @@ public class ChatBotFragment extends Fragment {
                             sendBotMessage("Your degree is less than 3  ,\n" +
                                     " I think you're a normal person");
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2269,7 +2347,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getDrugAddictionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber113", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber115", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you make sure you have a steady supply of your drug of choice on hand?"
@@ -2295,7 +2373,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void drugAddictionTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter113", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter115", Context.MODE_PRIVATE);
         int drugAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2344,6 +2422,8 @@ public class ChatBotFragment extends Fragment {
                             sendBotMessage("Your degree is less than 5  ,\n" +
                                     " I think you're a normal person");
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2437,6 +2517,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2524,6 +2606,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2621,6 +2705,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2717,6 +2803,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2733,7 +2821,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getstressQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber73", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber75", Context.MODE_PRIVATE);
         int numberOfStressQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you experience fatigue and/or struggle to fall or stay asleep?"
@@ -2759,7 +2847,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void stressTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter73", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter75", Context.MODE_PRIVATE);
         int stressCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2809,6 +2897,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -2826,7 +2916,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void anixietyTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter82", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter85", Context.MODE_PRIVATE);
         int depressionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2848,7 +2938,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getAnixietyQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber82", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber85", Context.MODE_PRIVATE);
         int numberOfAnixietyQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"How often have you been bothered by not being able to stop or control worrying over the last two weeks?"
@@ -2907,8 +2997,13 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
+
+
+
 
 
                 }
@@ -2998,6 +3093,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3094,6 +3191,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3191,6 +3290,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3288,6 +3389,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3385,6 +3488,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3482,6 +3587,8 @@ public class ChatBotFragment extends Fragment {
 
 
                         }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
 
                     }
 
@@ -3517,7 +3624,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void depressionTestQuestionsCounter(int count){
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter92", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter93", Context.MODE_PRIVATE);
         int depressionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3539,7 +3646,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void getDepressionQuestions() {
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber91", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber92", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"How often have you been bothered that you have little interest or pleasure in doing things over the last two weeks?"
@@ -3977,6 +4084,15 @@ public class ChatBotFragment extends Fragment {
                                 chooseThree.setText("\n   Sometimes. \n");
                                 chooseFour.setText("\n   Often. \n");
                                 chooseFive.setText("\n   Very often. \n");
+                            }else if(chat.getMessage().contains("You can see some tips and discription about "+illness1+" that can help you")){
+                                chooseThree.setVisibility(View.GONE);
+                               chooseFive.setVisibility(View.GONE);
+                               chooseFour.setVisibility(View.GONE);
+                                chooseOne.setText("Show "+illness1+" discreption");
+                                chooseTwo.setText("No, Thanks");
+                            }else if(chat.getMessage().equals("feel free to snooze me any time :)")){
+                                chooseTwo.setVisibility(View.GONE);
+                                chooseOne.setText("Start Session Again");
                             }
 
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
@@ -4025,6 +4141,8 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void bullyingTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4037,6 +4155,9 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void schizophreniaTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
@@ -4046,6 +4167,8 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void pbaTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4070,6 +4193,8 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void AdhdTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
@@ -4077,6 +4202,8 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText("TOO MUCH CALLS");
     }
     private void ManiaTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4087,6 +4214,9 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText(". Rarely");
     }
     private void NarcissisticPersonalityDisorderTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4097,6 +4227,9 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText(".  Rarely");
     }
     private void  lowselfesteemTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
@@ -4104,6 +4237,8 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText(" NO  ");
     }
     private void IllnessanxietydisorderTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4114,13 +4249,18 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText(".  Rarely ");
     }
     private void  DissociativeIdentityDisorderTest() {
+
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseOne.setText(" Yes . ");
         chooseTwo.setText(" No . ");
     }
     private void  BipolarDisorderTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
@@ -4128,6 +4268,8 @@ public class ChatBotFragment extends Fragment {
         chooseTwo.setText(" NO  .");
     }
     private void BorderlinePersonalityDisordertest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
@@ -4136,6 +4278,8 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void psychosexualDysfunctionTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
@@ -4148,6 +4292,9 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void drugAddictiontest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
         setChooseVisable();
@@ -4157,6 +4304,9 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void alcoholAddictiontest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.GONE);
         chooseFive.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
         setChooseVisable();
@@ -4165,8 +4315,13 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void stressTest() {
-        setChooseVisable();
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+
+        setChooseVisable();
         chooseOne.setText("Never");
         chooseTwo.setText("Rarely");
         chooseThree.setText("Sometimes");
@@ -4176,6 +4331,13 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void nixietyTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+
+
         setChooseVisable();
         chooseOne.setText("Not  at all ");
         chooseTwo.setText("Several  day ");
@@ -4185,6 +4347,8 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void psychosisTest(){
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("Agree");
         chooseTwo.setText("Disagree");
@@ -4197,6 +4361,10 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+
+
         setChooseVisable();
         chooseOne.setText("\nNever\n");
         chooseTwo.setText("\nRarely\n");
@@ -4209,6 +4377,9 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+
         setChooseVisable();
         chooseOne.setText("\n Never \n");
         chooseTwo.setText("\n Rarely \n");
@@ -4221,6 +4392,8 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("\nNever \n");
         chooseTwo.setText("\nRarely \n");
@@ -4233,6 +4406,8 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("\n  Never \n");
         chooseTwo.setText("\n  Rarely \n");
@@ -4245,6 +4420,8 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setVisibility(View.VISIBLE);
         chooseFour.setVisibility(View.VISIBLE);
         chooseFive.setVisibility(View.VISIBLE);
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseOne.setText("\n   Never \n");
         chooseTwo.setText("\n   Rarely \n");
@@ -4260,8 +4437,11 @@ public class ChatBotFragment extends Fragment {
     private void chooseForStartTest(String illness) {
         chooseOne.setText("Ok let's do "+illness+" test");
         chooseTwo.setText("I'd prefere to begain with another one");
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
         chooseThree.setVisibility(View.GONE);
         chooseFour.setVisibility(View.GONE);
+        chooseFive.setVisibility(View.GONE);
         setChooseVisable();
 
     }
@@ -4300,13 +4480,18 @@ public class ChatBotFragment extends Fragment {
              public void onResponse(Call<Chat> call, Response<Chat> response) {
                  Log.d("TAGDATA", "onResponse: " + response.body().getMessage() + " " + response.code());
                  if(response.isSuccessful()&&response.body()!=null) {
+                        if(response.body().getMessage().equals("I didn't get that, try again")){
+                            sendBotMessage("Explain More");
+                        }else {
+                            chats.add(response.body());
+                            //  Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            sendBotMessage("After analysis we see that you have "+response.body().getMessage());
+                            sendBotMessage("I recommend for us to begin with "+response.body().getMessage()+
+                                    " test ,what do you see?");
+                            illness1=response.body().getMessage();
+                            reportRefrence.child(response.body().getMessage()).child("illness").setValue(response.body().getMessage());
+                        }
 
-                         chats.add(response.body());
-                   //  Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                     sendBotMessage("After analysis we see that you have "+response.body().getMessage());
-                     sendBotMessage("I recommend for us to begin with "+response.body().getMessage()+
-                             " test ,what do you see?");
-                     reportRefrence.child(response.body().getMessage()).child("illness").setValue(response.body().getMessage());
                      }else {
                      Toast.makeText(getActivity(), "Something was wrong", Toast.LENGTH_SHORT).show();
                  }
@@ -4322,6 +4507,11 @@ public class ChatBotFragment extends Fragment {
          });
     }
     private void depressionTest() {
+        chooseOne.setVisibility(View.VISIBLE);
+        chooseTwo.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
         setChooseVisable();
         chooseFive.setVisibility(View.GONE);
         chooseOne.setText("Not at all");
