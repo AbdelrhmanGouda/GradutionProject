@@ -508,7 +508,7 @@ public class ChatBotFragment extends Fragment {
                     readBullyingDegree();
 
                 }
-
+///s7
 
             }
         });
