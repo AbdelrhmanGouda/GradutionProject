@@ -502,10 +502,12 @@ public class ChatBotFragment extends Fragment {
                     bullyingTestQuestionsCounter(0);
                     getBullyingQuestions();
 
+
                 }else if(chooseOne.getText().toString().equals(". NEVER.")){
                     sendUserMessage(chooseOne.getText().toString());
                     bullyingTestQuestionsCounter(0);
                     readBullyingDegree();
+                    trythis();
 
                 }
 ///s7
@@ -1191,6 +1193,10 @@ public class ChatBotFragment extends Fragment {
         getPrefrance();
 
         return view;
+    }
+
+    private void trythis() {
+        Toast.makeText(getActivity(), "hhhh", Toast.LENGTH_SHORT).show();
     }
 
     private void readBullyingDegree() {
