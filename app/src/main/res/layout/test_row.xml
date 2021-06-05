@@ -36,6 +36,7 @@
                 android:visibility="gone"/>
         </FrameLayout>
         <LinearLayout
+            android:id="@+id/learn_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
