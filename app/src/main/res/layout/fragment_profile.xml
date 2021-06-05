@@ -101,17 +101,35 @@
 
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_edit_profile_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginTop="@dimen/_70sdp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_baseline_edit_24"
-        android:backgroundTint="@color/blue"
-        app:borderWidth="0dp"
-        />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            android:backgroundTint="@color/blue"
+            app:borderWidth="0dp"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_edit_profile_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:backgroundTint="@color/blue"
+            app:borderWidth="0dp"
+            />
+    </RelativeLayout>
+
 
 </LinearLayout>

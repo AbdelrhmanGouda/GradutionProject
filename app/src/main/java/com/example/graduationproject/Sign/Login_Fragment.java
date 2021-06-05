@@ -87,6 +87,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     FirebaseAuth.AuthStateListener mAuthListener;
     User userData = new User();
     private CallbackManager mCallbackManager;
+    public boolean IdToken ;
 
 
     public Login_Fragment() {
@@ -315,20 +316,24 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             /*------------ If user's email is verified then access login -----------*/
             if (user.isEmailVerified()) {
                 String name = user.getDisplayName();
-                Toast.makeText(getActivity(), "Login Success." + name,
-                        Toast.LENGTH_SHORT).show();
+
+                Log.d("555555","Login Success." +"/" + user.isEmailVerified() +"/" +name);
 
                 startActivity(new Intent(getActivity(), MainActivity.class));
+                //Toast.makeText(getActivity(), "Login Success."  +name, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Your Email is not verified.",
                         Toast.LENGTH_SHORT).show();
+                Log.d("555556","Login Success." +"/" + user.isEmailVerified() +"/" );
+
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         } else {
             Toast.makeText(getActivity(), "Welcome , none :)",
                     Toast.LENGTH_SHORT).show();
         }
         /*-------- Check if G user is already logged in or not--------*/
-        if (user != null) {
+        if (user != null && IdToken) {
             String name = user.getDisplayName();
             Toast.makeText(getActivity(), "Google or Facebook Login Success." + name,
                     Toast.LENGTH_SHORT).show();
@@ -418,6 +423,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            IdToken =true;
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -585,6 +591,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(FTAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            IdToken = true;
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

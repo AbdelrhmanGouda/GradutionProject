@@ -50,7 +50,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     }
 
     private void dataBase(){
-        Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){

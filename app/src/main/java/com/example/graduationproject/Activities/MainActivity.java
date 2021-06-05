@@ -1,5 +1,6 @@
 package com.example.graduationproject.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.graduationproject.Fragments.AppointmentsFragment;
 import com.example.graduationproject.Fragments.CartFragment;
 import com.example.graduationproject.Fragments.FriendListFragment;
@@ -145,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             userImage=dataSnapshot.child("uri").getValue(String.class);
                             Log.i(userName.toString(), "onDataChange: ");
                             textName.setText(userName);
-                            Picasso.get().load(userImage).into(imgHead);
+                            Picasso.get().load(userImage).centerCrop().fit().into(imgHead);
 
                         }
                     }
