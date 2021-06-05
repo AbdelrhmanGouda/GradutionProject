@@ -77,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.home);
         }
 
+        /*toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getHeader();
+                Toast.makeText(getApplicationContext(),"ssss",Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
     }
     @Override
     public void onBackPressed() {
@@ -84,11 +92,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         }else{
             super.onBackPressed();
+
         }
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        getHeader();
         switch (menuItem.getItemId()){
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
@@ -149,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.i(userName.toString(), "onDataChange: ");
                             textName.setText(userName);
                             Picasso.get().load(userImage).centerCrop().fit().into(imgHead);
-
                         }
                     }
                 }

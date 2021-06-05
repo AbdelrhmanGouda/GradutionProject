@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    style="@style/Theme.AppCompat.Light.NoActionBar"
     android:orientation="vertical"
     tools:context=".Fragments.ProfileFragment">
 
@@ -27,7 +29,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_75sdp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -105,13 +107,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="30dp"
             android:src="@drawable/ic_baseline_delete_forever_24"
             android:backgroundTint="@color/blue"
@@ -124,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="30dp"
             android:src="@drawable/ic_baseline_edit_24"
             android:backgroundTint="@color/blue"
