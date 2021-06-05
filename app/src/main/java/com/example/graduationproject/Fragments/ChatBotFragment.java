@@ -528,7 +528,7 @@ public class ChatBotFragment extends Fragment {
                     posttraumaticStressDisorderTestQuestionsCounter(0);
                     getPosttraumaticStressDisorderQuestions();
 
-                }else if(chooseOne.getText().toString().equals("\n   Never.\n")){
+                }else if(chooseOne.getText().toString().equals("\n   Never. \n")){
                     sendUserMessage(chooseOne.getText().toString());
                     posttraumaticStressDisorderTestQuestionsCounter(0);
                     readPosttraumaticStressDisorderDegree();
@@ -822,7 +822,7 @@ public class ChatBotFragment extends Fragment {
                     posttraumaticStressDisorderTestQuestionsCounter(1);
                     getPosttraumaticStressDisorderQuestions();
 
-                }else if(chooseTwo.getText().toString().equals("\n   Rarely.\n")) {
+                }else if(chooseTwo.getText().toString().equals("\n   Rarely. \n")) {
                     sendUserMessage(chooseTwo.getText().toString());
                     posttraumaticStressDisorderTestQuestionsCounter(1);
                     readPosttraumaticStressDisorderDegree();
@@ -1284,14 +1284,14 @@ public class ChatBotFragment extends Fragment {
                     obsessiveCompulsiveDisorderTestQuestionsCounter(4);
                     readObsessiveCompulsiveDisordeDegree();
 
-                  }else if(chooseFive.getText().toString().equals("\n  Very often \n")){
+                  }else if(chooseFive.getText().toString().equals("\n   Very often \n")){
                     sendUserMessage(chooseFive.getText().toString());
                     posttraumaticStressDisorderTestQuestionsCounter(4);
                     getPosttraumaticStressDisorderQuestions();
 
 
 
-                }else if(chooseFive.getText().toString().equals("\n  Very often. \n")) {
+                }else if(chooseFive.getText().toString().equals("\n   Very often. \n")) {
                     sendUserMessage(chooseFive.getText().toString());
                     posttraumaticStressDisorderTestQuestionsCounter(4);
                     readPosttraumaticStressDisorderDegree();
