@@ -213,6 +213,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Social Anxiety Disorder","Do you feel anxious or panicky before social situations?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Bullying test")){
                     startTestWithFirstQuestion("Bullying","Do others make hurtful comments about you?");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Imposter syndrome test")){
+                    startTestWithFirstQuestion("Imposter syndrome","I think my success was just a coincidence.");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -449,6 +451,16 @@ public class ChatBotFragment extends Fragment {
                     NarcissisticPersonalityDisorderTestQuestionsCounter(0);
                     readNarcissisticPersonalityDisorderDegree();
 
+                }else if(chooseOne.getText().toString().equals("\nNever \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(0);
+                    getimposterSyndromerQuestions();
+
+                }else if(chooseOne.getText().toString().equals("\nNever. \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(0);
+                    readImposterSyndromeDegree();
+
                 }
 
 
@@ -673,6 +685,16 @@ public class ChatBotFragment extends Fragment {
                     empathyDeficitDisorderTestQuestionsCounter(1);
                     readEmpathyDeficitDisorderDegree();
 
+                }else if(chooseTwo.getText().toString().equals("\nRarely \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(1);
+                    getimposterSyndromerQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("\nRarely. \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(1);
+                    readImposterSyndromeDegree();
+
                 }
 
 
@@ -801,6 +823,16 @@ public class ChatBotFragment extends Fragment {
                     empathyDeficitDisorderTestQuestionsCounter(2);
                     readEmpathyDeficitDisorderDegree();
 
+                }else if(chooseThree.getText().toString().equals("\nSometimes \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(2);
+                    getimposterSyndromerQuestions();
+
+                }else if(chooseThree.getText().toString().equals("\nSometimes. \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(2);
+                    readImposterSyndromeDegree();
+
                 }
 
                 }
@@ -908,6 +940,16 @@ public class ChatBotFragment extends Fragment {
                     empathyDeficitDisorderTestQuestionsCounter(3);
                     readEmpathyDeficitDisorderDegree();
 
+                }else if(chooseFour.getText().toString().equals("\nOften \n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(3);
+                    getimposterSyndromerQuestions();
+
+                }else if(chooseFour.getText().toString().equals("\nOften. \n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(3);
+                    readImposterSyndromeDegree();
+
                 }
                 }
 
@@ -986,6 +1028,16 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     empathyDeficitDisorderTestQuestionsCounter(4);
                     readEmpathyDeficitDisorderDegree();
+
+                }else if(chooseFive.getText().toString().equals("\nVery Often \n")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(4);
+                    getimposterSyndromerQuestions();
+
+                }else if(chooseFive.getText().toString().equals("\nVery Often. \n")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    imposterSyndromeTestQuestionsCounter(4);
+                    readImposterSyndromeDegree();
 
                 }
                 }
@@ -2523,6 +2575,104 @@ public class ChatBotFragment extends Fragment {
     }
 
 
+    private void imposterSyndromeTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter231", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }else if(count==2){
+            alcoholAddictionCounterDegree+=2;
+        }else if (count==3){
+            alcoholAddictionCounterDegree+=3;
+        }else if (count==4){
+            alcoholAddictionCounterDegree+=4;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
+        reportRefrence.child("Imposter syndrome").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getimposterSyndromerQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber231", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Even when I'm doing well, I don't think I really deserve it"
+                ,"I worry about feeling very shy if my incompetence is exposed."
+                ,"I fear that people will discover that I am not as smart as they think."
+                ,"I underestimated my accomplishments"
+                ,"It's hard for me to accept compliments."
+                ,"I compare myself to others"
+                ,"I feel failure is not an option."
+                ,"I hesitate to show off my accomplishments"
+                ,"I don't like drawing attention to my successes."
+
+
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 9) {
+            if (numberOfQuestion <= 8) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+    private void readImposterSyndromeDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Imposter syndrome");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Imposter syndrome test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -2745,6 +2895,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Mania");
                             }else if(chat.getMessage().equals(recommendedTest("Empathy Deficit Disorder"))){
                                 chooseForStartTest("Empathy Deficit Disorder");
+                            }else if(chat.getMessage().equals(recommendedTest("Imposter syndrome"))){
+                                chooseForStartTest("Imposter syndrome");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -2792,6 +2944,8 @@ public class ChatBotFragment extends Fragment {
                                 socialAnxietyDisorderTest();
                             }else if(chat.getMessage().equals("Starting Empathy Deficit Disorder test ....!")){
                                 empathyDeficitDisorderTest();
+                            }else if(chat.getMessage().equals("Starting Empathy Imposter syndrome test ....!")){
+                                imposterSyndromeTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -2930,6 +3084,12 @@ public class ChatBotFragment extends Fragment {
                                 chooseFour.setText("  .Often");
                                 chooseFive.setText("  .Very Often");
 
+                            }  else if(chat.getMessage().equals("I don't like drawing attention to my successes.")){
+                                chooseOne.setText("\nNever. \n");
+                                chooseTwo.setText("\nRarely. \n");
+                                chooseThree.setText("\nSometimes. \n");
+                                chooseFour.setText("\nOften. \n");
+                                chooseFive.setText("\nVery Often. \n");
                             }
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
                             chat.getMessage().equals("More than half of the days.")||chat.getMessage().equals("Nearly everyday.")){
@@ -3129,6 +3289,18 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText("\n Sometimes \n");
         chooseFour.setText("\n Often \n");
         chooseFive.setText("\n Very often \n");
+    }
+
+    private void imposterSyndromeTest(){
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        setChooseVisable();
+        chooseOne.setText("\nNever \n");
+        chooseTwo.setText("\nRarely \n");
+        chooseThree.setText("\nSometimes \n");
+        chooseFour.setText("\nOften \n");
+        chooseFive.setText("\nVery often \n");
     }
 
     private String recommendedTest(String illness) {
