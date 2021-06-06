@@ -16,16 +16,14 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
+        <ImageView
+            android:layout_width="@dimen/_132sdp"
+            android:layout_height="@dimen/_142sdp"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/login"
-            android:textColor="@color/white_greyish"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:src="@drawable/logo2008" />
 
         <EditText
             android:id="@+id/login_emailid"
@@ -79,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/show_pwd"
-                android:textColor="@color/white"
+                android:buttonTint="@color/blue"
+                android:textColor="@color/blue"
                 android:textSize="14sp" />
 
             <TextView
@@ -99,10 +98,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:background="@drawable/loginbutton_selector"
+            android:background="@drawable/rounded_corner"
+            android:layout_marginBottom="20dp"
             android:padding="3dp"
             android:text="@string/login"
-            android:textColor="#009688"
+            android:textColor="@color/blue"
             android:textSize="17sp"
             android:textStyle="bold" />
 

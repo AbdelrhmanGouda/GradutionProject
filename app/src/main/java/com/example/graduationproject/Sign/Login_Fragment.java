@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -179,9 +180,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);
 
-            forgotPassword.setTextColor(csl);
-            show_hide_password.setTextColor(csl);
-            signUp.setTextColor(csl);
+            forgotPassword.setTextColor(Color.rgb(	69	,166,	222));
+            show_hide_password.setTextColor(Color.rgb(	69	,166,	222));
+            signUp.setTextColor(Color.rgb(	69	,166,	222));
         } catch (Exception e) {
         }
     }
@@ -201,8 +202,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                 .setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
                     @Override
-                    public void onCheckedChanged(CompoundButton button,
-                                                 boolean isChecked) {
+                    public void onCheckedChanged(CompoundButton button, boolean isChecked) {
 
                         // If it is checkec then show password else hide
                         // password
