@@ -39,6 +39,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.graduationproject.Activities.MainActivity;
 import com.example.graduationproject.R;
 import com.example.graduationproject.Sign.User;
 import com.example.graduationproject.Sign.Utils;
@@ -176,10 +177,25 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         final String email = editEmail.getText().toString();
         final String location = editLocation.getSelectedItem().toString();
         final String phone = editPhone.getText().toString();
-        Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        //Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         uploadImage();
         userProfile(name);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users").child(id);
+
+        myRef.child("name").setValue(name);
+        myRef.child("email").setValue(email);
+        myRef.child("location").setValue(location);
+        myRef.child("phone").setValue(phone).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot!= null){
@@ -201,7 +217,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
     }
     private void checkValidation() {
 

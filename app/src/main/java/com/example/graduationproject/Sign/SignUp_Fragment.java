@@ -15,6 +15,7 @@ import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
@@ -27,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -129,20 +131,23 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         user_profile = view.findViewById(R.id.add_pic);
         //   dropdown = view.findViewById(R.id.spinner);
 
+
+
         //create a list of items for the spinner.
         String[] items = new String[]{"Choose Your Location", "Alexandria", "Aswan", "Asyut", "Beheira", "Beni Suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Ismailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohag", "South Sinai", "Suez"};
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.color_spinner, items);
         location.setAdapter(adapter);
+
+
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
+            ColorStateList csl = ColorStateList.createFromXml(getResources(), xrp);
 
-            login.setTextColor(csl);
+            login.setTextColor(Color.rgb(	69	,166,	222));
 //			terms_conditions.setTextColor(csl);
         } catch (Exception e) {
             Toast.makeText(getActivity(), e + " ", Toast.LENGTH_SHORT).show();
@@ -172,6 +177,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     }
 
      */
+
+
 
     public void saveToRealFirebase(String uid, String name, String email, String phone, String location, String password) {
         //saveToRealFirebase(String uid, Uri uri, String name, String email, String phone, String location, String password)
@@ -225,6 +232,8 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             }
         });
     }
+
+
 
     @Override
     public void onClick(View v) {

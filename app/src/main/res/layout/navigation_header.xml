@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:gravity="bottom"
     android:padding="20dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/header_image"
