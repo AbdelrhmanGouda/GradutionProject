@@ -3841,6 +3841,8 @@ public class ChatBotFragment extends Fragment {
                                 chooseForStartTest("Obsessive-Compulsive Disorder (OCD)");
                             }else if(chat.getMessage().equals(recommendedTest("Posttraumatic stress disorder (PTSD)"))){
                                 chooseForStartTest("Posttraumatic stress disorder (PTSD)");
+                            }else if(chat.getMessage().equals(recommendedTest("Eating Disorder"))){
+                                chooseForStartTest("Eating Disorder");
                             }
                             else if(chat.getMessage().equals("Starting Depression test ....!")){
                                 chooseFour.setVisibility(View.VISIBLE);
@@ -3902,6 +3904,8 @@ public class ChatBotFragment extends Fragment {
                                 obsessiveCompulsiveDisorderTest();
                             }else if(chat.getMessage().equals("Starting Posttraumatic stress disorder (PTSD) test ....!")){
                                 posttraumaticStressDisorderTest();
+                            }else if(chat.getMessage().equals("Starting Eating Disorder test ....!")){
+                                eatingDisorderTest();
                             }
 
                             else if(chat.getMessage().equals("How often have you been bothered by moving or speaking so slowly that other people could have noticed? Or the opposite" +
@@ -4093,6 +4097,14 @@ public class ChatBotFragment extends Fragment {
                             }else if(chat.getMessage().equals("feel free to snooze me any time :)")){
                                 chooseTwo.setVisibility(View.GONE);
                                 chooseOne.setText("Start Session Again");
+                            }
+
+                            else if(chat.getMessage().equals("I am not happy at all with my eating patterns  ")){
+                                chooseOne.setText("\n   Never.  \n");
+                                chooseTwo.setText("\n   Rarely.  \n");
+                                chooseThree.setText("\n   Sometimes.  \n");
+                                chooseFour.setText("\n   Often.  \n");
+                                chooseFive.setText("\n   Very often.  \n");
                             }
 
                             else  if(chat.getMessage().equals("Not at all.")||chat.getMessage().equals("Several days.")||
@@ -4428,6 +4440,18 @@ public class ChatBotFragment extends Fragment {
         chooseThree.setText("\n   Sometimes \n");
         chooseFour.setText("\n   Often \n");
         chooseFive.setText("\n   Very often \n");
+    }
+
+    private void eatingDisorderTest(){
+        chooseThree.setVisibility(View.VISIBLE);
+        chooseFour.setVisibility(View.VISIBLE);
+        chooseFive.setVisibility(View.VISIBLE);
+        setChooseVisable();
+        chooseOne.setText("\n   Never  \n");
+        chooseTwo.setText("\n   Rarely  \n");
+        chooseThree.setText("\n   Sometimes  \n");
+        chooseFour.setText("\n   Often  \n");
+        chooseFive.setText("\n   Very often  \n");
     }
 
     private String recommendedTest(String illness) {
