@@ -28,7 +28,7 @@
             android:id="@+id/username"
             android:textSize="@dimen/_18sdp"
             android:layout_marginStart="@dimen/_25sdp"
-            android:textColor="@color/white"
+            android:textColor="@color/whitee"
             android:textStyle="bold"
             android:text="name"
             ></TextView>
