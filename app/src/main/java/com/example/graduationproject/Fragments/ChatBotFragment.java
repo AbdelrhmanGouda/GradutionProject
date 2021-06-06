@@ -170,7 +170,7 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseOne.getText().toString());
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
-
+                /////
                 }else if(chooseOne.getText().toString().equals("Ok let's do Depression test")){
 
                     startTestWithFirstQuestion("Depression","How often have you been bothered by feeling down," +
