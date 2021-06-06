@@ -30,8 +30,8 @@
             android:title="Appointments" />
         <item
             android:id="@+id/cart"
-            android:icon="@drawable/cart"
-            android:title="Cart" />
+            android:icon="@drawable/test"
+            android:title="Test" />
         <item
             android:id="@+id/log_out"
             android:icon="@drawable/logout"
