@@ -341,7 +341,6 @@ public class TherapyDataFragment extends Fragment {
 
             patientBookRef = FirebaseDatabase.getInstance().getReference("appointment").child(patientId).push();
             String id = patientBookRef.getKey();
-            patientBookRef = FirebaseDatabase.getInstance().getReference("appointment").child(patientId).push();
             patientBookRef.child("therapyId").setValue(therapyId);
             patientBookRef.child("therapyName").setValue(therapyName);
             patientBookRef.child("patientName").setValue(patientName);
