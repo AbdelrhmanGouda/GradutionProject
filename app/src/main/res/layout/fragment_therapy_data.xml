@@ -57,20 +57,18 @@
 
 
     <TextView
+        android:id="@+id/select_the_day"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_30sdp"
-        android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
-        android:hint="select the day "
-        android:textColorHint="@color/white"
-        android:textSize="@dimen/_15sdp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/blue"
-        android:id="@+id/select_the_day"/>
-
-
+        android:gravity="center"
+        android:hint="select the day "
+        android:textColor="@color/whitee"
+        android:textColorHint="@color/whitee"
+        android:textSize="@dimen/_15sdp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -92,7 +90,7 @@
         android:text="Book"
         android:backgroundTint="@color/blue"
         android:id="@+id/therapy_book_button"
-        android:textColor="@color/white"
+        android:textColor="@color/whitee"
         />
 
 
