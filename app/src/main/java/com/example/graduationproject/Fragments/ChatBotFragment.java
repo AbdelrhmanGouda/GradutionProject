@@ -226,6 +226,8 @@ public class ChatBotFragment extends Fragment {
                     startTestWithFirstQuestion("Obsessive-Compulsive Disorder (OCD)","1-Do you ever experience repetitive thoughts that cause you anxiety?");
                 }else if(chooseOne.getText().toString().equals("Ok let's do Posttraumatic stress disorder (PTSD) test")){
                     startTestWithFirstQuestion("Posttraumatic stress disorder (PTSD)","1-Any reminder brought back feelings about the event/s");
+                }else if(chooseOne.getText().toString().equals("Ok let's do Eating Disorder test")){
+                    startTestWithFirstQuestion("Eating Disorder","Do you ever eat more food than planned at a meal?");
                 }
                 else if(chooseOne.getText().toString().equals("Not at all")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -544,6 +546,16 @@ public class ChatBotFragment extends Fragment {
                     sendBotMessage("Tell me about your problem");
                     sendBotMessage("I'm listening");
 
+                }else if(chooseOne.getText().toString().equals("\n   Never  \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    eatingDisorderTestQuestionsCounter(0);
+                    getEmpathyDeficitDisorderQuestions();
+
+                }else if(chooseOne.getText().toString().equals("\n   Never.  \n")){
+                    sendUserMessage(chooseOne.getText().toString());
+                    eatingDisorderTestQuestionsCounter(0);
+                    readEmpathyDeficitDisorderDegree();
+
                 }
 
 ///s7
@@ -843,6 +855,17 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseTwo.getText().toString());
                     sendBotMessage("feel free to snooze me any time :)");
                 }
+                else if(chooseTwo.getText().toString().equals("\n   Rarely  \n")){
+                    sendUserMessage(chooseTwo.getText().toString());
+                    eatingDisorderTestQuestionsCounter(1);
+                    getEmpathyDeficitDisorderQuestions();
+
+                }else if(chooseTwo.getText().toString().equals("\n   Rarely.  \n")) {
+                    sendUserMessage(chooseTwo.getText().toString());
+                    eatingDisorderTestQuestionsCounter(1);
+                    readEatingDisorderDegree();
+
+                }
 
 
 
@@ -1023,6 +1046,17 @@ public class ChatBotFragment extends Fragment {
                     readPosttraumaticStressDisorderDegree();
 
                 }
+                else if(chooseThree.getText().toString().equals("\n   Sometimes  \n")){
+                    sendUserMessage(chooseThree.getText().toString());
+                    eatingDisorderTestQuestionsCounter(2);
+                    getEatingDisorderQuestions();
+
+                }else if(chooseThree.getText().toString().equals("\n   Sometimes. \n")) {
+                    sendUserMessage(chooseThree.getText().toString());
+                    eatingDisorderTestQuestionsCounter(2);
+                    readEatingDisorderDegree();
+
+                }
                 }
         });
         chooseFour.setOnClickListener(new View.OnClickListener() {
@@ -1178,6 +1212,16 @@ public class ChatBotFragment extends Fragment {
                     posttraumaticStressDisorderTestQuestionsCounter(3);
                     readPosttraumaticStressDisorderDegree();
 
+                }else if(chooseFour.getText().toString().equals("\n   Often  \n")){
+                    sendUserMessage(chooseFour.getText().toString());
+                    eatingDisorderTestQuestionsCounter(3);
+                    getEatingDisorderQuestions();
+
+                }else if(chooseFour.getText().toString().equals("\n   Often.  \n")) {
+                    sendUserMessage(chooseFour.getText().toString());
+                    eatingDisorderTestQuestionsCounter(3);
+                    readEatingDisorderDegree();
+
                 }
                 }
 
@@ -1310,6 +1354,18 @@ public class ChatBotFragment extends Fragment {
                     sendUserMessage(chooseFive.getText().toString());
                     posttraumaticStressDisorderTestQuestionsCounter(4);
                     readPosttraumaticStressDisorderDegree();
+                }
+                else if(chooseFive.getText().toString().equals("\n   Very often  \n")){
+                    sendUserMessage(chooseFive.getText().toString());
+                    eatingDisorderTestQuestionsCounter(4);
+                    getEatingDisorderQuestions();
+
+
+
+                }else if(chooseFive.getText().toString().equals("\n   Very often.  \n")) {
+                    sendUserMessage(chooseFive.getText().toString());
+                    eatingDisorderTestQuestionsCounter(4);
+                    readEatingDisorderDegree();
                 }
                 }
         });
@@ -3577,6 +3633,105 @@ public class ChatBotFragment extends Fragment {
 
 
                         } sendBotMessage("Your total degree from Posttraumatic stress disorder (PTSD) test is \n"+degree+"%");
+                        if(Double.parseDouble(degree)<(double) 40){
+                            sendBotMessage("Your degree is lower than 40% ,\n" +
+                                    " I think you're a normal person");
+
+                        }else {
+                            sendBotMessage("Your degree is more than 40% ,\n" +
+                                    " I think you should visit a doctor");
+
+
+                        }
+                        sendBotMessage("You can see some tips and discription about "+illness1+" that can help you");
+
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    private void eatingDisorderTestQuestionsCounter(int count) {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter262", Context.MODE_PRIVATE);
+        int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        if(count==0){
+        }else if(count==1){
+            alcoholAddictionCounterDegree++;
+        }else if(count==2){
+            alcoholAddictionCounterDegree+=2;
+        }else if (count==3){
+            alcoholAddictionCounterDegree+=3;
+        }else if (count==4){
+            alcoholAddictionCounterDegree+=4;
+        }
+        editor.putInt("counter",alcoholAddictionCounterDegree);
+        editor.apply();
+        double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/44)*100);
+        reportRefrence.child("Eating Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+
+        Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void getEatingDisorderQuestions() {
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber262", Context.MODE_PRIVATE);
+        int numberOfQuestion=preferences.getInt("number",0);
+        SharedPreferences.Editor editor=preferences.edit();
+        String [] depressionTest={"Do you find yourself eating large amounts of food when you aren’t hungry?"
+                ,"Do you experience feelings of shame or guilt about how much you eat?"
+                ,"Do you hide your eating behaviors from loved ones?"
+                ,"Do you struggle to control when and how much you eat?"
+                ,"Do you hoard food or hide empty food containers?"
+                ,"Do you find yourself eating more rapidly than you’d like?"
+                ,"Do you find yourself eating more when you try to restrict how much you eat?"
+                ,"A close family member has, has had an eating disorder"
+                ,"when others critique my eating or pressure me to eat more this makes me very annoyed"
+                ,"I am not happy at all with my eating patterns  "
+
+        };
+        Toast.makeText(getActivity(), " "+numberOfQuestion, Toast.LENGTH_SHORT).show();
+        while (numberOfQuestion<= 10) {
+            if (numberOfQuestion <= 9) {
+                sendBotMessage(depressionTest[numberOfQuestion]);
+                numberOfQuestion++;
+                editor.putInt("number", numberOfQuestion);
+                editor.apply();
+            }
+            break;
+        }
+
+    }
+
+
+    private void readEatingDisorderDegree() {
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Eating Disorder");
+        query6.addListenerForSingleValueEvent(new ValueEventListener() {
+            String degree;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null){
+                    if (dataSnapshot.exists() && dataSnapshot.getChildrenCount()>0&&dataSnapshot.getValue().toString().length()>0) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // FriendListData user =snapshot.getValue(FriendListData.class);
+                            degree=dataSnapshot.child("totalDegree").getValue(String.class);
+
+
+
+                        } sendBotMessage("Your total degree from Eating Disorder test is \n"+degree+"%");
                         if(Double.parseDouble(degree)<(double) 40){
                             sendBotMessage("Your degree is lower than 40% ,\n" +
                                     " I think you're a normal person");
