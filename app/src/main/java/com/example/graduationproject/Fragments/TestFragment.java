@@ -36,12 +36,11 @@ public class TestFragment extends Fragment {
         testDataList =new ArrayList<>();
         testDataList.add(new TestData("Depression",R.drawable.deppression));
         testDataList.add(new TestData("Alcohol Addiction",R.drawable.alcohol));
-        testDataList.add(new TestData("Behavioral Addiction",R.drawable.behavioral));
         testDataList.add(new TestData("Drug Addiction",R.drawable.drug));
         testDataList.add(new TestData("Anixiety",R.drawable.anxiety));
         testDataList.add(new TestData("Stress",R.drawable.stress));
         testDataList.add(new TestData("Psychosexual Dysfunction",R.drawable.psychosexual));
-        testDataList.add(new TestData("Psychosexual Dysfunction",R.drawable.adhd));
+        testDataList.add(new TestData("Attention-Deficit Hyperactivity Disorder (ADHD)",R.drawable.adhd));
         testDataList.add(new TestData("Autism",R.drawable.autism));
         testDataList.add(new TestData("Pseudobulbar Affect (PBA)",R.drawable.pseudobullar));
         testDataList.add(new TestData("Bullying",R.drawable.bullying));
@@ -51,8 +50,6 @@ public class TestFragment extends Fragment {
         testDataList.add(new TestData("low self esteem",R.drawable.low_self));
         testDataList.add(new TestData("Bipolar Disorder",R.drawable.bipolar));
         testDataList.add(new TestData("Mania",R.drawable.mania));
-        testDataList.add(new TestData("Panic Disorder",R.drawable.panic));
-        testDataList.add(new TestData("Hoarding Disorder",R.drawable.hoarding));
         testDataList.add(new TestData("Psychosis",R.drawable.psychosis));
         testDataList.add(new TestData("Social Anxiety Disorder",R.drawable.social));
         testDataList.add(new TestData("Imposter syndrome",R.drawable.imposter));

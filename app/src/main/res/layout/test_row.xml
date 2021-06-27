@@ -49,8 +49,8 @@
                 android:layout_marginBottom="@dimen/_2sdp"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="13dp"
+                android:layout_width="81dp"
+                android:layout_height="18dp"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:text="Learn More"
