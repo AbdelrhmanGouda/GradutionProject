@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.graduationproject.Adapter.MessageAdapter;
 import com.example.graduationproject.Data.Chat;
+import com.example.graduationproject.Data.TestDegree;
 import com.example.graduationproject.R;
 import com.example.graduationproject.Remote.IChatBotApi;
 import com.example.graduationproject.Remote.RetrofitBot;
@@ -1524,7 +1525,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/36)*100);
-        reportRefrence.child("Bullying").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Bullying",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -1619,7 +1621,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",schizophreniaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)schizophreniaCounterDegree/10)*100);
-        reportRefrence.child("Schizophrenia").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Schizophrenia",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+schizophreniaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -1716,7 +1719,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/35)*100);
-        reportRefrence.child("Pseudobulbar Affect (PBA)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Pseudobulbar Affect (PBA)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -1813,7 +1817,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/32)*100);
-        reportRefrence.child("Mania").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Mania",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -1911,7 +1916,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/40)*100);
-        reportRefrence.child("Narcissistic Personality Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Narcissistic Personality Disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2011,7 +2017,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/40)*100);
-        reportRefrence.child("Illness anxiety disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Illness anxiety disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2100,7 +2107,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",pbaCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)pbaCounterDegree/5)*100);
-        reportRefrence.child("Dissociative Identity Disorder (DID)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Dissociative Identity Disorder (DID)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2213,7 +2221,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",autismCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)autismCounterDegree/54)*100);
-        reportRefrence.child("Autism").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Autism",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+autismCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2262,7 +2271,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",adhdCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)adhdCounterDegree));
-        reportRefrence.child("Attention-Deficit Hyperactivity Disorder (ADHD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Attention-Deficit Hyperactivity Disorder (ADHD)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+adhdCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2362,7 +2372,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",psychosexualDysfunctionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)psychosexualDysfunctionCounterDegree/44)*100);
-        reportRefrence.child("Psychosexual Dysfunction").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Psychosexual Dysfunction",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+psychosexualDysfunctionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2454,7 +2465,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",drugAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)drugAddictionCounterDegree));
-        reportRefrence.child("drugAddiction").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("drugAddiction",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+drugAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2521,7 +2533,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/14)*100);
-        reportRefrence.child("Borderline personality disorder (BPD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Borderline personality disorder (BPD)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2616,7 +2629,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/7)*100);
-        reportRefrence.child("low self esteem").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("low self esteem",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2705,7 +2719,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/17)*100);
-        reportRefrence.child("Bipolar Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Bipolar Disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2807,7 +2822,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree));
-        reportRefrence.child("Alcohol Addiction").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Alcohol Addiction",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -2934,7 +2950,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",stressCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)stressCounterDegree/32)*100);
-        reportRefrence.child("Stress").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Stress",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+stressCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3001,7 +3018,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",depressionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)depressionCounterDegree/21)*100);
-        reportRefrence.child("Anixiety").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Anixiety",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+depressionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3101,7 +3119,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/10)*100);
-        reportRefrence.child("Psychosis").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Psychosis",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3198,7 +3217,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
-        reportRefrence.child("Social Anxiety Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Social Anxiety Disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3297,7 +3317,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
-        reportRefrence.child("Empathy Deficit Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Empathy Deficit Disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3396,7 +3417,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
-        reportRefrence.child("Imposter syndrome").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Imposter syndrome",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3497,7 +3519,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
-        reportRefrence.child("Obsessive-Compulsive Disorder (OCD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Obsessive-Compulsive Disorder (OCD)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3595,7 +3618,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/40)*100);
-        reportRefrence.child("Posttraumatic stress disorder (PTSD)").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Posttraumatic stress disorder (PTSD)",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3693,7 +3717,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",alcoholAddictionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)alcoholAddictionCounterDegree/44)*100);
-        reportRefrence.child("Eating Disorder").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Eating Disorder",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
         Toast.makeText(getActivity(), " dep "+alcoholAddictionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -3808,7 +3833,8 @@ public class ChatBotFragment extends Fragment {
         editor.putInt("counter",depressionCounterDegree);
         editor.apply();
         double totalDegreeOfTest=Math.round(((float)depressionCounterDegree/27)*100);
-                reportRefrence.child("Depression").child("totalDegree").setValue(String.valueOf(totalDegreeOfTest));
+        TestDegree testDegree=new TestDegree("Depression",String.valueOf(totalDegreeOfTest));
+        reportRefrence.child("tests").push().setValue(testDegree);
 
        Toast.makeText(getActivity(), " dep "+depressionCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
@@ -4684,7 +4710,7 @@ public class ChatBotFragment extends Fragment {
                             sendBotMessage("I recommend for us to begin with "+response.body().getMessage()+
                                     " test ,what do you see?");
                             illness1=response.body().getMessage();
-                            reportRefrence.child(response.body().getMessage()).child("illness").setValue(response.body().getMessage());
+                          //  reportRefrence.child("tests").child("illness").setValue(response.body().getMessage());
                         }
 
                      }else {
