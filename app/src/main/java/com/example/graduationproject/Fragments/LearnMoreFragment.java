@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.graduationproject.R;
 
@@ -28,9 +27,10 @@ public class LearnMoreFragment extends Fragment {
         if(getArguments()!=null){
             name=getArguments().getString("name");
             image=getArguments().getInt("image",0);
+            setDifenationSymptoms();
+
         }
         ilnessImage.setImageResource(image);
-        setDifenationSymptoms();
         return view;
     }
 

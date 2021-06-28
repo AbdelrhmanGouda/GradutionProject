@@ -60,6 +60,8 @@ public class ChatBotFragment extends Fragment {
     DatabaseReference databaseAllReference,databaseReference,reportRefrence;
     EditText textSend;
     ImageButton send;
+    String illnessName1;
+    int image;
     RelativeLayout relativeLayout;
     LinearLayout linearLayout;
 
@@ -93,6 +95,11 @@ public class ChatBotFragment extends Fragment {
         // ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         activity.getSupportActionBar().setTitle("");
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getArguments()!=null){
+            illness1=getArguments().getString("name");
+            image=getArguments().getInt("image",0);
+        }
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -540,6 +547,14 @@ public class ChatBotFragment extends Fragment {
                 }else if(chooseOne.getText().toString().equals("Show "+illness1+" discreption")){
                     sendUserMessage(chooseOne.getText().toString());
                     //budle to test fragment
+                    LearnMoreFragment messageFragment=new LearnMoreFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("name", illness1);
+                    bundle.putInt("image", image);
+                    messageFragment.setArguments(bundle);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,messageFragment).commit();
+
                     sendBotMessage("feel free to snooze me any time :)");
                 }else if(chooseOne.getText().toString().equals("Start Session Again")){
                     sendUserMessage(chooseOne.getText().toString());
@@ -3020,7 +3035,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void startTestWithFirstQuestion(String ilness, String question) {
-        sendUserMessage(ilness+"test");
+        sendUserMessage(ilness+" test");
         sendBotMessage("Starting "+ilness+" test ....!");
         sendBotMessage(question);
     }
@@ -4251,6 +4266,7 @@ public class ChatBotFragment extends Fragment {
                                 chooseTwo.setText("No, Thanks");
                             }else if(chat.getMessage().equals("feel free to snooze me any time :)")){
                                 chooseTwo.setVisibility(View.GONE);
+
                                 chooseOne.setText("Start Session Again");
                             }
 
