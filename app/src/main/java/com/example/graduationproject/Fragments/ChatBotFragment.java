@@ -604,6 +604,14 @@ public class ChatBotFragment extends Fragment {
 
                 }else if(chooseTwo.getText().toString().equals("I'd prefere to begain with another one")){
 
+                    TestFragment messageFragment=new TestFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("name", illness1);
+                    bundle.putInt("image", image);
+                    messageFragment.setArguments(bundle);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,messageFragment).commit();
+
                 }else if(chooseTwo.getText().toString().equals("Several days")){
                     sendUserMessage(chooseTwo.getText().toString());
                     depressionTestQuestionsCounter(1);
@@ -1391,7 +1399,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getadhdDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Attention-Deficit Hyperactivity Disorder (ADHD)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Attention-Deficit Hyperactivity Disorder (ADHD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1435,7 +1443,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readBullyingDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Bullying");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Bullying");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1535,7 +1543,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readSchizophreniaDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Schizophrenia");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Schizophrenia");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1631,7 +1639,7 @@ public class ChatBotFragment extends Fragment {
 
     //hahaa
     private void readPBADegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Pseudobulbar Affect (PBA)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Pseudobulbar Affect (PBA)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1729,7 +1737,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readManiaDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Mania");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Mania");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1827,7 +1835,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readNarcissisticPersonalityDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Narcissistic Personality Disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Narcissistic Personality Disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -1928,7 +1936,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readIllnessanxietydisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Illness anxiety disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Illness anxiety disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2028,7 +2036,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readDissociativeIdentityDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Dissociative Identity Disorder (DID)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Dissociative Identity Disorder (DID)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2116,7 +2124,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readAutismDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Autism");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Autism");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2282,7 +2290,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPsychosexualDysfunctionDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Psychosexual Dysfunction");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Psychosexual Dysfunction");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2380,7 +2388,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readDrugAddictionDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("drugAddiction");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("drugAddiction");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2475,7 +2483,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readAlcoholAddictionDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Alcohol Addiction");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Alcohol Addiction");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2575,7 +2583,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readBorderlinePersonalityDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Borderline personality disorder (BPD)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Borderline personality disorder (BPD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2665,7 +2673,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readlowselfesteemDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("low self esteem");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("low self esteem");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2765,7 +2773,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readBipolarDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Bipolar Disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Bipolar Disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2864,7 +2872,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readStressDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Stress");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Stress");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -2959,7 +2967,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readAnixietyDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Anixiety");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Anixiety");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3060,7 +3068,7 @@ public class ChatBotFragment extends Fragment {
 
     private void readDepressionDegree() {
 
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Depression");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Depression");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3157,7 +3165,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readPsychosisDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Psychosis");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Psychosis");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3256,7 +3264,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readSocialAnxietyDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Social Anxiety Disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Social Anxiety Disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3356,7 +3364,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readEmpathyDeficitDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Empathy Deficit Disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Empathy Deficit Disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3456,7 +3464,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readImposterSyndromeDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Imposter syndrome");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Imposter syndrome");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3556,7 +3564,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void readObsessiveCompulsiveDisordeDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Obsessive-Compulsive Disorder (OCD)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Obsessive-Compulsive Disorder (OCD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3656,7 +3664,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readPosttraumaticStressDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Posttraumatic stress disorder (PTSD)");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Posttraumatic stress disorder (PTSD)");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3756,7 +3764,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void readEatingDisorderDegree() {
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("Eating Disorder");
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("PatientReportChatBot").child(firebaseUser.getUid()).child("tests").child("Eating Disorder");
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             String degree;
 
@@ -3819,7 +3827,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void depressionTestQuestionsCounter(int count){
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter93", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter700", Context.MODE_PRIVATE);
         int depressionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3842,7 +3850,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void getDepressionQuestions() {
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber92", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber700", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"How often have you been bothered that you have little interest or pleasure in doing things over the last two weeks?"
@@ -4292,7 +4300,9 @@ public class ChatBotFragment extends Fragment {
                                 chooseTwo.setText("No, Thanks");
                             }else if(chat.getMessage().equals("feel free to snooze me any time :)")){
                                 chooseTwo.setVisibility(View.GONE);
-
+                                chooseThree.setVisibility(View.GONE);
+                                chooseFour.setVisibility(View.GONE);
+                                chooseFive.setVisibility(View.GONE);
                                 chooseOne.setText("Start Session Again");
                             }
 
