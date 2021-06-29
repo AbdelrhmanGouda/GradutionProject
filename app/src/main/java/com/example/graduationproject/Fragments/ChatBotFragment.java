@@ -1486,7 +1486,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getBullyingQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber340", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1000", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Are you being harassed online or do others post mean things about you?"
@@ -1515,7 +1515,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void bullyingTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter340", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1000", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
        if(count==0){
@@ -1536,7 +1536,7 @@ public class ChatBotFragment extends Fragment {
         TestDegree testDegree=new TestDegree("Bullying",String.valueOf(totalDegreeOfTest));
         reportRefrence.child("tests").child("Bullying").setValue(testDegree);
 
-        Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), " dep  "+pbaCounterDegree+" total "+totalDegreeOfTest, Toast.LENGTH_SHORT).show();
 
 
 
@@ -1588,7 +1588,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getSchizophreniaQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber331", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1010", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you find it difficult to think regularly?"
@@ -1618,7 +1618,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void schizophreniaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter331", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1010", Context.MODE_PRIVATE);
         int schizophreniaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -1683,7 +1683,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPBAQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber314", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1020", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Others have told me that I seem to become amused very easily or that I seem to become amused about things that really aren’t funny"
@@ -1710,7 +1710,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void pbaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter314", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1020", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==1){
@@ -1781,7 +1781,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getManiaQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber172", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1030", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you ever experience persistently increased goal-directed activity for more than a week?"
@@ -1809,7 +1809,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void ManiaTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter172", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1030", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){}
@@ -1879,7 +1879,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getNarcissisticPersonalityDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber180", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1040", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you expect to be seen as superior to other people?"
@@ -1908,7 +1908,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void NarcissisticPersonalityDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter180", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1040", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){}
@@ -1980,7 +1980,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getIllnessanxietydisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber420", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1050", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do your worries distract you from enjoying normal activities?"
@@ -2009,7 +2009,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void IllnessanxietydisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter420", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1050", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){}
@@ -2080,7 +2080,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getDissociativeIdentityDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber401", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1060", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you feel memory problems?"
@@ -2105,7 +2105,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void DissociativeIdentityDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter401", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1060", Context.MODE_PRIVATE);
         int pbaCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){}
@@ -2169,7 +2169,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getAutismQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber303", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1070", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={" is regarded as an \"eccentric professor\" by the other children?"
@@ -2217,7 +2217,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void autismTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter303", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1070", Context.MODE_PRIVATE);
         int autismCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2237,7 +2237,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdfunctionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber135", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1080", Context.MODE_PRIVATE);
         int numberOfAdhdQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"HOW IS YOUR CHILD DOING WITH CIRCLE TIME?"
@@ -2269,7 +2269,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void adhdTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter135", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1080", Context.MODE_PRIVATE);
         int adhdCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2335,7 +2335,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPsychosexualDysfunctionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber120", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1090", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={" How concerned have you been about your sexual performance?"
@@ -2364,7 +2364,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void psychosexualDysfunctionTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter120", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1090", Context.MODE_PRIVATE);
         int psychosexualDysfunctionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2437,7 +2437,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getDrugAddictionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber115", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1100", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you make sure you have a steady supply of your drug of choice on hand?"
@@ -2463,7 +2463,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void drugAddictionTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter115", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1100", Context.MODE_PRIVATE);
         int drugAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2531,7 +2531,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void BorderlinePersonalityDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter140", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1110", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2550,7 +2550,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getBorderlinePersonalityDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber140", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1110", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Have you had a sense of overwhelming emptiness or feeling \"hollow\"?"
@@ -2627,7 +2627,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void lowselfesteemTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter150", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1120", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2646,7 +2646,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getlowselfesteemQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber150", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1120", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you feel hate about your outward appearance?"
@@ -2717,7 +2717,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void BipolarDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter162", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1130", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2736,7 +2736,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getBipolarDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber162", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1130", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"You were much more socially active than normal, and at all hours:"
@@ -2820,7 +2820,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void lcoholAddictionTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter101", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1140", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -2839,7 +2839,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getAlcoholAddictionQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber101", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1140", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you drink because you are uncomfortable in social situations?"
@@ -2916,7 +2916,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getstressQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber75", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1150", Context.MODE_PRIVATE);
         int numberOfStressQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you experience fatigue and/or struggle to fall or stay asleep?"
@@ -2942,7 +2942,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void stressTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter75", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1150", Context.MODE_PRIVATE);
         int stressCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3012,7 +3012,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void anixietyTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter85", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1160", Context.MODE_PRIVATE);
         int depressionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3035,7 +3035,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getAnixietyQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber85", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1160", Context.MODE_PRIVATE);
         int numberOfAnixietyQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"How often have you been bothered by not being able to stop or control worrying over the last two weeks?"
@@ -3117,7 +3117,7 @@ public class ChatBotFragment extends Fragment {
 
     // farid////////////////////////////////
     private void psychosisTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter200", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1170", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3136,7 +3136,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPsychosisQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber200", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1170", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"I sometimes feel that someone or something else controls my thoughts"
@@ -3209,7 +3209,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void socialAnxietyDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter210", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1180", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3234,7 +3234,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getSocialAnxietyDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber210", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1190", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you fear that you will be negatively evaluated by others when in social situations?"
@@ -3309,7 +3309,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void empathyDeficitDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter221", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1190", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3334,7 +3334,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getEmpathyDeficitDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber221", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1200", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"I attempt to change the topic of conversation when a family member or friend wants to talk about what’s troubling them?"
@@ -3409,7 +3409,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void imposterSyndromeTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter231", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1200", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3434,7 +3434,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getimposterSyndromerQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber231", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1210", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Even when I'm doing well, I don't think I really deserve it"
@@ -3511,7 +3511,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void obsessiveCompulsiveDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter242", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1210", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3535,7 +3535,7 @@ public class ChatBotFragment extends Fragment {
 
     }
     private void getObsessiveCompulsiveDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber242", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1220", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"2-Do you ever fear germs or engage in excessive cleaning?"
@@ -3610,7 +3610,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void posttraumaticStressDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter252", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1220", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3635,7 +3635,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getPosttraumaticStressDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber252", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1230", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"2- I had trouble staying asleep"
@@ -3709,7 +3709,7 @@ public class ChatBotFragment extends Fragment {
 
 
     private void eatingDisorderTestQuestionsCounter(int count) {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter262", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1230", Context.MODE_PRIVATE);
         int alcoholAddictionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3734,7 +3734,7 @@ public class ChatBotFragment extends Fragment {
     }
 
     private void getEatingDisorderQuestions() {
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber262", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1240", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"Do you find yourself eating large amounts of food when you aren’t hungry?"
@@ -3827,7 +3827,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void depressionTestQuestionsCounter(int count){
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter700", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceCounter1240", Context.MODE_PRIVATE);
         int depressionCounterDegree=preferences.getInt("counter",0);
         SharedPreferences.Editor editor=preferences.edit();
         if(count==0){
@@ -3850,7 +3850,7 @@ public class ChatBotFragment extends Fragment {
     }
     private void getDepressionQuestions() {
 
-        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber700", Context.MODE_PRIVATE);
+        final SharedPreferences preferences=getActivity().getSharedPreferences("PrefrenceneNumber1250", Context.MODE_PRIVATE);
         int numberOfQuestion=preferences.getInt("number",0);
         SharedPreferences.Editor editor=preferences.edit();
         String [] depressionTest={"How often have you been bothered that you have little interest or pleasure in doing things over the last two weeks?"

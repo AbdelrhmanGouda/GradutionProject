@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +33,9 @@
         android:layout_margin="@dimen/_10sdp"
         android:src="@drawable/right"
         android:id="@+id/floating_right"
+        android:backgroundTint="@color/blue"
+        app:borderWidth="0dp"
+        android:visibility="gone"
         ></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </RelativeLayout>

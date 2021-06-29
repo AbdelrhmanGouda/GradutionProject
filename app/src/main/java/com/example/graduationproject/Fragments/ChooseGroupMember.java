@@ -1,5 +1,6 @@
 package com.example.graduationproject.Fragments;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,17 +57,16 @@ public class ChooseGroupMember  extends Fragment {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    FragmentCreateGroup createGroup=new FragmentCreateGroup();
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelableArrayList("arraylist",chossenData);
+                    //set Fragmentclass Arguments
+                    createGroup.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container,createGroup).addToBackStack("").commit();
+                    FirebaseDatabase.getInstance().getReference().child("CreateGroup").child(firebaseUser.getUid()).removeValue();
 
-                FragmentCreateGroup createGroup=new FragmentCreateGroup();
-                Bundle bundle=new Bundle();
-                bundle.putParcelableArrayList("arraylist",chossenData);
-                //set Fragmentclass Arguments
-                createGroup.setArguments(bundle);
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,createGroup).addToBackStack("").commit();
-                FirebaseDatabase.getInstance().getReference().child("CreateGroup").child(firebaseUser.getUid()).removeValue();
-
-            }
+                }
         });
         return view;
 
@@ -75,7 +75,7 @@ public class ChooseGroupMember  extends Fragment {
 
     private void getFriends() {
         listData.clear();
-        Query query6 = FirebaseDatabase.getInstance().getReference().child("Profiles").child("Friends").child("FriendsList")
+        Query query6 = FirebaseDatabase.getInstance().getReference().child("Friends").child("FriendsList")
                 .child(firebaseUser.getUid());
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -138,6 +138,7 @@ public class ChooseGroupMember  extends Fragment {
                         }
                         if(chossenData!=null){
                             friendChossen.setVisibility(View.VISIBLE);
+                            go.setVisibility(View.VISIBLE);
                         }
                        // Toast.makeText(getActivity(), firebaseUser.getUid(), Toast.LENGTH_SHORT).show();
                         chossenAdapter.notifyDataSetChanged();

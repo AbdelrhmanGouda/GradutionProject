@@ -42,7 +42,7 @@ public class FriendListFragment extends Fragment {
     private List<GroupChatList> groupChatLists;
     private FriendListAdapter friendListAdapter;
     private GroupChatAdapter groupChatAdapter;
-    LinearLayout linearLayout;
+    //LinearLayout linearLayout;
     FloatingActionButton addGroup;
     FirebaseUser firebaseUser;
     String type;
@@ -56,7 +56,7 @@ public class FriendListFragment extends Fragment {
         groupChatRecycler=view.findViewById(R.id.recycler_groupchat);
         friendListRecyclerView =view.findViewById(R.id.friends_list_recycler_view);
         textViewGroup=view.findViewById(R.id.text);
-        linearLayout=view.findViewById(R.id.location_linear);
+       // linearLayout=view.findViewById(R.id.location_linear);
         friendListRecyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
         friendListRecyclerView.setHasFixedSize(true);
         groupChatRecycler.setLayoutManager( new LinearLayoutManager(getContext()));
@@ -78,7 +78,7 @@ public class FriendListFragment extends Fragment {
             if(type.equals("people")){
                 setHasOptionsMenu(true);
                 addGroup.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.VISIBLE);
+//                linearLayout.setVisibility(View.VISIBLE);
                 groupChatRecycler.setVisibility(View.VISIBLE);
                 textViewGroup.setVisibility(View.VISIBLE);
             }

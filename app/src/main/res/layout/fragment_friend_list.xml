@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".Fragments.FriendListFragment">
 
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -31,19 +32,12 @@
             ></TextView>
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/location_linear"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:id="@+id/view"
-        android:background="@android:color/black"/>
+-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friends_list_recycler_view"
         android:layout_width="match_parent"
-        android:layout_below="@id/view"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/_200sdp" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -54,6 +48,8 @@
         android:visibility="gone"
         android:src="@drawable/white_add"
         android:layout_margin="@dimen/_10sdp"
+        android:backgroundTint="@color/blue"
+        app:borderWidth="0dp"
         ></com.google.android.material.floatingactionbutton.FloatingActionButton>
    <TextView
        android:layout_width="wrap_content"

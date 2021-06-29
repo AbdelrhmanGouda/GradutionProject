@@ -50,32 +50,70 @@
     android:layout_height="match_parent"
     tools:listitem="@layout/row_groupchat_left"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    android:background="@color/light_Gray"
     ></androidx.recyclerview.widget.RecyclerView>
 
-<LinearLayout
+<!--<LinearLayout
     android:id="@+id/group_chat_linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:background="@color/white"
+    android:background="@color/light_Gray"
     android:layout_alignParentBottom="true"
-    >
+    android:orientation="horizontal">
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Type a message..."
         android:id="@+id/edit_group_message"
-        android:layout_weight="1"
-        android:inputType="textCapSentences|textMultiLine"
-        ></EditText>
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@id/btn_group_send"
+        android:background="@drawable/rounded_corner"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:hint="Type a message..."></EditText>
     <ImageButton
+        android:id="@+id/btn_group_send"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:id="@+id/btn_group_send"
         android:background="@drawable/send"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_2sdp"
         ></ImageButton>
 
-</LinearLayout>
+</LinearLayout>-->
+    <RelativeLayout
+        android:id="@+id/group_chat_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:background="@color/light_Gray"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/edit_group_message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@id/btn_group_send"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:hint="Type a message..."></EditText>
+
+        <ImageButton
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:id="@+id/btn_group_send"
+            android:background="@drawable/send"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            ></ImageButton>
+
+    </RelativeLayout>
+
 </RelativeLayout>

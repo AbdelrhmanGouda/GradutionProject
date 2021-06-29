@@ -370,7 +370,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                         Toast.LENGTH_SHORT).show();
                 Log.d("555556","Login Success." +"/" + user.isEmailVerified() +"/" );
 
-                startActivity(new Intent(getActivity(), MainActivity.class));
+               // startActivity(new Intent(getActivity(), MainActivity.class));
             }
         } else {
             Toast.makeText(getActivity(), "Welcome , none :)",
