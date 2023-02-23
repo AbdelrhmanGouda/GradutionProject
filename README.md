@@ -6,6 +6,8 @@ our application chatbot on your phone, assess your situation, give you some tips
 
 
 
+https://user-images.githubusercontent.com/61237536/220800661-eb5bd83a-fb15-4033-80e4-0b2be6bf8998.mp4
+
 
 
 
@@ -17,13 +19,5 @@ our application chatbot on your phone, assess your situation, give you some tips
 
 
 
-https://user-images.githubusercontent.com/61237536/220800661-eb5bd83a-fb15-4033-80e4-0b2be6bf8998.mp4
 
-
-
-Uploading myndia~2.mp4…
-
-
-
-Uploading myndia~3.mp4…
 
