@@ -1,0 +1,814 @@
+{
+  "intents": [
+    {
+      "tag": "Depression",
+      "patterns": [
+        "I am depressed",
+        "I am thinking to sucide",
+        "I have no value in life",
+        "I have deppression",
+        "i feel lonly",
+        "i am alone",
+        "i dont feel good with dealing with others",
+        "i am very sad",
+        "no one love me",
+        "no one care about me",
+        "i feel that as i lost my interests",
+        "i am not enjoy at any activity",
+        " i have changes in appetite",
+        "i sleep too much",
+        "i have a trouble sleeping",
+        "i have no energy to do anything",
+        "i feel worthless",
+        "i wanna die ",
+        "i have problems with concentrating",
+        "i am hopless person ",
+        "i want die",
+        "i am going to die",
+        "i am fear of being dead",
+        "depression"
+        
+        
+      ],
+      "responses": [
+        "Depression"
+      ]
+    },
+
+
+    {
+      "tag": "Alcohol Addiction",
+      "patterns": [
+
+        "I am addicted to alcahol ",
+        "i am drinking too much",
+        "i am drunkard",
+        "i am alcoholic",
+        "i am hard drinker",
+        "i have alcohol addiction ",
+        "i am addicted to alcohol",
+        "alcohol"
+                
+      ],
+      "responses": [
+        "Alcohol Addiction"
+      ]
+    },
+    
+    {
+      "tag": "Behavioral Addiction",
+      "patterns": [
+        "I have an addiction",
+        "I am addicted to sex",
+        "I am addicted to games",
+        "I am addicted to love",
+        "I am addicted to social media",
+        "i can't give up it",
+        "i have a behavioral addiction",
+        "behavioral addiction",
+        "i can't stop this habit",
+        "i am addicted to secret habit",
+        "Secretive or dishonest behavior",
+        "Continuing to use the substance, or engage in certain behaviors, despite the negative consequences that these cause",
+        "Trying but failing to reduce or stop misusing a substance, or engaging in certain behaviors",
+        "i find it difficult to stop these behaviors",
+        "i find it difficult to stop these behaviors even when there are negative consequences",
+        "feel ashamed about this",
+        "i felt guilty after every time i doing that ",
+        "i am unable to get through the week without doing this",
+        "i always find  justifications to myself to do that more and more",
+        "i always keep doing this alone",
+        "i always keep that secret from others ",
+        "i am spending large amounts of time engaging in this behavior",
+        "i can't stop doing this"
+        
+
+      ],
+      
+      "responses": [
+        "Behavioral Addiction"
+      ]
+    },
+    
+    
+    {
+      "tag": "Drug Addiction",
+      "patterns": [
+        "i need to drugs regularly",
+        "i have drugs addiction ",
+        "i am addicted to drugs",
+        "i want to stop taking drugs, but i can’t",
+        "i am a drug taker",
+        "i am hooked",
+        "drug addiction",
+        "drugs"
+        
+        
+      ],
+      "responses": [
+        "Drug Addiction"
+      ]
+    },
+    
+    
+    {
+      "tag": "Anixiety",
+      "patterns": [
+        "i am feeling restlessness",
+        "i am feeling that i am on-edge",
+        "i am very worried ",
+        "i feel that i am irritable",
+        "i found its difficultto concentrate ",
+        "i am breathing rapidly ",
+        "i have a difficulty with falling asleep",
+        "i am anixited",
+        "i become easily annoyed",
+        "anixiety"
+    
+      ],
+      "responses": [
+        "Anixiety"
+      ]
+    },
+    
+    
+    {
+      "tag": "Stress",
+      "patterns": [
+        "i am feeling stress",
+        "i am feeling anger",
+        "i am feeling fear",
+        "i am feeling sad",
+        "i am furstrated",
+        "i am not able to sleep properly",
+        "i have a Headache",
+        "i notice changes in my sexual habits",
+        "i notice that my memory is affected",
+        "i am smoking alot unusually",
+        "i feel overwhelmed with responsibilities",
+        "Stress"
+        
+      ],
+      "responses": [
+        "Stress"
+      ]
+    },
+    
+    
+    {
+      "tag": "Psychosexual Dysfunction",
+      "patterns": [
+        "i am inable to maintain an erection ",
+        "i have aproblem with erection",
+        "i have retarded ejaculation.",
+        "i am inable to control the timing of ejaculation ",
+        "i have aproblem to control the timing of ejaculation ",
+        "i am inable to achieve orgasm.",
+        "i have a lack of interest in or desire for sex.",
+        "i have no desire for sex",
+        "i am inable to become aroused during sex",
+        "i feel pain with intercourse.",
+        "i think taht i have a psychosexual dysfunction",
+        "i found intercourse painful for me",
+        "i have problems during sex",
+        "i have a sexual problems",
+        "sexual",
+        "sexual Dysfunction",
+        "Psychosexual Dysfunction",
+        "i am not satisified with my partner",
+        "i am not able to be aroused ",
+        "i have problems in being aroused",
+        "i have a bed problems",
+        "i am not satisified with my wife",
+        "i can not accept my husband"
+        
+      ],
+      "responses": [
+        "Psychosexual Dysfunction"
+      ]
+    },
+    
+    
+    {
+      "tag": "Attention-Deficit Hyperactivity Disorder (ADHD)",
+      "patterns": [
+        "ADHD",
+        "my child is inattention",
+        "he is very hyper",
+        "he is impulisive",
+        "he is always distracte",
+        "i think he does not understand me ",
+        "he is so energatic",
+        "he has an attention deficit",
+        " he is hyperactivity",
+        "Attention-Deficit",
+        "Hyperactivity",
+        "Attention-Deficit Hyperactivity Disorder"
+        
+        
+      ],
+      "responses": [
+        "Attention-Deficit Hyperactivity Disorder (ADHD)"
+      ]
+    },
+    
+
+    {
+      "tag": "Autism",
+      "patterns": [
+        "Autism",
+        "he has a hard time interacting with others.",
+        "he prefers to be alone.",
+        "he avoids or rejects physical contact.",
+        "he avoids eye contact.",
+        "he don’t understand emotions ",
+        "he don’t talk at all",
+        "he has problems with communication",
+        "he has a delayed speech ",
+        "he has problems with language skills",
+        "he is speaking as robots",
+        "he is not using common gestures (pointing or waving),and not responding to them",
+        "he is inable to stay on topic when talking or answering questions",
+        "he is not recognizing sarcasm or joking",
+        "he acts in ways that seem unusual ",
+        "he has interests that aren’t typical",
+        "he has a fussy eating habits",
+        "he acts without thinking",
+        "he is aggressive",
+        "he has a short attention span"
+        
+        
+      ],
+      "responses": [
+        "Autism"
+      ]
+    },
+    
+    
+    {
+      "tag": "Pseudobulbar Affect (PBA)",
+      "patterns": [
+        "i have episodes of sudden laughing",
+        "i have episodes of sudden crying",
+        "i am laughing inappropriately",
+        "i am crying inappropriately",
+        "i have a frequent outbursts of crying or laughing",
+        "i have a involuntary outbursts of crying or laughing",
+        "i have a uncontrollable outbursts of crying or laughing",
+        "i am not connected to my emotional state.",
+        "my laughter often turns to tears. ",
+        "I become amused very easily ",
+        "I find myself crying very easily. ",
+        "i am crying very easily. ",
+        "I unable to control my laughter",
+        "i am laughing suddenly with no reasons. ",
+        "I am  unable  to control my crying",
+        "I find that I am easily overcome by laughter",
+        "PBA",
+        "pseudobulbar affect"
+        
+      ],
+      "responses": [
+       "Pseudobulbar Affect (PBA)"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Bullying",
+      "patterns": [
+        "others always bully me",
+        "he is not wanting to go to school",
+        "others always bully me ",
+        "Feelings of helplessness ",
+        "Feelings decreased self esteem",
+        "Self-destructive behaviors",
+        "harming themselves",
+        "talking about suicide",
+        "others make hurtful comments about me",
+        "being harassed",
+        "others make fun of me",
+        "others spread rumors about me",
+        "i feel excluded",
+        "others hurt me physically ",
+        "bullying"
+        
+      ],
+      "responses": [
+        "Bullying"
+      ]
+    },
+    
+
+    
+    {
+      "tag": "Schizophrenia",
+      "patterns": [
+        "Schizophrenia",
+        "Schiz",
+        "Schizo",
+        "suffer from functional problems in the community",
+        "Social withdrawal",
+        "Trouble concentrating",
+        "Difficulty sleeping",
+        "hear or see things others cannot see",
+        "find it difficult to think regularly",
+        "people comment on their inability to understand what i am saying",
+        "sometimes feel that someone is watching you",
+        "feel that i have capabilities that others cannot understand",
+        "struggling to trust that what you are thinking is real",
+        "i have capabilities that others cannot appreciate"
+
+      ],
+      "responses": [
+        "Schizophrenia"
+      ]
+    },
+    
+    
+    {
+      "tag": "Dissociative Identity Disorder (DID)",
+      "patterns": [
+        "Dissociative Identity Disorder",
+        "Dissociative",
+        "Dissociative Identity",
+        "i think he has multiple personalities",
+        "his act to me is completly different",
+        "feel of alternate personalities",
+        "behave like another one",
+        "history of trauma ",
+        "history of abuse",
+        "have important loss ",
+        "Depersonalization",
+        "feeling disconnected from one’s own thoughts, feelings, and body",
+        "memory loss or feeling a time distortion",
+        "Hallucinations",
+        "Self-injurious behaviors ",
+        "hearing voices",
+        "feel the radical change towards thoughts and behavior",
+        "feel memory problems"        
+        
+      ],
+      "responses": [
+        "Dissociative Identity Disorder (DID)"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Borderline personality disorder (BPD)",
+      "patterns": [
+        "Borderline personality disorder",
+        "Borderline personality",
+        "BPD",
+        "unstable moods and emotions, relationships, and behavior.",
+        "engage in self-harming behaviors",
+        "attempting suicide.",
+        "Emotional instability",
+        "unstable self-image",
+        "unstable social and emotional relationship  ",
+        "suffer from a chronic feeling of emptiness.",
+        "self-destructive behaviors",
+        "relationships are unstable and tense",
+        "feelings and mood fluctuate quickly"
+        
+      ],
+      "responses": [
+        "Borderline personality disorder (BPD)"
+      ]
+    },
+    
+    
+    {
+      "tag": "low self esteem",
+      "patterns": [
+        "low self esteem",
+        "seek to please others",
+        "obsession with perfection",
+        "not accept criticism from others",
+        "blame myself for the simplest things",
+        "hate my outward appearance",
+        "feel myself is worthless",
+        "i have no confidence",
+        "i have no confidence in myself",
+        "i can't trust myself"
+
+      ],
+      "responses": [
+        "low self esteem"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Bipolar Disorder",
+      "patterns": [
+        "Bipolar Disorder",
+        "Bipolar",
+        "shifts in mood",
+        "shifts in energy ",
+        "shifts in activity levels ",
+        "shifts in concentration",
+        "clear changes in mood ",
+        "inable to carry out day-to-day tasks.",
+        "changes in energy",
+        "changes in activity levels",
+        "feelings of anguish or desperation",
+        "feel exhausted or unusually fatigued",
+        "Nothing could make you happy or joyful",
+        "sex drive was much higher than normal",
+        "felt slower than normal",
+        "felt inadequate or to blame for things",
+        "much more lively and energetic than normal",
+        "became absent-minded and had difficulty focusing on tasks",
+        "much more productive than normal"
+
+        
+        
+      ],
+      "responses": [
+        "Bipolar Disorder"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Mania",
+      "patterns": [
+        "Mania",
+        "sudden and intense changes in mood, thought patterns or energy levels",
+        "Mood swings",
+        "erratic judgment",
+        "bad judgment ",
+        "Poor judgments ",
+        "Shifts in thought processes",
+        "Changes in energy level",
+        "hallucinations, paranoia, and delusions",
+        "experience inflated self-esteem",
+        "experience grandiose thoughts about yourself",
+        "find myrself more talkative than usual"
+
+      ],
+      "responses": [
+        "Mania"
+      ]
+    },
+    
+    
+    {
+      "tag": "Panic Disorder",
+      "patterns": [
+        "unexpected panic attacks",
+        "Panic",
+        "recurrent panic attacks",
+        "sudden intense fear or discomfort ",
+        "accelerated heart rate",
+        "Sweating",
+        "Trembling or shaking",
+        "Shortness of breath",
+        "Feelings of choking",
+        "Chest pain or discomfort",
+        "Feeling dizzy, unsteady, light-headed, or faint",
+        "Chills or heat sensations",
+        "Fear or losing control ",
+        "Fear going crazy",
+        "Fear of dying",
+        "sense of being detached from yourself or your surroundings",
+        "sense of observing yourself from outside your body",
+        "i am fear"
+        
+
+
+        
+      ],
+      "responses": [
+        "Panic Disorder"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Hoarding Disorder",
+      "patterns": [
+        "Hoarding",
+        "Hoarding Disorder",
+        "struggles with giving up items and belongings  ",
+        "upset or anxious at the idea of getting rid of items",
+        "Excessively acquiring items that are not needed ",
+        "Persistent difficulty throwing out or parting with your things",
+        "Feeling a need to save items, and being upset by the thought of discarding them",
+        "Inability to throw away possessions",
+        "Severe anxiety when attempting to discard items",
+        "Great difficulty categorizing or organizing possessions",
+        "Indecision about what to keep or where to put things",
+        "Distress, such as feeling overwhelmed or embarrassed by possessions",
+        "Suspicion of other people touching items"
+                
+        
+      ],
+      "responses": [
+        "Hoarding Disorder"
+      ]
+    },
+    
+    
+    {
+      "tag": "Psychosis",
+      "patterns": [
+        "Psychosis",
+        "affects the way your brain processes information.",
+        "lose touch with reality.",
+        "You might see, hear, or believe things that aren’t real. ",
+        "Hallucination",
+        "visual or auditory sensation that isn’t real ",
+        "auditory hallucination during a psychotic episode often takes the form of voices that are only heard inside the individual’s mind",
+        "Delusions",
+        "thoughts or beliefs that may not be rooted in truth",
+        "belief that commonplace or inconsequential things, events, or objects have great significance, meaning, or power",
+        "belief that extrinsic powers have control over your mind, body, and behaviors",
+        "I sometimes see things that others tell me they cannot see",
+        "I sometimes feel that someone or something else controls my thoughts",
+        "I frequently feel like other people are plotting against me",
+        "I feel that my body is different or behaves in a different way to how it used to",
+        "I have lost interest in things I used to like",
+        "I have seen someone's face change in front of me, or my own face has changed in the mirror",
+        "I am not always sure if something has actually happened, or whether I imagined it",
+        "Meeting new people makes me very nervous or stressed",
+        "I sometimes spot hidden messages in adverts on television, in shop displays, or in how things are arranged",
+        "I get the feeling that I have lived through the present situation before, like things are repeating",
+        "Blurred vision"
+        
+      ],
+      "responses": [
+        "Psychosis"
+      ]
+    },
+    
+    
+    {
+      "tag": "Social Anxiety Disorder",
+      "patterns": [
+        "Social Anxiety Disorder ",
+        "Social Anxiety ",
+        "excessive fear, anxiety, discomfort, and self-consciousness in social settings",
+        "social phobia ",
+        "fear of interaction with others in a variety of social interactions ",
+        "worry they will be scrutinized by others",
+        "anxious in social situations",
+        "panicky before social situations",
+        "negatively evaluated by others when in social situations",
+        "avoid social situations",
+        "fear or panic of doing something in front of others",
+        "worrying about being in certain social situations"
+        
+      ],
+      "responses": [
+        "Social Anxiety Disorder"
+      ]
+    },
+    
+    
+    {
+      "tag": "Imposter syndrome",
+      "patterns": [
+        "Imposter syndrome",
+        "Imposter",
+        "feelings of inadequacy that persist despite evident success ",
+        "suffer from chronic self-doubt ",
+        "suffer from a sense of intellectual fraudulence ",
+        "believing that i am not as competent as others perceive me to be ",
+        "feeling like a phony",
+        "i feel that i am going to be found out as a fraud",
+        "i feel that i don't belong where i am",
+        "i feel that i get all i have just through luck.",
+        "Extreme lack of self confidence",
+        "Feelings of inadequacy",
+        "Constant comparison to other people",
+        "Self doubt",
+        "Distrust in one’s own intuition and capabilities",
+        "Negative self-talk",
+        "Dwelling on the past",
+        "Irrational fears of the future",
+        "I think my success was just a coincidence.",
+        "Even when I'm doing well, I don't think I really deserve it.",
+        "I worry about feeling very shy if my incompetence is exposed.",
+        "I fear that people will discover that I am not as smart as they think.",
+        "I underestimated my accomplishments.",
+        "It's hard for me to accept compliments.",
+        "I compare myself to others.",
+        "I feel failure is not an option.",
+        "I hesitate to show off my accomplishments.",
+        "I don't like drawing attention to my successes."
+        
+      ],
+      "responses": [
+        "Imposter syndrome"
+      ]
+    },
+    
+    
+    {
+      "tag": "Obsessive-Compulsive Disorder (OCD)",
+      "patterns": [
+        "i have unwanted, repeated and persistent thoughts, memories and urges ",
+        "i feel that i have an obsessions",
+        "i think i have OCD",
+        "i have unwanted and repeated thoughts",
+        "i have  repeated and persistent memories and urges ",
+        "i have a compulsive behaviors",
+        "i usually do repeated behaviors ",
+        "i usually do compulsive behaviors ",
+        "i have obsessive thoughts, compulsive behaviors, or both",
+        "i have obsessive thoughts and compulsive behaviors",
+        "compulsive behaviors",
+        "obsessive thoughts",
+        "Fear of being contaminated by germs or dirt or contaminating others",
+        "Excessive focus on religious or moral ideas",
+        "Fear of losing control and harming yourself or others",
+        "Fear of losing or not having things you might need",
+        "Excessive double-checking of things, such as locks, appliances, and switches",
+        "Repeatedly checking in on loved ones to make sure they’re safe",
+        "Spending a lot of time washing or cleaning",
+        "fear germs or engage in excessive cleaning",
+        "i always count",
+        "i experience intrusive thoughts that are aggressive or about taboo topics",
+        "i struggle to control obsessive thoughts ",
+        "i struggle to control compulsive behaviors",
+        "i spend hours a day thinking obsessive thoughts",
+        "i spend hours a day performing these ritual behaviors",
+        "OCD",
+        "Obsessive-Compulsive Disorder",
+        "repetitive thoughts",
+        "i have a repetitive thoughts",
+        "i have a bad repetitive thoughts",
+        "i have bad thoughts"
+        
+      ],
+      "responses": [
+        "Obsessive-Compulsive Disorder (OCD)"
+      ]
+    },
+    
+    
+    {
+      "tag": "Eating Disorder",
+      "patterns": [
+        "Eating Disorder",
+        "i have a persistent disturbance in eating behaviors",
+        "i eat too much unhealthy food ",
+        "i eat too much",
+        "i become overweighted",
+        "i gain too much weight",
+        "my bodyweight is over",
+        "chronic dieting, despite having a healthy body-mass index",
+        "constant weight fluctuations",
+        "counting calories and eliminating fat from all food consumed",
+        "i eat too much and i am very lethargy",
+        "i always eat more food than planned ",
+        "i eat large amounts of food",
+        "i eat large amounts of food when i am not hungry",
+        "i feel of shame about how much i eat",
+        "i feel guilty about how much i eat",
+        "i hide my eating behaviors from loved ones",
+        "i struggle to control when and how much you eat",
+        "i eat more rapidly than i’d like"
+        
+      ],
+      "responses": [
+        "Eating Disorder"
+      ]
+    },
+    
+    
+    {
+      "tag": "Narcissistic Personality Disorder",
+      "patterns": [
+        "Narcissistic Personality",
+        "Narcissistic ",
+        "have an inflated sense of their own importance",
+        "have a deep need for excessive attention and admiration",
+        "have a lack of empathy for others",
+        "Expect to be recognized as superior even without achievements that warrant it",
+        "Have an exaggerated sense of self-importance",
+        "Exaggerate achievements and talents",
+        "Be preoccupied with fantasies about success, power, brilliance, beauty or the perfect mate",
+        "Believe they are superior and can only associate with equally special people",
+        "Expect special favors and unquestioning compliance with their expectations",
+        "Take advantage of others to get what they want",
+        "Have an inability or unwillingness to recognize the needs and feelings of others",
+        "Be envious of others and believe others envy them",
+        "Insist on having the best of everything ",
+        "expect to be seen as superior to other people",
+        "engage in fantasies about being successful, powerful, or beautiful",
+        "others perceive me as arrogant or haughty",
+        "insist on having the best of everything",
+        "others are jealous of my talents and success"
+
+      ],
+      "responses": [
+        "Narcissistic Personality Disorder"
+      ]
+    },
+    
+    
+    {
+      "tag": "Empathy Deficit Disorder",
+      "patterns": [
+        "Empathy Deficit Disorder",
+        "Empathy Deficit",
+        "Empathy",
+        "Coldness or indifference towards people who are struggling",
+        "Quickness to criticize others before considering their circumstances",
+        "Difficulty showing appreciation for favors.",
+        "Difficulty feeling happy or congratulatory towards others.",
+        "Difficulty in relationships with family and friends.",
+        "Difficulty making new friends",
+        "Difficulty building meaningful emotional connections with others.",
+        "Only discussing themselves and poor listening skills in social situations.",
+        "Belief that when others are hurt as a result of their actions, it’s due to the other person’s oversensitivity",
+        "I find it hard to feel sympathetic for someone who is experiencing unkind or unfair behavior",
+        "Other people’s emotional states and moods aren't that important to me",
+        "I am not sorry for others suffering",
+        "I get annoyed when someone I'm around gets tearful",
+        "When bad things to happen to other, it doesn’t bother me",
+        "i hate others",
+        "i hate all people",
+        "i care about no one",
+        "i am not caring about anyone"
+        
+        
+      ],
+      "responses": [
+        "Empathy Deficit Disorder"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Illness anxiety disorder",
+      "patterns": [
+        "Illness anxiety",
+        "Illness",
+        "i am worrying excessively that i may become seriously ill. ",
+        "fear of having or getting a serious disease or health condition",
+        "Worrying that minor symptoms or body sensations mean you have a serious illness",
+        "Being easily alarmed about your health status",
+        "Worrying excessively about a specific medical condition as it runs in your family",
+        "Worrying excessively about your risk of developing a medical condition because it runs in your family",
+        "Having so much distress about possible illnesses that it's hard for you to function",
+        "Repeatedly checking your body for signs of illness or disease",
+        "Frequently making medical appointments for reassurance ",
+        "avoiding medical care for fear of being diagnosed with a serious illness",
+        "Avoiding people, places or activities for fear of health risks",
+        "Constantly talking about your health and possible illnesses",
+        "Frequently searching the internet for causes of symptoms or possible illnesses",
+        "i am worry about your health",
+        "i frequently visit health-related web sites",
+        "other people tired of hearing about my ailment(s)",
+        "i get frustrated when others dismiss my health worries",
+        "i am afraid to see a doctor ",
+        "i am a manic about my illness probability"  
+        
+      ],
+      "responses": [
+        "Illness anxiety disorder"
+      ]
+    },
+    
+    
+    
+    {
+      "tag": "Posttraumatic stress disorder (PTSD)",
+      "patterns": [
+        "Posttraumatic stress disorder",
+        "Posttraumatic",
+        "PTSD",
+        "i think i have a PTSD",
+        "i have a PTSD",
+        "i have witnessed  a natural disaster",
+        "i have experienced a traumatic event",
+        "i was in  a serious accident",
+        "i have witnessed  a terrorist act",
+        "i have a shell shock",
+        "i have a reminder brought back feelings about the event ",
+        "all things around remind me of that",
+        "I thought about the event when I didn't mean to",
+        "I felt as if the event hadn't happened or it wasn't real",
+        "I have stayed away from reminders about the situation",
+        "Images and pictures of the event pop into my mind"
+
+        
+      ],
+      "responses": [
+        "Posttraumatic stress disorder (PTSD)"
+      ]
+    }
+
+  ]
+}
